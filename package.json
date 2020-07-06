@@ -1,0 +1,19 @@
+{
+  "name": "obiee-react-irisa",
+  "version": "1.0.0",
+  "description": "this project is written by Ebrahim Salehi and BI users can enter into the the App for getting results in BI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ebrahim Salehi",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}

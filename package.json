@@ -4,7 +4,7 @@
   "description": "this project is written by Ebrahim Salehi and BI users can enter into the the App for getting results in BI",
   "main": "index.js",
   "scripts": {
-    "start:dev": "./node_modules/.bin/webpack-dev-server",
+    "start:dev": "./node_modules/.bin/webpack-dev-server --entry ./src/index.js ./dist/index.js",
     "build": "./node_modules/.bin/webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,6 +16,7 @@
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
+    "html-webpack-plugin": "^4.3.0",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",

@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   //   direction: 'rtl',
   // },
   grow: {
-    flexGrow: 1        
+    flexGrow: 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -190,7 +190,7 @@ export default function ObieeAppBar(props) {
   );
 
   return (
-    <div className={clsx(classes.grow,{"direction":props.direction})}>
+    <div >
       <AppBar 
         position="fixed"
         className={clsx(classes.appBar, {

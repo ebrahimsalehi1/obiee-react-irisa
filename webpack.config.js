@@ -6,10 +6,10 @@ module.exports = {
     entry: "./src/index.js",
     output:{
         filename: "index.js",
-        path: path.resolve(__dirname,"dist")
+        path: path.resolve(__dirname,"build")
     },
     devServer:{
-        contentBase: path.join(__dirname,"dist"),
+        contentBase: path.join(__dirname,"build"),
         compress: true,
         port: 9000
     },

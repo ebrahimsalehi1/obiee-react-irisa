@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "this project is written by Ebrahim Salehi and BI users can enter into the the App for getting results in BI",
   "main": "index.js",
+  "homepage": "https://ebrahimsalehi1.github.io/obiee-react-irisa",
   "scripts": {
-    "start:dev": "./node_modules/.bin/webpack-dev-server --entry ./src/index.js ./dist/index.js",
+    "start:dev": "./node_modules/.bin/webpack-dev-server --entry ./src/index.js ./build/index.js",
     "build": "./node_modules/.bin/webpack -w",
-    "test": "jest --config ./jest.config.js"
+    "test": "jest --config ./jest.config.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "author": "Ebrahim Salehi",
   "license": "ISC",
@@ -16,6 +19,7 @@
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.6.0",
+    "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^26.1.0",
     "style-loader": "^1.2.1",

@@ -33,4 +33,5 @@ function IndexComp(props) {
     )
 }
 
-ReactDOM.render(<IndexComp direction='rtl'/>,document.getElementById('root'));
+//ReactDOM.render(<IndexComp direction='rtl'/>,document.getElementById('root'));
+ReactDOM.render(<App />,document.getElementById('root'));

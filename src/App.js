@@ -4,7 +4,8 @@ import Dashboard from './hoc/Dashboard';
 export default function App(props){
     return (
         <div>
-            <Dashboard />
+            Hi there
+            {/* <Dashboard /> */}
         </div>
     );
 }

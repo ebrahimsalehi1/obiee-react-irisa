@@ -5,7 +5,6 @@ import {MuiThemeProvider} from '@material-ui/core/styles';
 import {theme} from './utils/theme2';
 import { create } from 'jss';
 import rtl from 'jss-rtl';
-//import ltr from 'jss-ltr';
 
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 
@@ -33,5 +32,5 @@ function IndexComp(props) {
     )
 }
 
-//ReactDOM.render(<IndexComp direction='rtl'/>,document.getElementById('root'));
-ReactDOM.render(<App />,document.getElementById('root'));
+ReactDOM.render(<IndexComp direction='rtl'/>,document.getElementById('root'));
+//ReactDOM.render(<App />,document.getElementById('root'));

@@ -10,11 +10,10 @@ function Dashboard(props){
 
     return (
         <div>
-            Hello Ebrahim
-            {/* <ObieeAppBar open={openDrawer} handleDrawerOpen={()=>{setOpenDrawer(true);}} /> */}
-            {/* <MyAppBar open={openDrawer} handleDrawerOpen={()=>{setOpenDrawer(true);}}/> */}
-            {/* <ObieeDrawer open={openDrawer} handleDrawerClose={()=>{setOpenDrawer(false);}}/> */}
-            {/* <CardReport /> */}
+            <ObieeAppBar open={openDrawer} handleDrawerOpen={()=>{setOpenDrawer(true);}} /> */}
+            <MyAppBar open={openDrawer} handleDrawerOpen={()=>{setOpenDrawer(true);}}/>
+            <ObieeDrawer open={openDrawer} handleDrawerClose={()=>{setOpenDrawer(false);}}/>
+            <CardReport />
         </div>
     )
 }

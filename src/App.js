@@ -1,11 +1,10 @@
 import React from 'react';
 import Dashboard from './hoc/Dashboard';
 
-export default function App(props){
+export default function App(){
     return (
         <div>
-            Hi there
-            {/* <Dashboard /> */}
+            <Dashboard />
         </div>
     );
 }

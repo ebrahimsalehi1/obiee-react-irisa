@@ -2,7 +2,7 @@
 import React from 'react';
 import ObieeAppBar from './ObieeAppBar';
 import ObieeDrawer from './ObieeDrawer';
-import MyAppBar from './MyAppBar';
+//import MyAppBar from './MyAppBar';
 import CardReport from '../widgets/CardReport';
 
 function Dashboard(props){
@@ -11,7 +11,7 @@ function Dashboard(props){
     return (
         <div>
             <ObieeAppBar open={openDrawer} handleDrawerOpen={()=>{setOpenDrawer(true);}} /> */}
-            <MyAppBar open={openDrawer} handleDrawerOpen={()=>{setOpenDrawer(true);}}/>
+            {/* <MyAppBar open={openDrawer} handleDrawerOpen={()=>{setOpenDrawer(true);}}/> */}
             <ObieeDrawer open={openDrawer} handleDrawerClose={()=>{setOpenDrawer(false);}}/>
             <CardReport />
         </div>

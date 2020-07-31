@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {MuiThemeProvider} from '@material-ui/core/styles';
-import {theme} from './utils/theme2';
+import {themeLightLTR} from './utils/theme-light-ltr';
+import {themeLightRTL} from './utils/theme-light-rtl';
 import { create } from 'jss';
 import rtl from 'jss-rtl';
 
@@ -16,16 +17,16 @@ function IndexComp(props) {
     <>
     {
         direction === 'ltr' && 
-        <MuiThemeProvider theme={theme}>
+        <MuiThemeProvider theme={themeLightLTR}>
             <App/>
         </MuiThemeProvider>
     }
     {
         direction === 'rtl' && 
-        <StylesProvider jss={jssRtl}> 
-        <MuiThemeProvider theme={theme}>
-            <App direction={direction}/>
-        </MuiThemeProvider>
+        <StylesProvider jss={jssRtl}>
+        <MuiThemeProvider theme={themeLightRTL}>
+            <App />
+        </MuiThemeProvider>       
         </StylesProvider>
     }    
     </>
@@ -34,3 +35,6 @@ function IndexComp(props) {
 
 ReactDOM.render(<IndexComp direction='rtl'/>,document.getElementById('root'));
 //ReactDOM.render(<App />,document.getElementById('root'));
+//         {/* <StylesProvider jss={jssRtl}>  */}
+//  {/* </StylesProvider> */}
+// direction={direction}

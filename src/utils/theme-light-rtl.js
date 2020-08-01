@@ -1,4 +1,6 @@
 import {createMuiTheme} from '@material-ui/core/styles';
+//import { faIR } from '@material-ui/core/locale';
+import * as locales from '@material-ui/core/locale';
 
 export const themeLightRTL = createMuiTheme({
     direction: 'rtl',
@@ -23,4 +25,4 @@ export const themeLightRTL = createMuiTheme({
             backgroundColor: '#3f51b5'
         }
     },
-});
+}, locales['faIR']);

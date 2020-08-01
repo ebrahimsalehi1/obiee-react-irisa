@@ -1,4 +1,6 @@
 import {createMuiTheme} from '@material-ui/core/styles';
+//import { enUS } from '@material-ui/core/locale';
+import * as locales from '@material-ui/core/locale';
 
 export const themeLightLTR = createMuiTheme({
     direction: 'ltr',
@@ -23,4 +25,4 @@ export const themeLightLTR = createMuiTheme({
             backgroundColor: '#3f51b5'
         }
     },
-});
+}, locales['enUS']);

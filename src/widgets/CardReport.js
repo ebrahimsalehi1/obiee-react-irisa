@@ -33,7 +33,10 @@ export default function CardReport(props){
                 subheader={"Sub Report 1"}
             />
 
-            <CardMedia></CardMedia>
+            {/* <CardMedia
+                  component="img"
+
+            ></CardMedia> */}
 
             <CardContent></CardContent>
 

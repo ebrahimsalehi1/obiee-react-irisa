@@ -17,8 +17,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import ObieeAppBar from './ObieeAppBar';
-import MyAppBar from './MyAppBar';
+//import ObieeAppBar from './ObieeAppBar';
+//import MyAppBar from './MyAppBar';
+import CardReport from '../widgets/CardReport';
 
 const drawerWidth = 240;
 
@@ -165,6 +166,9 @@ export default function ObieeDrawer(props) {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+
+        <CardReport />
+
         {/* <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum

@@ -14,27 +14,15 @@ const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 function IndexComp(props) {    
     const {direction} = props;
     return (
-    <>
-    {
-        direction === 'ltr' && 
-        <MuiThemeProvider theme={themeLightLTR}>
-            <App/>
-        </MuiThemeProvider>
-    }
-    {
-        direction === 'rtl' && 
-        <StylesProvider jss={jssRtl}>
-        <MuiThemeProvider theme={themeLightRTL}>
-            <App />
-        </MuiThemeProvider>       
-        </StylesProvider>
-    }    
-    </>
+        <>
+            <StylesProvider jss={jssRtl}>
+            <MuiThemeProvider theme={direction==='ltr' ? themeLightLTR : themeLightRTL}>
+                <App/>
+            </MuiThemeProvider>
+            </StylesProvider>
+
+        </>
     )
 }
 
-ReactDOM.render(<IndexComp direction='rtl'/>,document.getElementById('root'));
-//ReactDOM.render(<App />,document.getElementById('root'));
-//         {/* <StylesProvider jss={jssRtl}>  */}
-//  {/* </StylesProvider> */}
-// direction={direction}
+ReactDOM.render(<IndexComp direction='ltr'/>,document.getElementById('root'));

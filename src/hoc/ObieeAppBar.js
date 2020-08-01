@@ -8,12 +8,20 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+//import MenuItemText from '@material-ui/core/MenuItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+
+import LanguageIcon from '@material-ui/icons/Language';
+import BrightnessHighIcon from '@material-ui/icons/Brightness7';
+import BrightnessLowIcon from '@material-ui/icons/Brightness4';
+import RightToLeftPageIcon from '@material-ui/icons/FormatTextdirectionRToL';
+import LeftToRightIcon from '@material-ui/icons/FormatTextdirectionLToR';
+
 import clsx from 'clsx';
 
 const drawerWidth = 240;
@@ -85,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
-    direction: 'rtl' ,
+    direction: 'ltr' ,
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -111,9 +119,11 @@ export default function ObieeAppBar(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [openDrawer,setOpenDrawer] = React.useState(false);
+  const [languageMenu,setLanguageMenu] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isLanguageMenuOpen = Boolean(languageMenu);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -122,6 +132,15 @@ export default function ObieeAppBar(props) {
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
+
+  const handleLanguageMenuOpen = (event) => {
+    setLanguageMenu(event.currentTarget);
+  }
+
+
+  const handleLanguageMenuClose = (event) => {
+    setLanguageMenu(null);
+  }
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -189,6 +208,22 @@ export default function ObieeAppBar(props) {
     </Menu>
   );
 
+  const renderLanguages = (
+    <Menu
+      anchorEl={languageMenu}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isLanguageMenuOpen}
+      onClose={handleLanguageMenuClose}
+    >
+    <MenuItem onClick={()=>{alert('persian');setLanguageMenu(null);}}>Persian</MenuItem>
+    <MenuItem onClick={()=>{alert('english');setLanguageMenu(null);}}>English</MenuItem>
+    <MenuItem onClick={()=>{alert('deutsch');setLanguageMenu(null);}}>Deutsch</MenuItem>
+  </Menu>
+  );
+
   return (
     <div >
       <AppBar 
@@ -208,7 +243,7 @@ export default function ObieeAppBar(props) {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            Irisa Productions
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -225,6 +260,18 @@ export default function ObieeAppBar(props) {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            <IconButton 
+              color="inherit"
+              onClick={handleLanguageMenuOpen}
+            >
+              <LanguageIcon/>
+            </IconButton>
+            <IconButton color="inherit">
+              <BrightnessHighIcon/>
+            </IconButton>
+            <IconButton color="inherit">
+              <RightToLeftPageIcon/>
+            </IconButton>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
@@ -261,6 +308,7 @@ export default function ObieeAppBar(props) {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      {renderLanguages}
     </div>
   );
 }

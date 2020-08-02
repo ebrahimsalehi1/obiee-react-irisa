@@ -205,6 +205,33 @@ export default function ObieeAppBar(props) {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+      <MenuItem onClick={handleLanguageMenuOpen}>
+      <IconButton 
+              color="inherit"
+              aria-label="Show list of languages"              
+            >
+            <LanguageIcon/>
+      </IconButton>
+      <p>Languages</p>
+      </MenuItem>
+      <MenuItem>
+      <IconButton 
+        color="inherit"
+        aria-label="Brightness"              
+        >
+        <BrightnessHighIcon/>
+      </IconButton>
+      <p>Brightness</p>
+      </MenuItem>
+      <MenuItem>
+      <IconButton 
+        color="inherit"
+        aria-label="left to right / right to left"                            
+        >
+        <RightToLeftPageIcon/>
+      </IconButton>
+      <p>Left - Right</p>
+      </MenuItem>
     </Menu>
   );
 
@@ -218,9 +245,15 @@ export default function ObieeAppBar(props) {
       open={isLanguageMenuOpen}
       onClose={handleLanguageMenuClose}
     >
-    <MenuItem onClick={()=>{alert('persian');setLanguageMenu(null);}}>Persian</MenuItem>
-    <MenuItem onClick={()=>{alert('english');setLanguageMenu(null);}}>English</MenuItem>
-    <MenuItem onClick={()=>{alert('deutsch');setLanguageMenu(null);}}>Deutsch</MenuItem>
+    <MenuItem onClick={()=>{alert('persian');setLanguageMenu(null);}}>
+      Persian
+    </MenuItem>
+    <MenuItem onClick={()=>{alert('english');setLanguageMenu(null);}}>
+      English
+    </MenuItem>
+    <MenuItem onClick={()=>{alert('deutsch');setLanguageMenu(null);}}>
+      Deutsch
+    </MenuItem>
   </Menu>
   );
 
@@ -262,21 +295,28 @@ export default function ObieeAppBar(props) {
           <div className={classes.sectionDesktop}>
             <IconButton 
               color="inherit"
+              aria-label="Show list of languages"
               onClick={handleLanguageMenuOpen}
             >
               <LanguageIcon/>
             </IconButton>
-            <IconButton color="inherit">
+            <IconButton 
+              color="inherit"
+              aria-label="Brightness"              
+              >
               <BrightnessHighIcon/>
             </IconButton>
-            <IconButton color="inherit">
+            <IconButton 
+              color="inherit"
+              aria-label="left to right / right to left"                            
+              >
               <RightToLeftPageIcon/>
             </IconButton>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
-            </IconButton>
+            </IconButton> 
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />

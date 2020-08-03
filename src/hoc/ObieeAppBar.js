@@ -23,6 +23,7 @@ import RightToLeftPageIcon from '@material-ui/icons/FormatTextdirectionRToL';
 import LeftToRightIcon from '@material-ui/icons/FormatTextdirectionLToR';
 
 import clsx from 'clsx';
+import UserContext from '../Context';
 
 const drawerWidth = 240;
 //const mtheme = useTheme();
@@ -257,98 +258,103 @@ export default function ObieeAppBar(props) {
   </Menu>
   );
 
+  //console.log('my context',this.context);
+  const {handleChange} = React.useContext(UserContext);
+
   return (
-    <div >
-      <AppBar 
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Irisa Productions
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+    <div>
+          <AppBar 
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography className={classes.title} variant="h6" noWrap>
+              Irisa Productions
+            </Typography>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton 
-              color="inherit"
-              aria-label="Show list of languages"
-              onClick={handleLanguageMenuOpen}
-            >
-              <LanguageIcon/>
-            </IconButton>
-            <IconButton 
-              color="inherit"
-              aria-label="Brightness"              
+            <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
+              <IconButton 
+                color="inherit"
+                aria-label="Show list of languages"
+                onClick={handleLanguageMenuOpen}
               >
-              <BrightnessHighIcon/>
-            </IconButton>
-            <IconButton 
-              color="inherit"
-              aria-label="left to right / right to left"                            
+                <LanguageIcon/>
+              </IconButton>
+              <IconButton 
+                color="inherit"
+                aria-label="Brightness"              
+                >
+                <BrightnessHighIcon/>
+              </IconButton>
+              <IconButton 
+                color="inherit"
+                aria-label="left to right / right to left"        
+                onClick={handleChange}                    
+                >
+                <RightToLeftPageIcon/>
+              </IconButton>
+              <IconButton aria-label="show 4 new mails" color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <MailIcon />
+                </Badge>
+              </IconButton> 
+              <IconButton aria-label="show 17 new notifications" color="inherit">
+                <Badge badgeContent={17} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
               >
-              <RightToLeftPageIcon/>
-            </IconButton>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton> 
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
+                <AccountCircle />
+              </IconButton>
+            </div>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </div>
+          </Toolbar>
+        </AppBar>               
+      
       {renderMobileMenu}
       {renderMenu}
       {renderLanguages}
-    </div>
+      </div>
   );
 }

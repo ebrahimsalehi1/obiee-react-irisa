@@ -8,21 +8,30 @@ import { create } from 'jss';
 import rtl from 'jss-rtl';
 
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
+import UserContext from './Context';
 
 const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 function IndexComp(props) {    
-    const {direction} = props;
+
+    const [userDetails,setUserDetails] = React.useState(
+            false
+    );
+
     return (
-        <>
+        <UserContext.Provider value={ {
+            direction:userDetails,
+            handleChange: ()=>{
+                setUserDetails(!userDetails);
+            }
+        }}>
             <StylesProvider jss={jssRtl}>
-            <MuiThemeProvider theme={direction==='ltr' ? themeLightLTR : themeLightRTL}>
+            <MuiThemeProvider theme={userDetails===false ? themeLightLTR : themeLightRTL}>
                 <App/>
             </MuiThemeProvider>
             </StylesProvider>
-
-        </>
+        </UserContext.Provider>
     )
 }
 
-ReactDOM.render(<IndexComp direction='ltr'/>,document.getElementById('root'));
+ReactDOM.render(<IndexComp/>,document.getElementById('root'));

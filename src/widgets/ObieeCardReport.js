@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function CardReport(props){
+export default function ObieeCardReport(props){
     const classes = useStyles();
 
     return (

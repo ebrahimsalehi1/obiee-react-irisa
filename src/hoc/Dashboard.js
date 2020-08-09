@@ -6,11 +6,23 @@ import ObieeDrawer from './ObieeDrawer';
 
 function Dashboard(props){
     const [openDrawer,setOpenDrawer] = React.useState(false);
+    const [systemInfos,setSystemInfos] = React.useState(false);
 
     return (
         <div>
-            <ObieeAppBar open={openDrawer} handleDrawerOpen={()=>{setOpenDrawer(true);}} /> 
-            <ObieeDrawer open={openDrawer} handleDrawerClose={()=>{setOpenDrawer(false);}}/>
+
+            <ObieeAppBar 
+            open={openDrawer} 
+            handleDrawerOpen={()=>{setOpenDrawer(true);}} 
+            handleSystemInfos={()=>{alert('handleSystemInfos')}}
+            /> 
+
+            <ObieeDrawer 
+            open={openDrawer} 
+            handleDrawerClose={()=>{setOpenDrawer(false);}}
+            systemInfos={systemInfos}
+            />
+
         </div>
     )
 }

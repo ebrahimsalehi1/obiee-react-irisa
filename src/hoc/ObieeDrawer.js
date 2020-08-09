@@ -19,7 +19,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 //import ObieeAppBar from './ObieeAppBar';
 //import MyAppBar from './MyAppBar';
-import CardReport from '../widgets/CardReport';
+import CardReport from '../widgets/ObieeCardReport';
 
 const drawerWidth = 240;
 
@@ -87,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ObieeDrawer(props) {
 
-    const {open,handleDrawerClose} = props;
+    const {open,handleDrawerClose,systemInfos} = props;
 
   const classes = useStyles();
   const theme = useTheme();
@@ -167,7 +167,13 @@ export default function ObieeDrawer(props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
 
-        <CardReport />
+      {
+        systemInfos &&
+        systemInfos.map((item,index)=>(
+          <CardReport />
+
+        ))
+      }
 
         {/* <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt

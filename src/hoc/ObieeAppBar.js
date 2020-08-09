@@ -12,10 +12,14 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
+//import MailIcon from '@material-ui/icons/Mail';
+import SubtitlesIcon from '@material-ui/icons/Subtitles';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
+import Button from '@material-ui/core/Button';
+import SwitchUI from '@material-ui/core/Switch';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 import LanguageIcon from '@material-ui/icons/Language';
 import BrightnessHighIcon from '@material-ui/icons/Brightness7';
 import BrightnessLowIcon from '@material-ui/icons/Brightness4';
@@ -24,6 +28,8 @@ import LeftToRightIcon from '@material-ui/icons/FormatTextdirectionLToR';
 
 import clsx from 'clsx';
 import UserContext from '../Context';
+
+import ObieeDialog from '../widgets/ObieeDialog';
 
 const drawerWidth = 240;
 //const mtheme = useTheme();
@@ -121,10 +127,15 @@ export default function ObieeAppBar(props) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [openDrawer,setOpenDrawer] = React.useState(false);
   const [languageMenu,setLanguageMenu] = React.useState(null);
+  const [openDialog,setOpenDialog] = React.useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isLanguageMenuOpen = Boolean(languageMenu);
+
+  const handleSystemInfos = ()=>{
+    setOpenDialog(!openDialog);
+  }
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -180,9 +191,9 @@ export default function ObieeAppBar(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+        <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSystemInfos}>
           <Badge badgeContent={4} color="secondary">
-            <MailIcon />
+            <SubtitlesIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
@@ -317,9 +328,9 @@ export default function ObieeAppBar(props) {
                 >
                 <RightToLeftPageIcon/>
               </IconButton>
-              <IconButton aria-label="show 4 new mails" color="inherit">
+              <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSystemInfos}>
                 <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
+                  <SubtitlesIcon />
                 </Badge>
               </IconButton> 
               <IconButton aria-label="show 17 new notifications" color="inherit">
@@ -355,6 +366,114 @@ export default function ObieeAppBar(props) {
       {renderMobileMenu}
       {renderMenu}
       {renderLanguages}
+      {openDialog && 
+         <ObieeDialog
+         openModal={openDialog}
+         title={"Edit Customer"}
+         maxWidth={"lg"}
+         //fullScreen
+         //useOwnDialog={true}
+         TransitionComponent
+         eventClose={(e) => {
+             setOpenDialog(!openDialog);
+         }}
+         actionBar={
+             <>
+                 <Button color={"primary"} variant={"outlined"} style={{"width":"75px","margin":"4px"}}>Ok</Button>
+                 <Button color={"primary"} variant={"outlined"} style={{"width":"75px","margin":"4px"}}>Cancel</Button>
+             </>
+         }
+     >
+         <Grid container spacing={16} >
+             <Grid item xs={6} md={6}>
+                 <TextField  placeholder={"Email address"} variant={"outlined"}/>
+             </Grid>
+             <Grid item xs={6} md={6}>
+                 <TextField  placeholder={"Full name"} variant={"outlined"}/>
+             </Grid>
+
+             <Grid item xs={6} md={6} style={{"background-color":"green"}}>
+                 <TextField  placeholder={"Phone Number"} variant={"outlined"} />
+             </Grid>
+             <Grid item xs={6} md={6}>
+                 <TextField  placeholder={"State/Region"} variant={"outlined"}/>
+             </Grid>
+
+             <Grid item xs={6} md={6}>
+                 <TextField  placeholder={"Country"} variant={"outlined"}/>
+             </Grid>
+             <Grid item xs={6} md={6}>
+                 <TextField  placeholder={"Address 1"} variant={"outlined"}/>
+             </Grid>
+
+             <Grid item xs={12} md={12}>
+                 <TextField  placeholder={"Address 2"} variant={"outlined"}/>
+             </Grid>
+
+             <Grid item xs={6} md={6}>
+                 <Typography gutterBottom variant={"h5"}>
+                     Discounted Prices
+                 </Typography>
+
+                 <Typography gutterBottom component="h6" variant="h6">
+                     This will give the user discountedprices for all products
+                 </Typography>
+                 <SwitchUI
+                     checked={false}
+                     value={"check box 1"}
+                     color={"primary"}
+                     onChange={(e)=>{
+                         this.setState({checked:!this.state.checked});
+                         console.log("checked 1",e);
+                     }}
+                 />
+             </Grid>
+             <Grid item xs={6} md={6}>
+
+                 <Typography gutterBottom variant={"h5"}>
+                     Email Verified
+                 </Typography>
+
+                 <Typography gutterBottom component="h6" variant="h6">
+                     Disabling this will automatically send the user a
+                     verification email
+                 </Typography>
+                 <SwitchUI
+                     checked={true}
+                     value={"check box 2"}
+                     color={"primary"}
+                     onChange={(e)=>{
+                         //this.setState({checked:!this.state.checked});
+                         //console.log("checked 2",this.state.checked);
+                     }}
+                 />
+             </Grid>
+
+             <Grid item xs={6} md={6}>
+                 <Typography variant={"h5"} gutterBottom>
+                     The sample text in middle of form
+                 </Typography>
+             </Grid>
+
+             <Grid item xs={6} md={6}>
+                 <Typography variant={"h5"} gutterBottom>
+                     This is a test
+                 </Typography>
+             </Grid>
+
+             {/*<Grid item xs={12} md={12}>*/}
+             {/*    <Card style={{"min-height:":"100px","max-height:":"300px","overflow-y":"auto","border":"1px solid blue"}}>*/}
+             {/*    <IbxDNDTree*/}
+             {/*        data={*/}
+             {/*          [{title:'A',children:[{title:'B',children:[{title:'B11'},{title:'B12',children:[{title:'B121'},{title:'B122'}]},{title:'B13'}]},{title:'C'}]}]*/}
+             {/*        }/>*/}
+             {/*    </Card>*/}
+             {/*</Grid>*/}
+
+         </Grid>
+     </ObieeDialog>
+
+      }
       </div>
   );
 }

@@ -6,7 +6,15 @@ export default function App(){
     const [isAuthenticate,setIsAuthenticate] = React.useState(false);
     return (
         <div>
-            <ObieeSigin />
+            {
+            !isAuthenticate &&
+                <ObieeSigin handleLogin={(userName,pass)=>{
+                    if(userName==='admin' && pass==='admin')
+                        setIsAuthenticate(true);
+                    else
+                        setIsAuthenticate(false);
+                }}/>
+            }
             {
                 isAuthenticate &&
                 <Dashboard />

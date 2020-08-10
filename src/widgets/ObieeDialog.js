@@ -1,6 +1,6 @@
 import React,{memo} from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import {withStyles} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import Slide from "@material-ui/core/Slide";
@@ -15,19 +15,22 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import CloseIcon from '@material-ui/icons/Close';
 
-const DialogTitle = withStyles(theme => ({
+const useDialogTitleStyles = makeStyles(theme => ({
     root: {
         borderBottom: `1px solid ${theme.palette.divider}`,
         padding: '16px',
     },
     closeButton: {
         position: 'absolute',
-        right: theme.spacing.unit,
-        top: theme.spacing.unit,
+        right: theme.spacing(2),
+        top: theme.spacing(2),
         color: theme.palette.grey[500],
     }
-}))(props => {
-    const { children, classes, onClose } = props;
+}));
+
+const DialogTitle = (props => {
+    const { children, onClose } = props;
+    const classes = useDialogTitleStyles();
     return (
         <MuiDialogTitle disableTypography className={classes.root}>
             <Typography variant="h5" >{children}</Typography>
@@ -40,15 +43,26 @@ const DialogTitle = withStyles(theme => ({
     );
 });
 
-const DialogActions = withStyles(theme => ({
+const useDialogActionsStyles = makeStyles(theme => ({
     root: {
         borderTop: `1px solid ${theme.palette.divider}`,
         margin: "0px",
         padding:"8px",
     },
-}))(MuiDialogActions);
+}));
 
-const PaperDialogContent = withStyles(({
+const DialogActions = (props)=>{
+    const classes = useDialogActionsStyles();
+    const {children} = props;
+
+    return (
+        <MuiDialogActions>
+            {children}
+        </MuiDialogActions>
+    );
+}
+
+const usePaperDialogContentStyles = makeStyles(theme => ({
     root:{
         paddingTop:"16px",
         paddingLeft: "16px",
@@ -58,13 +72,24 @@ const PaperDialogContent = withStyles(({
         overflow: 'hidden',
         maxHeight: '600px',
         border:'0px',
-        boxShadow: 0
+        //boxShadow: 0
     }
-}))(Paper);
+}));
 
-function Transition(props) {
-    return <Slide direction="left" {...props} />;
+const PaperDialogContent = (props) => {
+    const classes = usePaperDialogContentStyles();
+    const {children} = props;
+    return (<Paper>
+        {children}
+        </Paper>);
 }
+
+// function Transition(props) {
+//     return <Slide direction="left" {...props} />;
+// }
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
 
 class ObieeDialog extends React.PureComponent {
 
@@ -79,7 +104,7 @@ class ObieeDialog extends React.PureComponent {
             <Dialog
                 onClose={eventClose}
                 onKeyDown={onKeyDown}
-                data-testId
+                //data-testId
                 aria-labelledby="customized-dialog-title"
                 open={openModal}
                 fullScreen={fullScreen}
@@ -92,7 +117,7 @@ class ObieeDialog extends React.PureComponent {
                         {title}
                 </DialogTitle>
 
-                <muiDialogContent>
+                <MuiDialogContent>
 
                     <PaperDialogContent>
 
@@ -100,7 +125,7 @@ class ObieeDialog extends React.PureComponent {
 
                     </PaperDialogContent>
 
-                </muiDialogContent>
+                </MuiDialogContent>
 
                 <DialogActions>
                     {actionBar}

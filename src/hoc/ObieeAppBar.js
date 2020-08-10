@@ -25,6 +25,7 @@ import BrightnessHighIcon from '@material-ui/icons/Brightness7';
 import BrightnessLowIcon from '@material-ui/icons/Brightness4';
 import RightToLeftPageIcon from '@material-ui/icons/FormatTextdirectionRToL';
 import LeftToRightIcon from '@material-ui/icons/FormatTextdirectionLToR';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import clsx from 'clsx';
 import UserContext from '../Context';
@@ -369,10 +370,8 @@ export default function ObieeAppBar(props) {
       {openDialog && 
          <ObieeDialog
          openModal={openDialog}
-         title={"Edit Customer"}
+         title={"System & Users & Roles"}
          maxWidth={"lg"}
-         //fullScreen
-         //useOwnDialog={true}
          TransitionComponent
          eventClose={(e) => {
              setOpenDialog(!openDialog);
@@ -384,91 +383,31 @@ export default function ObieeAppBar(props) {
              </>
          }
      >
-         <Grid container spacing={16} >
-             <Grid item xs={6} md={6}>
-                 <TextField  placeholder={"Email address"} variant={"outlined"}/>
-             </Grid>
-             <Grid item xs={6} md={6}>
-                 <TextField  placeholder={"Full name"} variant={"outlined"}/>
-             </Grid>
+         <Grid container spacing={1} >
 
-             <Grid item xs={6} md={6} style={{"background-color":"green"}}>
-                 <TextField  placeholder={"Phone Number"} variant={"outlined"} />
-             </Grid>
-             <Grid item xs={6} md={6}>
-                 <TextField  placeholder={"State/Region"} variant={"outlined"}/>
-             </Grid>
+            <Grid item xs={12} md={12}>
+              <Typography gutterBottom variant={"h5"}>
+                  System
+              </Typography>
+
+              <Typography gutterBottom component="h6" variant="h6">
+                  Create new system with these features
+              </Typography>
+            </Grid>
 
              <Grid item xs={6} md={6}>
-                 <TextField  placeholder={"Country"} variant={"outlined"}/>
+                 <TextField  placeholder={"System Name"} variant={"outlined"}/>
              </Grid>
              <Grid item xs={6} md={6}>
-                 <TextField  placeholder={"Address 1"} variant={"outlined"}/>
-             </Grid>
-
-             <Grid item xs={12} md={12}>
-                 <TextField  placeholder={"Address 2"} variant={"outlined"}/>
+                 <TextField  placeholder={"Latin System Name"} variant={"outlined"}/>
              </Grid>
 
              <Grid item xs={6} md={6}>
-                 <Typography gutterBottom variant={"h5"}>
-                     Discounted Prices
-                 </Typography>
-
-                 <Typography gutterBottom component="h6" variant="h6">
-                     This will give the user discountedprices for all products
-                 </Typography>
-                 <SwitchUI
-                     checked={false}
-                     value={"check box 1"}
-                     color={"primary"}
-                     onChange={(e)=>{
-                         this.setState({checked:!this.state.checked});
-                         console.log("checked 1",e);
-                     }}
-                 />
+                 <Checkbox  checked={true} color="primary" onChange={()=>{}} />
              </Grid>
              <Grid item xs={6} md={6}>
-
-                 <Typography gutterBottom variant={"h5"}>
-                     Email Verified
-                 </Typography>
-
-                 <Typography gutterBottom component="h6" variant="h6">
-                     Disabling this will automatically send the user a
-                     verification email
-                 </Typography>
-                 <SwitchUI
-                     checked={true}
-                     value={"check box 2"}
-                     color={"primary"}
-                     onChange={(e)=>{
-                         //this.setState({checked:!this.state.checked});
-                         //console.log("checked 2",this.state.checked);
-                     }}
-                 />
+                 <TextField  placeholder={"System Abbriviation"} variant={"outlined"}/>
              </Grid>
-
-             <Grid item xs={6} md={6}>
-                 <Typography variant={"h5"} gutterBottom>
-                     The sample text in middle of form
-                 </Typography>
-             </Grid>
-
-             <Grid item xs={6} md={6}>
-                 <Typography variant={"h5"} gutterBottom>
-                     This is a test
-                 </Typography>
-             </Grid>
-
-             {/*<Grid item xs={12} md={12}>*/}
-             {/*    <Card style={{"min-height:":"100px","max-height:":"300px","overflow-y":"auto","border":"1px solid blue"}}>*/}
-             {/*    <IbxDNDTree*/}
-             {/*        data={*/}
-             {/*          [{title:'A',children:[{title:'B',children:[{title:'B11'},{title:'B12',children:[{title:'B121'},{title:'B122'}]},{title:'B13'}]},{title:'C'}]}]*/}
-             {/*        }/>*/}
-             {/*    </Card>*/}
-             {/*</Grid>*/}
 
          </Grid>
      </ObieeDialog>

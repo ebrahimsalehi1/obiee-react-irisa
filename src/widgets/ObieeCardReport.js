@@ -23,14 +23,16 @@ const useStyles = makeStyles((theme) => ({
 export default function ObieeCardReport(props){
     const classes = useStyles();
 
+    const {title,subheader,avatarText,content} = props;
+
     return (
         <Card className={classes.root}>
 
             <CardHeader 
-                avatar={<Avatar aria-label="recipe" className={classes.avatar}>RE</Avatar>}
+                avatar={<Avatar aria-label="recipe" className={classes.avatar}>{avatarText}</Avatar>}
                 action={<IconButton aria-label="setting"><MoreVert/></IconButton>}
-                title={"Report 1"}
-                subheader={"Sub Report 1"}
+                title={title}
+                subheader={subheader}
             />
 
             {/* <CardMedia
@@ -38,7 +40,11 @@ export default function ObieeCardReport(props){
 
             ></CardMedia> */}
 
-            <CardContent></CardContent>
+            <CardContent>
+            <Typography variant="body2" color="textSecondary" component="p">
+            {content}
+            </Typography>
+            </CardContent>
 
             <CardActions></CardActions>
 

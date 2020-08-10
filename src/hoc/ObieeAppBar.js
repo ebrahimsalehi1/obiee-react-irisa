@@ -13,7 +13,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 //import MailIcon from '@material-ui/icons/Mail';
-import SubtitlesIcon from '@material-ui/icons/Subtitles';
+//import SubtitlesIcon from '@material-ui/icons/Subtitles';
+import SettingsIcon from '@material-ui/icons/Settings';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
@@ -21,8 +22,8 @@ import SwitchUI from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import LanguageIcon from '@material-ui/icons/Language';
-import BrightnessHighIcon from '@material-ui/icons/Brightness7';
-import BrightnessLowIcon from '@material-ui/icons/Brightness4';
+//import BrightnessHighIcon from '@material-ui/icons/Brightness7';
+//import BrightnessLowIcon from '@material-ui/icons/Brightness4';
 import RightToLeftPageIcon from '@material-ui/icons/FormatTextdirectionRToL';
 import LeftToRightIcon from '@material-ui/icons/FormatTextdirectionLToR';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -120,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ObieeAppBar(props) {
 
-  const {open,handleDrawerOpen} = props;
+  const {open,handleDrawerOpen,handleSettings} = props;
 
   const classes = useStyles();
 
@@ -134,9 +135,13 @@ export default function ObieeAppBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isLanguageMenuOpen = Boolean(languageMenu);
 
-  const handleSystemInfos = ()=>{
-    setOpenDialog(!openDialog);
-  }
+  // const handleSystemInfos = ()=>{
+  //   setOpenDialog(!openDialog);
+  // }
+
+  // const handleSettings = ()=>{
+  //   handleSettings(true);
+  // }
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -192,10 +197,11 @@ export default function ObieeAppBar(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSystemInfos}>
-          <Badge badgeContent={4} color="secondary">
-            <SubtitlesIcon />
-          </Badge>
+        <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSettings}>
+          <SettingsIcon />
+          {/* <Badge badgeContent={4} color="secondary">
+            <SettingsIcon />
+          </Badge> */}
         </IconButton>
         <p>Messages</p>
       </MenuItem>
@@ -227,7 +233,7 @@ export default function ObieeAppBar(props) {
       </IconButton>
       <p>Languages</p>
       </MenuItem>
-      <MenuItem>
+      {/* <MenuItem>
       <IconButton 
         color="inherit"
         aria-label="Brightness"              
@@ -235,7 +241,7 @@ export default function ObieeAppBar(props) {
         <BrightnessHighIcon/>
       </IconButton>
       <p>Brightness</p>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem>
       <IconButton 
         color="inherit"
@@ -316,12 +322,12 @@ export default function ObieeAppBar(props) {
               >
                 <LanguageIcon/>
               </IconButton>
-              <IconButton 
+              {/* <IconButton 
                 color="inherit"
                 aria-label="Brightness"              
                 >
                 <BrightnessHighIcon/>
-              </IconButton>
+              </IconButton> */}
               <IconButton 
                 color="inherit"
                 aria-label="left to right / right to left"        
@@ -329,10 +335,12 @@ export default function ObieeAppBar(props) {
                 >
                 <RightToLeftPageIcon/>
               </IconButton>
-              <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSystemInfos}>
-                <Badge badgeContent={4} color="secondary">
-                  <SubtitlesIcon />
-                </Badge>
+              <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSettings}>
+              <SettingsIcon />
+
+                {/* <Badge badgeContent={4} color="secondary">
+                  <SettingsIcon />
+                </Badge> */}
               </IconButton> 
               <IconButton aria-label="show 17 new notifications" color="inherit">
                 <Badge badgeContent={17} color="secondary">

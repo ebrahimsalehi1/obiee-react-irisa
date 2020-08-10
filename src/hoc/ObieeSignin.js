@@ -58,12 +58,15 @@ export default function SignIn(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
+        {/* <Avatar className={classes.avatar}> */}
+          {/* <LockOutlinedIcon /> */}
+          <img src="../../public/img/logo-irisa.png" />
+          <br/>
+
+        {/* </Avatar> */}
+        {/* <Typography component="h1" variant="h5">
           Sign in
-        </Typography>
+        </Typography> */}
         {/* <form className={classes.form} noValidate> */}
           <TextField
             variant="outlined"
@@ -71,7 +74,7 @@ export default function SignIn(props) {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="User Name"
             name="email"
             autoComplete="email"
             autoFocus

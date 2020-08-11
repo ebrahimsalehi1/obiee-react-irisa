@@ -14,7 +14,7 @@ function Dashboard(props){
     const [openMessage,setOpenMessage] = React.useState(false);
 
     React.useEffect(()=>{
-        axios.get(localStorage.getItem('url-systems'))
+        axios.get(localStorage.getItem('esbip')+"systems")
         .then(res=>{
             if(res.status===200){
                 setSystemInfos(res.data);

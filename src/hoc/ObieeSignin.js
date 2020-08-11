@@ -95,7 +95,9 @@ export default function SignIn(props) {
             value={pass}
           />
           <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
+            control={<Checkbox value="remember" color="primary" onChange={(e,v)=>{
+              console.log('onChange',e,v);
+            }}/>}
             label="Remember me"
           />
           <Button

@@ -15,6 +15,7 @@ export default function ObieeSettings(){
 
     return (
 <>
+        <Card style={{"padding":"40px","box-shadow":"none"}}>
          <ObieeTabs 
          value={valTab}
          handleChange={(event,newValue)=>{
@@ -31,13 +32,16 @@ export default function ObieeSettings(){
          }
          />
 
+         </Card>
+
     {valTab ==0 && 
-    <Card style={{"padding":"40px"}}>
-        <Grid container spacing={1} >
+    <Card style={{"padding":"40px","box-shadow":"none"}}>
+        <Grid container spacing={0} >
 
          <Grid item xs={6} md={6}>
              <TextField  
-                placeholder={"Service IP Address"} 
+                label="Service IP Address"
+                placeholder="Service IP Address"
                 variant={"outlined"}
                 value={serviceIpAddress}
                 onChange={(e)=>setServiceIpAddress(e.target.value)}
@@ -45,7 +49,8 @@ export default function ObieeSettings(){
          </Grid>
          <Grid item xs={6} md={6}>
              <TextField  
-                placeholder={"ESB IP Address"} 
+                label="ESB IP Address"
+                placeholder="ESB IP Address"
                 variant={"outlined"}
                 value={ESBIpAddress}
                 onChange={(e)=>setESBIpAddress(e.target.value)}
@@ -54,8 +59,19 @@ export default function ObieeSettings(){
 
          <Grid item xs={6} md={6}>
 
-            <Button color={"primary"} variant={"outlined"} style={{"width":"75px","margin":"4px"}}>Ok</Button>
-            <Button color={"primary"} variant={"outlined"} style={{"width":"75px","margin":"4px"}}>Cancel</Button>
+            <Button 
+                color={"primary"} 
+                variant={"outlined"} 
+                style={{"width":"75px","margin":"4px"}}
+                onClick={e=>{
+                    localStorage.setItem('ip',serviceIpAddress);
+                    localStorage.setItem('esbip',ESBIpAddress);
+                }}
+            >Save</Button>
+            <Button 
+                color={"primary"} 
+                variant={"outlined"} 
+                style={{"width":"75px","margin":"4px"}}>Cancel</Button>
 
          </Grid>
 

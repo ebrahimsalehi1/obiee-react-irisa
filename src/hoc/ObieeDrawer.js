@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   toolbar: {
-    display: 'flex',
+    //display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),

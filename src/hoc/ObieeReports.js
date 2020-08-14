@@ -12,32 +12,42 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
 import data from '../../db.json';
-import ObieeItemApprole from "./ObieeItemApprole";
-import ObieeDialog from '../widgets/ObieeDialog';
+import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme=>({
   root: {
     width: '100%',
-    //maxWidth: '36ch',
     backgroundColor: theme.palette.background.paper,
+  },
+  inline: {
+    display: 'inline',
+  },
+  listitem:{
+    borderBottom:'1px solid black'
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
   },
   iconButton: {
-    padding: 10,
+    padding: 2,
   },   
 }))
 
-export default function ObieeCrudApprole(props){
+export default function ObieeReports(props){
 
     const classes = useStyles();
 
     const {url} = props;
 
-    const [approles,setApproles] = React.useState(data.approles);
-    const [openModal,setOpenModal] = React.useState(false);
+    const [reports,setReports] = React.useState(data.reports);
     const [search,setSearch] = React.useState('');
 
     React.useEffect(()=>{
@@ -60,21 +70,21 @@ export default function ObieeCrudApprole(props){
   
     },[]);
 
-    React.useEffect(()=>{
-        console.log('use effect data',approles);
-    },[approles])
+    // React.useEffect(()=>{
+    //     console.log('use effect data',approles);
+    // },[approles])
 
     return (
-    <Card className={classes.root} variant="outlined">
+    <Card className={classes.root} >
       <CardContent>
 
       <Grid container spacing={1} >
 
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={10}>
           <TextField
             //className={classes.input}
-            placeholder="Search approles"
-            inputProps={{ 'aria-label': 'Search approles' }}
+            placeholder="Search reports"
+            inputProps={{ 'aria-label': 'Search reports' }}
             value={search}
             onChange={e=>{
               setSearch(e.target.value);
@@ -84,60 +94,48 @@ export default function ObieeCrudApprole(props){
           />
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={2}>
         <IconButton type="submit" className={classes.iconButton} aria-label="search"
           onClick={()=>{
-
             let filteredData = null;
-            filteredData = data.approles.filter(item=>
-                  item.approleName.includes(search) ||
-                  item.approleDesc.includes(search) ||
-                  item.approleType.includes(search) ||
-                  item.approleLatinName.includes(search)                 
+            filteredData = data.reports.filter(item=>
+                  item.name.includes(search) ||
+                  item.title.includes(search) ||
+                  item.link.includes(search) 
                 );
                 //console.log(search,filteredData);
-            setApproles(filteredData);
+            setReports(filteredData);
           }}
           >
             <SearchIcon />
           </IconButton>
-          <IconButton 
-            type="submit" 
-            className={classes.iconButton} 
-            aria-label="add" 
-            onClick={()=>{
-                setOpenModal(true);
-            }}
-            >
-            <AddIcon />
-          </IconButton>
         </Grid>
         
-        </Grid>
+      </Grid>
+      <List className={classes.root}>
 
-        <ObieeDialog 
-        title="Add new Approle"
-        openModal={openModal}
-        TransitionComponent
-        eventClose={()=>{
-          setOpenModal(false);
-        }}
-        >
-        <ObieeItemApprole mode="add" onAdd={()=>{
-          setOpenModal(false);
-        }}/>
+        {          
+          reports.map((report,index)=>(
+            <ListItem alignItems="flex-start" key={index} className={classes.listitem}>
+            <ListItemText
+              key={index}
+              primary={report.name+'-'+report.title} 
+              secondary={
+                <Link href="#"  key={index} onClick={()=>{}}>
+                  {report.link}
+                </Link>
+              }
+              />
+            </ListItem>
 
-        </ObieeDialog>
-
-        {
-          
-          approles.map((approle,index)=>(<ObieeItemApprole mode="edit" key={index} approle={approle}/>))
+          ))
         }
+        </List>
       </CardContent>
     </Card>
     )
 }
 
-ObieeCrudApprole.propTypes = {
+ObieeReports.propTypes = {
   url: PropTypes.string.isRequired,
 }

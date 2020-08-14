@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
 export default function ObieeCardReport(props){
     const classes = useStyles();
 
-    const {children,title,subheader,avatarText,content,onUsers,onApproles,onUserOfApproles} = props;
-    
+    const {children,title,subheader,avatarText,content,onUsers,onApproles,onUserOfApproles,onReports} = props;
+
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
@@ -83,6 +83,9 @@ export default function ObieeCardReport(props){
                     </Grid>
                     <Grid item xs={12} md={12}>
                     <Button size="large" variant="contained" color="primary" onClick={onUserOfApproles}>User Approles</Button>
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                    <Button size="large" variant="contained" color="primary" onClick={onReports}>Reports</Button>
                     </Grid>
                 </Grid>
                 </CardContent>

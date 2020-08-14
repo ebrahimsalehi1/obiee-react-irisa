@@ -8,6 +8,8 @@ import ObieeCardReport from '../widgets/ObieeCardReport';
 import ObieeSettings from './ObieeSettings';
 import Grid from '@material-ui/core/Grid';
 import ObieeCrudApprole from './ObieeCrudApprole';
+import ObieeReports from './ObieeReports';
+import ObieeUsers from './ObieeUsers';
 
 function Dashboard(props){
 
@@ -40,7 +42,10 @@ function Dashboard(props){
             <ObieeAppBar 
             open={openDrawer} 
             handleDrawerOpen={()=>{setOpenDrawer(true);}} 
-            handleSettings={()=>{setShowSystemSetting(!showSystemSetting)}}
+            handleSettings={()=>{
+                setShowSystemSetting(!showSystemSetting);
+                setWhichCompShow(-1);
+                }}
             onHomeClick={()=>{setWhichCompShow(0)}}
             /> 
 
@@ -50,11 +55,12 @@ function Dashboard(props){
             systemInfos={systemInfos}
             >
 
-            { showSystemSetting && 
+            <Grid container spacing={4} >
+            { 
+                whichCompShow===-1 &&
+                showSystemSetting && 
             <ObieeSettings />
             }
-
-            <Grid container spacing={4} >
 
             { 
                 whichCompShow===0 &&
@@ -69,15 +75,22 @@ function Dashboard(props){
                         onUsers={e=>setWhichCompShow(1)}
                         onApproles={e=>setWhichCompShow(2)}
                         onUserOfApproles={e=>setWhichCompShow(3)} 
+                        onReports={e=>setWhichCompShow(4)}
                         />
                   </Grid>     
                 ))
+            }
+            {whichCompShow===1 &&
+                <ObieeUsers url={localStorage.esbip+'api/v1.0/approles'}/>
             }
 
             {whichCompShow===2 &&
                 <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>
             }
-
+            {whichCompShow===4 &&
+                <ObieeReports url={localStorage.esbip+'api/v1.0/reports'}/>
+            }
+            
             </Grid>
 
             </ObieeDrawer>

@@ -58,12 +58,12 @@ const MyTab = withStyles(({
         display: 'inline-block',
         width:'200px',
     },
-    labelContainer:{
-        //width:'70%',
-        fontSize:'10px',
-        padding: 0,
-        margin: 0,
-    }
+    // labelContainer:{
+    //     //width:'70%',
+    //     fontSize:'10px',
+    //     padding: 0,
+    //     margin: 0,
+    // }
 }))(Tab);
 
 function ObieeTabs(props){

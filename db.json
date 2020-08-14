@@ -7,14 +7,14 @@
 
     ],
     "users":[
-        {"userId": "763434","userName":"ahmad","userFamily":"molaee"},
-        {"userId": "763431","userName":"asghar","userFamily":"samadi"},
-        {"userId": "763430","userName":"karim","userFamily":"erfani"}
+        {"id": "763434","name":"ahmad","family":"molaee"},
+        {"id": "763431","name":"asghar","family":"samadi"},
+        {"id": "763430","name":"karim","family":"erfani"}
     ],
     "reports" : [
-        {"reportName":"report 1","title":"report for PDS","link":"http://obiee.com/report1"},
-        {"reportName":"report 2","title":"report for WSE","link":"http://obiee.com/report2"},
-        {"reportName":"report 3","title":"report for FND","link":"http://obiee.com/report3"}
+        {"name":"report 1","title":"report for PDS","link":"http://obiee.com/report1"},
+        {"name":"report 2","title":"report for WSE","link":"http://obiee.com/report2"},
+        {"name":"report 3","title":"report for FND","link":"http://obiee.com/report3"}
     ],
     "approles" : [
         {"approleName":"approle 1","approleDesc":"approle desc 1","approleType":"author","approleLatinName":"approle Latin name 1"},

@@ -4,26 +4,34 @@ import ObieeAppBar from './ObieeAppBar';
 import ObieeDrawer from './ObieeDrawer';
 import axios from 'axios';
 import ObieeSnackbar from '../widgets/ObieeSnackbar';
+import ObieeCardReport from '../widgets/ObieeCardReport';
 import ObieeSettings from './ObieeSettings';
+import Grid from '@material-ui/core/Grid';
+import ObieeCrudApprole from './ObieeCrudApprole';
 
 function Dashboard(props){
 
+    const {systemInfos} = props;
+
+    console.log("systemInfos",systemInfos);
+
     const [openDrawer,setOpenDrawer] = React.useState(false);
-    const [systemInfos,setSystemInfos] = React.useState([]);
+    //const [systemInfos,setSystemInfos] = React.useState([]);
     const [showSystemSetting,setShowSystemSetting] = React.useState(false);
     const [openMessage,setOpenMessage] = React.useState(false);
+    const [whichCompShow,setWhichCompShow] = React.useState(0);
 
     React.useEffect(()=>{
-        axios.get(localStorage.getItem('esbip')+"systems")
-        .then(res=>{
-            if(res.status===200){
-                setSystemInfos(res.data);
-                setOpenMessage(false);
-            }
-        })
-        .catch(err=>{
-            setOpenMessage(true);
-        })
+        // axios.get(localStorage.getItem('esbip')+"systems")
+        // .then(res=>{
+        //     if(res.status===200){
+        //         setSystemInfos(res.data);
+        //         setOpenMessage(false);
+        //     }
+        // })
+        // .catch(err=>{
+        //     setOpenMessage(true);
+        // })
     },[]);
 
     return (
@@ -32,8 +40,8 @@ function Dashboard(props){
             <ObieeAppBar 
             open={openDrawer} 
             handleDrawerOpen={()=>{setOpenDrawer(true);}} 
-            //handleSystemInfos={()=>{alert('handleSystemInfos')}}
             handleSettings={()=>{setShowSystemSetting(!showSystemSetting)}}
+            onHomeClick={()=>{setWhichCompShow(0)}}
             /> 
 
             <ObieeDrawer 
@@ -46,13 +54,31 @@ function Dashboard(props){
             <ObieeSettings />
             }
 
-            {
+            <Grid container spacing={4} >
+
+            { 
+                whichCompShow===0 &&
                 systemInfos &&
                 systemInfos.map((item,index)=>(
-                <CardReport />
-
+                  <Grid item xs={12} md={6} key={index}>
+                        <ObieeCardReport 
+                        key={index} 
+                        title={item.name} 
+                        subheader={item.latinName}
+                        avatarText={item.latinName.substring(0,2)}   
+                        onUsers={e=>setWhichCompShow(1)}
+                        onApproles={e=>setWhichCompShow(2)}
+                        onUserOfApproles={e=>setWhichCompShow(3)} 
+                        />
+                  </Grid>     
                 ))
             }
+
+            {whichCompShow===2 &&
+                <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>
+            }
+
+            </Grid>
 
             </ObieeDrawer>
 

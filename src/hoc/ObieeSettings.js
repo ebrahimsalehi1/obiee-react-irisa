@@ -7,6 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import Checkbox from '@material-ui/core/Checkbox';
 import ObieeTabs from '../widgets/ObieeTabs';
 import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+
 
 export default function ObieeSettings(){
     const [valTab,setValTab] = React.useState(0);
@@ -34,9 +37,10 @@ export default function ObieeSettings(){
 
          </Card>
 
-    {valTab ==0 && 
+    {valTab === 0 && 
     <Card style={{"padding":"40px","box-shadow":"none"}}>
-        <Grid container spacing={0} >
+    <CardContent>
+        <Grid container spacing={1} >
 
          <Grid item xs={6} md={6}>
              <TextField  
@@ -57,9 +61,11 @@ export default function ObieeSettings(){
                 />
          </Grid>
 
-         <Grid item xs={6} md={6}>
 
-            <Button 
+     </Grid>
+     </CardContent>
+     <CardActions>
+     <Button 
                 color={"primary"} 
                 variant={"outlined"} 
                 style={{"width":"75px","margin":"4px"}}
@@ -72,12 +78,10 @@ export default function ObieeSettings(){
                 color={"primary"} 
                 variant={"outlined"} 
                 style={{"width":"75px","margin":"4px"}}>Cancel</Button>
-
-         </Grid>
-
-     </Grid>
+     </CardActions>
      </Card>
     }
+
 </>
     )
 }

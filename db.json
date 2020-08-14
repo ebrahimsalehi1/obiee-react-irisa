@@ -1,0 +1,55 @@
+{
+    "systemInfos":[
+        {"id":"AN","name":"گزارشات تحلیلی","latinName":"Analytics"},
+        {"id":"VI","name":"گزارشات داده محور","latinName":"Visual Analyzer"},
+        {"id":"BI","name":"گزارشات تراکنشی","latinName":"BI Publisher"},
+        {"id":"AD","name":"راهبری سیستم","latinName":"Administrator of OBIEE"}
+
+    ],
+    "users":[
+        {"userId": "763434","userName":"ahmad","userFamily":"molaee"},
+        {"userId": "763431","userName":"asghar","userFamily":"samadi"},
+        {"userId": "763430","userName":"karim","userFamily":"erfani"}
+    ],
+    "reports" : [
+        {"reportName":"report 1","title":"report for PDS","link":"http://obiee.com/report1"},
+        {"reportName":"report 2","title":"report for WSE","link":"http://obiee.com/report2"},
+        {"reportName":"report 3","title":"report for FND","link":"http://obiee.com/report3"}
+    ],
+    "approles" : [
+        {"approleName":"approle 1","approleDesc":"approle desc 1","approleType":"author","approleLatinName":"approle Latin name 1"},
+        {"approleName":"approle 2","approleDesc":"approle desc 2","approleType":"consumer","approleLatinName":"approle Latin name 2"},
+        {"approleName":"approle 3","approleDesc":"approle desc 3","approleType":"admin","approleLatinName":"approle Latin name 3"},
+        {"approleName":"approle 4","approleDesc":"approle desc 4","approleType":"context author","approleLatinName":"approle Latin name 4"},
+        {"approleName":"approle 5","approleDesc":"approle desc 5","approleType":"author","approleLatinName":"approle Latin name 5"}
+    ],
+    "userApproles" : [
+        {
+            "userId": "763434","userName":"ahmad","userFamily":"molaee", 
+            "approles":[{"approleName":"approle 1","approleDesc":"approle desc 1","approleType":"author"},
+            {"approleName":"approle 2","approleDesc":"approle desc 2","approleType":"consumer"}]
+        },
+
+        {"userId": "763431","userName":"asghar","userFamily":"samadi",
+            "approles":[{"approleName":"approle 3","approleDesc":"approle desc 3","approleType":"admin"}]},
+
+        {"userId": "763430","userName":"karim","userFamily":"erfani",
+        "approles":[{"approleName":"approle 4","approleDesc":"approle desc 4","approleType":"context author"},
+        {"approleName":"approle 5","approleDesc":"approle desc 5","approleType":"author"}]}
+
+    ],
+    "reportApproles" : [
+        {
+            "reportName":"report 1","title":"report for PDS","link":"http://obiee.com/report1", 
+            "approles":[{"approleName":"approle 1","approleDesc":"approle desc 1","approleType":"author"},
+            {"approleName":"approle 2","approleDesc":"approle desc 2","approleType":"consumer"}]
+        },
+
+        {"reportName":"report 2","title":"report for WSE","link":"http://obiee.com/report2",
+            "approles":[{"approleName":"approle 3","approleDesc":"approle desc 3","approleType":"admin"}]},
+
+        {"reportName":"report 3","title":"report for FND","link":"http://obiee.com/report3",
+        "approles":[{"approleName":"approle 4","approleDesc":"approle desc 4","approleType":"context author"},
+        {"approleName":"approle 5","approleDesc":"approle desc 5","approleType":"author"}]}
+    ]
+}

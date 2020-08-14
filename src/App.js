@@ -1,9 +1,12 @@
 import React from 'react';
 import Dashboard from './hoc/Dashboard';
 import ObieeSigin from './hoc/ObieeSignin';
+import data from '../db.json';
+
+import ObieeCrudApprole from './hoc/ObieeCrudApprole';
 
 export default function App(){
-    const [isAuthenticate,setIsAuthenticate] = React.useState(false);
+    const [isAuthenticate,setIsAuthenticate] = React.useState(true);
     return (
         <div>
             {
@@ -17,9 +20,11 @@ export default function App(){
             }
             {
                 isAuthenticate &&
-                <Dashboard />
+                <Dashboard systemInfos={data.systemInfos}/> 
             }
         </div>
     );
 }
 
+//  <Dashboard /> 
+//  <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>

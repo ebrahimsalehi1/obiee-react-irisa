@@ -11,6 +11,7 @@ import Menu from '@material-ui/core/Menu';
 //import MenuItemText from '@material-ui/core/MenuItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 //import MailIcon from '@material-ui/icons/Mail';
 //import SubtitlesIcon from '@material-ui/icons/Subtitles';
@@ -18,7 +19,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
-import SwitchUI from '@material-ui/core/Switch';
+//import SwitchUI from '@material-ui/core/Switch';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import LanguageIcon from '@material-ui/icons/Language';
@@ -121,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ObieeAppBar(props) {
 
-  const {open,handleDrawerOpen,handleSettings} = props;
+  const {open,handleDrawerOpen,handleSettings,onHomeClick} = props;
 
   const classes = useStyles();
 
@@ -153,8 +154,7 @@ export default function ObieeAppBar(props) {
 
   const handleLanguageMenuOpen = (event) => {
     setLanguageMenu(event.currentTarget);
-  }
-
+  }  
 
   const handleLanguageMenuClose = (event) => {
     setLanguageMenu(null);
@@ -317,6 +317,13 @@ export default function ObieeAppBar(props) {
             <div className={classes.sectionDesktop}>
               <IconButton 
                 color="inherit"
+                aria-label="go to home"
+                onClick={onHomeClick}
+              >
+                <HomeIcon/>
+              </IconButton>
+              <IconButton 
+                color="inherit"
                 aria-label="Show list of languages"
                 onClick={handleLanguageMenuOpen}
               >
@@ -375,52 +382,7 @@ export default function ObieeAppBar(props) {
       {renderMobileMenu}
       {renderMenu}
       {renderLanguages}
-      {openDialog && 
-         <ObieeDialog
-         openModal={openDialog}
-         title={"System & Users & Roles"}
-         maxWidth={"lg"}
-         TransitionComponent
-         eventClose={(e) => {
-             setOpenDialog(!openDialog);
-         }}
-         actionBar={
-             <>
-                 <Button color={"primary"} variant={"outlined"} style={{"width":"75px","margin":"4px"}}>Ok</Button>
-                 <Button color={"primary"} variant={"outlined"} style={{"width":"75px","margin":"4px"}}>Cancel</Button>
-             </>
-         }
-     >
-         <Grid container spacing={1} >
 
-            <Grid item xs={12} md={12}>
-              <Typography gutterBottom variant={"h5"}>
-                  System
-              </Typography>
-
-              <Typography gutterBottom component="h6" variant="h6">
-                  Create new system with these features
-              </Typography>
-            </Grid>
-
-             <Grid item xs={6} md={6}>
-                 <TextField  placeholder={"System Name"} variant={"outlined"}/>
-             </Grid>
-             <Grid item xs={6} md={6}>
-                 <TextField  placeholder={"Latin System Name"} variant={"outlined"}/>
-             </Grid>
-
-             <Grid item xs={6} md={6}>
-                 <Checkbox  checked={true} color="primary" onChange={()=>{}} />
-             </Grid>
-             <Grid item xs={6} md={6}>
-                 <TextField  placeholder={"System Abbriviation"} variant={"outlined"}/>
-             </Grid>
-
-         </Grid>
-     </ObieeDialog>
-
-      }
       </div>
   );
 }

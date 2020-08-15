@@ -14,7 +14,7 @@
     "test": "jest --config ./jest.config.js",
     "predeploy": "npm run prod",
     "deploy": "gh-pages -d dist",
-    "json:server":"json-server --watch db.json"
+    "json:server": "json-server --watch db.json"
   },
   "author": "Ebrahim Salehi",
   "license": "ISC",

@@ -11,6 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import {makeStyles} from '@material-ui/core/styles';
 import ObieeHosts from './ObieeHosts';
+import ObieeResetPassword from './ObieeResetPassword';
 
 export default function ObieeSettings(){
 
@@ -26,11 +27,11 @@ export default function ObieeSettings(){
          }}
          tabData={
              [
-                 {title:'Hosts'},
-                 {title:'Systems'},
-                 {title:'languages'},
-                 {title:'change password'},
-                 {title:'profile'},
+                 {title:'Hosts',id:0},
+                 //{title:'Systems',id:1},
+                 //{title:'languages',id:2},
+                 //{title:'change password',id:3},
+                 {title:'profile',id:4},
              ]
          }
          />
@@ -39,6 +40,10 @@ export default function ObieeSettings(){
 
     {valTab === 0 && 
      <ObieeHosts />       
+    }
+
+    {valTab === 3 && 
+     <ObieeResetPassword />       
     }
 
 </>

@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import ObieeCrudApprole from './ObieeCrudApprole';
 import ObieeReports from './ObieeReports';
 import ObieeUsers from './ObieeUsers';
+import ObieeCrudUserOfApprole from './ObieeCrudUserOfApprole';
 
 function Dashboard(props){
 
@@ -71,11 +72,16 @@ function Dashboard(props){
                         key={index} 
                         title={item.name} 
                         subheader={item.latinName}
+                        type={item.type}
                         avatarText={item.latinName.substring(0,2)}   
                         onUsers={e=>setWhichCompShow(1)}
                         onApproles={e=>setWhichCompShow(2)}
                         onUserOfApproles={e=>setWhichCompShow(3)} 
                         onReports={e=>setWhichCompShow(4)}
+                        onSettings={e=>{
+                            setWhichCompShow(-1);
+                            setShowSystemSetting(!showSystemSetting);
+                        }}
                         />
                   </Grid>     
                 ))
@@ -86,6 +92,9 @@ function Dashboard(props){
 
             {whichCompShow===2 &&
                 <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>
+            }
+            {whichCompShow===3 &&
+                <ObieeCrudUserOfApprole url={localStorage.esbip+'api/v1.0/approles'}/>
             }
             {whichCompShow===4 &&
                 <ObieeReports url={localStorage.esbip+'api/v1.0/reports'}/>

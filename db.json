@@ -1,15 +1,18 @@
 {
     "systemInfos":[
-        {"id":"AN","name":"گزارشات تحلیلی","latinName":"Analytics"},
-        {"id":"VI","name":"گزارشات داده محور","latinName":"Visual Analyzer"},
-        {"id":"BI","name":"گزارشات تراکنشی","latinName":"BI Publisher"},
-        {"id":"AD","name":"راهبری سیستم","latinName":"Administrator of OBIEE"}
+        {"id":"AN","name":"گزارشات تحلیلی","latinName":"Analytics","type":"no_setting"},
+        {"id":"VI","name":"گزارشات داده محور","latinName":"Visual Analyzer","type":"no_setting"},
+        {"id":"BI","name":"گزارشات تراکنشی","latinName":"BI Publisher","type":"no_setting"},
+        {"id":"AD","name":"راهبری سیستم","latinName":"Administrator of OBIEE","type":"setting"}
 
     ],
     "users":[
         {"id": "763434","name":"ahmad","family":"molaee"},
         {"id": "763431","name":"asghar","family":"samadi"},
-        {"id": "763430","name":"karim","family":"erfani"}
+        {"id": "763430","name":"karim","family":"erfani"},
+        {"id": "763439","name":"amir","family":"kiani"},
+        {"id": "763438","name":"maryam","family":"ahmadi"},
+        {"id": "763437","name":"sima","family":"salahi"}
     ],
     "reports" : [
         {"name":"report 1","title":"report for PDS","link":"http://obiee.com/report1"},
@@ -25,15 +28,15 @@
     ],
     "userApproles" : [
         {
-            "userId": "763434","userName":"ahmad","userFamily":"molaee", 
+            "id": "763434","name":"ahmad","family":"molaee", 
             "approles":[{"approleName":"approle 1","approleDesc":"approle desc 1","approleType":"author"},
             {"approleName":"approle 2","approleDesc":"approle desc 2","approleType":"consumer"}]
         },
 
-        {"userId": "763431","userName":"asghar","userFamily":"samadi",
+        {"id": "763431","name":"asghar","family":"samadi",
             "approles":[{"approleName":"approle 3","approleDesc":"approle desc 3","approleType":"admin"}]},
 
-        {"userId": "763430","userName":"karim","userFamily":"erfani",
+        {"id": "763430","name":"karim","family":"erfani",
         "approles":[{"approleName":"approle 4","approleDesc":"approle desc 4","approleType":"context author"},
         {"approleName":"approle 5","approleDesc":"approle desc 5","approleType":"author"}]}
 

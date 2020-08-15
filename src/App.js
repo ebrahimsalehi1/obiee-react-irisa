@@ -6,7 +6,7 @@ import data from '../db.json';
 import ObieeCrudApprole from './hoc/ObieeCrudApprole';
 
 export default function App(){
-    const [isAuthenticate,setIsAuthenticate] = React.useState(false);
+    const [isAuthenticate,setIsAuthenticate] = React.useState(true);
     return (
         <div>
             {

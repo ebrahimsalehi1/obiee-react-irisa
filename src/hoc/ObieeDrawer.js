@@ -25,6 +25,7 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    direction:'ltr',
     display: 'flex',
   },
 //   appBar: {

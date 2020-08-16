@@ -23,16 +23,18 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import LanguageIcon from '@material-ui/icons/Language';
-//import BrightnessHighIcon from '@material-ui/icons/Brightness7';
-//import BrightnessLowIcon from '@material-ui/icons/Brightness4';
+import BrightnessHighIcon from '@material-ui/icons/Brightness7';
+import BrightnessLowIcon from '@material-ui/icons/Brightness4';
 import RightToLeftPageIcon from '@material-ui/icons/FormatTextdirectionRToL';
-import LeftToRightIcon from '@material-ui/icons/FormatTextdirectionLToR';
+import LeftToRightPageIcon from '@material-ui/icons/FormatTextdirectionLToR';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import clsx from 'clsx';
 import UserContext from '../Context';
 
 import ObieeDialog from '../widgets/ObieeDialog';
+
+import {useTranslation} from 'react-i18next';
 
 const drawerWidth = 240;
 //const mtheme = useTheme();
@@ -136,6 +138,8 @@ export default function ObieeAppBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isLanguageMenuOpen = Boolean(languageMenu);
 
+  //const { translation } = useTranslation();
+
   // const handleSystemInfos = ()=>{
   //   setOpenDialog(!openDialog);
   // }
@@ -224,7 +228,7 @@ export default function ObieeAppBar(props) {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
-      <MenuItem onClick={handleLanguageMenuOpen}>
+      {/* <MenuItem onClick={handleLanguageMenuOpen}>
       <IconButton 
               color="inherit"
               aria-label="Show list of languages"              
@@ -232,8 +236,8 @@ export default function ObieeAppBar(props) {
             <LanguageIcon/>
       </IconButton>
       <p>Languages</p>
-      </MenuItem>
-      {/* <MenuItem>
+      </MenuItem> */}
+      <MenuItem>
       <IconButton 
         color="inherit"
         aria-label="Brightness"              
@@ -241,7 +245,7 @@ export default function ObieeAppBar(props) {
         <BrightnessHighIcon/>
       </IconButton>
       <p>Brightness</p>
-      </MenuItem> */}
+      </MenuItem>
       <MenuItem>
       <IconButton 
         color="inherit"
@@ -254,30 +258,30 @@ export default function ObieeAppBar(props) {
     </Menu>
   );
 
-  const renderLanguages = (
-    <Menu
-      anchorEl={languageMenu}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isLanguageMenuOpen}
-      onClose={handleLanguageMenuClose}
-    >
-    <MenuItem onClick={()=>{alert('persian');setLanguageMenu(null);}}>
-      Persian
-    </MenuItem>
-    <MenuItem onClick={()=>{alert('english');setLanguageMenu(null);}}>
-      English
-    </MenuItem>
-    <MenuItem onClick={()=>{alert('deutsch');setLanguageMenu(null);}}>
-      Deutsch
-    </MenuItem>
-  </Menu>
-  );
+  // const renderLanguages = (
+  //   <Menu
+  //     anchorEl={languageMenu}
+  //     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+  //     id={mobileMenuId}
+  //     keepMounted
+  //     transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+  //     open={isLanguageMenuOpen}
+  //     onClose={handleLanguageMenuClose}
+  //   >
+  //   <MenuItem onClick={()=>{alert('persian');setLanguageMenu(null);}}>
+  //     Persian
+  //   </MenuItem>
+  //   <MenuItem onClick={()=>{alert('english');setLanguageMenu(null);}}>
+  //     English
+  //   </MenuItem>
+  //   <MenuItem onClick={()=>{alert('deutsch');setLanguageMenu(null);}}>
+  //     Deutsch
+  //   </MenuItem>
+  // </Menu>
+  // );
 
   //console.log('my context',this.context);
-  const {handleChange} = React.useContext(UserContext);
+  const {direction,handleChange} = React.useContext(UserContext);
 
   return (
     <div>
@@ -298,7 +302,7 @@ export default function ObieeAppBar(props) {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
-              Irisa Productions
+            Irisa Productions
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
@@ -322,25 +326,25 @@ export default function ObieeAppBar(props) {
               >
                 <HomeIcon/>
               </IconButton>
-              <IconButton 
+              {/* <IconButton 
                 color="inherit"
                 aria-label="Show list of languages"
                 onClick={handleLanguageMenuOpen}
               >
                 <LanguageIcon/>
-              </IconButton>
-              {/* <IconButton 
+              </IconButton> */}
+              <IconButton 
                 color="inherit"
                 aria-label="Brightness"              
                 >
                 <BrightnessHighIcon/>
-              </IconButton> */}
+              </IconButton>
               <IconButton 
                 color="inherit"
                 aria-label="left to right / right to left"        
                 onClick={handleChange}                    
                 >
-                <RightToLeftPageIcon/>
+                {!direction ? <RightToLeftPageIcon/> : <LeftToRightPageIcon/>}
               </IconButton>
               <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSettings}>
               <SettingsIcon />
@@ -381,7 +385,6 @@ export default function ObieeAppBar(props) {
       
       {renderMobileMenu}
       {renderMenu}
-      {renderLanguages}
 
       </div>
   );

@@ -16,8 +16,6 @@ function Dashboard(props){
 
     const {systemInfos} = props;
 
-    console.log("systemInfos",systemInfos);
-
     const [openDrawer,setOpenDrawer] = React.useState(false);
     //const [systemInfos,setSystemInfos] = React.useState([]);
     const [showSystemSetting,setShowSystemSetting] = React.useState(false);

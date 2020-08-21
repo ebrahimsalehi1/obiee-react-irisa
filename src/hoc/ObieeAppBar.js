@@ -18,22 +18,15 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import SettingsIcon from '@material-ui/icons/Settings';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Button from '@material-ui/core/Button';
 //import SwitchUI from '@material-ui/core/Switch';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import LanguageIcon from '@material-ui/icons/Language';
+//import Grid from '@material-ui/core/Grid';
+//import LanguageIcon from '@material-ui/icons/Language';
 import BrightnessHighIcon from '@material-ui/icons/Brightness7';
 import BrightnessLowIcon from '@material-ui/icons/Brightness4';
 import RightToLeftPageIcon from '@material-ui/icons/FormatTextdirectionRToL';
 import LeftToRightPageIcon from '@material-ui/icons/FormatTextdirectionLToR';
-import Checkbox from '@material-ui/core/Checkbox';
-
 import clsx from 'clsx';
 import UserContext from '../Context';
-
-import ObieeDialog from '../widgets/ObieeDialog';
-
 import {useTranslation} from 'react-i18next';
 
 const drawerWidth = 240;
@@ -138,7 +131,7 @@ export default function ObieeAppBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isLanguageMenuOpen = Boolean(languageMenu);
 
-  //const { translation } = useTranslation();
+  const { t } = useTranslation();
 
   // const handleSystemInfos = ()=>{
   //   setOpenDialog(!openDialog);
@@ -302,7 +295,7 @@ export default function ObieeAppBar(props) {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
-            Irisa Productions
+            {t('IrisaProductions.1')}
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>

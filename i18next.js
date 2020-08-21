@@ -13,11 +13,10 @@ i18n
     fallbackLng: 'en',
     debug: true,
     whitelist: languages,
-
+    react:{useSuspense:false},
     interpolation: {
         escapeValue: false,
     }
 });
 
 export default i18n;
-

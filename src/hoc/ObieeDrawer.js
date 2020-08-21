@@ -19,7 +19,12 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 //import ObieeAppBar from './ObieeAppBar';
 //import MyAppBar from './MyAppBar';
-import CardReport from '../widgets/ObieeCardReport';
+//import CardReport from '../widgets/ObieeCardReport';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
+import { blue } from '@material-ui/core/colors';
 
 const drawerWidth = 240;
 
@@ -84,6 +89,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  avatar:{
+    backgroundColor: blue[500],
+  }
 }));
 
 export default function ObieeDrawer(props) {
@@ -147,17 +155,29 @@ export default function ObieeDrawer(props) {
           </IconButton>
         </div>
         <Divider />
-        <List>
+        <Card style={{"minHeight":"200px"}}>
+          <CardHeader
+          avatar={<Avatar aria-label="user" className={classes.avatar}>U</Avatar>}
+          title="Ebrahim Salehi"
+          subheader="Author"
+          />
+          <CardContent>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Here is my texts
+            </Typography>
+          </CardContent>
+        </Card>
+        {/* <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
-        </List>
+        </List> */}
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {['Reports', 'Users', 'Application roles','User Approles'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />

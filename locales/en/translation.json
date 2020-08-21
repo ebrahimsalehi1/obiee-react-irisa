@@ -1,6 +1,6 @@
 {   
     "Button_Desc":{"1":
-    "مستند مربوط به دکمه را اینجا مشاهده نمایید \n"
+    "Here you can see the button information \n"
     },
     "Checkbox":{"1":""},
     "Radio Button":{"1":""},
@@ -12,6 +12,6 @@
     "Tree":{"1":""},
     "Tabs":{"1":""},
     "StackedCanvas":{"1":""},
-
-    "Irisa Productions":{"1":"محیط عملیاتی ایریسا"}
+    
+    "IrisaProductions":{"1":"Irisa Productions"}
 }

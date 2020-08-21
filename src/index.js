@@ -22,28 +22,28 @@ const countries = [
 
 function IndexComp(props) {    
 
-    const [userDetails,setUserDetails] = React.useState(
-            false
-    );
+    const [userDetails,setUserDetails] = React.useState(false);
 
-    //const { i18n } = useTranslation();
+    const { i18n } = useTranslation();
+    //i18n.init({ lng: countries[0].lang });
+
 
     return (
+    <React.Suspense fallback={<h1>Loading profile...</h1>}>
         <UserContext.Provider value={ {
             direction:userDetails,
             handleChange: ()=>{
                 setUserDetails(!userDetails);
-                //i18n.changeLanguage(userDetails ? countries[1].lang : countries[0].lang)
+                i18n.changeLanguage(userDetails ? countries[0].lang : countries[1].lang)
             }
         }}>
-        <React.Suspense fallback={<h1>Loading profile...</h1>}>
             <StylesProvider jss={jssRtl}>
             <MuiThemeProvider theme={userDetails===false ? themeLightLTR : themeLightRTL}>
                 <App/>
             </MuiThemeProvider>
             </StylesProvider>
-        </React.Suspense>
         </UserContext.Provider>
+    </React.Suspense>
     )
 }
 

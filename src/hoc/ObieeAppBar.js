@@ -273,8 +273,7 @@ export default function ObieeAppBar(props) {
   // </Menu>
   // );
 
-  //console.log('my context',this.context);
-  const {direction,handleChange} = React.useContext(UserContext);
+  const {direction,theme,handleChangeDirection,handleChangeTheme} = React.useContext(UserContext);
 
   return (
     <div>
@@ -328,14 +327,15 @@ export default function ObieeAppBar(props) {
               </IconButton> */}
               <IconButton 
                 color="inherit"
-                aria-label="Brightness"              
+                aria-label="Brightness"    
+                onClick={handleChangeTheme}            
                 >
-                <BrightnessHighIcon/>
+                {theme ? <BrightnessHighIcon/> : <BrightnessLowIcon/>}
               </IconButton>
               <IconButton 
                 color="inherit"
                 aria-label="left to right / right to left"        
-                onClick={handleChange}                    
+                onClick={handleChangeDirection}                    
                 >
                 {!direction ? <RightToLeftPageIcon/> : <LeftToRightPageIcon/>}
               </IconButton>

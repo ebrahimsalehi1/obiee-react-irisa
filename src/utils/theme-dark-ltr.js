@@ -3,8 +3,13 @@ import {createMuiTheme} from '@material-ui/core/styles';
 import * as locales from '@material-ui/core/locale';
 
 export const themeDarkLTR = createMuiTheme({
-    direction: 'ltr',
-    MuiDrawer: {
+    type:'themeDarkLTR',
+    direction: 'ltr',    
+    body:{
+        backgrouundColor:'#000000'
+    },    
+    overrides: {
+        MuiDrawer: {
         root: {
             position: 'absolute',
         },
@@ -14,8 +19,8 @@ export const themeDarkLTR = createMuiTheme({
         paper: {
             //backgroundColor: '#18202c',
             //backgroundColor: '#f4f6f8',
-            backgroundColor: '#ffffff',
-            color:'#263238',
+            backgroundColor: '#000000',
+            color:'#ffffff',
         },
 
     },
@@ -24,7 +29,6 @@ export const themeDarkLTR = createMuiTheme({
             backgroundColor: '#3f51b5'
         }
     },
-    overrides: {
 
     MuiCardHeader: {
         root: {

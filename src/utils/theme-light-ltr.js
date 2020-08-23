@@ -3,7 +3,11 @@ import {createMuiTheme} from '@material-ui/core/styles';
 import * as locales from '@material-ui/core/locale';
 
 export const themeLightLTR = createMuiTheme({
+    type:'themeLightLTR',
     direction: 'ltr',
+    body:{
+        backgrouundColor:'#FFFFFF'
+    },     
     MuiDrawer: {
         root: {
             position: 'absolute',
@@ -19,12 +23,13 @@ export const themeLightLTR = createMuiTheme({
         },
 
     },
+    overrides: {
+
     MuiAppBar: {
         colorPrimary: {
             backgroundColor: '#3f51b5'
         }
     },
-    overrides: {
 
     MuiCardHeader: {
         root: {

@@ -30,14 +30,19 @@ function IndexComp(props) {
     const { i18n } = useTranslation();
     //i18n.init({ lng: countries[0].lang });
 
+    console.log("index",(isRightToLeft===false ? (isDarkTheme ? themeDarkLTR : themeLightLTR) : (!isDarkTheme ? themeLightRTL : themeDarkRTL)).type);
 
     return (
     <React.Suspense fallback={<h1>Loading profile...</h1>}>
         <UserContext.Provider value={ {
             direction:isRightToLeft,
-            handleChange: ()=>{
+            theme: !isDarkTheme,
+            handleChangeDirection: ()=>{
                 setIsRightToLeft(!isRightToLeft);
                 i18n.changeLanguage(isRightToLeft ? countries[0].lang : countries[1].lang)
+            },
+            handleChangeTheme:()=>{
+                setIsDarkTheme(!isDarkTheme);
             }
         }}>
             <StylesProvider jss={jssRtl}>

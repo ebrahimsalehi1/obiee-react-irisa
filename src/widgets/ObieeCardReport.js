@@ -76,17 +76,17 @@ export default function ObieeCardReport(props){
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
                 <Grid container spacing={1} direction="column">
-                    {type==='no_setting' &&  
+                    {type==='setting' &&  
                     <Grid item xs={12} md={12}>
                     <Button size="large" variant="contained" color="primary" onClick={onUsers}>Users</Button>
                     </Grid>
                     }
-                    {type==='no_setting' && 
+                    {type==='setting' && 
                     <Grid item xs={12} md={12}>
                     <Button size="large" variant="contained" color="primary" onClick={onApproles}>Approles</Button>
                     </Grid>
                     }
-                    {type==='no_setting' && 
+                    {type==='setting' && 
                     <Grid item xs={12} md={12}>
                     <Button size="large" variant="contained" color="primary" onClick={onUserOfApproles}>User Approles</Button>
                     </Grid>
@@ -96,11 +96,11 @@ export default function ObieeCardReport(props){
                     <Button size="large" variant="contained" color="primary" onClick={onReports}>Reports</Button>
                     </Grid>
                     }
-                    { type==='setting' && 
+                    {/* { type==='setting' && 
                     <Grid item xs={12} md={12}>
                     <Button size="large" variant="contained" color="primary" onClick={onSettings}>Setting</Button>
                     </Grid>
-                    }                    
+                    }                     */}
                 </Grid>
                 </CardContent>
             </Collapse>

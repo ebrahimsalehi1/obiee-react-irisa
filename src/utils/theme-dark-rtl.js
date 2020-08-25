@@ -1,6 +1,7 @@
 import {createMuiTheme} from '@material-ui/core/styles';
 //import { faIR } from '@material-ui/core/locale';
 import * as locales from '@material-ui/core/locale';
+import { blue } from '@material-ui/core/colors';
 
 export const themeDarkRTL = createMuiTheme({
     type:'themeDarkRTL',
@@ -8,23 +9,55 @@ export const themeDarkRTL = createMuiTheme({
     body:{
         backgrouundColor:'#000000'
     },
-    overrides: {
-        MuiDrawer: {
-        root: {
-            position: 'absolute',
-        },
-        paperAnchorDockedRight: {
-            width: 225
-        },
-        paper: {
-            //backgroundColor: '#18202c',
-            //backgroundColor: '#f4f6f8',
-            backgroundColor: '#000000',
-            color:'#ffffff',
-        },
-
-
-    },
+overrides: {
+        MuiDrawer:theme=>( {
+            root: {
+                direction:'ltr',
+                display: 'flex',
+              },
+              menuButton: {
+                marginRight: 36,
+              },
+              hide: {
+                display: 'none',
+              },
+              drawer: {
+                width: 240,
+                flexShrink: 0,
+                whiteSpace: 'nowrap',
+              },
+              drawerOpen: {
+                width: 240,
+                transition: theme.transitions.create('width', {
+                  easing: theme.transitions.easing.sharp,
+                  duration: theme.transitions.duration.enteringScreen,
+                }),
+              },
+              drawerClose: {
+                transition: theme.transitions.create('width', {
+                  easing: theme.transitions.easing.sharp,
+                  duration: theme.transitions.duration.leavingScreen,
+                }),
+                overflowX: 'hidden',
+                width: theme.spacing(7) + 1,
+                [theme.breakpoints.up('sm')]: {
+                  width: theme.spacing(9) + 1,
+                },
+              },
+              toolbar: {
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                padding: theme.spacing(0, 1),
+                ...theme.mixins.toolbar,
+              },
+              content: {
+                flexGrow: 1,
+                padding: theme.spacing(3),
+              },
+              avatar:{
+                backgroundColor: blue[500],
+              }
+        }),
     MuiAppBar: {
         colorPrimary: {
             backgroundColor: '#3f51b5'

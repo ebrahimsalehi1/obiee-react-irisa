@@ -25,6 +25,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import { blue } from '@material-ui/core/colors';
+import Text from '../widgets/ObieeText';
 
 const drawerWidth = 240;
 
@@ -180,7 +181,8 @@ export default function ObieeDrawer(props) {
           {['Reports', 'Users', 'Application roles','User Approles'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText ><Text keyStr={text}/></ListItemText>
+
             </ListItem>
           ))}
         </List>

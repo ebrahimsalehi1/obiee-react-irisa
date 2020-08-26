@@ -10,6 +10,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import {makeStyles} from '@material-ui/core/styles';
+import {getText} from '../utils/Utils';
 
 const useStyles = makeStyles(theme=>({
     root:{
@@ -24,6 +25,10 @@ export default function ObieeHosts(props){
     const [serviceIpAddress,setServiceIpAddress] = React.useState(localStorage.getItem('ip'));
     const [ESBIpAddress,setESBIpAddress] = React.useState(localStorage.getItem('esbip'));
 
+    const strServiceIPAddress = getText("ServiceIPAddress");
+    const strEsbIPAddress = getText("ESBIPAddress");
+    const strSave = getText("Save");
+
     return (
         <Card className={classes.root}>
         <CardContent>
@@ -31,8 +36,8 @@ export default function ObieeHosts(props){
     
              <Grid item xs={6} md={6}>
                  <TextField  
-                    label="Service IP Address"
-                    placeholder="Service IP Address"
+                    label={strServiceIPAddress}
+                    placeholder={strServiceIPAddress}
                     variant={"outlined"}
                     value={serviceIpAddress}
                     onChange={(e)=>setServiceIpAddress(e.target.value)}
@@ -40,8 +45,8 @@ export default function ObieeHosts(props){
              </Grid>
              <Grid item xs={6} md={6}>
                  <TextField  
-                    label="ESB IP Address"
-                    placeholder="ESB IP Address"
+                    label={strEsbIPAddress}
+                    placeholder={strEsbIPAddress}
                     variant={"outlined"}
                     value={ESBIpAddress}
                     onChange={(e)=>setESBIpAddress(e.target.value)}
@@ -59,7 +64,7 @@ export default function ObieeHosts(props){
                         localStorage.setItem('ip',serviceIpAddress);
                         localStorage.setItem('esbip',ESBIpAddress);
                     }}
-                >Save</Button>
+                >{strSave}</Button>
          </CardActions>
          </Card>
     )

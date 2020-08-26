@@ -12,8 +12,8 @@ import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import UserContext from './Context';
 
-import '../i18next';
-import {useTranslation} from 'react-i18next';
+//import '../i18next';
+//import {useTranslation} from 'react-i18next';
 
 const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 
@@ -27,10 +27,10 @@ function IndexComp(props) {
     const [isRightToLeft,setIsRightToLeft] = React.useState(false);
     const [isDarkTheme,setIsDarkTheme] = React.useState(false);
 
-    const { i18n } = useTranslation();
+    //const { i18n } = useTranslation();
     //i18n.init({ lng: countries[0].lang });
 
-    console.log("index",(isRightToLeft===false ? (isDarkTheme ? themeDarkLTR : themeLightLTR) : (!isDarkTheme ? themeLightRTL : themeDarkRTL)).type);
+    //console.log("index",(isRightToLeft===false ? (isDarkTheme ? themeDarkLTR : themeLightLTR) : (!isDarkTheme ? themeLightRTL : themeDarkRTL)).type);
 
     return (
     <React.Suspense fallback={<h1>Loading profile...</h1>}>
@@ -39,7 +39,8 @@ function IndexComp(props) {
             theme: !isDarkTheme,
             handleChangeDirection: ()=>{
                 setIsRightToLeft(!isRightToLeft);
-                i18n.changeLanguage(isRightToLeft ? countries[0].lang : countries[1].lang)
+                //i18n.changeLanguage(isRightToLeft ? countries[0].lang : countries[1].lang)
+                localStorage.setItem("language",isRightToLeft ? countries[0].lang : countries[1].lang);
             },
             handleChangeTheme:()=>{
                 setIsDarkTheme(!isDarkTheme);

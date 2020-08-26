@@ -27,7 +27,8 @@ import RightToLeftPageIcon from '@material-ui/icons/FormatTextdirectionRToL';
 import LeftToRightPageIcon from '@material-ui/icons/FormatTextdirectionLToR';
 import clsx from 'clsx';
 import UserContext from '../Context';
-import {useTranslation} from 'react-i18next';
+//import {useTranslation} from 'react-i18next';
+import Text from '../widgets/ObieeText';
 
 const drawerWidth = 240;
 //const mtheme = useTheme();
@@ -131,7 +132,7 @@ export default function ObieeAppBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isLanguageMenuOpen = Boolean(languageMenu);
 
-  const { t } = useTranslation();
+  //const { t } = useTranslation();
 
   // const handleSystemInfos = ()=>{
   //   setOpenDialog(!openDialog);
@@ -294,7 +295,7 @@ export default function ObieeAppBar(props) {
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
-            {t('IrisaProductions.1')}
+            <Text keyStr="IrisaProductions"/>
             </Typography>
             <div className={classes.search}>
               <div className={classes.searchIcon}>

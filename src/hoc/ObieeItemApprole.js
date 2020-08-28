@@ -45,6 +45,7 @@ export default function ObieeItemApprole(props){
     const [approleName,setApproleName] = React.useState(props.approle ? props.approle.approleName:'');
     const [approleDesc,setApproleDesc] = React.useState(props.approle ? props.approle.approleDesc:'');
     const [approleType,setApproleType] = React.useState(props.approle ? props.approle.approleType:'');
+    const [appType,setAppType] = React.useState(props.approle ? props.approle.appType:'');
     const [approleLatinName,setApproleLatinName] = React.useState(props.approle ? props.approle.approleLatinName:'');
 
     return (
@@ -52,28 +53,47 @@ export default function ObieeItemApprole(props){
       <CardContent>
       <Grid container spacing={1} >
 
-      <Grid item xs={12} md={mode==='add' ? 12 : 4}>
+      <Grid item xs={12} md={mode==='add' ? 12 : 3}>
             <TextField  
             label="approle latine name"
             placeholder="approle latine name"
             variant={"outlined"}
+            fullWidth
             value={approleLatinName}
             onChange={(e)=>setApproleLatinName(e.target.value)}
             />
         </Grid>
 
-        <Grid item xs={12} md={mode==='add' ? 12 : 4}>
+        <Grid item xs={12} md={mode==='add' ? 12 : 3}>
             <TextField  
             label="approle name"
             placeholder="approle name"
             variant={"outlined"}
+            fullWidth
             value={approleName}
             onChange={(e)=>setApproleName(e.target.value)}
             />
         </Grid>
 
-        <Grid item xs={12} md={mode==='add' ? 12 : 4}>
-        <FormControl variant="outlined" className={classes.formControl}>
+        <Grid item xs={12} md={mode==='add' ? 6 : 3}>
+        <FormControl variant="outlined" fullWidth className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">approle Type</InputLabel>
+        <Select
+          //labelId="demo-simple-select-outlined-label"
+          //id="demo-simple-select-outlined"
+          value={appType}
+          onChange={(e)=>{setAppType(e.target.value)}}
+          label="app Type"
+        >
+          <MenuItem value={'BI'}>BI</MenuItem>
+          <MenuItem value={'AN'}>AN</MenuItem>
+        </Select>
+      </FormControl>
+        </Grid>
+
+
+        <Grid item xs={12} md={mode==='add' ? 6 : 3}>
+        <FormControl variant="outlined" fullWidth className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">approle Type</InputLabel>
         <Select
           //labelId="demo-simple-select-outlined-label"

@@ -11,6 +11,7 @@ import ObieeCrudApprole from './ObieeCrudApprole';
 import ObieeReports from './ObieeReports';
 import ObieeUsers from './ObieeUsers';
 import ObieeCrudUserOfApprole from './ObieeCrudUserOfApprole';
+import ObieeStatusbar from './ObieeStatusbar';
 
 function Dashboard(props){
 
@@ -110,6 +111,8 @@ function Dashboard(props){
                     setOpenMessage(false);
                 }}
             />
+
+            <ObieeStatusbar />
 
         </div>
     )

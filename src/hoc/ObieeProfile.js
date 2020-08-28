@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme=>({
 }));
 
 
-export default function Profile({userName,displayName,email}){
+export default function Profile({userName,displayName,email,mobile,tel,internalTel}){
 
     const classes = useStyles();
     
@@ -25,6 +25,9 @@ export default function Profile({userName,displayName,email}){
     const strUserName = getText('User Name');    
     const strDisplayName = getText('Display Name');
     const strEmail = getText('Email');
+    const strMobile = getText('Mobile');
+    const strTel = getText('Tel');
+    const strInternalTel = getText('Internal Telephone');
 
     return (
         <Card className={classes.root}>
@@ -39,9 +42,9 @@ export default function Profile({userName,displayName,email}){
                     fullWidth
                     disabled
                     value={userName}
-                    onChange={e=>setUserName(e.target.value)}                
                 />
             </Grid>
+
             <Grid item xs={12} md={12}>
                 <TextField 
                     label={strDisplayName}
@@ -50,9 +53,9 @@ export default function Profile({userName,displayName,email}){
                     fullWidth
                     disabled
                     value={displayName}
-                    onChange={e=>setDisplayName(e.target.value)}                
                 />
             </Grid>
+
             <Grid item xs={12} md={12}>
             <TextField 
                     label={strEmail}
@@ -61,7 +64,39 @@ export default function Profile({userName,displayName,email}){
                     fullWidth
                     disabled
                     value={email}
-                    onChange={e=>setEmail(e.target.value)}                
+                />
+            </Grid>
+
+            <Grid item xs={12} md={12}>
+            <TextField 
+                    label={strMobile}
+                    placeholder={strMobile}
+                    variant="outlined"
+                    fullWidth
+                    disabled
+                    value={mobile}
+                />
+            </Grid>
+
+            <Grid item xs={12} md={12}>
+            <TextField 
+                    label={strTel}
+                    placeholder={strTel}
+                    variant="outlined"
+                    fullWidth
+                    disabled
+                    value={tel}
+                />
+            </Grid>
+
+            <Grid item xs={12} md={12}>
+            <TextField 
+                    label={strInternalTel}
+                    placeholder={strInternalTel}
+                    variant="outlined"
+                    fullWidth
+                    disabled
+                    value={internalTel}
                 />
             </Grid>
 

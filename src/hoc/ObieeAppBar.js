@@ -13,8 +13,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-//import MailIcon from '@material-ui/icons/Mail';
-//import SubtitlesIcon from '@material-ui/icons/Subtitles';
+import ExitToApp from '@material-ui/icons/ExitToApp';
+import Tune from '@material-ui/icons/Tune';
 import SettingsIcon from '@material-ui/icons/Settings';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
@@ -30,6 +30,7 @@ import UserContext from '../Context';
 //import {useTranslation} from 'react-i18next';
 import Text from '../widgets/ObieeText';
 import {getText} from '../utils/Utils';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const drawerWidth = 240;
 //const mtheme = useTheme();
@@ -144,7 +145,7 @@ export default function ObieeAppBar(props) {
   // }
 
   const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    //setAnchorEl(event.currentTarget);
   };
 
   const handleMobileMenuClose = () => {
@@ -292,7 +293,7 @@ export default function ObieeAppBar(props) {
               color="inherit"
               aria-label="open drawer"
               onClick={handleDrawerOpen}
-            >
+            >              
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
@@ -318,15 +319,26 @@ export default function ObieeAppBar(props) {
                 aria-label="go to home"
                 onClick={onHomeClick}
               >
+                <Tooltip title={getText("Home")} >
                 <HomeIcon/>
+                </Tooltip>
               </IconButton>
-              {/* <IconButton 
+
+              <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSettings}>
+              <Tooltip title={getText("Setting")} >
+              <SettingsIcon />
+              </Tooltip>
+              </IconButton> 
+
+              <IconButton 
                 color="inherit"
                 aria-label="Show list of languages"
                 onClick={handleLanguageMenuOpen}
               >
-                <LanguageIcon/>
-              </IconButton> */}
+                <Tooltip title={getText("Appearance")} >
+                <Tune/>
+                </Tooltip>
+              </IconButton> 
               <IconButton 
                 color="inherit"
                 aria-label="Brightness"    
@@ -341,18 +353,7 @@ export default function ObieeAppBar(props) {
                 >
                 {!direction ? <RightToLeftPageIcon/> : <LeftToRightPageIcon/>}
               </IconButton>
-              <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSettings}>
-              <SettingsIcon />
 
-                {/* <Badge badgeContent={4} color="secondary">
-                  <SettingsIcon />
-                </Badge> */}
-              </IconButton> 
-              {/* <IconButton aria-label="show 17 new notifications" color="inherit">
-                <Badge badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton> */}
               <IconButton
                 edge="end"
                 aria-label="account of current user"
@@ -361,7 +362,9 @@ export default function ObieeAppBar(props) {
                 onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <AccountCircle />
+                <Tooltip title={getText("Exit")} >
+                <ExitToApp />
+                </Tooltip>
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>

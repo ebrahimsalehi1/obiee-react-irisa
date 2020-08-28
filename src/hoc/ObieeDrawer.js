@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     direction:'ltr',
     display: 'flex',
+    
   },
 //   appBar: {
 //     zIndex: theme.zIndex.drawer + 1,
@@ -168,18 +169,17 @@ export default function ObieeDrawer(props) {
           </IconButton>
         </div>
         <Divider />
-        <Card style={{"minHeight":"200px"}}>
+        <Card style={{"minHeight":"60px","boxShadow":"none"}}>
           <CardHeader
           avatar={<Avatar aria-label="user" className={classes.avatar}>U</Avatar>}
           title="Ebrahim Salehi"
-          subheader="Author"
+          subheader="Person Position"
           />
-          <CardContent>
+          {/* <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
-              Here is my texts
+              Person Position
             </Typography>
-            <Version />
-          </CardContent>
+          </CardContent> */}
         </Card>
         {/* <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -191,7 +191,7 @@ export default function ObieeDrawer(props) {
         </List> */}
         <Divider />
         <List>
-          {['Reports', 'Users', 'Application roles','User Approles'].map((text, index) => (
+          {['Security','Application roles','User Approles','Objects of Approle'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText ><Text keyStr={text}/></ListItemText>
@@ -199,6 +199,18 @@ export default function ObieeDrawer(props) {
             </ListItem>
           ))}
         </List>
+        <Divider />
+        <List>
+          {['Reports'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText ><Text keyStr={text}/></ListItemText>
+
+            </ListItem>
+          ))}
+        </List>        
+        <Divider />
+        <Version />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

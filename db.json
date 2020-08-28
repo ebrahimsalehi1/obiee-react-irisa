@@ -7,12 +7,12 @@
 
     ],
     "users":[
-        {"id": "763434","name":"ahmad","family":"molaee"},
-        {"id": "763431","name":"asghar","family":"samadi"},
-        {"id": "763430","name":"karim","family":"erfani"},
-        {"id": "763439","name":"amir","family":"kiani"},
-        {"id": "763438","name":"maryam","family":"ahmadi"},
-        {"id": "763437","name":"sima","family":"salahi"}
+        {"id": "763434","name":"ahmad","family":"molaee","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},
+        {"id": "763431","name":"asghar","family":"samadi","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},
+        {"id": "763430","name":"karim","family":"erfani","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},
+        {"id": "763439","name":"amir","family":"kiani","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},
+        {"id": "763438","name":"maryam","family":"ahmadi","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},
+        {"id": "763437","name":"sima","family":"salahi","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"}
     ],
     "reports" : [
         {"name":"report 1","title":"report for PDS","link":"http://obiee.com/report1"},
@@ -20,11 +20,11 @@
         {"name":"report 3","title":"report for FND","link":"http://obiee.com/report3"}
     ],
     "approles" : [
-        {"approleName":"approle 1","approleDesc":"approle desc 1","approleType":"author","approleLatinName":"approle Latin name 1"},
-        {"approleName":"approle 2","approleDesc":"approle desc 2","approleType":"consumer","approleLatinName":"approle Latin name 2"},
-        {"approleName":"approle 3","approleDesc":"approle desc 3","approleType":"admin","approleLatinName":"approle Latin name 3"},
-        {"approleName":"approle 4","approleDesc":"approle desc 4","approleType":"context author","approleLatinName":"approle Latin name 4"},
-        {"approleName":"approle 5","approleDesc":"approle desc 5","approleType":"author","approleLatinName":"approle Latin name 5"}
+        {"approleName":"approle 1","approleDesc":"approle desc 1","approleType":"author","approleLatinName":"approle Latin name 1","appType":"AN"},
+        {"approleName":"approle 2","approleDesc":"approle desc 2","approleType":"consumer","approleLatinName":"approle Latin name 2","appType":"BI"},
+        {"approleName":"approle 3","approleDesc":"approle desc 3","approleType":"admin","approleLatinName":"approle Latin name 3","appType":"AN"},
+        {"approleName":"approle 4","approleDesc":"approle desc 4","approleType":"context author","approleLatinName":"approle Latin name 4","appType":"BI"},
+        {"approleName":"approle 5","approleDesc":"approle desc 5","approleType":"author","approleLatinName":"approle Latin name 5","appType":"BI"}
     ],
     "userApproles" : [
         {

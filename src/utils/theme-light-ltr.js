@@ -12,10 +12,10 @@ export const themeLightLTR = createMuiTheme({
 
 overrides: {
     MuiDrawer:theme=>( {
-        root: {
-            direction:'ltr',
-            display: 'flex',
-          },
+          root: {
+              direction:'ltr',
+              display: 'flex',
+            },          
           menuButton: {
             marginRight: 36,
           },

@@ -34,20 +34,22 @@ export default function ObieeHosts(props){
         <CardContent>
             <Grid container spacing={1} >
     
-             <Grid item xs={6} md={6}>
+             <Grid item xs={12} md={6}>
                  <TextField  
                     label={strServiceIPAddress}
                     placeholder={strServiceIPAddress}
                     variant={"outlined"}
+                    fullWidth
                     value={serviceIpAddress}
                     onChange={(e)=>setServiceIpAddress(e.target.value)}
                  />
              </Grid>
-             <Grid item xs={6} md={6}>
+             <Grid item xs={12} md={6}>
                  <TextField  
                     label={strEsbIPAddress}
                     placeholder={strEsbIPAddress}
                     variant={"outlined"}
+                    fullWidth
                     value={ESBIpAddress}
                     onChange={(e)=>setESBIpAddress(e.target.value)}
                     />

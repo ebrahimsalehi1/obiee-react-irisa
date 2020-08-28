@@ -14,6 +14,7 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {getText} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,6 +36,12 @@ export default function ObieeCardReport(props){
     const handleExpandClick = () => {
         setExpanded(!expanded);
       };
+
+    const strReports = getText('Reports');
+    const strUserApproles = getText('User Approles');
+    const strApproles = getText('Application roles');
+    const strUsers = getText('Users');
+
       
     return (
         <Card className={classes.root}>
@@ -78,22 +85,22 @@ export default function ObieeCardReport(props){
                 <Grid container spacing={1} direction="column">
                     {type==='setting' &&  
                     <Grid item xs={12} md={12}>
-                    <Button size="large" variant="contained" color="primary" onClick={onUsers}>Users</Button>
+                    <Button size="large" variant="contained" color="primary" onClick={onUsers}>{strUsers}</Button>
                     </Grid>
                     }
                     {type==='setting' && 
                     <Grid item xs={12} md={12}>
-                    <Button size="large" variant="contained" color="primary" onClick={onApproles}>Approles</Button>
+                    <Button size="large" variant="contained" color="primary" onClick={onApproles}>{strApproles}</Button>
                     </Grid>
                     }
                     {type==='setting' && 
                     <Grid item xs={12} md={12}>
-                    <Button size="large" variant="contained" color="primary" onClick={onUserOfApproles}>User Approles</Button>
+                    <Button size="large" variant="contained" color="primary" onClick={onUserOfApproles}>{strUserApproles}</Button>
                     </Grid>
                     }
                     {type==='no_setting' && 
                     <Grid item xs={12} md={12}>
-                    <Button size="large" variant="contained" color="primary" onClick={onReports}>Reports</Button>
+                    <Button size="large" variant="contained" color="primary" onClick={onReports}>{strReports}</Button>
                     </Grid>
                     }
                     {/* { type==='setting' && 

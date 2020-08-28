@@ -29,6 +29,7 @@ import clsx from 'clsx';
 import UserContext from '../Context';
 //import {useTranslation} from 'react-i18next';
 import Text from '../widgets/ObieeText';
+import {getText} from '../utils/Utils';
 
 const drawerWidth = 240;
 //const mtheme = useTheme();
@@ -178,8 +179,8 @@ export default function ObieeAppBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{getText('Profile')}</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{getText('My account')}</MenuItem>
     </Menu>
   );
 
@@ -302,7 +303,7 @@ export default function ObieeAppBar(props) {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder="Search…"
+                placeholder={getText("Search")}
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,

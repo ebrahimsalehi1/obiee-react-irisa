@@ -26,6 +26,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Avatar from '@material-ui/core/Avatar';
 import { blue } from '@material-ui/core/colors';
 import Text from '../widgets/ObieeText';
+import {getText} from '../utils/Utils';
+import Link from '@material-ui/core/Link';
 
 const drawerWidth = 240;
 
@@ -94,6 +96,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: blue[500],
   }
 }));
+
+function Version() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="left">
+      <Link color="inherit" href="http://www.irisaco.com/fa" target="_blank">
+        {getText('Version')} 0.0.10
+      </Link>
+    </Typography>
+  );
+}
 
 export default function ObieeDrawer(props) {
 
@@ -166,6 +178,7 @@ export default function ObieeDrawer(props) {
             <Typography variant="body2" color="textSecondary" component="p">
               Here is my texts
             </Typography>
+            <Version />
           </CardContent>
         </Card>
         {/* <List>

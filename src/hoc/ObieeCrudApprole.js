@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 import data from '../../db.json';
 import ObieeItemApprole from "./ObieeItemApprole";
 import ObieeDialog from '../widgets/ObieeDialog';
+import {getText} from '../utils/Utils';
 
 const useStyles = makeStyles(theme=>({
   root: {
@@ -39,6 +40,8 @@ export default function ObieeCrudApprole(props){
     const [approles,setApproles] = React.useState(data.approles);
     const [openModal,setOpenModal] = React.useState(false);
     const [search,setSearch] = React.useState('');
+
+    const strSearchApproles = getText('Search approles');
 
     React.useEffect(()=>{
 
@@ -73,8 +76,8 @@ export default function ObieeCrudApprole(props){
       <Grid item xs={12} md={8}>
           <TextField
             //className={classes.input}
-            placeholder="Search approles"
-            inputProps={{ 'aria-label': 'Search approles' }}
+            placeholder={strSearchApproles}
+            inputProps={{  'aria-label': {strSearchApproles} }}
             value={search}
             onChange={e=>{
               setSearch(e.target.value);

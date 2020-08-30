@@ -14,6 +14,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import PropTypes from 'prop-types';
+import {getText} from '../utils/Utils';
 
 const useStyles = makeStyles(theme=>({
     root: {
@@ -48,6 +49,15 @@ export default function ObieeItemApprole(props){
     const [appType,setAppType] = React.useState(props.approle ? props.approle.appType:'');
     const [approleLatinName,setApproleLatinName] = React.useState(props.approle ? props.approle.approleLatinName:'');
 
+    const strApproleLatinName = getText('Approle Latine Name');
+    const strApproleName = getText('Approle Name');
+    const strApproleType = getText('Application Type');
+    const strAppType = getText('Application Type');
+    const strApproleDesc = getText('Approle Desc');
+    const strSave = getText('Save');
+    const strEdit = getText('Edit');
+    const strDelete = getText('Delete');
+    
     return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
@@ -55,8 +65,8 @@ export default function ObieeItemApprole(props){
 
       <Grid item xs={12} md={mode==='add' ? 12 : 3}>
             <TextField  
-            label="approle latine name"
-            placeholder="approle latine name"
+            label={strApproleLatinName}
+            placeholder={strApproleLatinName}
             variant={"outlined"}
             fullWidth
             value={approleLatinName}
@@ -66,8 +76,8 @@ export default function ObieeItemApprole(props){
 
         <Grid item xs={12} md={mode==='add' ? 12 : 3}>
             <TextField  
-            label="approle name"
-            placeholder="approle name"
+            label={strApproleName}
+            placeholder={strApproleName}
             variant={"outlined"}
             fullWidth
             value={approleName}
@@ -77,13 +87,13 @@ export default function ObieeItemApprole(props){
 
         <Grid item xs={12} md={mode==='add' ? 6 : 3}>
         <FormControl variant="outlined" fullWidth className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">approle Type</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">{strAppType}</InputLabel>
         <Select
           //labelId="demo-simple-select-outlined-label"
           //id="demo-simple-select-outlined"
           value={appType}
           onChange={(e)=>{setAppType(e.target.value)}}
-          label="app Type"
+          label={strAppType}
         >
           <MenuItem value={'BI'}>BI</MenuItem>
           <MenuItem value={'AN'}>AN</MenuItem>
@@ -94,13 +104,13 @@ export default function ObieeItemApprole(props){
 
         <Grid item xs={12} md={mode==='add' ? 6 : 3}>
         <FormControl variant="outlined" fullWidth className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">approle Type</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">{strApproleType}</InputLabel>
         <Select
           //labelId="demo-simple-select-outlined-label"
           //id="demo-simple-select-outlined"
           value={approleType}
           onChange={(e)=>{setApproleType(e.target.value)}}
-          label="approle Type"
+          label={strApproleType}
         >
           <MenuItem value={'author'}>Author</MenuItem>
           <MenuItem value={'consumer'}>Consumer</MenuItem>
@@ -112,8 +122,8 @@ export default function ObieeItemApprole(props){
 
         <Grid item xs={12} md={12}>
             <TextField  
-            label="approle Desc"
-            placeholder="approle Desc"
+            label={strApproleDesc}
+            placeholder={strApproleDesc}
             variant={"outlined"}
             fullWidth
             value={approleDesc}
@@ -125,13 +135,13 @@ export default function ObieeItemApprole(props){
       </CardContent>
       <CardActions>
         {mode==='add' &&
-        <Button size="large" variant="contained" color="primary" onClick={onAdd}>Save</Button>
+        <Button size="large" variant="contained" color="primary" onClick={onAdd}>{strSave}</Button>
         }
         {mode==='edit' &&
-        <Button size="large" variant="contained" color="primary" onClick={onEdit}>Edit</Button>
+        <Button size="large" variant="contained" color="primary" onClick={onEdit}>{strEdit}</Button>
         }
         {mode==='edit' &&
-        <Button size="large" variant="contained" color="secondary" onClick={onDelete}>Delete</Button>
+        <Button size="large" variant="contained" color="secondary" onClick={onDelete}>{strDelete}</Button>
         }
       </CardActions>
     </Card>

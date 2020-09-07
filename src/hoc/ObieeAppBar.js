@@ -344,7 +344,7 @@ export default function ObieeAppBar(props) {
                 <Tune/>
                 </Tooltip>
               </IconButton> 
-              <IconButton 
+              {/* <IconButton 
                 color="inherit"
                 aria-label="Brightness"    
                 onClick={handleChangeTheme}            
@@ -357,7 +357,7 @@ export default function ObieeAppBar(props) {
                 onClick={handleChangeDirection}                    
                 >
                 {!direction ? <RightToLeftPageIcon/> : <LeftToRightPageIcon/>}
-              </IconButton>
+              </IconButton> */}
 
               <IconButton
                 edge="end"
@@ -386,7 +386,13 @@ export default function ObieeAppBar(props) {
           </Toolbar>
         </AppBar>               
       
-      <ObieeAppearance anchorEl={anchorElAppearance} handleClose={handleCloseAppearance}/>
+      <ObieeAppearance 
+      anchorEl={anchorElAppearance} 
+      handleClose={handleCloseAppearance}
+      handleChangeTheme={handleChangeTheme}        
+      handleChangeDirection={handleChangeDirection}   
+      //handleChangeVariant     
+      />
 
       {renderMobileMenu}
       {renderMenu}

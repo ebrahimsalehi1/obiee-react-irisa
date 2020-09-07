@@ -1,5 +1,5 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles,makeStyles } from "@material-ui/core/styles";
 import Menu from "@material-ui/core/Menu";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -10,11 +10,14 @@ import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 import Divider from "@material-ui/core/Divider";
 import {getText} from '../utils/Utils';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
 
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
-    padding: "16px"
+    padding: "0px"
   }
 })((props) => (
   <Menu
@@ -32,9 +35,11 @@ const StyledMenu = withStyles({
   />
 ));
 
+
+
 export default function ObieeAppearance(props) {
 
-  const {anchorEl,handleClose} = props;
+  const {anchorEl,handleClose,handleChangeTheme,handleChangeDirection,handleChangeVariant} = props;
   
   const [isDirectionRight, setIsDirectionRight] = React.useState(true);
   const [isThemeLight, setIsThemeLight] = React.useState(true);
@@ -42,20 +47,20 @@ export default function ObieeAppearance(props) {
 
   const [variant, setVariant] = React.useState("standard");
 
-  const handleChangeDirection = (event, newDirectionRight) => {
-    console.log(isDirectionRight);
-    setIsDirectionRight(!isDirectionRight);
-  };
+  // const handleChangeDirection = (event, newDirectionRight) => {
+  //   console.log(isDirectionRight);
+  //   setIsDirectionRight(!isDirectionRight);
+  // };
 
-  const handleChangeTheme = (event, newThemeRight) => {
-    console.log(isThemeLight);
-    setIsThemeLight(!isThemeLight);
-  };
+  // const handleChangeTheme = (event, newThemeRight) => {
+  //   console.log(isThemeLight);
+  //   setIsThemeLight(!isThemeLight);
+  // };
 
-  const handleChangeVariant = (event, newAlignment) => {
-    console.log(newAlignment);
-    setVariant(newAlignment);
-  };
+  // const handleChangeVariant = (event, newAlignment) => {
+  //   console.log(newAlignment);
+  //   setVariant(newAlignment);
+  // };
 
 
   const strAppearance = getText('Appearance');
@@ -68,7 +73,6 @@ export default function ObieeAppearance(props) {
   const strStandard = getText('standard');
   const strChangeAppearanceOfLayout = getText('Change Appearance Of Layout');
 
-
   return (
       <StyledMenu
         id="customized-menu"
@@ -77,8 +81,11 @@ export default function ObieeAppearance(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+      <Card>
+      <CardHeader></CardHeader>
+      <CardContent>
         <FormControl component="fieldset">
-          <FormLabel component="legend">strAppearance</FormLabel>
+          <FormLabel component="legend">{strAppearance}</FormLabel>
           <br />
           <FormGroup>
             <ToggleButtonGroup
@@ -87,8 +94,8 @@ export default function ObieeAppearance(props) {
               exclusive
               onChange={handleChangeDirection}
             >
-              <ToggleButton value={false}>strDirectionLeft</ToggleButton>
-              <ToggleButton value={true}>strDirectionRight</ToggleButton>
+              <ToggleButton value={false}>{strDirectionLeft}</ToggleButton>
+              <ToggleButton value={true}>{strDirectionRight}</ToggleButton>
             </ToggleButtonGroup>
 
             <br />
@@ -101,8 +108,8 @@ export default function ObieeAppearance(props) {
               exclusive
               onChange={handleChangeTheme}
             >
-              <ToggleButton value={true}>strThemeLight</ToggleButton>
-              <ToggleButton value={false}>strThemeDark</ToggleButton>
+              <ToggleButton value={true}>{strThemeLight}</ToggleButton>
+              <ToggleButton value={false}>{strThemeDark}</ToggleButton>
             </ToggleButtonGroup>
 
             <br />
@@ -115,14 +122,16 @@ export default function ObieeAppearance(props) {
               exclusive
               onChange={handleChangeVariant}
             >
-              <ToggleButton value="filled">strFilled</ToggleButton>
-              <ToggleButton value="outlined">strOutlined</ToggleButton>
-              <ToggleButton value="standard">strStandard</ToggleButton>
+              <ToggleButton value="filled">{strFilled}</ToggleButton>
+              <ToggleButton value="outlined">{strOutlined}</ToggleButton>
+              <ToggleButton value="standard">{strStandard}</ToggleButton>
             </ToggleButtonGroup>
           </FormGroup>
 
-          <FormHelperText>Change Appearance Of Layout</FormHelperText>
+          <FormHelperText>{strChangeAppearanceOfLayout}</FormHelperText>
         </FormControl>
+      </CardContent>
+      </Card>
       </StyledMenu>
 
   );

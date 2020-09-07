@@ -39,7 +39,6 @@
     {"str":"Approle Type","val":"Application Role Type"},
     {"str":"Approle Desc","val":"Application Role Description"},
     {"str":"Search approles","val":"Search Application Roles"},
-    {"str":"Appearance","val":"Appearance"},
     {"str":"Direction Left","val":"Direction Left"},
     {"str":"Direction Right","val":"Direction Right"},
     {"str":"Theme Light","val":"Light"},

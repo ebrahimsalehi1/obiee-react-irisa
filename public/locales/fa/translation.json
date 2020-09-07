@@ -39,7 +39,6 @@
     {"str":"Approle Type","val":"نوع نقش"},
     {"str":"Approle Desc","val":"شرح نقش"},
     {"str":"Search approles","val":"جستجوی نقش"},
-    {"str":"Appearance","val":"ظاهر"},
     {"str":"Direction Left","val":"سمت چپ"},
     {"str":"Direction Right","val":"سمت راست"},
     {"str":"Theme Light","val":"روشن"},

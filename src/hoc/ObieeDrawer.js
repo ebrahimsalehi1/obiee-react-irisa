@@ -28,6 +28,7 @@ import { blue } from '@material-ui/core/colors';
 import Text from '../widgets/ObieeText';
 import {getText} from '../utils/Utils';
 import Link from '@material-ui/core/Link';
+import ObieeTreeView from '../widgets/ObieeTreeView';
 
 const drawerWidth = 240;
 
@@ -190,7 +191,8 @@ export default function ObieeDrawer(props) {
           ))}
         </List> */}
         <Divider />
-        <List>
+        <ObieeTreeView />
+        {/* <List>
           {['Security','Application roles','User Approles','Objects of Approle'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
@@ -198,7 +200,7 @@ export default function ObieeDrawer(props) {
 
             </ListItem>
           ))}
-        </List>
+        </List> */}
         <Divider />
         <List>
           {['Reports'].map((text, index) => (

@@ -4,7 +4,6 @@
         {"id":"VI","name":"گزارشات داده محور","latinName":"Visual Analyzer","type":"no_setting"},
         {"id":"BI","name":"گزارشات تراکنشی","latinName":"BI Publisher","type":"no_setting"},
         {"id":"AD","name":"راهبری سیستم","latinName":"Administrator of OBIEE","type":"setting"}
-
     ],
     "users":[
         {"id": "763434","name":"ahmad","family":"molaee","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},

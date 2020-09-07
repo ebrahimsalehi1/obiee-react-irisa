@@ -31,6 +31,7 @@ import UserContext from '../Context';
 import Text from '../widgets/ObieeText';
 import {getText} from '../utils/Utils';
 import Tooltip from '@material-ui/core/Tooltip';
+import ObieeAppearance from './ObieeApperance';
 
 const drawerWidth = 240;
 //const mtheme = useTheme();
@@ -134,11 +135,15 @@ export default function ObieeAppBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isLanguageMenuOpen = Boolean(languageMenu);
 
-  //const { t } = useTranslation();
+  const [anchorElAppearance, setAnchorElAppearance] = React.useState(null);
 
-  // const handleSystemInfos = ()=>{
-  //   setOpenDialog(!openDialog);
-  // }
+  const handleClickAppearance = (event) => {
+    setAnchorElAppearance(event.currentTarget);
+  };
+
+  const handleCloseAppearance = () => {
+    setAnchorElAppearance(null);
+  };
 
   // const handleSettings = ()=>{
   //   handleSettings(true);
@@ -333,7 +338,7 @@ export default function ObieeAppBar(props) {
               <IconButton 
                 color="inherit"
                 aria-label="Show list of languages"
-                onClick={handleLanguageMenuOpen}
+                onClick={handleClickAppearance}
               >
                 <Tooltip title={getText("Appearance")} >
                 <Tune/>
@@ -381,6 +386,8 @@ export default function ObieeAppBar(props) {
           </Toolbar>
         </AppBar>               
       
+      <ObieeAppearance anchorEl={anchorElAppearance} handleClose={handleCloseAppearance}/>
+
       {renderMobileMenu}
       {renderMenu}
 

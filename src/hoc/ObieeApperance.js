@@ -1,78 +1,75 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import IconButton from '@material-ui/core/IconButton';
-import Tune from '@material-ui/icons/Tune';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Switch from '@material-ui/core/Switch';
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import Menu from "@material-ui/core/Menu";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormGroup from "@material-ui/core/FormGroup";
+//import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import ToggleButton from "@material-ui/lab/ToggleButton";
+import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
+import Divider from "@material-ui/core/Divider";
+import {getText} from '../utils/Utils';
 
 const StyledMenu = withStyles({
   paper: {
-    border: '1px solid #d3d4d5',
-  },
+    border: "1px solid #d3d4d5",
+    padding: "16px"
+  }
 })((props) => (
   <Menu
     elevation={0}
     getContentAnchorEl={null}
     anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
+      vertical: "bottom",
+      horizontal: "center"
     }}
     transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
+      vertical: "top",
+      horizontal: "center"
     }}
     {...props}
   />
 ));
 
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
+export default function ObieeAppearance(props) {
 
-export default function ObieeApperance() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const {anchorEl,handleClose} = props;
+  
+  const [isDirectionRight, setIsDirectionRight] = React.useState(true);
+  const [isThemeLight, setIsThemeLight] = React.useState(true);
+  //const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const [variant, setVariant] = React.useState("standard");
+
+  const handleChangeDirection = (event, newDirectionRight) => {
+    console.log(isDirectionRight);
+    setIsDirectionRight(!isDirectionRight);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleChangeTheme = (event, newThemeRight) => {
+    console.log(isThemeLight);
+    setIsThemeLight(!isThemeLight);
   };
 
-  const handleChange = (event) => {
+  const handleChangeVariant = (event, newAlignment) => {
+    console.log(newAlignment);
+    setVariant(newAlignment);
   };
+
+
+  const strAppearance = getText('Appearance');
+  const strDirectionLeft = getText('Direction Left');
+  const strDirectionRight = getText('Direction Right');
+  const strThemeLight = getText('Theme Light');
+  const strThemeDark = getText('Theme Dark');
+  const strFilled = getText('filled');
+  const strOutlined = getText('outlined');
+  const strStandard = getText('standard');
+  const strChangeAppearanceOfLayout = getText('Change Appearance Of Layout');
+
 
   return (
-    <div>
-      <IconButton
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
-        <Tune />
-      </IconButton>
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
@@ -80,28 +77,53 @@ export default function ObieeApperance() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
+        <FormControl component="fieldset">
+          <FormLabel component="legend">strAppearance</FormLabel>
+          <br />
+          <FormGroup>
+            <ToggleButtonGroup
+              size="small"
+              value={isDirectionRight}
+              exclusive
+              onChange={handleChangeDirection}
+            >
+              <ToggleButton value={false}>strDirectionLeft</ToggleButton>
+              <ToggleButton value={true}>strDirectionRight</ToggleButton>
+            </ToggleButtonGroup>
 
-<FormControl component="fieldset">
-      <FormLabel component="legend">Assign responsibility</FormLabel>
-      <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={false} onChange={handleChange} name="gilad" />}
-          label="Righ to left"
-        />
-        <FormControlLabel
-          control={<Switch checked={true} onChange={handleChange} name="jason" />}
-          label="Light"
-        />
-      </FormGroup>
-      <FormHelperText>Be careful</FormHelperText>
+            <br />
+            <Divider />
+            <br />
 
-      <Button>Test</Button>
+            <ToggleButtonGroup
+              size="small"
+              value={isThemeLight}
+              exclusive
+              onChange={handleChangeTheme}
+            >
+              <ToggleButton value={true}>strThemeLight</ToggleButton>
+              <ToggleButton value={false}>strThemeDark</ToggleButton>
+            </ToggleButtonGroup>
 
+            <br />
+            <Divider />
+            <br />
 
-    </FormControl>
+            <ToggleButtonGroup
+              size="small"
+              value={variant}
+              exclusive
+              onChange={handleChangeVariant}
+            >
+              <ToggleButton value="filled">strFilled</ToggleButton>
+              <ToggleButton value="outlined">strOutlined</ToggleButton>
+              <ToggleButton value="standard">strStandard</ToggleButton>
+            </ToggleButtonGroup>
+          </FormGroup>
 
-
+          <FormHelperText>Change Appearance Of Layout</FormHelperText>
+        </FormControl>
       </StyledMenu>
-    </div>
+
   );
 }

@@ -28,7 +28,7 @@ import { blue } from '@material-ui/core/colors';
 import Text from '../widgets/ObieeText';
 import {getText} from '../utils/Utils';
 import Link from '@material-ui/core/Link';
-import ObieeTreeView from '../widgets/ObieeTreeView';
+import ObieeTreeView from '../widgets/ObieeTreeView.js';
 import ObieeDrawerMenuList from './ObieeDrawerMenuList';
 
 const drawerWidth = 240;
@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden',
     width: theme.spacing(7) + 1,
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
+      width: theme.spacing(7) + 1,
     },
   },
   toolbar: {

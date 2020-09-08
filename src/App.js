@@ -2,18 +2,34 @@ import React from 'react';
 import Dashboard from './hoc/Dashboard';
 import ObieeSigin from './hoc/ObieeSignin';
 import data from '../db.json';
-import ObieeMaterialTable from './widgets/ObieeMaterialTable';
-import ObieeCrudApprole from './hoc/ObieeCrudApprole';
-import { TramRounded } from '@material-ui/icons';
-import {Router,Route,Switch as SwitchRoute} from 'react-router-dom';
+//import ObieeMaterialTable from './widgets/ObieeMaterialTable';
+//import ObieeCrudApprole from './hoc/ObieeCrudApprole';
+//import { TramRounded } from '@material-ui/icons';
+import {  BrowserRouter as Router,Route,Switch as SwitchRoute} from 'react-router-dom';
+//import { createBrowserHistory } from 'history';
 
 export default function App(){
     const [isAuthenticate,setIsAuthenticate] = React.useState(true);
     return (
-        <div>
             <Router>
-                <Switch>
-                    <Route path="/login" render={()=>{
+                <SwitchRoute>
+                    <Route path="/" exact >
+                        {
+                                    
+                            !isAuthenticate ?
+                                (<ObieeSigin handleLogin={(userName,pass)=>{
+                                    if(userName==='admin' && pass==='admin')
+                                        setIsAuthenticate(true);
+                                    else
+                                        setIsAuthenticate(false);
+                                }}/>)
+                        
+                                :
+                                
+                                (<Dashboard systemInfos={data.systemInfos}/> )
+                        }
+                    </Route>
+                    <Route path="/login" exact render={()=>{
                                     !isAuthenticate &&
                                     <ObieeSigin handleLogin={(userName,pass)=>{
                                         if(userName==='admin' && pass==='admin')
@@ -21,25 +37,18 @@ export default function App(){
                                         else
                                             setIsAuthenticate(false);
                                     }}/>
-                    }}>
+                            }} >
+                                login
+                            </Route>
+                    <Route path="/tree" exact>
+                        {/* <ObieeMaterialTable />                                 */}
                     </Route>
-                    <Route path="/tree" component={ObieeMaterialTable}></Route>
-                </Switch>
-            {
-            !isAuthenticate &&
-                <ObieeSigin handleLogin={(userName,pass)=>{
-                    if(userName==='admin' && pass==='admin')
-                        setIsAuthenticate(true);
-                    else
-                        setIsAuthenticate(false);
-                }}/>
-            }
-            {
-                isAuthenticate &&
-                <Dashboard systemInfos={data.systemInfos}/> 
-            }
+
+                    <Route>Page not found</Route>            
+
+                </SwitchRoute>
+
             </Router>
-        </div>
     );
 }
 

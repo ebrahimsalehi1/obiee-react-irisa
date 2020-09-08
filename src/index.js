@@ -56,4 +56,5 @@ function IndexComp(props) {
     )
 }
 
+localStorage.setItem('language','en');
 ReactDOM.render(<IndexComp/>,document.getElementById('root'));

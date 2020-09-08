@@ -29,6 +29,7 @@ import Text from '../widgets/ObieeText';
 import {getText} from '../utils/Utils';
 import Link from '@material-ui/core/Link';
 import ObieeTreeView from '../widgets/ObieeTreeView';
+import ObieeDrawerMenuList from './ObieeDrawerMenuList';
 
 const drawerWidth = 240;
 
@@ -191,7 +192,7 @@ export default function ObieeDrawer(props) {
           ))}
         </List> */}
         <Divider />
-        <ObieeTreeView />
+        <ObieeDrawerMenuList />
         {/* <List>
           {['Security','Application roles','User Approles','Objects of Approle'].map((text, index) => (
             <ListItem button key={text}>

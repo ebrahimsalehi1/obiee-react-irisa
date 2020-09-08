@@ -17,7 +17,13 @@ import CardContent from '@material-ui/core/CardContent';
 const StyledMenu = withStyles({
   paper: {
     border: "1px solid #d3d4d5",
-    padding: "0px"
+    padding: "0px",
+    margin: "0px",
+    maxWidth:"300px",
+    width:"300px"
+  },
+  list:{
+    padding:0
   }
 })((props) => (
   <Menu
@@ -35,13 +41,19 @@ const StyledMenu = withStyles({
   />
 ));
 
-
+const styleTogggleButton = makeStyles(theme=>({
+  root:{
+    width:"100px"
+  }
+}))
 
 export default function ObieeAppearance(props) {
 
+  const classes = styleTogggleButton();
+
   const {anchorEl,handleClose,handleChangeTheme,handleChangeDirection,handleChangeVariant} = props;
   
-  const [isDirectionRight, setIsDirectionRight] = React.useState(true);
+  const [isDirectionRight, setIsDirectionRight] = React.useState(false);
   const [isThemeLight, setIsThemeLight] = React.useState(true);
   //const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -81,21 +93,18 @@ export default function ObieeAppearance(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-      <Card>
+      <Card >
       <CardHeader></CardHeader>
-      <CardContent>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">{strAppearance}</FormLabel>
-          <br />
-          <FormGroup>
-            <ToggleButtonGroup
-              size="small"
+      <CardContent style={{margin:0,padding:"4px"}}>
+
+            <ToggleButtonGroup                   
+              size="small"                            
               value={isDirectionRight}
               exclusive
               onChange={handleChangeDirection}
             >
-              <ToggleButton value={false}>{strDirectionLeft}</ToggleButton>
-              <ToggleButton value={true}>{strDirectionRight}</ToggleButton>
+              <ToggleButton style={{width:"95px"}} value={false}>{strDirectionLeft}</ToggleButton>
+              <ToggleButton style={{width:"95px"}} value={true}>{strDirectionRight}</ToggleButton>
             </ToggleButtonGroup>
 
             <br />
@@ -108,8 +117,8 @@ export default function ObieeAppearance(props) {
               exclusive
               onChange={handleChangeTheme}
             >
-              <ToggleButton value={true}>{strThemeLight}</ToggleButton>
-              <ToggleButton value={false}>{strThemeDark}</ToggleButton>
+              <ToggleButton style={{width:"95px"}} value={true}>{strThemeLight}</ToggleButton>
+              <ToggleButton style={{width:"95px"}} value={false}>{strThemeDark}</ToggleButton>
             </ToggleButtonGroup>
 
             <br />
@@ -122,14 +131,11 @@ export default function ObieeAppearance(props) {
               exclusive
               onChange={handleChangeVariant}
             >
-              <ToggleButton value="filled">{strFilled}</ToggleButton>
-              <ToggleButton value="outlined">{strOutlined}</ToggleButton>
-              <ToggleButton value="standard">{strStandard}</ToggleButton>
+              <ToggleButton style={{width:"95px"}} value="filled">{strFilled}</ToggleButton>
+              <ToggleButton style={{width:"95px"}} value="outlined">{strOutlined}</ToggleButton>
+              <ToggleButton style={{width:"95px"}} value="standard">{strStandard}</ToggleButton>
             </ToggleButtonGroup>
-          </FormGroup>
 
-          <FormHelperText>{strChangeAppearanceOfLayout}</FormHelperText>
-        </FormControl>
       </CardContent>
       </Card>
       </StyledMenu>

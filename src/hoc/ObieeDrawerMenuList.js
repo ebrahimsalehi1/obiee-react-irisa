@@ -6,16 +6,20 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-//import DraftsIcon from '@material-ui/icons/Drafts';
-//import SendIcon from '@material-ui/icons/Send';
+import PrintIcon from '@material-ui/icons/Print';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
-//import MailIcon from '@material-ui/icons/Mail';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import LockIcon from '@material-ui/icons/Lock';
+import FolderIcon from '@material-ui/icons/Folder';
+import Filter1Icon from '@material-ui/icons/Filter1';
 import Collapse from '@material-ui/core/Collapse';
-import ListSubheader from '@material-ui/core/ListSubheader';
+//import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import {getText} from '../utils/Utils';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,6 +78,8 @@ export default function ObieeDrawerMenuList(){
   const strApplicarionRoles = getText('Application roles');
   const strUserApproles = getText('User Approles');
   const strObjectsOfApprole = getText('Objects of Approle');
+  const strReports = getText('Reports');
+  const strVersion = getText('Version');
 
   return (
     <div>
@@ -90,35 +96,51 @@ export default function ObieeDrawerMenuList(){
 
 
 <ListItem button key={strSecurity} onClick={handleClick}>
-    <ListItemIcon><InboxIcon /> </ListItemIcon>
+    <ListItemIcon><LockIcon /> </ListItemIcon>
     <ListItemText >{strSecurity}</ListItemText>
     <IconButton>
     {
       open ? <ExpandLess /> : <ExpandMore />
     }
     </IconButton>
+
     </ListItem>
 
     <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
 
           <ListItem button className={classes.nested} onClick={()=>{}}>
-            <StarBorder/>
+            <GroupAddIcon/> 
             <ListItemText>{strApplicarionRoles}</ListItemText>
           </ListItem>
 
           <ListItem button className={classes.nested} onClick={()=>{}}>
-            <StarBorder/>
+            <PersonAddIcon/>
             <ListItemText>{strUserApproles}</ListItemText>
           </ListItem>
 
           <ListItem button className={classes.nested} onClick={()=>{}}>
-            <StarBorder/>
+            <FolderIcon/>
             <ListItemText>{strObjectsOfApprole}</ListItemText>
           </ListItem>
 
         </List>
     </Collapse>
+
+
+    <ListItem button key={strReports}>
+      <ListItemIcon><PrintIcon /></ListItemIcon>
+      <ListItemText >{strReports}</ListItemText>
+    </ListItem>
+
+    <Divider />
+
+    <ListItem button key={strReports}>
+      <ListItemIcon><Filter1Icon /></ListItemIcon>
+      <ListItemText >{strVersion}</ListItemText>
+    </ListItem>
+
+    {/* <Version /> */}
 
   </List>
 

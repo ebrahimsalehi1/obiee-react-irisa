@@ -32,37 +32,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ListItemComp = ({text,handleClick,includeSubItem,handleClickSubItem,open,icon}) => {
-
-  const classes = useStyles();  
-
-  return ( 
-  <div>
-    <ListItem button key={text} onClick={handleClick}>
-    <ListItemIcon><InboxIcon /> </ListItemIcon>
-    <ListItemText >{text}</ListItemText>
-    <IconButton>
-    {
-      includeSubItem ? (open ? <ExpandLess /> : <ExpandMore />) : null
-    }
-    </IconButton>
-    </ListItem>
-
-    <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button className={classes.nested} onClick={handleClickSubItem}>
-            <ListItemIcon>
-              {icon}
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItem>
-        </List>
-    </Collapse>
-
-  </div>
-)
-}
-
 export default function ObieeDrawerMenuList(){
 
   const classes = useStyles();
@@ -135,7 +104,7 @@ export default function ObieeDrawerMenuList(){
 
     <Divider />
 
-    <ListItem button key={strReports}>
+    <ListItem button key={strVersion}>
       <ListItemIcon><Filter1Icon /></ListItemIcon>
       <ListItemText >{strVersion}</ListItemText>
     </ListItem>

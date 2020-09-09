@@ -185,35 +185,8 @@ export default function ObieeDrawer(props) {
             </Typography>
           </CardContent> */}
         </Card>
-        {/* <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
         <Divider />
         <ObieeDrawerMenuList />
-        {/* <List>
-          {['Security','Application roles','User Approles','Objects of Approle'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText ><Text keyStr={text}/></ListItemText>
-
-            </ListItem>
-          ))}
-        </List> */}
-        {/* <Divider />
-        <List>
-          {['Reports'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText ><Text keyStr={text}/></ListItemText>
-
-            </ListItem>
-          ))}
-        </List>         */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

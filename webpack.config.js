@@ -34,9 +34,10 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpeg)$/,
-                use: [
-                    {loader: 'url-loader'}
-                ]
+                loader: 'file-loader',
+                options: {
+                    outputPath: 'images',
+                }
             },
             {
                 test: /\.js$/,

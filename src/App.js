@@ -13,13 +13,18 @@ export default function App(){
     return (
         <div>
             {
-                !isAuthenticate &&
-                <ObieeSigin handleLogin={(userName,pass)=>{
-                    if(userName==='admin' && pass==='admin')
-                        setIsAuthenticate(true);
-                    else
-                        setIsAuthenticate(false);
-                }}/>
+                        
+                !isAuthenticate ?
+                    (<ObieeSigin handleLogin={(userName,pass)=>{
+                        if(userName==='admin' && pass==='admin')
+                            setIsAuthenticate(true);
+                        else
+                            setIsAuthenticate(false);
+                    }}/>)
+            
+                    :
+                    
+                    (<Dashboard systemInfos={data.systemInfos}/> )
             }
 
             </div>

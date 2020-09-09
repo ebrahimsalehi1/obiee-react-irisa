@@ -9,46 +9,20 @@ import {  BrowserRouter as Router,Route,Switch as SwitchRoute} from 'react-route
 //import { createBrowserHistory } from 'history';
 
 export default function App(){
-    const [isAuthenticate,setIsAuthenticate] = React.useState(true);
+    const [isAuthenticate,setIsAuthenticate] = React.useState(false);
     return (
-            <Router>
-                <SwitchRoute>
-                    <Route path="/" exact >
-                        {
-                                    
-                            !isAuthenticate ?
-                                (<ObieeSigin handleLogin={(userName,pass)=>{
-                                    if(userName==='admin' && pass==='admin')
-                                        setIsAuthenticate(true);
-                                    else
-                                        setIsAuthenticate(false);
-                                }}/>)
-                        
-                                :
-                                
-                                (<Dashboard systemInfos={data.systemInfos}/> )
-                        }
-                    </Route>
-                    <Route path="/login" exact render={()=>{
-                                    !isAuthenticate &&
-                                    <ObieeSigin handleLogin={(userName,pass)=>{
-                                        if(userName==='admin' && pass==='admin')
-                                            setIsAuthenticate(true);
-                                        else
-                                            setIsAuthenticate(false);
-                                    }}/>
-                            }} >
-                                login
-                            </Route>
-                    <Route path="/tree" exact>
-                        {/* <ObieeMaterialTable />                                 */}
-                    </Route>
+        <div>
+            {
+                !isAuthenticate &&
+                <ObieeSigin handleLogin={(userName,pass)=>{
+                    if(userName==='admin' && pass==='admin')
+                        setIsAuthenticate(true);
+                    else
+                        setIsAuthenticate(false);
+                }}/>
+            }
 
-                    <Route>Page not found</Route>            
-
-                </SwitchRoute>
-
-            </Router>
+            </div>
     );
 }
 

@@ -53,27 +53,11 @@ export default function ObieeAppearance(props) {
 
   const {anchorEl,handleClose,handleChangeTheme,handleChangeDirection,handleChangeVariant} = props;
   
-  const [isDirectionRight, setIsDirectionRight] = React.useState(false);
+  const [isDirectionRight, setIsDirectionRight] = React.useState(localStorage.getItem("language")==="fa");
   const [isThemeLight, setIsThemeLight] = React.useState(true);
   //const [anchorEl, setAnchorEl] = React.useState(null);
 
   const [variant, setVariant] = React.useState("standard");
-
-  // const handleChangeDirection = (event, newDirectionRight) => {
-  //   console.log(isDirectionRight);
-  //   setIsDirectionRight(!isDirectionRight);
-  // };
-
-  // const handleChangeTheme = (event, newThemeRight) => {
-  //   console.log(isThemeLight);
-  //   setIsThemeLight(!isThemeLight);
-  // };
-
-  // const handleChangeVariant = (event, newAlignment) => {
-  //   console.log(newAlignment);
-  //   setVariant(newAlignment);
-  // };
-
 
   const strAppearance = getText('Appearance');
   const strDirectionLeft = getText('Direction Left');
@@ -101,7 +85,11 @@ export default function ObieeAppearance(props) {
               size="small"                            
               value={isDirectionRight}
               exclusive
-              onChange={handleChangeDirection}
+              onChange={e=>{
+                  handleChangeDirection();
+                  setIsDirectionRight(!isDirectionRight);
+                }
+              }
             >
               <ToggleButton style={{width:"95px"}} value={false}>{strDirectionLeft}</ToggleButton>
               <ToggleButton style={{width:"95px"}} value={true}>{strDirectionRight}</ToggleButton>

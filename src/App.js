@@ -9,7 +9,7 @@ import {  BrowserRouter as Router,Route,Switch as SwitchRoute} from 'react-route
 //import { createBrowserHistory } from 'history';
 
 export default function App(){
-    const [isAuthenticate,setIsAuthenticate] = React.useState(false);
+    const [isAuthenticate,setIsAuthenticate] = React.useState(true);
     return (
         <div>
             {

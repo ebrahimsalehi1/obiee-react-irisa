@@ -43,7 +43,7 @@ function Dashboard(props){
             open={openDrawer} 
             handleDrawerOpen={()=>{setOpenDrawer(true);}} 
             handleSettings={()=>{
-                setShowSystemSetting(!showSystemSetting);
+                setShowSystemSetting(true);
                 setWhichCompShow(-1);
                 }}
             onHomeClick={()=>{setWhichCompShow(0)}}
@@ -66,7 +66,7 @@ function Dashboard(props){
                 whichCompShow===0 &&
                 systemInfos &&
                 systemInfos.map((item,index)=>(
-                  <Grid item xs={12} md={6} key={index}>
+                  <Grid item xs={12} md={12} key={index}>
                         <ObieeCardReport 
                         key={index} 
                         title={item.name} 

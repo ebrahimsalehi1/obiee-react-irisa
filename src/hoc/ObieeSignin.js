@@ -80,6 +80,10 @@ export default function SignIn(props) {
             autoComplete="email"
             autoFocus
             onChange={e=>setUserName(e.target.value)}
+            onKeyPress={e=>{
+              if(e.charCode===13)
+                handleLogin(userName,pass);
+            }}
             value={userName}
           />
           <TextField
@@ -93,6 +97,10 @@ export default function SignIn(props) {
             id="password"
             autoComplete="current-password"
             onChange={e=>setPass(e.target.value)}
+            onKeyPress={e=>{
+              if(e.charCode===13)
+                handleLogin(userName,pass);
+            }}
             value={pass}
           />
           <FormControlLabel

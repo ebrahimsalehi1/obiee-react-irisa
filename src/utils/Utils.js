@@ -9,3 +9,11 @@ export function getText(keyStr){
     const result =  lang==='en' ? translationEn.filter(item=>item.str===keyStr).map(item=>item.val): translationFa.filter(item=>item.str===keyStr).map(item=>item.val);
     return String(result[0]);
 }
+
+export function getTitle(){
+    return localStorage.getItem('title');
+}
+
+export function setTitle(title){
+    return localStorage.setItem('title',title);
+}

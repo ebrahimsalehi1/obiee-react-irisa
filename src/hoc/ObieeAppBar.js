@@ -149,10 +149,6 @@ export default function ObieeAppBar(props) {
   //   handleSettings(true);
   // }
 
-  const handleProfileMenuOpen = (event) => {
-    //setAnchorEl(event.currentTarget);
-  };
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -218,7 +214,7 @@ export default function ObieeAppBar(props) {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={e=>{handleLogedIn(false)}}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -281,7 +277,7 @@ export default function ObieeAppBar(props) {
   // </Menu>
   // );
 
-  const {direction,theme,handleChangeDirection,handleChangeTheme} = React.useContext(UserContext);
+  const {direction,theme,handleChangeDirection,handleChangeTheme,handleLogedIn} = React.useContext(UserContext);
 
   return (
     <div>
@@ -364,7 +360,7 @@ export default function ObieeAppBar(props) {
                 aria-label="account of current user"
                 aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
+                onClick={e=>{handleLogedIn(false)}}
                 color="inherit"
               >
                 <Tooltip title={getText("Exit")} >

@@ -26,25 +26,29 @@ function IndexComp(props) {
 
     const [isRightToLeft,setIsRightToLeft] = React.useState(false);
     const [isDarkTheme,setIsDarkTheme] = React.useState(false);
+    //const [isLogedIn,setIsLogedIn] = React.useState(false);
 
     //const { i18n } = useTranslation();
     //i18n.init({ lng: countries[0].lang });
-
     //console.log("index",(isRightToLeft===false ? (isDarkTheme ? themeDarkLTR : themeLightLTR) : (!isDarkTheme ? themeLightRTL : themeDarkRTL)).type);
 
     return (
     <React.Suspense fallback={<h1>Loading profile...</h1>}>
-        <UserContext.Provider value={ {
+        <UserContext.Provider value={{
             direction:isRightToLeft,
             theme: !isDarkTheme,
+            //isLogedin: false,
             handleChangeDirection: ()=>{
                 setIsRightToLeft(!isRightToLeft);
-                //i18n.changeLanguage(isRightToLeft ? countries[0].lang : countries[1].lang)
                 localStorage.setItem("language",isRightToLeft ? countries[0].lang : countries[1].lang);
             },
-            handleChangeTheme:()=>{
+            handleChangeTheme: ()=>{
                 setIsDarkTheme(!isDarkTheme);
-            }
+            },
+            handleLogedIn: (pisLogedIn)=>{
+                //setIsLogedIn(pisLogedIn);
+                return pisLogedIn;
+            } 
         }}>
             <StylesProvider jss={jssRtl}>
             <MuiThemeProvider theme={isRightToLeft===false ? (isDarkTheme ? themeDarkLTR : themeLightLTR) : (!isDarkTheme ? themeLightRTL : themeDarkRTL)}>

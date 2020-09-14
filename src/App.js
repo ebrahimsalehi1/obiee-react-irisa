@@ -10,8 +10,8 @@ import UserContext from './Context';
 import {  BrowserRouter as Router,Route,Switch as SwitchRoute} from 'react-router-dom';
 //import { createBrowserHistory } from 'history';
 
-export default function App(){
-    const [isAuthenticate,setIsAuthenticate] = React.useState(false);
+export default function App(props){
+    const [isAuthenticate,setIsAuthenticate] = React.useState(true);
     const {handleLogedIn} = React.useContext(UserContext);
 
     return (
@@ -29,7 +29,7 @@ export default function App(){
             
                     :
                     
-                    (<Dashboard systemInfos={data.systemInfos}/> )
+                    (<Dashboard systemInfos={data.systemInfos} whichComp={props.whichComp}/> )
             }
 
             </div>

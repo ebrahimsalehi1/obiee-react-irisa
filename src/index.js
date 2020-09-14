@@ -26,7 +26,7 @@ function IndexComp(props) {
 
     const [isRightToLeft,setIsRightToLeft] = React.useState(false);
     const [isDarkTheme,setIsDarkTheme] = React.useState(false);
-    //const [isLogedIn,setIsLogedIn] = React.useState(false);
+    const [whichComp,setWhichComp] = React.useState(4);
 
     //const { i18n } = useTranslation();
     //i18n.init({ lng: countries[0].lang });
@@ -40,7 +40,8 @@ function IndexComp(props) {
             //isLogedin: false,
             handleChangeDirection: ()=>{
                 setIsRightToLeft(!isRightToLeft);
-                localStorage.setItem("language",isRightToLeft ? countries[0].lang : countries[1].lang);
+                console.log('isRightToLeft',isRightToLeft)
+                //localStorage.setItem("language",isRightToLeft ? countries[0].lang : countries[1].lang);
             },
             handleChangeTheme: ()=>{
                 setIsDarkTheme(!isDarkTheme);
@@ -49,10 +50,15 @@ function IndexComp(props) {
                 //setIsLogedIn(pisLogedIn);
                 return pisLogedIn;
             } 
+            ,            
+            handleWhichComp : (index)=>{
+                //setWhichComp(index);
+                console.log('index',index);
+            }
         }}>
             <StylesProvider jss={jssRtl}>
             <MuiThemeProvider theme={isRightToLeft===false ? (isDarkTheme ? themeDarkLTR : themeLightLTR) : (!isDarkTheme ? themeLightRTL : themeDarkRTL)}>
-                <App/>
+                <App whichComp={whichComp}/>
             </MuiThemeProvider>
             </StylesProvider>
         </UserContext.Provider>

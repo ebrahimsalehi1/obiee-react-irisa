@@ -15,11 +15,13 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import LockIcon from '@material-ui/icons/Lock';
 import FolderIcon from '@material-ui/icons/Folder';
 import Filter1Icon from '@material-ui/icons/Filter1';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 import Collapse from '@material-ui/core/Collapse';
 //import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import {getText} from '../utils/Utils';
 import Divider from '@material-ui/core/Divider';
+import UserContext from '../Context';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,10 +34,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ObieeDrawerMenuList(){
+export default function ObieeDrawerMenuList(props){
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+
+  const {handleWhichComp} = React.useContext(UserContext);
 
   const handleClick = () => {
     setOpen(!open);
@@ -43,12 +47,18 @@ export default function ObieeDrawerMenuList(){
     
   };
 
+  const strAnalytics = getText('Analytics');
+  const strVisualAnalyzer = getText('Visual Analyzer');
+  const strBIPublisher = getText('BI Publisher');
+
   const strSecurity = getText('Security');
   const strApplicarionRoles = getText('Application roles');
   const strUserApproles = getText('User Approles');
   const strObjectsOfApprole = getText('Objects of Approle');
   const strReports = getText('Reports');
   const strVersion = getText('Version');
+
+  console.log('rendering DrawerMenuList');
 
   return (
     <div>
@@ -63,6 +73,22 @@ export default function ObieeDrawerMenuList(){
       className={classes.root}
     >
 
+<ListItem button key={strBIPublisher} onClick={handleWhichComp(0)}>
+      <ListItemIcon><AssessmentIcon /></ListItemIcon>
+      <ListItemText >{strBIPublisher}</ListItemText>
+</ListItem>
+
+<ListItem button key={strVisualAnalyzer} >
+      <ListItemIcon><AssessmentIcon /></ListItemIcon>
+      <ListItemText >{strVisualAnalyzer}</ListItemText>
+</ListItem>
+
+<ListItem button key={strAnalytics} >
+      <ListItemIcon><AssessmentIcon /></ListItemIcon>
+      <ListItemText >{strAnalytics}</ListItemText>
+</ListItem>
+
+<Divider />
 
 <ListItem button key={strSecurity} onClick={handleClick}>
     <ListItemIcon><LockIcon /> </ListItemIcon>
@@ -78,12 +104,12 @@ export default function ObieeDrawerMenuList(){
     <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
 
-          <ListItem button className={classes.nested} onClick={()=>{}}>
+          <ListItem button className={classes.nested}>
             <GroupAddIcon/> 
             <ListItemText>{strApplicarionRoles}</ListItemText>
           </ListItem>
 
-          <ListItem button className={classes.nested} onClick={()=>{}}>
+          <ListItem button className={classes.nested} >
             <PersonAddIcon/>
             <ListItemText>{strUserApproles}</ListItemText>
           </ListItem>
@@ -97,7 +123,7 @@ export default function ObieeDrawerMenuList(){
     </Collapse>
 
 
-    <ListItem button key={strReports}>
+    <ListItem button key={strReports} onClick={e=>{localStorage.setItem('which',4)}}>
       <ListItemIcon><PrintIcon /></ListItemIcon>
       <ListItemText >{strReports}</ListItemText>
     </ListItem>

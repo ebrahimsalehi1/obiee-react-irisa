@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ObieeDrawer(props) {
 
-    const {open,handleDrawerClose,children} = props;
+  const {open,handleDrawerClose,children} = props;
 
   const classes = useStyles();
   const theme = useTheme();

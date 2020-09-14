@@ -63,7 +63,7 @@ function Dashboard(props){
             }
 
             { 
-                whichCompShow===0 &&
+                props.whichComp===0 &&
                 systemInfos &&
                 systemInfos.map((item,index)=>(
                   <Grid item xs={12} md={12} key={index}>
@@ -85,17 +85,17 @@ function Dashboard(props){
                   </Grid>     
                 ))
             }
-            {whichCompShow===1 &&
+            {props.whichComp===1 &&
                 <ObieeUsers url={localStorage.esbip+'api/v1.0/approles'}/>
             }
 
-            {whichCompShow===2 &&
+            {props.whichComp===2 &&
                 <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>
             }
-            {whichCompShow===3 &&
+            {props.whichComp===3 &&
                 <ObieeCrudUserOfApprole url={localStorage.esbip+'api/v1.0/approles'}/>
             }
-            {whichCompShow===4 &&
+            {props.whichComp===4 &&
                 <ObieeReports url={localStorage.esbip+'api/v1.0/reports'}/>
             }
             

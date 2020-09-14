@@ -98,7 +98,7 @@ export default function ObieeCardReport(props){
                     <Button size="large" variant="contained" color="primary" onClick={onUserOfApproles}>{strUserApproles}</Button>
                     </Grid>
                     }
-                    {type==='no_setting' && 
+                    {type==='setting' && 
                     <Grid item xs={12} md={12}>
                     <Button size="large" variant="contained" color="primary" onClick={onReports}>{strReports}</Button>
                     </Grid>

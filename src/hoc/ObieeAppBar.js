@@ -277,7 +277,7 @@ export default function ObieeAppBar(props) {
   // </Menu>
   // );
 
-  const {direction,theme,handleChangeDirection,handleChangeTheme,handleLogedIn} = React.useContext(UserContext);
+  const {handleChangeDirection,handleChangeTheme,handleLogedIn} = React.useContext(UserContext);
 
   return (
     <div>

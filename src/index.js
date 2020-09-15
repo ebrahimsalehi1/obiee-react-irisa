@@ -10,7 +10,7 @@ import { create } from 'jss';
 import rtl from 'jss-rtl';
 
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
-import UserContext from './Context';
+import {UserContext} from './Context';
 
 //import '../i18next';
 //import {useTranslation} from 'react-i18next';
@@ -50,15 +50,10 @@ function IndexComp(props) {
                 //setIsLogedIn(pisLogedIn);
                 return pisLogedIn;
             } 
-            ,            
-            handleWhichComp : (index)=>{
-                //setWhichComp(index);
-                console.log('index',index);
-            }
         }}>
             <StylesProvider jss={jssRtl}>
             <MuiThemeProvider theme={isRightToLeft===false ? (isDarkTheme ? themeDarkLTR : themeLightLTR) : (!isDarkTheme ? themeLightRTL : themeDarkRTL)}>
-                <App whichComp={whichComp}/>
+                <App/>
             </MuiThemeProvider>
             </StylesProvider>
         </UserContext.Provider>

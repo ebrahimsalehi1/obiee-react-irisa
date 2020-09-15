@@ -12,6 +12,7 @@ import ObieeReports from './ObieeReports';
 import ObieeUsers from './ObieeUsers';
 import ObieeCrudUserOfApprole from './ObieeCrudUserOfApprole';
 import ObieeStatusbar from './ObieeStatusbar';
+import {UIContext} from '../Context';
 
 function Dashboard(props){
 
@@ -22,6 +23,11 @@ function Dashboard(props){
     const [showSystemSetting,setShowSystemSetting] = React.useState(false);
     const [openMessage,setOpenMessage] = React.useState(false);
     const [whichCompShow,setWhichCompShow] = React.useState(0);
+
+    const uiContextData = React.useContext(UIContext);
+    uiContextData.onClickDrawerItem = (which)=>{
+        setWhichCompShow(which)
+    }
 
     React.useEffect(()=>{
         // axios.get(localStorage.getItem('esbip')+"systems")

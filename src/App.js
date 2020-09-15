@@ -2,7 +2,7 @@ import React from 'react';
 import Dashboard from './hoc/Dashboard';
 import ObieeSigin from './hoc/ObieeSignin';
 import data from '../db.json';
-import UserContext from './Context';
+import {UserContext,UIContext} from './Context';
 
 //import ObieeMaterialTable from './widgets/ObieeMaterialTable';
 //import ObieeCrudApprole from './hoc/ObieeCrudApprole';
@@ -29,7 +29,7 @@ export default function App(props){
             
                     :
                     
-                    (<Dashboard systemInfos={data.systemInfos} whichComp={props.whichComp}/> )
+                    (<UIContext.Provider value={{onClickDrawerItem:null}}><Dashboard systemInfos={data.systemInfos} whichComp={props.whichComp}/></UIContext.Provider>)
             }
 
             </div>

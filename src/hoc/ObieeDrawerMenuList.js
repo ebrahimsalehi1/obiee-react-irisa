@@ -21,7 +21,7 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import {getText} from '../utils/Utils';
 import Divider from '@material-ui/core/Divider';
-import UserContext from '../Context';
+import {UIContext} from '../Context';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,13 +38,13 @@ export default function ObieeDrawerMenuList(props){
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  //const [whichComp,setWhichComp] = React.useState(0);
 
-  const {handleWhichComp} = React.useContext(UserContext);
+  const uiContextData = React.useContext(UIContext);
 
   const handleClick = () => {
     setOpen(!open);
-    console.log('handleClickSubItem');
-    
+    console.log('handleClickSubItem');    
   };
 
   const strAnalytics = getText('Analytics');
@@ -73,7 +73,7 @@ export default function ObieeDrawerMenuList(props){
       className={classes.root}
     >
 
-<ListItem button key={strBIPublisher} onClick={handleWhichComp(0)}>
+<ListItem button key={strBIPublisher} onClick={uiContextData.onClickDrawerItem(0)}>
       <ListItemIcon><AssessmentIcon /></ListItemIcon>
       <ListItemText >{strBIPublisher}</ListItemText>
 </ListItem>
@@ -123,7 +123,7 @@ export default function ObieeDrawerMenuList(props){
     </Collapse>
 
 
-    <ListItem button key={strReports} onClick={e=>{localStorage.setItem('which',4)}}>
+    <ListItem button key={strReports} onClick={uiContextData.onClickDrawerItem(4)}>
       <ListItemIcon><PrintIcon /></ListItemIcon>
       <ListItemText >{strReports}</ListItemText>
     </ListItem>

@@ -73,7 +73,7 @@ export default function ObieeDrawerMenuList(props){
       className={classes.root}
     >
 
-<ListItem button key={strBIPublisher} onClick={uiContextData.onClickDrawerItem(0)}>
+<ListItem button key={strBIPublisher} >
       <ListItemIcon><AssessmentIcon /></ListItemIcon>
       <ListItemText >{strBIPublisher}</ListItemText>
 </ListItem>
@@ -114,7 +114,7 @@ export default function ObieeDrawerMenuList(props){
             <ListItemText>{strUserApproles}</ListItemText>
           </ListItem>
 
-          <ListItem button className={classes.nested} onClick={()=>{}}>
+          <ListItem button className={classes.nested} >
             <FolderIcon/>
             <ListItemText>{strObjectsOfApprole}</ListItemText>
           </ListItem>
@@ -123,14 +123,14 @@ export default function ObieeDrawerMenuList(props){
     </Collapse>
 
 
-    <ListItem button key={strReports} onClick={uiContextData.onClickDrawerItem(4)}>
+    <ListItem button key={strReports} >
       <ListItemIcon><PrintIcon /></ListItemIcon>
       <ListItemText >{strReports}</ListItemText>
     </ListItem>
 
     <Divider />
 
-    <ListItem button key={strVersion}>
+    <ListItem button key={strVersion} onClick={e=>{alert('version click')}}>
       <ListItemIcon><Filter1Icon /></ListItemIcon>
       <ListItemText >{strVersion}</ListItemText>
     </ListItem>

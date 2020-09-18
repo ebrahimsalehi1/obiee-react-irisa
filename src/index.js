@@ -32,7 +32,7 @@ function IndexComp(props) {
     //i18n.init({ lng: countries[0].lang });
     //console.log("index",(isRightToLeft===false ? (isDarkTheme ? themeDarkLTR : themeLightLTR) : (!isDarkTheme ? themeLightRTL : themeDarkRTL)).type);
 
-    return (
+    return (        
     <React.Suspense fallback={<h1>Loading profile...</h1>}>
         <UserContext.Provider value={{
             direction:isRightToLeft,
@@ -58,8 +58,9 @@ function IndexComp(props) {
             </StylesProvider>
         </UserContext.Provider>
     </React.Suspense>
+        
     )
 }
 
 localStorage.setItem('language','en');
-ReactDOM.render(<IndexComp/>,document.getElementById('root'));
+ReactDOM.render(<React.StrictMode><IndexComp/></React.StrictMode>,document.getElementById('root'));

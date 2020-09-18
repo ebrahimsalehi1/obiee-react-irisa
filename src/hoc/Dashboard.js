@@ -69,7 +69,7 @@ function Dashboard(props){
             }
 
             { 
-                props.whichComp===0 &&
+                whichCompShow===0 &&
                 systemInfos &&
                 systemInfos.map((item,index)=>(
                   <Grid item xs={12} md={12} key={index}>
@@ -79,29 +79,29 @@ function Dashboard(props){
                         subheader={item.latinName}
                         type={item.type}
                         avatarText={item.latinName.substring(0,2)}   
-                        onUsers={e=>setWhichCompShow(1)}
-                        onApproles={e=>setWhichCompShow(2)}
-                        onUserOfApproles={e=>setWhichCompShow(3)} 
-                        onReports={e=>setWhichCompShow(4)}
-                        onSettings={e=>{
-                            setWhichCompShow(-1);
-                            setShowSystemSetting(!showSystemSetting);
-                        }}
+                        // onUsers={e=>setWhichCompShow(1)}
+                        // onApproles={e=>setWhichCompShow(2)}
+                        // onUserOfApproles={e=>setWhichCompShow(3)} 
+                        // onReports={e=>setWhichCompShow(4)}
+                        // onSettings={e=>{
+                        //     setWhichCompShow(-1);
+                        //     setShowSystemSetting(!showSystemSetting);
+                        // }}
                         />
                   </Grid>     
                 ))
             }
-            {props.whichComp===1 &&
+            {whichCompShow===1 &&
                 <ObieeUsers url={localStorage.esbip+'api/v1.0/approles'}/>
             }
 
-            {props.whichComp===2 &&
+            {whichCompShow===2 &&
                 <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>
             }
-            {props.whichComp===3 &&
+            {whichCompShow===3 &&
                 <ObieeCrudUserOfApprole url={localStorage.esbip+'api/v1.0/approles'}/>
             }
-            {props.whichComp===4 &&
+            {whichCompShow===4 &&
                 <ObieeReports url={localStorage.esbip+'api/v1.0/reports'}/>
             }
             

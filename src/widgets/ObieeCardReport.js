@@ -14,12 +14,23 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreLess from '@material-ui/icons/ExpandLess';
 import {getText} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: '100%',
     },
+    expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+          duration: theme.transitions.duration.shortest,
+        }),
+      },
+      expandOpen: {
+        transform: 'rotate(180deg)',
+      },
     avatar: {
         backgroundColor: 'red[500]',
     }
@@ -31,10 +42,14 @@ export default function ObieeCardReport(props){
     const {children,title,subheader,avatarText,content,type,
         onUsers,onApproles,onUserOfApproles,onReports,onSettings} = props;
 
-    const [expanded, setExpanded] = React.useState(false);
+    //const [expanded, setExpanded] = React.useState(false);
+    const expanded = React.useRef(false); 
 
     const handleExpandClick = () => {
-        setExpanded(!expanded);
+        //setExpanded(!expanded);
+        //expanded.current = (expanded.current+1)%2;
+        expanded.current.in = !expanded.current.in;
+        console.log('expanded',expanded);
       };
 
     const strReports = getText('Reports');
@@ -76,11 +91,11 @@ export default function ObieeCardReport(props){
                 aria-expanded={expanded}
                 aria-label="show more"
                 >
-                <ExpandMoreIcon />
+                <ExpandMoreIcon /> 
                 </IconButton>
             </CardActions>
 
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Collapse ref={expanded} in={Boolean(expanded)} timeout="auto" unmountOnExit >
                 <CardContent>
                 <Grid container spacing={1} direction="column">
                     {type==='setting' &&  

@@ -17,3 +17,21 @@ export function getTitle(){
 export function setTitle(title){
     return localStorage.setItem('title',title);
 }
+
+export function readFile(url){
+
+    fetch(url,{
+        headers: {
+            'Content-Type': 'application/json'
+          }
+    })
+    .then(response=>
+        {
+            console.log("response",response);
+            return response.json();
+        })
+    .then(data=>{console.log(data)})
+    .catch(err=>{
+        console.log("err",err);
+    })
+}

@@ -11,6 +11,7 @@ import rtl from 'jss-rtl';
 
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import {UserContext} from './Context';
+import {readFile} from './utils/Utils';
 
 //import '../i18next';
 //import {useTranslation} from 'react-i18next';
@@ -24,6 +25,8 @@ const countries = [
 
 function IndexComp(props) {    
 
+    readFile('webservices.json');
+    
     const [isRightToLeft,setIsRightToLeft] = React.useState(false);
     const [isDarkTheme,setIsDarkTheme] = React.useState(false);
     const [whichComp,setWhichComp] = React.useState(4);

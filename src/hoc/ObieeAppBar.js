@@ -315,7 +315,7 @@ export default function ObieeAppBar(props) {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton 
+              {/* <IconButton 
                 color="inherit"
                 aria-label="go to home"
                 onClick={onHomeClick}
@@ -329,7 +329,7 @@ export default function ObieeAppBar(props) {
               <Tooltip title={getText("Setting")} >
               <SettingsIcon />
               </Tooltip>
-              </IconButton> 
+              </IconButton>  */}
 
               <IconButton 
                 color="inherit"
@@ -390,7 +390,7 @@ export default function ObieeAppBar(props) {
       //handleChangeVariant     
       />
 
-      {renderMobileMenu}
+      {/* {renderMobileMenu} */}
       {renderMenu}
 
       </div>

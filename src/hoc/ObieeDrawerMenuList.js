@@ -16,6 +16,8 @@ import LockIcon from '@material-ui/icons/Lock';
 import FolderIcon from '@material-ui/icons/Folder';
 import Filter1Icon from '@material-ui/icons/Filter1';
 import AssessmentIcon from '@material-ui/icons/Assessment';
+import HomeIcon from '@material-ui/icons/Home';
+import SettingsIcon from '@material-ui/icons/Settings';
 import Collapse from '@material-ui/core/Collapse';
 //import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
@@ -57,6 +59,8 @@ export default function ObieeDrawerMenuList(props){
   const strObjectsOfApprole = getText('Objects of Approle');
   const strReports = getText('Reports');
   const strVersion = getText('Version');
+  const strHome = getText('Home');
+  const strSetting = getText('Setting');
 
   console.log('rendering DrawerMenuList');
 
@@ -72,6 +76,11 @@ export default function ObieeDrawerMenuList(props){
       // }
       className={classes.root}
     >
+
+<ListItem button key={strHome} >
+      <ListItemIcon><HomeIcon /></ListItemIcon>
+      <ListItemText >{strHome}</ListItemText>
+</ListItem>
 
 <ListItem button key={strBIPublisher} >
       <ListItemIcon><AssessmentIcon /></ListItemIcon>
@@ -130,9 +139,9 @@ export default function ObieeDrawerMenuList(props){
 
     <Divider />
 
-    <ListItem button key={strVersion} onClick={e=>{alert('version click')}}>
-      <ListItemIcon><Filter1Icon /></ListItemIcon>
-      <ListItemText >{strVersion}</ListItemText>
+    <ListItem button key={strSetting} onClick={e=>{alert('version click')}}>
+      <ListItemIcon><SettingsIcon /></ListItemIcon>
+      <ListItemText >{strSetting}</ListItemText>
     </ListItem>
 
     {/* <Version /> */}

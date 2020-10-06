@@ -13,8 +13,24 @@ import ObieeUsers from './ObieeUsers';
 import ObieeCrudUserOfApprole from './ObieeCrudUserOfApprole';
 import ObieeStatusbar from './ObieeStatusbar';
 import {UIContext} from '../Context';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    // paper: {
+    //   height: 140,
+    //   width: 100,
+    // },
+    // control: {
+    //   padding: theme.spacing(2),
+    // },
+  }));
 
 function Dashboard(props){
+
+    const classes = useStyles();
 
     const {systemInfos} = props;
 
@@ -61,7 +77,7 @@ function Dashboard(props){
             systemInfos={systemInfos}
             >
 
-            <Grid container spacing={4} >
+            <Grid container spacing={1} className={classes.root} justify={"center"}  direction="row">
             { 
                 whichCompShow===-1 &&
                 showSystemSetting && 
@@ -72,8 +88,8 @@ function Dashboard(props){
                 whichCompShow===0 &&
                 systemInfos &&
                 systemInfos.map((item,index)=>(
-                  <Grid item xs={12} md={12} key={index}>
-                        <ObieeCardReport 
+                  <Grid item key={index} xs={4} md={4}>
+                        <ObieeCardReport    
                         key={index} 
                         title={item.name} 
                         subheader={item.latinName}

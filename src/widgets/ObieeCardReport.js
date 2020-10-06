@@ -19,7 +19,7 @@ import {getText} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: '100%',
+        //maxWidth: '100%',
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -82,7 +82,7 @@ export default function ObieeCardReport(props){
             }
             </CardContent>
 
-            <CardActions>
+            {/* <CardActions>
                 <IconButton
                 className={clsx(classes.expand, {
                     [classes.expandOpen]: expanded,
@@ -93,7 +93,7 @@ export default function ObieeCardReport(props){
                 >
                 <ExpandMoreIcon /> 
                 </IconButton>
-            </CardActions>
+            </CardActions> */}
 
             <Collapse ref={expanded} in={Boolean(expanded)} timeout="auto" unmountOnExit >
                 <CardContent>

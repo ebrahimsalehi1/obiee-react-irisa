@@ -1,19 +1,11 @@
-
 import React from 'react';
-import ObieeAppBar from './ObieeAppBar';
-import ObieeDrawer from './ObieeDrawer';
-import axios from 'axios';
-import ObieeSnackbar from '../widgets/ObieeSnackbar';
+
 import ObieeCardReport from '../widgets/ObieeCardReport';
-import ObieeSettings from './ObieeSettings';
 import Grid from '@material-ui/core/Grid';
-import ObieeCrudApprole from './ObieeCrudApprole';
-import ObieeReports from './ObieeReports';
-import ObieeUsers from './ObieeUsers';
-import ObieeCrudUserOfApprole from './ObieeCrudUserOfApprole';
-import ObieeStatusbar from './ObieeStatusbar';
 import {UIContext} from '../Context';
 import { makeStyles } from '@material-ui/core/styles';
+const DataGridDemo = React.lazy(()=>import('../widgets/ObieeTable'));
+import {callRestGet,callRestPost,callRestPost2} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,58 +26,34 @@ function Dashboard(props){
 
     const {systemInfos} = props;
 
-    const [openDrawer,setOpenDrawer] = React.useState(false);
     //const [systemInfos,setSystemInfos] = React.useState([]);
-    const [showSystemSetting,setShowSystemSetting] = React.useState(false);
-    const [openMessage,setOpenMessage] = React.useState(false);
-    const [whichCompShow,setWhichCompShow] = React.useState(0);
+    const [dataReoprt,setDataReport] = React.useState([]);
 
-    const uiContextData = React.useContext(UIContext);
-    uiContextData.onClickDrawerItem = (which)=>{
-        setWhichCompShow(which)
-    }
+    // const uiContextData = React.useContext(UIContext);
+    // uiContextData.onClickDrawerItem = (which)=>{
+    //     setWhichCompShow(which)
+    // }
 
     React.useEffect(()=>{
-        // axios.get(localStorage.getItem('esbip')+"systems")
-        // .then(res=>{
-        //     if(res.status===200){
-        //         setSystemInfos(res.data);
-        //         setOpenMessage(false);
-        //     }
-        // })
-        // .catch(err=>{
-        //     setOpenMessage(true);
-        // })
+        //callRestGet('APPROLE_HAS_ADMIN_ROLE',['z.omidvar'])
+        callRestPost('REPORT_TRANSACTIONAL',[],{
+            "user": "z.omidvar",
+            "searchWord":""
+        })
+        .then(res=>{
+            setDataReport(res.data);
+        })
+        .catch(err=>{
+            //setOpenMessage(true);   
+        })
     },[]);
 
     return (
         <div>
 
-            <ObieeAppBar 
-            open={openDrawer} 
-            handleDrawerOpen={()=>{setOpenDrawer(true);}} 
-            handleSettings={()=>{
-                setShowSystemSetting(true);
-                setWhichCompShow(-1);
-                }}
-            onHomeClick={()=>{setWhichCompShow(0)}}
-            /> 
-
-            <ObieeDrawer 
-            open={openDrawer} 
-            handleDrawerClose={()=>{setOpenDrawer(false);}}
-            systemInfos={systemInfos}
-            >
-
             <Grid container spacing={1} className={classes.root} justify={"center"}  direction="row">
-            { 
-                whichCompShow===-1 &&
-                showSystemSetting && 
-            <ObieeSettings />
-            }
 
             { 
-                whichCompShow===0 &&
                 systemInfos &&
                 systemInfos.map((item,index)=>(
                   <Grid item key={index} xs={4} md={4}>
@@ -95,46 +63,16 @@ function Dashboard(props){
                         subheader={item.latinName}
                         type={item.type}
                         avatarText={item.latinName.substring(0,2)}   
-                        // onUsers={e=>setWhichCompShow(1)}
-                        // onApproles={e=>setWhichCompShow(2)}
-                        // onUserOfApproles={e=>setWhichCompShow(3)} 
-                        // onReports={e=>setWhichCompShow(4)}
-                        // onSettings={e=>{
-                        //     setWhichCompShow(-1);
-                        //     setShowSystemSetting(!showSystemSetting);
-                        // }}
+                        onClick={e=>console.log(item.latinName)}
                         />
                   </Grid>     
                 ))
             }
-            {whichCompShow===1 &&
-                <ObieeUsers url={localStorage.esbip+'api/v1.0/approles'}/>
-            }
-
-            {whichCompShow===2 &&
-                <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>
-            }
-            {whichCompShow===3 &&
-                <ObieeCrudUserOfApprole url={localStorage.esbip+'api/v1.0/approles'}/>
-            }
-            {whichCompShow===4 &&
-                <ObieeReports url={localStorage.esbip+'api/v1.0/reports'}/>
-            }
-            
+            <Grid item xs={12} md={12}>
+            <DataGridDemo />        
             </Grid>
 
-            </ObieeDrawer>
-
-            <ObieeSnackbar
-                open={openMessage}
-                message={"Error, Somthing goes wrong, \n contact administrator"}
-                autoHideDuration={6000}
-                handleClose={()=>{
-                    setOpenMessage(false);
-                }}
-            />
-
-            <ObieeStatusbar />
+            </Grid>
 
         </div>
     )

@@ -2,7 +2,6 @@ import React from 'react';
 import Dashboard from './hoc/Dashboard';
 import ObieeSigin from './hoc/ObieeSignin';
 import data from '../db.json';
-//import ObieeMaterialTable from './widgets/ObieeMaterialTable';
 //import ObieeCrudApprole from './hoc/ObieeCrudApprole';
 //import { TramRounded } from '@material-ui/icons';
 import {  BrowserRouter as Router,Route,Switch as SwitchRoute} from 'react-router-dom';
@@ -50,9 +49,7 @@ export default function App(){
                             }} >
                                 login
                             </Route>
-                    <Route path="/tree" exact>
-                        {/* <ObieeMaterialTable />                                 */}
-                    </Route>
+
 
                     <Route>Page not found</Route>            
 

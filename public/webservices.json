@@ -1,7 +1,22 @@
 [
     {
-        "name":"",
-        "bffUrl":"",
-        "bUrl":""
+        "name":"REPORT_SAMPLE",
+        "bffUrl":"http://localhost:8081/obiee-bff/reports/sample"
+    },
+    {
+        "name":"REPORT_TRANSACTIONAL",
+        "bffUrl":"http://localhost:8081/obiee-bff/reports/transactional"
+    },
+    {
+        "name":"REPORT_ANALYSER",
+        "bffUrl":"http://localhost:8081/obiee-bff/reports/analyser"
+    },
+    {
+        "name":"REPORT_DASHBOARD",
+        "bffUrl":"http://localhost:8081/obiee-bff/reports/dashboard"
+    },
+    {
+        "name":"APPROLE_HAS_ADMIN_ROLE",
+        "bffUrl":"http://localhost:8081/obiee-bff/approle/hasAdminRole/:1"
     }
 ]

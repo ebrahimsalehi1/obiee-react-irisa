@@ -11,10 +11,6 @@ import rtl from 'jss-rtl';
 
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import {UserContext} from './Context';
-import {readFile} from './utils/Utils';
-
-//import '../i18next';
-//import {useTranslation} from 'react-i18next';
 
 const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 
@@ -25,15 +21,28 @@ const countries = [
 
 function IndexComp(props) {    
 
-    readFile('webservices.json');
+    const countRender = React.useRef(0);
+
+    if(countRender.current === 0){
+        fetch('webservices.json',{
+            headers: {
+                'Content-Type': 'application/json'
+              }
+        })
+        .then(response=>response.json())
+        .then(data=>localStorage.setItem("webservices",JSON.stringify(data)))
+        .catch(err=>{
+            console.log("err",err);
+        });
+    
+        localStorage.setItem('language','en');  
+    }
     
     const [isRightToLeft,setIsRightToLeft] = React.useState(false);
     const [isDarkTheme,setIsDarkTheme] = React.useState(false);
-    const [whichComp,setWhichComp] = React.useState(4);
+    //const [whichComp,setWhichComp] = React.useState(4);
 
-    //const { i18n } = useTranslation();
-    //i18n.init({ lng: countries[0].lang });
-    //console.log("index",(isRightToLeft===false ? (isDarkTheme ? themeDarkLTR : themeLightLTR) : (!isDarkTheme ? themeLightRTL : themeDarkRTL)).type);
+    countRender.current++;
 
     return (        
     <React.Suspense fallback={<h1>Loading profile...</h1>}>
@@ -65,5 +74,4 @@ function IndexComp(props) {
     )
 }
 
-localStorage.setItem('language','en');
 ReactDOM.render(<React.StrictMode><IndexComp/></React.StrictMode>,document.getElementById('root'));

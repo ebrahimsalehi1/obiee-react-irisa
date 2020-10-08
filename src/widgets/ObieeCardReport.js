@@ -15,11 +15,13 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandMoreLess from '@material-ui/icons/ExpandLess';
+import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red'; 
 import {getText} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        //maxWidth: '100%',
+        maxWidth: '100%',
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -31,49 +33,54 @@ const useStyles = makeStyles((theme) => ({
       expandOpen: {
         transform: 'rotate(180deg)',
       },
+    avatarSelected: {
+        backgroundColor: red[500],
+    },
     avatar: {
-        backgroundColor: 'red[500]',
-    }
+        backgroundColor: red[0],
+    },
+    cardBackgroundDark:{
+        backgroundColor:blue[100]
+    },
+    cardBackgroundLight:{
+        backgroundColor:blue[100]
+    },
+
 }));
 
 export default function ObieeCardReport(props){
     const classes = useStyles();
 
     const {children,title,subheader,avatarText,content,type,
-        onUsers,onApproles,onUserOfApproles,onReports,onSettings} = props;
+        onClick,selected} = props;
 
     //const [expanded, setExpanded] = React.useState(false);
-    const expanded = React.useRef(false); 
+    // const expanded = React.useRef(false); 
 
-    const handleExpandClick = () => {
-        //setExpanded(!expanded);
-        //expanded.current = (expanded.current+1)%2;
-        expanded.current.in = !expanded.current.in;
-        console.log('expanded',expanded);
-      };
+    // const handleExpandClick = () => {
+    //     //setExpanded(!expanded);
+    //     //expanded.current = (expanded.current+1)%2;
+    //     expanded.current.in = !expanded.current.in;
+    //     console.log('expanded',expanded);
+    //   };
 
-    const strReports = getText('Reports');
-    const strUserApproles = getText('User Approles');
-    const strApproles = getText('Application roles');
-    const strUsers = getText('Users');
+        // const strReports = getText('Reports');
+        // const strUserApproles = getText('User Approles');
+        // const strApproles = getText('Application roles');
+        // const strUsers = getText('Users');
 
       
     return (
-        <Card className={classes.root}>
+        <Card className={classes.root} onClick={onClick}>
 
             <CardHeader 
-                avatar={<Avatar aria-label="recipe" className={classes.avatar}>{avatarText}</Avatar>}
+                avatar={<Avatar aria-label="recipe" className={selected ? classes.avatarSelected : classes.avatar}>{avatarText}</Avatar>}
                 action={<IconButton aria-label="setting"><MoreVert/></IconButton>}
                 title={title}
                 subheader={subheader}
             />
 
-            {/* <CardMedia
-                  component="img"
-
-            ></CardMedia> */}
-
-            <CardContent>
+            <CardContent >
             <Typography variant="body2" color="textSecondary" component="p">
             {content}
             </Typography>
@@ -95,7 +102,7 @@ export default function ObieeCardReport(props){
                 </IconButton>
             </CardActions> */}
 
-            <Collapse ref={expanded} in={Boolean(expanded)} timeout="auto" unmountOnExit >
+            {/* <Collapse ref={expanded} in={Boolean(expanded)} timeout="auto" unmountOnExit >
                 <CardContent>
                 <Grid container spacing={1} direction="column">
                     {type==='setting' &&  
@@ -118,14 +125,14 @@ export default function ObieeCardReport(props){
                     <Button size="large" variant="contained" color="primary" onClick={onReports}>{strReports}</Button>
                     </Grid>
                     }
-                    {/* { type==='setting' && 
+                    { type==='setting' && 
                     <Grid item xs={12} md={12}>
                     <Button size="large" variant="contained" color="primary" onClick={onSettings}>Setting</Button>
                     </Grid>
-                    }                     */}
+                    }                    
                 </Grid>
                 </CardContent>
-            </Collapse>
+            </Collapse> */}
 
         </Card>
     )

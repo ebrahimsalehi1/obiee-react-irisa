@@ -113,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ObieeDrawer(props) {
 
-  const {open,handleDrawerClose,children} = props;
+  const {open,handleDrawerClose,children,isAuthenticate} = props;
 
   const classes = useStyles();
   const theme = useTheme();
@@ -128,31 +128,11 @@ export default function ObieeDrawer(props) {
 //   };
 
   return (
+    <div>
+    {isAuthenticate && 
     <div className={classes.root}>
       <CssBaseline />
-      {/* <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open,
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Mini variant drawer
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
+
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -184,7 +164,7 @@ export default function ObieeDrawer(props) {
             <Typography variant="body2" color="textSecondary" component="p">
               Person Position
             </Typography>
-          </CardContent> */}
+          </CardCon tent> */}
         </Card>
         <Divider />
         <ObieeDrawerMenuList />
@@ -198,6 +178,8 @@ export default function ObieeDrawer(props) {
 
 
       </main>
+    </div>
+    }
     </div>
   );
 }

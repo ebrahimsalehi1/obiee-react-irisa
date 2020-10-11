@@ -20,7 +20,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 //import SwitchUI from '@material-ui/core/Switch';
 //import Grid from '@material-ui/core/Grid';
-//import LanguageIcon from '@material-ui/icons/Language';
+import LanguageIcon from '@material-ui/icons/Language';
 import BrightnessHighIcon from '@material-ui/icons/Brightness7';
 import BrightnessLowIcon from '@material-ui/icons/Brightness4';
 import RightToLeftPageIcon from '@material-ui/icons/FormatTextdirectionRToL';
@@ -127,23 +127,23 @@ export default function ObieeAppBar(props) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [openDrawer,setOpenDrawer] = React.useState(false);
+  //const [openDrawer,setOpenDrawer] = React.useState(false);
   const [languageMenu,setLanguageMenu] = React.useState(null);
-  const [openDialog,setOpenDialog] = React.useState(false);
+  //const [openDialog,setOpenDialog] = React.useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  //const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const isLanguageMenuOpen = Boolean(languageMenu);
 
-  const [anchorElAppearance, setAnchorElAppearance] = React.useState(null);
+  //const [anchorElAppearance, setAnchorElAppearance] = React.useState(null);
 
-  const handleClickAppearance = (event) => {
-    setAnchorElAppearance(event.currentTarget);
-  };
+  // const handleClickAppearance = (event) => {
+  //   setAnchorElAppearance(event.currentTarget);
+  // };
 
-  const handleCloseAppearance = () => {
-    setAnchorElAppearance(null);
-  };
+  // const handleCloseAppearance = () => {
+  //   setAnchorElAppearance(null);
+  // };
 
   // const handleSettings = ()=>{
   //   handleSettings(true);
@@ -186,98 +186,101 @@ export default function ObieeAppBar(props) {
     </Menu>
   );
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSettings}>
-          <SettingsIcon />
-          {/* <Badge badgeContent={4} color="secondary">
-            <SettingsIcon />
-          </Badge> */}
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={e=>{handleLogedIn(false)}}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-      {/* <MenuItem onClick={handleLanguageMenuOpen}>
-      <IconButton 
-              color="inherit"
-              aria-label="Show list of languages"              
-            >
-            <LanguageIcon/>
-      </IconButton>
-      <p>Languages</p>
-      </MenuItem> */}
-      <MenuItem>
-      <IconButton 
-        color="inherit"
-        aria-label="Brightness"              
-        >
-        <BrightnessHighIcon/>
-      </IconButton>
-      <p>Brightness</p>
-      </MenuItem>
-      <MenuItem>
-      <IconButton 
-        color="inherit"
-        aria-label="left to right / right to left"                            
-        >
-        <RightToLeftPageIcon/>
-      </IconButton>
-      <p>Left - Right</p>
-      </MenuItem>
-    </Menu>
-  );
-
-  // const renderLanguages = (
+const mobileMenuId = 'primary-search-account-menu-mobile';
+  // const renderMobileMenu = (
   //   <Menu
-  //     anchorEl={languageMenu}
+  //     anchorEl={mobileMoreAnchorEl}
   //     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
   //     id={mobileMenuId}
   //     keepMounted
   //     transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-  //     open={isLanguageMenuOpen}
-  //     onClose={handleLanguageMenuClose}
+  //     open={isMobileMenuOpen}
+  //     onClose={handleMobileMenuClose}
   //   >
-  //   <MenuItem onClick={()=>{alert('persian');setLanguageMenu(null);}}>
-  //     Persian
-  //   </MenuItem>
-  //   <MenuItem onClick={()=>{alert('english');setLanguageMenu(null);}}>
-  //     English
-  //   </MenuItem>
-  //   <MenuItem onClick={()=>{alert('deutsch');setLanguageMenu(null);}}>
-  //     Deutsch
-  //   </MenuItem>
-  // </Menu>
+  //     <MenuItem>
+  //       <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSettings}>
+  //         <SettingsIcon />
+  //         <Badge badgeContent={4} color="secondary">
+  //           <SettingsIcon />
+  //         </Badge> 
+  //       </IconButton>
+  //       <p>Messages</p>
+  //     </MenuItem>
+  //     <MenuItem>
+  //       <IconButton aria-label="show 11 new notifications" color="inherit">
+  //         <Badge badgeContent={11} color="secondary">
+  //           <NotificationsIcon />
+  //         </Badge>
+  //       </IconButton>
+  //       <p>Notifications</p>
+  //     </MenuItem>
+  //     <MenuItem onClick={e=>{handleLogedIn(false)}}>
+  //       <IconButton
+  //         aria-label="account of current user"
+  //         aria-controls="primary-search-account-menu"
+  //         aria-haspopup="true"
+  //         color="inherit"
+  //       >
+  //         <AccountCircle />
+  //       </IconButton>
+  //       <p>Profile</p>
+  //     </MenuItem>
+  //     <MenuItem onClick={handleLanguageMenuOpen}>
+  //     <IconButton 
+  //             color="inherit"
+  //             aria-label="Show list of languages"              
+  //           >
+  //           <LanguageIcon/>
+  //     </IconButton>
+  //     <p>Languages</p>
+  //     </MenuItem> 
+  //     <MenuItem>
+  //     <IconButton 
+  //       color="inherit"
+  //       aria-label="Brightness"              
+  //       >
+  //       <BrightnessHighIcon/>
+  //     </IconButton>
+  //     <p>Brightness</p>
+  //     </MenuItem>
+  //     <MenuItem>
+  //     <IconButton 
+  //       color="inherit"
+  //       aria-label="left to right / right to left"                            
+  //       >
+  //       <RightToLeftPageIcon/>
+  //     </IconButton>
+  //     <p>Left - Right</p>
+  //     </MenuItem>
+  //   </Menu>
   // );
 
-  const {handleChangeDirection,handleChangeTheme,handleLogedIn} = React.useContext(UserContext);
+  const renderLanguages = (
+    <Menu
+      anchorEl={languageMenu}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isLanguageMenuOpen}
+      onClose={handleLanguageMenuClose}
+    >
+    <MenuItem onClick={e=>{
+      handleLanguageMenuClose(e);
+      context.obieeDispatch('change_language_fa');
+      }}>
+      Persian
+    </MenuItem>
+    <MenuItem onClick={()=>{context.obieeDispatch('change_language_en')}}>
+      English
+    </MenuItem>
+    <MenuItem onClick={()=>{context.obieeDispatch('change_language_de')}}>
+      Deutsch
+    </MenuItem>
+  </Menu>
+  );
+
+ const context = React.useContext(UserContext);
 
   return (
     <div>
@@ -334,10 +337,10 @@ export default function ObieeAppBar(props) {
               <IconButton 
                 color="inherit"
                 aria-label="Show list of languages"
-                onClick={handleClickAppearance}
+                onClick={handleLanguageMenuOpen}
               >
                 <Tooltip title={getText("Appearance")} >
-                <Tune/>
+                <LanguageIcon/>
                 </Tooltip>
               </IconButton> 
               {/* <IconButton 
@@ -360,7 +363,7 @@ export default function ObieeAppBar(props) {
                 aria-label="account of current user"
                 aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={e=>{handleLogedIn(false)}}
+                //onClick={e=>{handleLogedIn(false)}}
                 color="inherit"
               >
                 <Tooltip title={getText("Exit")} >
@@ -382,17 +385,16 @@ export default function ObieeAppBar(props) {
           </Toolbar>
         </AppBar>               
       
-      <ObieeAppearance 
+      {/* <ObieeAppearance 
       anchorEl={anchorElAppearance} 
       handleClose={handleCloseAppearance}
       handleChangeTheme={handleChangeTheme}        
       handleChangeDirection={handleChangeDirection}   
-      //handleChangeVariant     
-      />
+      /> */}
 
       {/* {renderMobileMenu} */}
       {renderMenu}
-
+      {renderLanguages}
       </div>
   );
 }

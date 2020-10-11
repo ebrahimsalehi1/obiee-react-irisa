@@ -18,65 +18,73 @@ const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 const countries = [
     { code: "US",lang:"en", label: "United States", phone: "1", suggested: true },
     { code: "IR",lang:"fa", label: "Iran, Islamic Republic of", phone: "98",suggested: false }
-  ];
+];
 
 const initialState = {
+    language:'en',
     direction:false,
     theme: false,
     shown_component:'show_dashboard_home'
 }   
 
 function reducer(state,action){
-    //console.log(state,action);
+    console.log(state,action);
     switch(action){
         case 'show_dashboard_home':
             return  {
-                direction:false,
-                theme: false,
+                ...state,
                 shown_component:'show_dashboard_home'
             }
         case 'show_dashboard_transactional':
             return  {
-                direction:false,
-                theme: false,
+                ...state,
                 shown_component:'show_dashboard_transactional'
             }
         case 'show_dashboard_analyser':
             return  {
-                direction:false,
-                theme: false,
+                ...state,
                 shown_component:'show_dashboard_analyser'
             }
         case 'show_dashboard_dashboard':
             return  {
-                direction:false,
-                theme: false,
+                ...state,
                 shown_component:'show_dashboard_dashboard'
             }
         case 'show_users':
             return {
-                direction:false,
-                theme: false,
+                ...state,
                 shown_component:'show_users'
             }
         case 'show_approle':
             return {
-                direction:false,
-                theme: false,
+                ...state,
                 shown_component:'show_approle'
             }
         case 'show_report':
             return {
-                direction:false,
-                theme: false,
+                ...state,
                 shown_component:'show_report'
             }
         case 'show_setting':
             return {
-                direction:false,
-                theme: false,
+                ...state,
                 shown_component:'show_setting'
             }
+        case 'change_language_en':
+            return {
+                ...state,
+                language:'en',
+            }            
+        case 'change_language_fa':
+            return {
+                ...state,
+                language:'fa',
+            }            
+        case 'change_language_de':
+            return {
+                ...state,
+                language:'de',
+            }            
         default:
             return state;    
     }

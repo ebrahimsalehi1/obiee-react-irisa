@@ -5,8 +5,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import PrintIcon from '@material-ui/icons/Print';
+//import InboxIcon from '@material-ui/icons/MoveToInbox';
+//import PrintIcon from '@material-ui/icons/Print';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -14,7 +14,7 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import LockIcon from '@material-ui/icons/Lock';
 import FolderIcon from '@material-ui/icons/Folder';
-import Filter1Icon from '@material-ui/icons/Filter1';
+//import Filter1Icon from '@material-ui/icons/Filter1';
 import AssessmentIcon from '@material-ui/icons/Assessment';
 import HomeIcon from '@material-ui/icons/Home';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -48,7 +48,6 @@ export default function ObieeDrawerMenuList(props){
 
   const handleClick = () => {
     setOpen(!open);
-    console.log('handleClickSubItem');    
   };
 
   const strAnalytics = getText('Analytics');
@@ -59,7 +58,7 @@ export default function ObieeDrawerMenuList(props){
   const strApplicarionRoles = getText('Application roles');
   const strUserApproles = getText('User Approles');
   const strObjectsOfApprole = getText('Objects of Approle');
-  const strReports = getText('Reports');
+  //const strReports = getText('Reports');
   const strDashboard = getText('Dashboard');
   const strHome = getText('Home');
   const strSetting = getText('Setting');
@@ -71,7 +70,6 @@ export default function ObieeDrawerMenuList(props){
     container 
     spacing={1} 
     direction="column"
-    justifyContent="flex-start"
     alignItems="flex-start"
     >
 

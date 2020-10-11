@@ -46,7 +46,7 @@ export function callRestPost2(key,urlParams,data){
     return axios({
         method:'POST',
         url:url,
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
             'Accept': 'application/json',
             "Content-Type": ["application/json","text/plain;charset=UTF8"],
@@ -63,28 +63,41 @@ export function callRestPost2(key,urlParams,data){
     });
 }
 
-export function callRestPost(key,urlParams,data){    
+export async function callRestPost(key,urlParams,data){    
 
     const url = getUrlParamList(key,urlParams);
 
-    return fetch(url,{
-        method:'POST',
-        mode: 'no-cors',
-        headers: {
-            'Accept': 'application/json',
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods":"DELETE,GET,POST,PUT,OPTIONS",
-            "Access-Control-Allow-Headers":"Authorization,Content-Type,Pragma,Cache-Control",
-            "Access-Control-Max-Age":"3600",
-        },
-        referrerPolicy: 'no-referrer', 
-        redirect: 'follow', 
-        credentials: 'same-origin',         
-        body:JSON.stringify(data)
+    console.log('callRestPost url',url);
 
-    })
-    .then(response=>response.json());
+    return await fetch(url,{
+            method:'POST',
+            //mode: 'cors',
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods":"DELETE,GET,POST,PUT,OPTIONS",
+                "Access-Control-Allow-Headers":"Authorization,Content-Type,Pragma,Cache-Control",
+                "Access-Control-Max-Age":"3600",
+            },
+            referrerPolicy: 'no-referrer', 
+            redirect: 'follow', 
+            credentials: 'same-origin',         
+            body:JSON.stringify(data)
+        })
+        .then(response=>{
+            try{
+            const res = response.json();
+            return res;
+            }
+            catch(e){
+                console.log('UTILS,err',e);
+            }
+        })
+        .catch(err=>{
+            reject({error:err})
+        });
+
 }
 
 export function callRestGet(key,urlParams){    
@@ -93,7 +106,7 @@ export function callRestGet(key,urlParams){
 
     return fetch(url,{
         method:'GET',
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
             'Accept': 'application/json',
             "Content-Type": "application/json",

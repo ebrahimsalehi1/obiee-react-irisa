@@ -4,7 +4,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 
 module.exports = {
-    entry: "./src/index.js",
+    entry: 
+        ["babel-polyfill","./src/index.js"],
     // output:{
     //     filename: "index.js",
     //     path: path.resolve(__dirname,"build")

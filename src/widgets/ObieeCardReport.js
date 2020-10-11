@@ -54,15 +54,15 @@ export default function ObieeCardReport(props){
     const {children,title,subheader,avatarText,content,type,
         onClick,selected} = props;
 
-    //const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(false);
     // const expanded = React.useRef(false); 
 
-    // const handleExpandClick = () => {
-    //     //setExpanded(!expanded);
-    //     //expanded.current = (expanded.current+1)%2;
-    //     expanded.current.in = !expanded.current.in;
-    //     console.log('expanded',expanded);
-    //   };
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+        //expanded.current = (expanded.current+1)%2;
+        //expanded.current.in = !expanded.current.in;
+       // console.log('expanded',expanded);
+      };
 
         // const strReports = getText('Reports');
         // const strUserApproles = getText('User Approles');
@@ -75,21 +75,21 @@ export default function ObieeCardReport(props){
 
             <CardHeader 
                 avatar={<Avatar aria-label="recipe" className={selected ? classes.avatarSelected : classes.avatar}>{avatarText}</Avatar>}
-                action={<IconButton aria-label="setting"><MoreVert/></IconButton>}
+                // action={<IconButton aria-label="setting"><MoreVert/></IconButton>}
                 title={title}
                 subheader={subheader}
             />
 
-            <CardContent >
+            {/* <CardContent >
             <Typography variant="body2" color="textSecondary" component="p">
             {content}
             </Typography>
             {
                 children
             }
-            </CardContent>
-
-            {/* <CardActions>
+            </CardContent> */}
+{/* 
+            <CardActions>
                 <IconButton
                 className={clsx(classes.expand, {
                     [classes.expandOpen]: expanded,
@@ -100,9 +100,9 @@ export default function ObieeCardReport(props){
                 >
                 <ExpandMoreIcon /> 
                 </IconButton>
-            </CardActions> */}
+            </CardActions> 
 
-            {/* <Collapse ref={expanded} in={Boolean(expanded)} timeout="auto" unmountOnExit >
+            <Collapse  in={expanded} timeout="auto" unmountOnExit >
                 <CardContent>
                 <Grid container spacing={1} direction="column">
                     {type==='setting' &&  

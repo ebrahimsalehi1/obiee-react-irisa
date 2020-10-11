@@ -23,7 +23,9 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import {getText} from '../utils/Utils';
 import Divider from '@material-ui/core/Divider';
-import {UIContext} from '../Context';
+import {UserContext} from '../Context';
+import Grid from '@material-ui/core/Grid';
+import Copyright from '../widgets/ObieeCopyright';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +44,7 @@ export default function ObieeDrawerMenuList(props){
   const [open, setOpen] = React.useState(false);
   //const [whichComp,setWhichComp] = React.useState(0);
 
-  const uiContextData = React.useContext(UIContext);
+  const myContext = React.useContext(UserContext);
 
   const handleClick = () => {
     setOpen(!open);
@@ -58,14 +60,22 @@ export default function ObieeDrawerMenuList(props){
   const strUserApproles = getText('User Approles');
   const strObjectsOfApprole = getText('Objects of Approle');
   const strReports = getText('Reports');
-  const strVersion = getText('Version');
+  const strDashboard = getText('Dashboard');
   const strHome = getText('Home');
   const strSetting = getText('Setting');
 
   console.log('rendering DrawerMenuList');
 
   return (
-    <div>
+    <Grid 
+    container 
+    spacing={1} 
+    direction="column"
+    justifyContent="flex-start"
+    alignItems="flex-start"
+    >
+
+    <Grid item xs={10} md={10}>
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
@@ -77,22 +87,22 @@ export default function ObieeDrawerMenuList(props){
       className={classes.root}
     >
 
-<ListItem button key={strHome} >
+<ListItem button key={strDashboard} onClick={e=>myContext.obieeDispatch('show_dashboard_home')}>
       <ListItemIcon><HomeIcon /></ListItemIcon>
-      <ListItemText >{strHome}</ListItemText>
+      <ListItemText >{strDashboard}</ListItemText>
 </ListItem>
 
-<ListItem button key={strBIPublisher} >
+<ListItem button key={strBIPublisher} onClick={e=>myContext.obieeDispatch('show_dashboard_transactional')}>
       <ListItemIcon><AssessmentIcon /></ListItemIcon>
       <ListItemText >{strBIPublisher}</ListItemText>
 </ListItem>
 
-<ListItem button key={strVisualAnalyzer} >
+<ListItem button key={strVisualAnalyzer} onClick={e=>myContext.obieeDispatch('show_dashboard_analyser')}>
       <ListItemIcon><AssessmentIcon /></ListItemIcon>
       <ListItemText >{strVisualAnalyzer}</ListItemText>
 </ListItem>
 
-<ListItem button key={strAnalytics} >
+<ListItem button key={strAnalytics} onClick={e=>myContext.obieeDispatch('show_dashboard_dashboard')}>
       <ListItemIcon><AssessmentIcon /></ListItemIcon>
       <ListItemText >{strAnalytics}</ListItemText>
 </ListItem>
@@ -113,7 +123,7 @@ export default function ObieeDrawerMenuList(props){
     <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
 
-          <ListItem button className={classes.nested}>
+          <ListItem button className={classes.nested} onClick={e=>myContext.obieeDispatch('show_approle')}>
             <GroupAddIcon/> 
             <ListItemText>{strApplicarionRoles}</ListItemText>
           </ListItem>
@@ -132,14 +142,14 @@ export default function ObieeDrawerMenuList(props){
     </Collapse>
 
 
-    <ListItem button key={strReports} >
+    {/* <ListItem button key={strReports} onClick={e=>myContext.obieeDispatch('show_report')}>
       <ListItemIcon><PrintIcon /></ListItemIcon>
       <ListItemText >{strReports}</ListItemText>
-    </ListItem>
+    </ListItem> */}
 
     <Divider />
 
-    <ListItem button key={strSetting} onClick={e=>{alert('version click')}}>
+    <ListItem button key={strSetting} onClick={e=>myContext.obieeDispatch('show_setting')}>
       <ListItemIcon><SettingsIcon /></ListItemIcon>
       <ListItemText >{strSetting}</ListItemText>
     </ListItem>
@@ -147,7 +157,12 @@ export default function ObieeDrawerMenuList(props){
     {/* <Version /> */}
 
   </List>
+    </Grid>
 
-  </div>
+    <Grid item xs={2} md={2}>
+    <Copyright/>
+    </Grid>
+
+  </Grid>
   )
 }

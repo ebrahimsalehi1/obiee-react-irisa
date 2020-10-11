@@ -30,7 +30,6 @@ import {getText} from '../utils/Utils';
 import Link from '@material-ui/core/Link';
 //import ObieeTreeView from '../widgets/ObieeTreeView.js';
 import ObieeDrawerMenuList from './ObieeDrawerMenuList';
-import Copyright from '../widgets/ObieeCopyright';
 
 const drawerWidth = 240;
 
@@ -168,7 +167,6 @@ export default function ObieeDrawer(props) {
         </Card>
         <Divider />
         <ObieeDrawerMenuList />
-        <Copyright/>
 
       </Drawer>
       <main className={classes.content}>

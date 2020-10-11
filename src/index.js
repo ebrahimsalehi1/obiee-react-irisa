@@ -11,6 +11,7 @@ import rtl from 'jss-rtl';
 
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import {UserContext} from './Context';
+const CircularProgress = React.lazy(()=>  import('@material-ui/core/CircularProgress'));
 
 const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 
@@ -19,8 +20,71 @@ const countries = [
     { code: "IR",lang:"fa", label: "Iran, Islamic Republic of", phone: "98",suggested: false }
   ];
 
+const initialState = {
+    direction:false,
+    theme: false,
+    shown_component:'show_dashboard_home'
+}   
+
+function reducer(state,action){
+    //console.log(state,action);
+    switch(action){
+        case 'show_dashboard_home':
+            return  {
+                direction:false,
+                theme: false,
+                shown_component:'show_dashboard_home'
+            }
+        case 'show_dashboard_transactional':
+            return  {
+                direction:false,
+                theme: false,
+                shown_component:'show_dashboard_transactional'
+            }
+        case 'show_dashboard_analyser':
+            return  {
+                direction:false,
+                theme: false,
+                shown_component:'show_dashboard_analyser'
+            }
+        case 'show_dashboard_dashboard':
+            return  {
+                direction:false,
+                theme: false,
+                shown_component:'show_dashboard_dashboard'
+            }
+        case 'show_users':
+            return {
+                direction:false,
+                theme: false,
+                shown_component:'show_users'
+            }
+        case 'show_approle':
+            return {
+                direction:false,
+                theme: false,
+                shown_component:'show_approle'
+            }
+        case 'show_report':
+            return {
+                direction:false,
+                theme: false,
+                shown_component:'show_report'
+            }
+        case 'show_setting':
+            return {
+                direction:false,
+                theme: false,
+                shown_component:'show_setting'
+            }
+        default:
+            return state;    
+    }
+}
+
 function IndexComp(props) {    
 
+    const [state,dispatch] = React.useReducer(reducer,initialState);
     const countRender = React.useRef(0);
 
     if(countRender.current === 0){
@@ -45,24 +109,8 @@ function IndexComp(props) {
     countRender.current++;
 
     return (        
-    <React.Suspense fallback={<h1>Loading profile...</h1>}>
-        <UserContext.Provider value={{
-            direction:isRightToLeft,
-            theme: !isDarkTheme,
-            //isLogedin: false,
-            handleChangeDirection: ()=>{
-                setIsRightToLeft(!isRightToLeft);
-                console.log('isRightToLeft',isRightToLeft)
-                //localStorage.setItem("language",isRightToLeft ? countries[0].lang : countries[1].lang);
-            },
-            handleChangeTheme: ()=>{
-                setIsDarkTheme(!isDarkTheme);
-            },
-            handleLogedIn: (pisLogedIn)=>{
-                //setIsLogedIn(pisLogedIn);
-                return pisLogedIn;
-            } 
-        }}>
+    <React.Suspense fallback={<h1>Progress ....</h1>}>
+        <UserContext.Provider value={{obieeState:state,obieeDispatch:dispatch}}>
             <StylesProvider jss={jssRtl}>
             <MuiThemeProvider theme={isRightToLeft===false ? (isDarkTheme ? themeDarkLTR : themeLightLTR) : (!isDarkTheme ? themeLightRTL : themeDarkRTL)}>
                 <App/>

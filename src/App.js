@@ -4,7 +4,7 @@ import ObieeAppBar from './hoc/ObieeAppBar';
 import ObieeDrawer from './hoc/ObieeDrawer';
 import ObieeSigin from './hoc/ObieeSignin';
 import data from '../db.json';
-import {UserContext,UIContext} from './Context';
+import {UserContext} from './Context';
 import ObieeCrudApprole from './hoc/ObieeCrudApprole';
 import ObieeReports from './hoc/ObieeReports';
 import ObieeUsers from './hoc/ObieeUsers';
@@ -19,13 +19,16 @@ import Grid from '@material-ui/core/Grid';
 //import {  BrowserRouter as Router,Route,Switch as SwitchRoute} from 'react-router-dom';
 //import { createBrowserHistory } from 'history';
 
+
 export default function App(props){
 
     const [isAuthenticate,setIsAuthenticate] = React.useState(true);
     const {handleLogedIn} = React.useContext(UserContext);
     const [openDrawer,setOpenDrawer] = React.useState(false);
-    const [whichCompShow,setWhichCompShow] = React.useState(2);
+    //const [whichCompShow,setWhichCompShow] = React.useState(2);
     const [openMessage,setOpenMessage] = React.useState(false);
+
+    const myContext = React.useContext(UserContext);
 
     return (
         <div>
@@ -64,26 +67,55 @@ export default function App(props){
 
             <Grid container spacing={1}  justify={"center"}  >
 
-            { whichCompShow===0 &&
+            {myContext.obieeState.shown_component==='show_dashboard_home' &&
 
-                <Dashboard systemInfos={data.systemInfos} whichComp={props.whichComp}/>
+                <Dashboard 
+                    systemInfos={data.systemInfos} 
+                    whichComp={props.whichComp} 
+                    type='REPORT_NONE'/>
+            }  
+
+            {myContext.obieeState.shown_component==='show_dashboard_transactional' &&
+
+                <Dashboard 
+                    systemInfos={data.systemInfos} 
+                    whichComp={props.whichComp} 
+                    type='REPORT_TRANSACTIONAL'/>
+            }  
+
+            {myContext.obieeState.shown_component==='show_dashboard_analyser' &&
+
+                <Dashboard 
+                    systemInfos={data.systemInfos} 
+                    whichComp={props.whichComp} 
+                    type='REPORT_ANALYSER'/>
             }            
 
-            { whichCompShow===1 &&
+            {myContext.obieeState.shown_component==='show_dashboard_dashboard' &&
+
+                <Dashboard 
+                    systemInfos={data.systemInfos} 
+                    whichComp={props.whichComp} 
+                    type='REPORT_DASHBOARD'/>
+            }  
+
+            {myContext.obieeState.shown_component==='show_user' &&
                 <ObieeUsers url={localStorage.esbip+'api/v1.0/approles'}/>
             }
 
-            { whichCompShow===2 &&
+            {myContext.obieeState.shown_component==='show_approle' &&
                 <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>
             }
-            { whichCompShow===3 &&
+
+            {myContext.obieeState.shown_component==='show_user_approle' &&
                 <ObieeCrudUserOfApprole url={localStorage.esbip+'api/v1.0/approles'}/>
             }
-            { whichCompShow===4 &&
+
+            {myContext.obieeState.shown_component==='show_report' &&
                 <ObieeReports url={localStorage.esbip+'api/v1.0/reports'}/>
             }
 
-            { whichCompShow===5 &&
+            {myContext.obieeState.shown_component==='show_setting' &&
                 <ObieeSettings />
             }
 

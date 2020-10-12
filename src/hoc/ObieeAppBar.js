@@ -21,8 +21,8 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import SwitchUI from '@material-ui/core/Switch';
 //import Grid from '@material-ui/core/Grid';
 import LanguageIcon from '@material-ui/icons/Language';
-//import BrightnessHighIcon from '@material-ui/icons/Brightness7';
-//import BrightnessLowIcon from '@material-ui/icons/Brightness4';
+import BrightnessHighIcon from '@material-ui/icons/Brightness7';
+import BrightnessLowIcon from '@material-ui/icons/Brightness4';
 //import RightToLeftPageIcon from '@material-ui/icons/FormatTextdirectionRToL';
 //import LeftToRightPageIcon from '@material-ui/icons/FormatTextdirectionLToR';
 import clsx from 'clsx';
@@ -290,6 +290,8 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
 
  const context = React.useContext(UserContext);
 
+  console.log('ObieeAppBar');
+
   return (
     <div>
           <AppBar 
@@ -340,12 +342,7 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
               {/* <IconButton aria-label="show 4 new mails" color="inherit" onClick={()=>{
                 context.obieeDispatch('show_loading')
               }}> */}
-                <SwitchUI
-                  checked={context.obieeState.theme}
-                  onChange={context.obieeState.theme ? context.obieeDispatch('change_to_light'):context.obieeDispatch('change_to_dark')}
-                  name="checkedA"
-                  inputProps={{ 'aria-label': 'secondary checkbox' }}
-                />
+
                 {/* </IconButton>   */}
 
 
@@ -358,20 +355,20 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                 <LanguageIcon/>
                 </Tooltip>
               </IconButton> 
-              {/* <IconButton 
+              <IconButton 
                 color="inherit"
                 aria-label="Brightness"    
-                onClick={handleChangeTheme}            
+                onClick={()=>context.obieeState.theme ? context.obieeDispatch('change_to_light') : context.obieeDispatch('change_to_dark')}            
                 >
-                {theme ? <BrightnessHighIcon/> : <BrightnessLowIcon/>}
+                {!context.obieeState.theme ? <BrightnessHighIcon/> : <BrightnessLowIcon/>}
               </IconButton>
-              <IconButton 
+              {/* <IconButton 
                 color="inherit"
                 aria-label="left to right / right to left"        
                 onClick={handleChangeDirection}                    
                 >
                 {!direction ? <RightToLeftPageIcon/> : <LeftToRightPageIcon/>}
-              </IconButton> */}
+              </IconButton>  */}
 
               <IconButton
                 edge="end"

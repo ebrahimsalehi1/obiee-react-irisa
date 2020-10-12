@@ -14,6 +14,12 @@ import ObieeSettings from './hoc/ObieeSettings';
 import Grid from '@material-ui/core/Grid';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
+import {MuiThemeProvider} from '@material-ui/core/styles';
+import {themeLightLTR} from './utils/theme-light-ltr';
+import {themeLightRTL} from './utils/theme-light-rtl';
+import {themeDarkLTR} from './utils/theme-dark-ltr';
+import {themeDarkRTL} from './utils/theme-dark-rtl';
+
 //import ObieeCrudApprole from './hoc/ObieeCrudApprole';
 //import { TramRounded } from '@material-ui/icons';
 //import {  BrowserRouter as Router,Route,Switch as SwitchRoute} from 'react-router-dom';
@@ -28,11 +34,11 @@ export default function App(props){
     //const [whichCompShow,setWhichCompShow] = React.useState(2);
     const [openMessage,setOpenMessage] = React.useState(false);
 
-    const myContext = React.useContext(UserContext);
+    const context = React.useContext(UserContext);
 
     return (
-        <div>
-            {                        
+        <MuiThemeProvider theme={context.obieeState.direction===false ? (context.obieeState.theme ? themeDarkLTR : themeLightLTR) : (!context.obieeState.theme ? themeLightRTL : themeDarkRTL)}>
+        {                        
                 !isAuthenticate &&
                     (<ObieeSigin handleLogin={(userName,pass)=>{
                         if(userName==='admin' && pass==='admin')
@@ -66,7 +72,7 @@ export default function App(props){
 
             <Grid container spacing={1}  justify={"center"}  >
 
-            {myContext.obieeState.shown_component==='show_dashboard_home' &&
+            {context.obieeState.shown_component==='show_dashboard_home' &&
 
                 <Dashboard 
                     systemInfos={data.systemInfos} 
@@ -74,7 +80,7 @@ export default function App(props){
                     type='REPORT_NONE'/>
             }  
 
-            {myContext.obieeState.shown_component==='show_dashboard_transactional' &&
+            {context.obieeState.shown_component==='show_dashboard_transactional' &&
 
                 <Dashboard 
                     systemInfos={data.systemInfos} 
@@ -82,7 +88,7 @@ export default function App(props){
                     type='REPORT_TRANSACTIONAL'/>
             }  
 
-            {myContext.obieeState.shown_component==='show_dashboard_analyser' &&
+            {context.obieeState.shown_component==='show_dashboard_analyser' &&
 
                 <Dashboard 
                     systemInfos={data.systemInfos} 
@@ -90,7 +96,7 @@ export default function App(props){
                     type='REPORT_ANALYSER'/>
             }            
 
-            {myContext.obieeState.shown_component==='show_dashboard_dashboard' &&
+            {context.obieeState.shown_component==='show_dashboard_dashboard' &&
 
                 <Dashboard 
                     systemInfos={data.systemInfos} 
@@ -98,23 +104,23 @@ export default function App(props){
                     type='REPORT_DASHBOARD'/>
             }  
 
-            {myContext.obieeState.shown_component==='show_user' &&
+            {context.obieeState.shown_component==='show_user' &&
                 <ObieeUsers url={localStorage.esbip+'api/v1.0/approles'}/>
             }
 
-            {myContext.obieeState.shown_component==='show_approle' &&
+            {context.obieeState.shown_component==='show_approle' &&
                 <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>
             }
 
-            {myContext.obieeState.shown_component==='show_user_approle' &&
+            {context.obieeState.shown_component==='show_user_approle' &&
                 <ObieeCrudUserOfApprole url={localStorage.esbip+'api/v1.0/approles'}/>
             }
 
-            {myContext.obieeState.shown_component==='show_report' &&
+            {context.obieeState.shown_component==='show_report' &&
                 <ObieeReports url={localStorage.esbip+'api/v1.0/reports'}/>
             }
 
-            {myContext.obieeState.shown_component==='show_setting' &&
+            {context.obieeState.shown_component==='show_setting' &&
                 <ObieeSettings />
             }
 
@@ -130,6 +136,6 @@ export default function App(props){
                 }}
             />
 
-            </div>
+            </MuiThemeProvider>
     );
 }

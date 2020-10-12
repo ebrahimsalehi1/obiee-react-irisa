@@ -1,11 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import {MuiThemeProvider} from '@material-ui/core/styles';
-import {themeLightLTR} from './utils/theme-light-ltr';
-import {themeLightRTL} from './utils/theme-light-rtl';
-import {themeDarkLTR} from './utils/theme-dark-ltr';
-import {themeDarkRTL} from './utils/theme-dark-rtl';
 import { create } from 'jss';
 import rtl from 'jss-rtl';
 
@@ -131,8 +126,8 @@ function IndexComp(props) {
         localStorage.setItem('language','en');  
     }
     
-    const [isRightToLeft,setIsRightToLeft] = React.useState(false);
-    const [isDarkTheme,setIsDarkTheme] = React.useState(false);
+    //const [isRightToLeft,setIsRightToLeft] = React.useState(false);
+    //const [isDarkTheme,setIsDarkTheme] = React.useState(false);
     //const [whichComp,setWhichComp] = React.useState(4);
 
     countRender.current++;
@@ -141,9 +136,7 @@ function IndexComp(props) {
     <React.Suspense fallback={<h1>Progress ....</h1>}>
         <UserContext.Provider value={{obieeState:state,obieeDispatch:dispatch}}>
             <StylesProvider jss={jssRtl}>
-            <MuiThemeProvider theme={isRightToLeft===false ? (isDarkTheme ? themeDarkLTR : themeLightLTR) : (!isDarkTheme ? themeLightRTL : themeDarkRTL)}>
                 <App/>
-            </MuiThemeProvider>
             </StylesProvider>
         </UserContext.Provider>
     </React.Suspense>

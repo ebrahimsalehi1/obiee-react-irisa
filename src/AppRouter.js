@@ -60,6 +60,3 @@ export default function App(){
             </div>
     );
 }
-
-//  <Dashboard /> 
-//  <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>

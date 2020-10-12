@@ -2,17 +2,18 @@ import React from 'react';
 import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import {makeStyles,fade} from '@material-ui/core/styles';
-import CardActions from '@material-ui/core/CardActions';
+//import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import InputBase from '@material-ui/core/InputBase';
+//import InputBase from '@material-ui/core/InputBase';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
+
 import PropTypes from 'prop-types';
 import data from '../../db.json';
-import ObieeItemApprole from "./ObieeItemApprole";
+const ObieeItemApprole = React.lazy(()=>import("./ObieeItemApprole"));
 import ObieeDialog from '../widgets/ObieeDialog';
 import {getText} from '../utils/Utils';
 
@@ -90,7 +91,6 @@ export default function ObieeCrudApprole(props){
         <Grid item xs={12} md={4}>
         <IconButton type="submit" className={classes.iconButton} aria-label="search"
           onClick={()=>{
-
             let filteredData = null;
             filteredData = data.approles.filter(item=>
                   item.approleName.includes(search) ||

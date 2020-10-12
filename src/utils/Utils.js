@@ -39,30 +39,6 @@ function getUrlParamList(key,urlParams){
     return url;
 }
 
-export function callRestPost2(key,urlParams,data){    
-
-    const url = getUrlParamList(key,urlParams);
-
-    return axios({
-        method:'POST',
-        url:url,
-        mode: 'cors',
-        headers: {
-            'Accept': 'application/json',
-            "Content-Type": ["application/json","text/plain;charset=UTF8"],
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods":"DELETE,GET,POST,PUT,OPTIONS",
-            "Access-Control-Allow-Headers":"Authorization,Content-Type,Pragma,Cache-Control",
-            "Access-Control-Max-Age":"3600",
-        },
-        referrerPolicy: 'no-referrer', 
-        redirect: 'follow', 
-        credentials: 'same-origin', 
-        body:JSON.stringify(data)
-
-    });
-}
-
 export async function callRestPost(key,urlParams,data){    
 
     const url = getUrlParamList(key,urlParams);
@@ -85,19 +61,57 @@ export async function callRestPost(key,urlParams,data){
             credentials: 'same-origin',         
             body:JSON.stringify(data)
         })
-        .then(response=>{
-            try{
-            const res = response.json();
-            return res;
-            }
-            catch(e){
-                console.log('UTILS,err',e);
-            }
-        })
-        .catch(err=>{
-            reject({error:err})
-        });
+        .then(response=>response.json());
+}
 
+export async function callRestPut(key,urlParams,data){    
+
+    const url = getUrlParamList(key,urlParams);
+
+    console.log('callRestPut url',url);
+
+    return await fetch(url,{
+            method:'PUT',
+            //mode: 'cors',
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods":"DELETE,GET,POST,PUT,OPTIONS",
+                "Access-Control-Allow-Headers":"Authorization,Content-Type,Pragma,Cache-Control",
+                "Access-Control-Max-Age":"3600",
+            },
+            referrerPolicy: 'no-referrer', 
+            redirect: 'follow', 
+            credentials: 'same-origin',         
+            body:JSON.stringify(data)
+        })
+        .then(response=>response.json());    
+}
+
+export async function callRestDelete(key,urlParams,data){    
+
+    const url = getUrlParamList(key,urlParams);
+
+    console.log('callRestDelete url',url);
+
+    return await fetch(url,{
+            method:'PUT',
+            //mode: 'cors',
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods":"DELETE,GET,POST,PUT,OPTIONS",
+                "Access-Control-Allow-Headers":"Authorization,Content-Type,Pragma,Cache-Control",
+                "Access-Control-Max-Age":"3600",
+            },
+            referrerPolicy: 'no-referrer', 
+            redirect: 'follow', 
+            credentials: 'same-origin',         
+            body:JSON.stringify(data)
+        })
+        .then(response=>response.json());    
 }
 
 export function callRestGet(key,urlParams){    

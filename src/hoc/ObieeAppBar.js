@@ -5,33 +5,35 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
+//import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-//import MenuItemText from '@material-ui/core/MenuItemText';
+//import MenuItemText from '@material-ui/core/menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import HomeIcon from '@material-ui/icons/Home';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+// import HomeIcon from '@material-ui/icons/Home';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitToApp from '@material-ui/icons/ExitToApp';
-import Tune from '@material-ui/icons/Tune';
+// import Tune from '@material-ui/icons/Tune';
 import SettingsIcon from '@material-ui/icons/Settings';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+// import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-//import SwitchUI from '@material-ui/core/Switch';
+import SwitchUI from '@material-ui/core/Switch';
 //import Grid from '@material-ui/core/Grid';
 import LanguageIcon from '@material-ui/icons/Language';
-import BrightnessHighIcon from '@material-ui/icons/Brightness7';
-import BrightnessLowIcon from '@material-ui/icons/Brightness4';
-import RightToLeftPageIcon from '@material-ui/icons/FormatTextdirectionRToL';
-import LeftToRightPageIcon from '@material-ui/icons/FormatTextdirectionLToR';
+//import BrightnessHighIcon from '@material-ui/icons/Brightness7';
+//import BrightnessLowIcon from '@material-ui/icons/Brightness4';
+//import RightToLeftPageIcon from '@material-ui/icons/FormatTextdirectionRToL';
+//import LeftToRightPageIcon from '@material-ui/icons/FormatTextdirectionLToR';
 import clsx from 'clsx';
 import {UserContext} from '../Context';
 //import {useTranslation} from 'react-i18next';
 import Text from '../widgets/ObieeText';
 import {getText} from '../utils/Utils';
 import Tooltip from '@material-ui/core/Tooltip';
-import ObieeAppearance from './ObieeApperance';
+//import ObieeAppearance from './ObieeApperance';
+//import {showLoading} from '../utils/GeneralContext';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const drawerWidth = 240;
 //const mtheme = useTheme();
@@ -268,13 +270,19 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
     <MenuItem onClick={e=>{
       handleLanguageMenuClose(e);
       context.obieeDispatch('change_language_fa');
-      }}>
+    }}>
       Persian
     </MenuItem>
-    <MenuItem onClick={()=>{context.obieeDispatch('change_language_en')}}>
+    <MenuItem onClick={e=>{
+            handleLanguageMenuClose(e);
+            context.obieeDispatch('change_language_en');
+    }}>
       English
     </MenuItem>
-    <MenuItem onClick={()=>{context.obieeDispatch('change_language_de')}}>
+    <MenuItem onClick={e=>{
+      handleLanguageMenuClose(e);
+      context.obieeDispatch('change_language_de');
+    }}>
       Deutsch
     </MenuItem>
   </Menu>
@@ -318,6 +326,7 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+            
               {/* <IconButton 
                 color="inherit"
                 aria-label="go to home"
@@ -326,13 +335,19 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                 <Tooltip title={getText("Home")} >
                 <HomeIcon/>
                 </Tooltip>
-              </IconButton>
+              </IconButton> */}
 
-              <IconButton aria-label="show 4 new mails" color="inherit" onClick={handleSettings}>
-              <Tooltip title={getText("Setting")} >
-              <SettingsIcon />
-              </Tooltip>
-              </IconButton>  */}
+              {/* <IconButton aria-label="show 4 new mails" color="inherit" onClick={()=>{
+                context.obieeDispatch('show_loading')
+              }}> */}
+                <SwitchUI
+                  checked={context.obieeState.theme}
+                  onChange={context.obieeState.theme ? context.obieeDispatch('change_to_light'):context.obieeDispatch('change_to_dark')}
+                  name="checkedA"
+                  inputProps={{ 'aria-label': 'secondary checkbox' }}
+                />
+                {/* </IconButton>   */}
+
 
               <IconButton 
                 color="inherit"
@@ -383,6 +398,11 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
               </IconButton>
             </div>
           </Toolbar>
+
+          {context.obieeState.progress && 
+            <LinearProgress />
+          }
+
         </AppBar>               
       
       {/* <ObieeAppearance 

@@ -11,8 +11,8 @@ import ObieeUsers from './hoc/ObieeUsers';
 import ObieeCrudUserOfApprole from './hoc/ObieeCrudUserOfApprole';
 import ObieeSnackbar from './widgets/ObieeSnackbar';
 import ObieeSettings from './hoc/ObieeSettings';
-
 import Grid from '@material-ui/core/Grid';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 //import ObieeCrudApprole from './hoc/ObieeCrudApprole';
 //import { TramRounded } from '@material-ui/icons';
@@ -44,7 +44,6 @@ export default function App(props){
                     }}/>)
             
             }
-
 
             {isAuthenticate &&                            
                 <ObieeAppBar 
@@ -134,6 +133,3 @@ export default function App(props){
             </div>
     );
 }
-
-//  <Dashboard /> 
-//  <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>

@@ -11,7 +11,7 @@ import rtl from 'jss-rtl';
 
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import {UserContext} from './Context';
-const CircularProgress = React.lazy(()=>  import('@material-ui/core/CircularProgress'));
+//const CircularProgress = React.lazy(()=>  import('@material-ui/core/CircularProgress'));
 
 const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 
@@ -24,7 +24,8 @@ const initialState = {
     language:'en',
     direction:false,
     theme: false,
-    shown_component:'show_dashboard_home'
+    shown_component:'show_dashboard_home',
+    progress: false,
 }   
 
 function reducer(state,action){
@@ -85,6 +86,26 @@ function reducer(state,action){
                 ...state,
                 language:'de',
             }            
+        case 'show_loading':
+            return {
+                ...state,
+                progress: true,
+            }                            
+        case 'hide_loading':
+            return {
+                ...state,
+                progress: false,
+            }  
+        case 'change_to_light':
+            return {
+                ...state,
+                theme: false,
+            }                            
+        case 'change_to_dark':
+            return {
+                ...state,
+                theme: true,
+            }  
         default:
             return state;    
     }

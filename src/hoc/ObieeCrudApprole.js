@@ -64,7 +64,7 @@ export default function ObieeCrudApprole(props){
   
     },[]);
 
-    React.useEffect(()=>{
+    React.useEffect (()=>{
         console.log('use effect data',approles);
     },[approles])
 

@@ -12,18 +12,47 @@ import ObieeCrudUserOfApprole from './hoc/ObieeCrudUserOfApprole';
 import ObieeSnackbar from './widgets/ObieeSnackbar';
 import ObieeSettings from './hoc/ObieeSettings';
 import Grid from '@material-ui/core/Grid';
-import LinearProgress from '@material-ui/core/LinearProgress';
+//import LinearProgress from '@material-ui/core/LinearProgress';
 
-import {MuiThemeProvider} from '@material-ui/core/styles';
-import {themeLightLTR} from './utils/theme-light-ltr';
-import {themeLightRTL} from './utils/theme-light-rtl';
-import {themeDarkLTR} from './utils/theme-dark-ltr';
-import {themeDarkRTL} from './utils/theme-dark-rtl';
+import {MuiThemeProvider,createMuiTheme} from '@material-ui/core/styles';
+// import {themeLightLTR} from './utils/theme-light-ltr';
+// import {themeLightRTL} from './utils/theme-light-rtl';
+// import {themeDarkLTR} from './utils/theme-dark-ltr';
+// import {themeDarkRTL} from './utils/theme-dark-rtl';
 
 //import ObieeCrudApprole from './hoc/ObieeCrudApprole';
 //import { TramRounded } from '@material-ui/icons';
 //import {  BrowserRouter as Router,Route,Switch as SwitchRoute} from 'react-router-dom';
 //import { createBrowserHistory } from 'history';
+
+const themeLightLTR = createMuiTheme({
+    direction: 'ltr',    
+    palette:{
+        type:"light"
+    }
+});
+
+const themeLightRTL = createMuiTheme({
+    direction: 'rtl',    
+    palette:{
+        type:"light"
+    }
+});
+
+const themeDarkLTR = createMuiTheme({
+    direction: 'ltr',    
+    palette:{
+        type:"dark"
+    }
+});
+
+const themeDarkRTL = createMuiTheme({
+    direction: 'rtl',    
+    palette:{
+        type:"dark"
+    }
+});
+
 
 
 export default function App(props){
@@ -36,8 +65,18 @@ export default function App(props){
 
     const context = React.useContext(UserContext);
 
+    const themeMain = createMuiTheme({
+        direction: context.obieeState.direction ? 'rtl':'ltr',    
+        palette:{
+            type:context.obieeState.theme ? "dark":"light"
+        }
+    });
+
+    console.log(context.obieeState.direction===false ? (context.obieeState.theme ? 'themeDarkLTR' : 'themeLightLTR') : (!context.obieeState.theme ? 'themeLightRTL' : 'themeDarkRTL'));
+    // <MuiThemeProvider theme={context.obieeState.direction===false ? (context.obieeState.theme ? themeDarkLTR : themeLightLTR) : (!context.obieeState.theme ? themeLightRTL : themeDarkRTL)}>
+
     return (
-        <MuiThemeProvider theme={context.obieeState.direction===false ? (context.obieeState.theme ? themeDarkLTR : themeLightLTR) : (!context.obieeState.theme ? themeLightRTL : themeDarkRTL)}>
+        <MuiThemeProvider theme={themeMain}>
         {                        
                 !isAuthenticate &&
                     (<ObieeSigin handleLogin={(userName,pass)=>{

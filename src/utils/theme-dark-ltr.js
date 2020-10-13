@@ -6,11 +6,13 @@ import { blue } from '@material-ui/core/colors';
 export const themeDarkLTR = createMuiTheme({
     type:'themeDarkLTR',
     direction: 'ltr',    
-    body:{
-        backgrouundColor:'#000000'
-    },    
+    palette:{
+      primary: {
+        main: "#000000"
+      },   
+      },
 overrides: {
-        MuiDrawer:theme=>( {
+      MuiDrawer:theme=>( {
             root: {
                 direction:'ltr',
                 display: 'flex',

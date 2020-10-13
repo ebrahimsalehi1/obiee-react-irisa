@@ -67,18 +67,24 @@ function reducer(state,action){
                 shown_component:'show_setting'
             }
         case 'change_language_en':
+            localStorage.setItem("language","en");
             return {
                 ...state,
+                direction:false,
                 language:'en',
             }            
         case 'change_language_fa':
+            localStorage.setItem("language","fa");
             return {
                 ...state,
+                direction:true,
                 language:'fa',
             }            
         case 'change_language_de':
+            localStorage.setItem("language","de");
             return {
                 ...state,
+                direction:false,
                 language:'de',
             }            
         case 'show_loading':

@@ -290,8 +290,6 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
 
  const context = React.useContext(UserContext);
 
-  console.log('ObieeAppBar');
-
   return (
     <div>
           <AppBar 
@@ -323,8 +321,15 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
-                inputProps={{ 'aria-label': 'search' }}
+                inputProps={{'aria-label':'search','list':'actions','name':'actionList','id':'actionList'}}
               />
+              <datalist id="actions">
+                <option value="Application roles"/>
+                <option value="User approles"/>
+                <option value="Objects of approle"/>
+                <option value="Setting"/>
+              </datalist>
+
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>

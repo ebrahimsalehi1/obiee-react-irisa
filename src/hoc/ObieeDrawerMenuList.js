@@ -26,6 +26,9 @@ import Divider from '@material-ui/core/Divider';
 import {UserContext} from '../Context';
 import Grid from '@material-ui/core/Grid';
 import Copyright from '../widgets/ObieeCopyright';
+import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
+import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
+import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -91,17 +94,17 @@ export default function ObieeDrawerMenuList(props){
 </ListItem>
 
 <ListItem button key={strBIPublisher} onClick={e=>myContext.obieeDispatch('show_dashboard_transactional')}>
-      <ListItemIcon><AssessmentIcon /></ListItemIcon>
+      <ListItemIcon><DescriptionRoundedIcon /></ListItemIcon>
       <ListItemText >{strBIPublisher}</ListItemText>
 </ListItem>
 
 <ListItem button key={strVisualAnalyzer} onClick={e=>myContext.obieeDispatch('show_dashboard_analyser')}>
-      <ListItemIcon><AssessmentIcon /></ListItemIcon>
+      <ListItemIcon><BarChartRoundedIcon /></ListItemIcon>
       <ListItemText >{strVisualAnalyzer}</ListItemText>
 </ListItem>
 
 <ListItem button key={strAnalytics} onClick={e=>myContext.obieeDispatch('show_dashboard_dashboard')}>
-      <ListItemIcon><AssessmentIcon /></ListItemIcon>
+      <ListItemIcon><DashboardRoundedIcon /></ListItemIcon>
       <ListItemText >{strAnalytics}</ListItemText>
 </ListItem>
 

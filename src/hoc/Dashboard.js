@@ -6,6 +6,7 @@ import {UserContext} from '../Context';
 import { makeStyles } from '@material-ui/core/styles';
 const DataGridDemo = React.lazy(()=>import('../widgets/ObieeTable'));
 //import {callRestGet,callRestPost,callRestPost2} from '../utils/Utils';
+import ObieeChart from './ObieeChart';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -377,7 +378,7 @@ function Dashboard(props){
 
             {type === 'REPORT_NONE' &&
             <Grid item xs={12} md={12}>
-
+                <ObieeChart />
             </Grid>
             }
 

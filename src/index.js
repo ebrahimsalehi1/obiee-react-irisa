@@ -130,6 +130,7 @@ function IndexComp(props) {
         });
     
         localStorage.setItem('language','en');  
+        localStorage.setItem('user','z.omidvar');
     }
     
     //const [isRightToLeft,setIsRightToLeft] = React.useState(false);

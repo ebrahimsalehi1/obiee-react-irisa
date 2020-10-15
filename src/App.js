@@ -53,8 +53,6 @@ const themeDarkRTL = createMuiTheme({
     }
 });
 
-
-
 export default function App(props){
 
     const [isAuthenticate,setIsAuthenticate] = React.useState(true);

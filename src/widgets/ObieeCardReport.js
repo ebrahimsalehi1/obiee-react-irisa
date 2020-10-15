@@ -17,7 +17,7 @@ import Avatar from '@material-ui/core/Avatar';
 //import ExpandMoreLess from '@material-ui/icons/ExpandLess';
 import blue from '@material-ui/core/colors/blue';
 import red from '@material-ui/core/colors/red'; 
-import {getText} from '../utils/Utils';
+//import {getText} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -52,7 +52,7 @@ export default function ObieeCardReport(props){
     const classes = useStyles();
 
     const {children,title,subheader,avatarText,content,type,
-        onClick,selected} = props;
+        onClick,selected,urlName} = props;
 
     const [expanded, setExpanded] = React.useState(false);
     // const expanded = React.useRef(false); 

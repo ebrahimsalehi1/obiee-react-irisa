@@ -47,7 +47,7 @@ export default function ObieeDrawerMenuList(props){
   const [open, setOpen] = React.useState(false);
   //const [whichComp,setWhichComp] = React.useState(0);
 
-  const myContext = React.useContext(UserContext);
+  const context = React.useContext(UserContext);
 
   const handleClick = () => {
     setOpen(!open);
@@ -88,22 +88,22 @@ export default function ObieeDrawerMenuList(props){
       className={classes.root}
     >
 
-<ListItem button key={strDashboard} onClick={e=>myContext.obieeDispatch('show_dashboard_home')}>
+<ListItem button key={strDashboard} onClick={e=>context.obieeDispatch('show_dashboard_home')}>
       <ListItemIcon><HomeIcon /></ListItemIcon>
       <ListItemText >{strDashboard}</ListItemText>
 </ListItem>
 
-<ListItem button key={strBIPublisher} onClick={e=>myContext.obieeDispatch('show_dashboard_transactional')}>
+<ListItem button key={strBIPublisher} onClick={e=>context.obieeDispatch('show_dashboard_transactional')}>
       <ListItemIcon><DescriptionRoundedIcon /></ListItemIcon>
       <ListItemText >{strBIPublisher}</ListItemText>
 </ListItem>
 
-<ListItem button key={strVisualAnalyzer} onClick={e=>myContext.obieeDispatch('show_dashboard_analyser')}>
+<ListItem button key={strVisualAnalyzer} onClick={e=>context.obieeDispatch('show_dashboard_analyser')}>
       <ListItemIcon><BarChartRoundedIcon /></ListItemIcon>
       <ListItemText >{strVisualAnalyzer}</ListItemText>
 </ListItem>
 
-<ListItem button key={strAnalytics} onClick={e=>myContext.obieeDispatch('show_dashboard_dashboard')}>
+<ListItem button key={strAnalytics} onClick={e=>context.obieeDispatch('show_dashboard_dashboard')}>
       <ListItemIcon><DashboardRoundedIcon /></ListItemIcon>
       <ListItemText >{strAnalytics}</ListItemText>
 </ListItem>
@@ -124,7 +124,7 @@ export default function ObieeDrawerMenuList(props){
     <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
 
-          <ListItem button className={classes.nested} onClick={e=>myContext.obieeDispatch('show_approle')}>
+          <ListItem button className={classes.nested} onClick={e=>context.obieeDispatch('show_approle')}>
             <GroupAddIcon/> 
             <ListItemText>{strApplicarionRoles}</ListItemText>
           </ListItem>
@@ -143,14 +143,14 @@ export default function ObieeDrawerMenuList(props){
     </Collapse>
 
 
-    {/* <ListItem button key={strReports} onClick={e=>myContext.obieeDispatch('show_report')}>
+    {/* <ListItem button key={strReports} onClick={e=>context.obieeDispatch('show_report')}>
       <ListItemIcon><PrintIcon /></ListItemIcon>
       <ListItemText >{strReports}</ListItemText>
     </ListItem> */}
 
     <Divider />
 
-    <ListItem button key={strSetting} onClick={e=>myContext.obieeDispatch('show_setting')}>
+    <ListItem button key={strSetting} onClick={e=>context.obieeDispatch('show_setting')}>
       <ListItemIcon><SettingsIcon /></ListItemIcon>
       <ListItemText >{strSetting}</ListItemText>
     </ListItem>

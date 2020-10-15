@@ -51,6 +51,8 @@
     {"str":"Visual Analyzer","val":"Visual Analyzer"},
     {"str":"BI Publisher","val":"BI Publisher"},
     {"str":"Dashboard","val":"Dashboard"},
+    {"str":"Caption","val":"Caption"},
+    {"str":"Description","val":"Description"},
     {"str":"","val":""},
     {"str":"","val":""},
     {"str":"","val":""},

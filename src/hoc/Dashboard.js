@@ -62,7 +62,7 @@ function Dashboard(props){
                         <ObieeCardReport    
                         key={index} 
                         title={item.name} 
-                        subheader={item.latinName+'-'+item.type}
+                        subheader={item.latinName}
                         type={item.type}
                         avatarText={item.latinName.substring(0,2)}   
                         selected={item.type===context.obieeState.shown_component}

@@ -151,7 +151,7 @@ export default function ObieeDrawer(props) {
           </IconButton>
         </div>
         <Divider />
-        <Card style={{"minHeight":"60px","boxShadow":"none"}}>
+        <Card style={{"minHeight":"60px","boxShadow":"none","padding":"0","margin":"0"}}>
           <CardHeader
           //avatar={<Avatar aria-label="user" className={classes.avatar}>U</Avatar>}
           

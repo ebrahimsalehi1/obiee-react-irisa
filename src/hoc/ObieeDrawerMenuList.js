@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ObieeDrawerMenuList(props){
+function ObieeDrawerMenuList(){
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -61,7 +61,7 @@ export default function ObieeDrawerMenuList(props){
   const strApplicarionRoles = getText('Application roles');
   const strUserApproles = getText('User Approles');
   const strObjectsOfApprole = getText('Objects of Approle');
-  //const strReports = getText('Reports');
+  const strReports = getText('Reports');
   const strDashboard = getText('Dashboard');
   const strHome = getText('Home');
   const strSetting = getText('Setting');
@@ -69,14 +69,7 @@ export default function ObieeDrawerMenuList(props){
   console.log('rendering DrawerMenuList');
 
   return (
-    <Grid 
-    container 
-    spacing={1} 
-    direction="column"
-    alignItems="flex-start"
-    >
 
-    <Grid item xs={10} md={10}>
     <List
       component="nav"
       aria-labelledby="nested-list-subheader"
@@ -87,6 +80,13 @@ export default function ObieeDrawerMenuList(props){
       // }
       className={classes.root}
     >
+
+<ListItem button key={"strDashboard88"} onClick={e=>context.obieeDispatch('show_dashboard_home')}>
+      <ListItemIcon><HomeIcon /></ListItemIcon>
+      <ListItemText >{strDashboard}</ListItemText>
+</ListItem>
+
+<Divider />
 
 <ListItem button key={strDashboard} onClick={e=>context.obieeDispatch('show_dashboard_home')}>
       <ListItemIcon><HomeIcon /></ListItemIcon>
@@ -158,12 +158,23 @@ export default function ObieeDrawerMenuList(props){
     {/* <Version /> */}
 
   </List>
-    </Grid>
 
-    <Grid item xs={2} md={2}>
-    <Copyright/>
-    </Grid>
-
-  </Grid>
   )
 }
+
+export default React.memo(ObieeDrawerMenuList);
+
+{/* <Grid 
+container 
+spacing={0} 
+direction="row"
+alignItems="flex-start"
+>
+    <Grid item xs={11} md={11}>
+</Grid>
+
+<Grid item xs={1} md={1}>
+<Copyright/>
+</Grid>
+
+</Grid> */}

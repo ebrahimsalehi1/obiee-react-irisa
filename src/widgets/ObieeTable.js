@@ -34,7 +34,7 @@ export default function DataGridDemo(props) {
       })
       .then(res=>{
         console.log("ObieeTable data",res);
-        setProws(res);
+        setProws(res.data);
       })
       .catch(err=>{
         console.log('ObieeTable err',err);

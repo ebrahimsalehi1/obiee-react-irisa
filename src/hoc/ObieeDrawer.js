@@ -151,7 +151,7 @@ export default function ObieeDrawer(props) {
           </IconButton>
         </div>
         <Divider />
-        <Card style={{"minHeight":"60px","boxShadow":"none","padding":"0","margin":"0"}}>
+        {/* <Card style={{"minHeight":"60px","boxShadow":"none","padding":"0","margin":"0"}}>
           <CardHeader
           //avatar={<Avatar aria-label="user" className={classes.avatar}>U</Avatar>}
           
@@ -159,13 +159,13 @@ export default function ObieeDrawer(props) {
           title="Ehsan Karimi"
           subheader="Person Position"
           />
-          {/* <CardContent>
+          <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
               Person Position
             </Typography>
-          </CardCon tent> */}
+          </CardContent>
         </Card>
-        <Divider />
+        <Divider /> */}
         <ObieeDrawerMenuList />
 
       </Drawer>

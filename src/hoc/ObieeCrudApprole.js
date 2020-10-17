@@ -10,12 +10,14 @@ import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
-
 import PropTypes from 'prop-types';
 import data from '../../db.json';
 const ObieeItemApprole = React.lazy(()=>import("./ObieeItemApprole"));
 import ObieeDialog from '../widgets/ObieeDialog';
+import ObieeConfirmationDialog from '../widgets/ObieeConfirmationDialog';
 import {getText} from '../utils/Utils';
+import {appRoleAll,approleCreate,approleEdit,approleDelete} from '../webservice/Approle';
+import ObieeShowMessage from '../widgets/ObieeShowMessage';
 
 const useStyles = makeStyles(theme=>({
   root: {
@@ -36,39 +38,38 @@ export default function ObieeCrudApprole(props){
 
     const classes = useStyles();
 
-    const {url} = props;
+    //const {url} = props;
 
-    const [approles,setApproles] = React.useState(data.approles);
-    const [openModal,setOpenModal] = React.useState(false);
+    const [approles,setApproles] = React.useState([]); // data.approles
+    const [mode,setMode] = React.useState('');
+    const [showConfirmDelete,setShowConfirmDelete] = React.useState(false);
     const [search,setSearch] = React.useState('');
+    const [approle,setApprole] = React.useState(undefined);
+    const [showmessage,setShowmessage] = React.useState('');
 
     const strSearchApproles = getText('Search approles');
 
     React.useEffect(()=>{
 
-      // axios(
-      //   {
-      //     url:url,
-      //     method:'get',
-      //     headers:{'Access-Control-Allow-Origin':url}
-      //   }).
-      // then(res=>{
-      //     console.log(res.data,res.status);
-      //     setUserList(res.data);
-      // }).
-      // catch(err=>{
+      async function fetchData(){
 
-      // })
+        const result = await appRoleAll();
 
-      //setApproles(data.approles);
-  
-    },[]);
+        if(result.errorMessage){
+          setShowmessage(result.errorPersian+"\n"+result.errorLatin);
+        }
+        else{
+          setApproles(result.data);
+        }
+      }
 
-    React.useEffect (()=>{
-        console.log('use effect data',approles);
-    },[approles])
+      fetchData();
+
+      }
+    ,[]);
 
     return (
+    <div className={classes.root}> 
     <Card className={classes.root} variant="outlined">
       <CardContent>
 
@@ -109,7 +110,7 @@ export default function ObieeCrudApprole(props){
             className={classes.iconButton} 
             aria-label="add" 
             onClick={()=>{
-                setOpenModal(true);
+                setMode('add');
             }}
             >
             <AddIcon />
@@ -120,24 +121,90 @@ export default function ObieeCrudApprole(props){
 
         <ObieeDialog 
         title="Add new Approle"
-        openModal={openModal}
-        TransitionComponent
+        openModal={mode==='add' || mode==='edit'}
+        //TransitionComponent
         eventClose={()=>{
-          setOpenModal(false);
+          setMode('');
         }}
         >
-        <ObieeItemApprole mode="add" onAdd={()=>{
-          setOpenModal(false);
-        }}/>
+        <ObieeItemApprole 
+          mode={mode} 
+          approle={approle}
+          onAdd={async approleItem=>{
+            console.log('add',approleItem);
 
+            const result = await approleCreate(approleItem);
+            console.log(result);
+            if(result.errorMessage){
+              setShowmessage(result.errorPersian+"\n"+result.errorLatin);
+            }
+            else{
+            }
+
+            setMode('');
+          }}
+          onEdit={async approleItem=>{
+            console.log('edit',approleItem);
+
+            const result = await approleEdit(approleItem);
+            if(result.errorMessage){
+              setShowmessage(result.errorPersian+"\n"+result.errorLatin);
+            }
+            else{
+            }
+
+            setMode('');
+          }}
+          onCancel={()=>{
+            setMode('');
+            setApprole(undefined);          
+          }}
+        />
         </ObieeDialog>
 
-        {
-          
-          approles.map((approle,index)=>(<ObieeItemApprole mode="edit" key={index} approle={approle}/>))
+        {showConfirmDelete &&
+        <ObieeConfirmationDialog 
+            open={true}
+            dialogTitle={"هشدار !"}
+            dialogContent={"آیا از حذف اطمینان دارید؟"}
+            onExecute={async ()=>{
+              //alert('delete record');
+              await approleDelete(approle.approleName);
+              setShowConfirmDelete(false);
+            }}
+            onCancel={()=>{setShowConfirmDelete(false)}}
+        />
+        }
+
+        {approles && approles.length>0 &&          
+          approles.map((approle,index)=>(
+                <ObieeItemApprole 
+                mode="read" 
+                key={index} 
+                approle={approle} 
+                onDelete={approleName=>{
+                    console.log('delete:'+approleName);
+                    setApprole(prev=>{
+                      const result = {prev,approleName:approleName};
+                      return result;
+                    });
+                    setShowConfirmDelete(true);
+                }}
+                onExternalEvent={approleItem=>{
+                  setApprole(approleItem);
+                  setMode('edit');
+                }}
+                />
+          ))
         }
       </CardContent>
     </Card>
+    <ObieeShowMessage 
+      open={showmessage!==''} 
+      onClose={()=>{setShowmessage('')}} 
+      message={showmessage} 
+      type="error"/>
+    </div>
     )
 }
 

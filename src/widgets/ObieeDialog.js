@@ -87,9 +87,10 @@ const PaperDialogContent = (props) => {
 // function Transition(props) {
 //     return <Slide direction="left" {...props} />;
 // }
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
+
+// const Transition = React.forwardRef(function Transition(props, ref) {
+//     return <Slide direction="up" ref={ref} {...props} />;
+//   });
 
 class ObieeDialog extends React.PureComponent {
 
@@ -109,7 +110,7 @@ class ObieeDialog extends React.PureComponent {
                 open={openModal}
                 fullScreen={fullScreen}
                 maxWidth={maxWidth}
-                TransitionComponent={TransitionComponent ? Transition : null}
+                //TransitionComponent={TransitionComponent ? Transition : null}
                 {...others}
             >
 
@@ -139,7 +140,6 @@ class ObieeDialog extends React.PureComponent {
 }
 
 ObieeDialog.propTypes = {
-    //classes: PropTypes.object.isRequired,
     eventClose: PropTypes.func.isRequired,
     openModal: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,

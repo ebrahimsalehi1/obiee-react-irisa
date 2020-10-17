@@ -29,6 +29,7 @@ import Copyright from '../widgets/ObieeCopyright';
 import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,29 +82,29 @@ function ObieeDrawerMenuList(){
       className={classes.root}
     >
 
-<ListItem button key={"strDashboard88"} onClick={e=>context.obieeDispatch('show_dashboard_home')}>
-      <ListItemIcon><HomeIcon /></ListItemIcon>
+<ListItem button key={"user-info"} onClick={()=>context.obieeDispatch('show_settimg_userinfo')}>
+      <ListItemIcon><AccountCircleIcon /></ListItemIcon>
       <ListItemText >{strDashboard}</ListItemText>
 </ListItem>
 
 <Divider />
 
-<ListItem button key={strDashboard} onClick={e=>context.obieeDispatch('show_dashboard_home')}>
+<ListItem button key={strDashboard} onClick={()=>context.obieeDispatch('show_dashboard_home')}>
       <ListItemIcon><HomeIcon /></ListItemIcon>
       <ListItemText >{strDashboard}</ListItemText>
 </ListItem>
 
-<ListItem button key={strBIPublisher} onClick={e=>context.obieeDispatch('show_dashboard_transactional')}>
+<ListItem button key={strBIPublisher} onClick={()=>context.obieeDispatch('show_dashboard_transactional')}>
       <ListItemIcon><DescriptionRoundedIcon /></ListItemIcon>
       <ListItemText >{strBIPublisher}</ListItemText>
 </ListItem>
 
-<ListItem button key={strVisualAnalyzer} onClick={e=>context.obieeDispatch('show_dashboard_analyser')}>
+<ListItem button key={strVisualAnalyzer} onClick={()=>context.obieeDispatch('show_dashboard_analyser')}>
       <ListItemIcon><BarChartRoundedIcon /></ListItemIcon>
       <ListItemText >{strVisualAnalyzer}</ListItemText>
 </ListItem>
 
-<ListItem button key={strAnalytics} onClick={e=>context.obieeDispatch('show_dashboard_dashboard')}>
+<ListItem button key={strAnalytics} onClick={()=>context.obieeDispatch('show_dashboard_dashboard')}>
       <ListItemIcon><DashboardRoundedIcon /></ListItemIcon>
       <ListItemText >{strAnalytics}</ListItemText>
 </ListItem>
@@ -124,7 +125,7 @@ function ObieeDrawerMenuList(){
     <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
 
-          <ListItem button className={classes.nested} onClick={e=>context.obieeDispatch('show_approle')}>
+          <ListItem button className={classes.nested} onClick={()=>context.obieeDispatch('show_approle')}>
             <GroupAddIcon/> 
             <ListItemText>{strApplicarionRoles}</ListItemText>
           </ListItem>
@@ -150,7 +151,7 @@ function ObieeDrawerMenuList(){
 
     <Divider />
 
-    <ListItem button key={strSetting} onClick={e=>context.obieeDispatch('show_setting')}>
+    <ListItem button key={strSetting} onClick={()=>context.obieeDispatch('show_setting')}>
       <ListItemIcon><SettingsIcon /></ListItemIcon>
       <ListItemText >{strSetting}</ListItemText>
     </ListItem>

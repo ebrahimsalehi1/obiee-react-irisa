@@ -21,6 +21,16 @@ const initialState = {
     theme: false,
     shown_component:'show_dashboard_home',
     progress: false,
+    userInfo:{
+        displayName: "",
+        name: "z.omidvar",
+        gUID: null,
+        description: null,
+        namFirstEmply: "",
+        namLastEmply: "z.omidvar",
+        mail: "",
+        membersOf: []
+    }
 }   
 
 function reducer(state,action){

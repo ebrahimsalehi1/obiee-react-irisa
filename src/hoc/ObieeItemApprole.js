@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import {makeStyles} from '@material-ui/core/styles';
 import CardActions from '@material-ui/core/CardActions';
@@ -15,6 +15,11 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import PropTypes from 'prop-types';
 import {getText} from '../utils/Utils';
+//import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import ObieeButtonOperation from '../widgets/ObieeButtonOperation';
 
 const useStyles = makeStyles(theme=>({
     root: {
@@ -35,19 +40,19 @@ const useStyles = makeStyles(theme=>({
         margin: 0,
         minWidth: 190,
       },
-}))
+}));
 
 export default function ObieeItemApprole(props){
 
     const classes = useStyles();
 
-    const{mode,onAdd,onEdit,onDelete} = props;
+    const{mode,onAdd,onEdit,onDelete,onCancel,onExternalEvent} = props;
 
-    const [approleName,setApproleName] = React.useState(props.approle ? props.approle.approleName:'');
-    const [approleDesc,setApproleDesc] = React.useState(props.approle ? props.approle.approleDesc:'');
-    const [approleType,setApproleType] = React.useState(props.approle ? props.approle.approleType:'');
-    const [appType,setAppType] = React.useState(props.approle ? props.approle.appType:'');
-    const [approleLatinName,setApproleLatinName] = React.useState(props.approle ? props.approle.approleLatinName:'');
+    const [approleName,setApproleName] = React.useState(props.approle && mode!=='add' ? props.approle.approleName:'');
+    const [approleDesc,setApproleDesc] = React.useState(props.approle && mode!=='add' ? props.approle.approleDesc : '');
+    const [approleType,setApproleType] = React.useState(props.approle && mode!=='add' ? props.approle.approleType:'');
+    const [appType,setAppType] = React.useState(props.approle && mode!=='add' ? props.approle.appType:'');
+    const [approleLatinName,setApproleLatinName] = React.useState(props.approle && mode!=='add' ? props.approle.approleLatinName:'');
 
     const strApproleLatinName = getText('Approle Latine Name');
     const strApproleName = getText('Approle Name');
@@ -55,37 +60,87 @@ export default function ObieeItemApprole(props){
     const strAppType = getText('Application Type');
     const strApproleDesc = getText('Approle Desc');
     const strSave = getText('Save');
-    const strEdit = getText('Edit');
-    const strDelete = getText('Delete');
+    //const strEdit = getText('Edit');
+    //const strDelete = getText('Delete');
+    const strCancel = getText('Cancel');
+
+    const createRow = () => {
+      const result = {
+        name: approleLatinName ,
+        displayName: approleName,
+        description: approleDesc,
+        appId: "obi",
+        type:appType,
+        baseRoles:[{name:approleType}]
+      };
+
+      return result;
+    }
+
+
+    function validation(){
+      if(approleName.length === 0 || 
+         approleLatinName.length === 0 ||
+         approleDesc.length === 0 ||
+         appType.length === 0 ||
+         approleType.length === 0
+        )
+        return false;
+      
+        return true;
+    }
     
     return (
     <Card className={classes.root} variant="outlined">
       <CardContent>
       <Grid container spacing={1} >
 
-      <Grid item xs={12} md={mode==='add' ? 12 : 3}>
+      {(mode==='add' || mode==='edit') && 
+      <Grid item xs={12} md={12}>
             <TextField  
             label={strApproleLatinName}
             placeholder={strApproleLatinName}
             variant={"outlined"}
             fullWidth
             value={approleLatinName}
-            onChange={(e)=>setApproleLatinName(e.target.value)}
+            onChange={e=>setApproleLatinName(e.target.value)}
             />
         </Grid>
+        }
 
-        <Grid item xs={12} md={mode==='add' ? 12 : 3}>
-            <TextField  
-            label={strApproleName}
-            placeholder={strApproleName}
-            variant={"outlined"}
-            fullWidth
-            value={approleName}
-            onChange={(e)=>setApproleName(e.target.value)}
-            />
+      {mode==='read' && 
+      <Grid item xs={12} md={3}>
+            <Typography  
+            variant="h6"
+            component="span"
+            >{approleLatinName}</Typography>
         </Grid>
+      }
 
-        <Grid item xs={12} md={mode==='add' ? 6 : 3}>
+      {(mode==='add' || mode==='edit') && 
+      <Grid item xs={12} md={12}>
+          <TextField  
+          label={strApproleName}
+          placeholder={strApproleName}
+          variant={"outlined"}
+          fullWidth
+          value={approleName}
+          onChange={(e)=>setApproleName(e.target.value)}
+          />
+      </Grid>
+      }
+
+      {mode==='read' && 
+      <Grid item xs={12} md={3}>
+            <Typography  
+            variant="h6"
+            component="span"
+            >{approleName}</Typography>
+        </Grid>
+      }
+
+      {(mode==='add' || mode==='edit') && 
+        <Grid item xs={12} md={6}>
         <FormControl variant="outlined" fullWidth className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">{strAppType}</InputLabel>
         <Select
@@ -99,10 +154,20 @@ export default function ObieeItemApprole(props){
           <MenuItem value={'AN'}>AN</MenuItem>
         </Select>
       </FormControl>
+      </Grid>
+      }
+
+      {/* {mode==='read' &&
+      <Grid item xs={12} md={3}>
+            <Typography  
+            variant="h6"
+            component="span"
+            >{strAppType}</Typography>
         </Grid>
+      } */}
 
-
-        <Grid item xs={12} md={mode==='add' ? 6 : 3}>
+      {(mode==='add' || mode==='edit') &&
+        <Grid item xs={12} md={6}>
         <FormControl variant="outlined" fullWidth className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">{strApproleType}</InputLabel>
         <Select
@@ -119,7 +184,18 @@ export default function ObieeItemApprole(props){
         </Select>
       </FormControl>
         </Grid>
+      }
 
+      {mode==='read' && 
+      <Grid item xs={12} md={3}>
+            <Typography  
+            variant="h6"
+            component="span"
+            >{approleType}</Typography>
+      </Grid>
+      }      
+
+      {(mode==='add' || mode==='edit') &&
         <Grid item xs={12} md={12}>
             <TextField  
             label={strApproleDesc}
@@ -130,24 +206,70 @@ export default function ObieeItemApprole(props){
             onChange={(e)=>setApproleDesc(e.target.value)}
             />
         </Grid>
+      } 
 
+
+        {mode==='read' &&
+        <Grid item xs={12} md={3}>
+        <IconButton 
+            type="submit" 
+            className={classes.iconButton} 
+            aria-label="edit" 
+            onClick={()=>onExternalEvent(props.approle)}
+            >
+            <EditIcon />
+            </IconButton>
+
+            <IconButton 
+            type="submit" 
+            className={classes.iconButton} 
+            aria-label="delete" 
+            onClick={()=>{onDelete(approleName)}}
+            >
+            <DeleteIcon />
+            </IconButton>                    
+        </Grid>
+        // <Button size="large" variant="contained" color="primary" onClick={onEdit}>{strEdit}</Button>
+        }
         </Grid>
       </CardContent>
+
       <CardActions>
-        {mode==='add' &&
-        <Button size="large" variant="contained" color="primary" onClick={onAdd}>{strSave}</Button>
-        }
-        {mode==='edit' &&
-        <Button size="large" variant="contained" color="primary" onClick={onEdit}>{strEdit}</Button>
-        }
-        {mode==='edit' &&
-        <Button size="large" variant="contained" color="secondary" onClick={onDelete}>{strDelete}</Button>
-        }
+      {mode==='add' &&
+        // <Button size="large" variant="contained" color="primary" onClick={()=>{onAdd(createRow())}}>{strSave}</Button>
+        <ObieeButtonOperation onExecute={()=>
+          {
+            if(validation())
+              onAdd(createRow());
+            else 
+              alert('fields must be fill');              
+          }} title={strSave} />
+      }
+      {mode==='add' &&
+        //<Button size="large" variant="contained" color="primary" onClick={onCancel}>{strCancel}</Button>
+        <ObieeButtonOperation onExecute={onCancel} title={strCancel} />         
+      }
+      {mode==='edit' &&    
+        //<Button size="large" variant="contained" color="primary" onClick={()=>{onEdit(props.approle)}}>{strSave}</Button>
+        <ObieeButtonOperation onExecute={()=>
+          {
+            if(validation())
+              onEdit(createRow());
+            else 
+              alert('fields must be fill');              
+          }} title={strSave} />        
+      }
+      {mode==='edit' &&
+        //<Button size="large" variant="contained" color="primary" onClick={onCancel}>{strCancel}</Button>
+        <ObieeButtonOperation onExecute={onCancel} title={strCancel} />         
+      }
+      
       </CardActions>
+
     </Card>
     )
 }
 
 ObieeItemApprole.propTypes ={
-    mode: PropTypes.oneOf(['add','edit']).isRequired,
+    mode: PropTypes.oneOf(['read','add','edit']).isRequired,
 }

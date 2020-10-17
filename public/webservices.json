@@ -37,7 +37,7 @@
     },
     {
         "name":"APPROLE_DELETE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/delete/{roleName}"
+        "bffUrl":"http://localhost:8081/obiee-bff/approle/delete/:1"
     },
     {
         "name":"APPROLE_ASSIGN_USER_TO_ROLE",
@@ -50,5 +50,11 @@
     {
         "name":"APPROLE_LIST_USERS_OF_ROLE",
         "bffUrl":"http://localhost:8081/obiee-bff/approle/listUsersOfRole/roleName"
+    },
+    {
+        "name":"USER_INFO",
+        "bffUrl":"http://localhost:8081/obiee-bff/user/info/:1"
     }
+
+    
 ]

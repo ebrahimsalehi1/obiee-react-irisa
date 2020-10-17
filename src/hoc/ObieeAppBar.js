@@ -322,6 +322,24 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                   input: classes.inputInput,
                 }}
                 inputProps={{'aria-label':'search','list':'actions','name':'actionList','id':'actionList'}}
+                onChange={e=>
+                  {
+                    switch(e.target.value){
+                      case 'Application roles':
+                        context.obieeDispatch('show_approle');
+                        break;
+                      case 'User approles':
+                        break;
+                      case 'Objects of approle':
+                        break;
+                      case 'Setting':
+                        break;
+                      case '':
+                        break;
+                      default:
+                        return;   
+                    }
+                  }}
               />
               <datalist id="actions">
                 <option value="Application roles"/>

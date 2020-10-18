@@ -1,8 +1,8 @@
 {
     "systemInfos":[
-        {"id":"AN","name":"داشبوردهای تحلیلی","latinName":"Analytics","type":"show_dashboard_analyser"},
-        {"id":"VI","name":"گزارشات داده محور","latinName":"Visual Analyzer","type":"show_dashboard_dashboard"},
-        {"id":"BI","name":"گزارشات تراکنشی","latinName":"BI Publisher","type":"show_dashboard_transactional"}
+        {"id":"ANALYTIC","name":"داشبوردهای تحلیلی","latinName":"Analytics","type":"show_dashboard_analyser"},
+        {"id":"VISUAL_ANALYSER","name":"گزارشات داده محور","latinName":"Visual Analyzer","type":"show_dashboard_dashboard"},
+        {"id":"BI_PUBLISHER","name":"گزارشات تراکنشی","latinName":"BI Publisher","type":"show_dashboard_transactional"}
     ],
     "users":[
         {"id": "763434","name":"ahmad","family":"molaee","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},

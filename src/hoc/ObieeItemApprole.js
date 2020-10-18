@@ -77,7 +77,6 @@ export default function ObieeItemApprole(props){
       return result;
     }
 
-
     function validation(){
       if(approleName.length === 0 || 
          approleLatinName.length === 0 ||
@@ -177,10 +176,10 @@ export default function ObieeItemApprole(props){
           onChange={(e)=>{setApproleType(e.target.value)}}
           label={strApproleType}
         >
-          <MenuItem value={'author'}>Author</MenuItem>
-          <MenuItem value={'consumer'}>Consumer</MenuItem>
-          <MenuItem value={'admin'}>Admin</MenuItem>
-          <MenuItem value={'context author'}>Context Author</MenuItem>
+          {/* <MenuItem value={'author'}>Author</MenuItem> */}
+          <MenuItem value={'BIConsumer'}>Consumer</MenuItem>
+          <MenuItem value={'BIServiceAdministrator'}>Admin</MenuItem>
+          <MenuItem value={'BIContentAuthor'}>Content Author</MenuItem>
         </Select>
       </FormControl>
         </Grid>

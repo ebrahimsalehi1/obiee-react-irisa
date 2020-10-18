@@ -1,10 +1,10 @@
 
-import {callRestPost,callRestGet,callRestPut,callRestDelete} from '../utils/Utils';
+import {callRestGet} from '../utils/Utils';
 
-export async function appRoleAll(){
+export async function loginStatisticData(){
 
     const result = {data:null,errorPersian:null,errorLatin:null,errorMessage:null};
-    await callRestGet('APPROLE_ALL',null)
+    await callRestGet('STATISTIC_LOGIN',null)
     .then(res=>{
          result.data = res.data;   
     })
@@ -17,9 +17,10 @@ export async function appRoleAll(){
     return result;
 }
 
-export async function approleCreate(data){
+export async function analyticStatisticData(){
+
     const result = {data:null,errorPersian:null,errorLatin:null,errorMessage:null};
-    await callRestPost('APPROLE_CREATE',null,data)
+    await callRestGet('STATISTIC_ANALYTIC',null)
     .then(res=>{
          result.data = res.data;   
     })
@@ -32,9 +33,10 @@ export async function approleCreate(data){
     return result;
 }
 
-export async function approleEdit(data){
+export async function visualAnalyserStatisticData(){
+
     const result = {data:null,errorPersian:null,errorLatin:null,errorMessage:null};
-    await callRestPut('APPROLE_EDIT',null,data)
+    await callRestGet('STATISTIC_VISUALANALYSER',null)
     .then(res=>{
          result.data = res.data;   
     })
@@ -47,9 +49,26 @@ export async function approleEdit(data){
     return result;
 }
 
-export async function approleDelete(roleName){
+export async function biPublisherStatisticData(){
+
     const result = {data:null,errorPersian:null,errorLatin:null,errorMessage:null};
-    await callRestDelete('APPROLE_DELETE',[roleName],null)
+    await callRestGet('STATISTIC_BIPUBLISHER',null)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.errorPersian = err.response.data[0].persianMessage;
+        result.errorLatin = err.response.data[0].latinMessage;
+        result.errorMessage = err.response.data[0].errorMessage;
+    });
+
+    return result;
+}
+
+export async function dashboardStatisticData(){
+
+    const result = {data:null,errorPersian:null,errorLatin:null,errorMessage:null};
+    await callRestGet('STATISTIC_DASHBOARD',null)
     .then(res=>{
          result.data = res.data;   
     })

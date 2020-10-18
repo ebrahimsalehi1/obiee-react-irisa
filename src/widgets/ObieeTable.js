@@ -56,18 +56,4 @@ export default function DataGridDemo(props) {
   );
 }
 
-// rows ? rows:prows
-// checkboxSelection
 
-
-  //   switch(urlName){
-  //     case 'REPORT_TRANSACTIONAL':  
-                                        
-  //         break;  
-  //     case 'REPORT_ANALYSER':
-  //         break;
-  //     case 'REPORT_DASHBOARD':
-  //         break;
-  //     default:
-          
-  // }

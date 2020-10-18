@@ -54,7 +54,26 @@
     {
         "name":"USER_INFO",
         "bffUrl":"http://localhost:8081/obiee-bff/user/info/:1"
+    },
+    {
+        "name":"STATISTIC_LOGIN",
+        "bffUrl":"http://localhost:8081/obiee-bff/statistic/traffic"
+    },
+    {
+        "name":"STATISTIC_ANALYTIC",
+        "bffUrl":"http://localhost:8081/obiee-bff/statistic/analytic"
+    },
+    {
+        "name":"STATISTIC_VISUALANALYSER",
+        "bffUrl":"http://localhost:8081/obiee-bff/statistic/visualAnalyser"
+    },
+    {
+        "name":"STATISTIC_BIPUBLISHER",
+        "bffUrl":"http://localhost:8081/obiee-bff/statistic/biPublisher"
+    },
+    {
+        "name":"STATISTIC_DASHBOARD",
+        "bffUrl":"http://localhost:8081/obiee-bff/statistic/dashboard"
     }
 
-    
 ]

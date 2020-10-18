@@ -1,0 +1,4 @@
+
+export const ANALYTIC = 'ANALYTIC';
+export const VISUAL_ANALYSER = 'VISUAL_ANALYSER';
+export const BI_PUBLISHER = 'BI_PUBLISHER';

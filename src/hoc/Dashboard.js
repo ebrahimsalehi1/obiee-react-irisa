@@ -1,12 +1,16 @@
 import React from 'react';
-import axios from 'axios';
 import ObieeCardReport from '../widgets/ObieeCardReport';
 import Grid from '@material-ui/core/Grid';
 import {UserContext} from '../Context';
 import { makeStyles } from '@material-ui/core/styles';
 const DataGridDemo = React.lazy(()=>import('../widgets/ObieeTable'));
 //import {callRestGet,callRestPost,callRestPost2} from '../utils/Utils';
-//import ObieeChart from './ObieeChart1';
+import ObieeChartMonthlyByType from './ObieeChartMonthlyByType';
+//import ObieeChartLogin from './ObieeChartLogin';
+import ObieeChartPie from './ObieeChartPie';
+import ObieeChartBarLogin from './ObieeChartBarLogin';
+import ObieeProgress from './ObieeProgress';
+import {ANALYTIC,VISUAL_ANALYSER,BI_PUBLISHER} from '../utils/Constants';
 import {getText} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -53,7 +57,7 @@ function Dashboard(props){
     // }
 
     return (
-            <Grid container spacing={1} className={classes.root} justify={"center"}  >
+            <Grid container spacing={1} className={classes.root} justify={"center"} alignItems={"center"}>
 
             { 
                 systemInfos &&
@@ -67,14 +71,14 @@ function Dashboard(props){
                         avatarText={item.latinName.substring(0,2)}   
                         selected={item.type===context.obieeState.shown_component}
                         onClick={()=>{
-                            switch(item.latinName){
-                                case 'Analytics':      
+                            switch(item.id){
+                                case ANALYTIC:      
                                     context.obieeDispatch('show_dashboard_analyser');
                                     break;  
-                                case 'Visual Analyzer':
+                                case VISUAL_ANALYSER:
                                     context.obieeDispatch('show_dashboard_dashboard');
                                     break;
-                                case 'BI Publisher':
+                                case BI_PUBLISHER:
                                     context.obieeDispatch('show_dashboard_transactional');
                                     break;
                                 default:
@@ -87,7 +91,7 @@ function Dashboard(props){
             }
 
             {type !== 'REPORT_NONE' &&
-            <Grid item xs={12} md={12}>
+            <Grid item xs={12} md={12} key={4}>
             <DataGridDemo 
                 urlName={context.obieeState.shown_component}
                 columns={[
@@ -100,8 +104,27 @@ function Dashboard(props){
             }
 
             {type === 'REPORT_NONE' &&
-            <Grid item xs={12} md={12}>
-                {/* <ObieeChart /> */}
+                systemInfos &&
+                systemInfos.map((item,index)=>(
+                    <Grid item xs={12} md={3} key={index+5}>
+                    <ObieeChartMonthlyByType 
+                    key={item.id} 
+                    type={item.id} 
+                    //title={item.latinName+"-"+item.name}
+                    />
+                </Grid>                
+                ))
+            }
+
+            {type === 'REPORT_NONE' &&
+            <Grid item xs={12} md={3} key={8}>
+                <ObieeProgress value={4512} percent={25} title="traffic"/>
+            </Grid>
+            }
+
+            {type === 'REPORT_NONE' &&
+            <Grid item xs={12} md={3} key={7}>
+                <ObieeChartPie />
             </Grid>
             }
 

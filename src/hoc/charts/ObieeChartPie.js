@@ -1,32 +1,39 @@
 import React from 'react';
 import { PieChart, Pie, Sector } from 'recharts';
-import {dashboardStatisticData} from '../webservice/Statistic';
-
+import {dashboardStatisticData} from '../../webservice/Statistic';
+import {UserContext} from '../../Context';
 
 export default function ObieeChartPie(props) {
 
     const {type,title} = props;
 
     const [data, setData] = React.useState([]);
-    const [showmessage,setShowmessage] = React.useState('');
     const [state,setState]= React.useState( {activeIndex: 0,name:''});
     const [sumData,setSumData] = React.useState(0);
 
+    const context = React.useContext(UserContext);
+
     React.useEffect(()=>{
         async function fetchData(){
-            let result = await dashboardStatisticData();
 
-            if(result.errorMessage){
-                setShowmessage(result.errorPersian+"\n"+result.errorLatin);
-            }
-            else{
-                setData(result.data);
-                setSumData(result.data.reduce((acc,item)=>item.value+acc,0));
-            }
+          context.obieeDispatch({type:'show_loading'});
+
+          let result = await dashboardStatisticData();
+
+          if(result.error){
+              //setShowmessage(result.errorPersian+"\n"+result.errorLatin);
+              context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
+          }
+          else{
+              setData(result.data);
+              setSumData(result.data.reduce((acc,item)=>item.value+acc,0));
+          }
+
+          context.obieeDispatch({type:'hide_loading'});
+
         }
         fetchData();   
     },[]);     
-
 
   const onPieEnter = (data, index) => {
     setState({

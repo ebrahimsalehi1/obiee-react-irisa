@@ -269,19 +269,19 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
     >
     <MenuItem onClick={e=>{
       handleLanguageMenuClose(e);
-      context.obieeDispatch('change_language_fa');
+      context.obieeDispatch({type:'change_language_fa'});
     }}>
       Persian
     </MenuItem>
     <MenuItem onClick={e=>{
             handleLanguageMenuClose(e);
-            context.obieeDispatch('change_language_en');
+            context.obieeDispatch({type:'change_language_en'});
     }}>
       English
     </MenuItem>
     <MenuItem onClick={e=>{
       handleLanguageMenuClose(e);
-      context.obieeDispatch('change_language_de');
+      context.obieeDispatch({type:'change_language_de'});
     }}>
       Deutsch
     </MenuItem>
@@ -325,14 +325,27 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                 onChange={e=>
                   {
                     switch(e.target.value){
+                      case 'Dashboard':
+                        context.obieeDispatch({type:'show_dashboard_home'});
+                        break;
+                      case 'Analytics':
+                        context.obieeDispatch({type:'show_dashboard_dashboard'});
+                        break;                                              
+                      case 'Visual Analyzer':
+                        context.obieeDispatch({type:'show_dashboard_analyser'});
+                        break;
+                      case 'BI Publisher':
+                        context.obieeDispatch({type:'show_dashboard_transactional'});
+                        break;                                                                                       
                       case 'Application roles':
-                        context.obieeDispatch('show_approle');
+                        context.obieeDispatch({type:'show_approle'});
                         break;
                       case 'User approles':
                         break;
                       case 'Objects of approle':
                         break;
                       case 'Setting':
+                        context.obieeDispatch({type:'show_setting'});
                         break;
                       case '':
                         break;
@@ -342,6 +355,10 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                   }}
               />
               <datalist id="actions">
+                <option value="Dashboard"/>
+                <option value="Analytics"/>
+                <option value="Visual Analyzer"/>
+                <option value="BI Publisher"/>
                 <option value="Application roles"/>
                 <option value="User approles"/>
                 <option value="Objects of approle"/>
@@ -363,7 +380,7 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
               </IconButton> */}
 
               {/* <IconButton aria-label="show 4 new mails" color="inherit" onClick={()=>{
-                context.obieeDispatch('show_loading')
+                context.obieeDispatch({type:'show_loading'})
               }}> */}
 
                 {/* </IconButton>   */}
@@ -381,7 +398,7 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
               <IconButton 
                 color="inherit"
                 aria-label="Brightness"    
-                onClick={()=>context.obieeState.theme ? context.obieeDispatch('change_to_light') : context.obieeDispatch('change_to_dark')}            
+                onClick={()=>context.obieeState.theme ? context.obieeDispatch({type:'change_to_light'}) : context.obieeDispatch({type:'change_to_dark'})}            
                 >
                 {!context.obieeState.theme ? <BrightnessHighIcon/> : <BrightnessLowIcon/>}
               </IconButton>

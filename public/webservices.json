@@ -41,15 +41,15 @@
     },
     {
         "name":"APPROLE_ASSIGN_USER_TO_ROLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/assignUserToRole/roleName/userName"
+        "bffUrl":"http://localhost:8081/obiee-bff/approle/assignUserToRole/:1/:2"
     },
     {
-        "name":"APPROLE_DELE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/deleteUserFromRole/roleName/userName"
+        "name":"APPROLE_DELETE_USER_FROM_ROLE",
+        "bffUrl":"http://localhost:8081/obiee-bff/approle/deleteUserFromRole/:1/:2"
     },
     {
         "name":"APPROLE_LIST_USERS_OF_ROLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/listUsersOfRole/roleName"
+        "bffUrl":"http://localhost:8081/obiee-bff/approle/listUsersOfRole/:1"
     },
     {
         "name":"USER_INFO",

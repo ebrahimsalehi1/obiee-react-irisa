@@ -64,7 +64,7 @@ function ObieeDrawerMenuList(){
   const strObjectsOfApprole = getText('Objects of Approle');
   const strReports = getText('Reports');
   const strDashboard = getText('Dashboard');
-  const strHome = getText('Home');
+  const strUserInfo = getText('User');
   const strSetting = getText('Setting');
 
   console.log('rendering DrawerMenuList');
@@ -82,29 +82,29 @@ function ObieeDrawerMenuList(){
       className={classes.root}
     >
 
-<ListItem button key={"user-info"} onClick={()=>context.obieeDispatch('show_settimg_userinfo')}>
+<ListItem button key={strUserInfo} onClick={()=>context.obieeDispatch({type:'show_settimg_userinfo'})}>
       <ListItemIcon><AccountCircleIcon /></ListItemIcon>
-      <ListItemText >{strDashboard}</ListItemText>
+      <ListItemText >{strUserInfo}</ListItemText>
 </ListItem>
 
 <Divider />
 
-<ListItem button key={strDashboard} onClick={()=>context.obieeDispatch('show_dashboard_home')}>
+<ListItem button key={strDashboard} onClick={()=>context.obieeDispatch({type:'show_dashboard_home'})}>
       <ListItemIcon><HomeIcon /></ListItemIcon>
       <ListItemText >{strDashboard}</ListItemText>
 </ListItem>
 
-<ListItem button key={strBIPublisher} onClick={()=>context.obieeDispatch('show_dashboard_transactional')}>
+<ListItem button key={strBIPublisher} onClick={()=>context.obieeDispatch({type:'show_dashboard_transactional'})}>
       <ListItemIcon><DescriptionRoundedIcon /></ListItemIcon>
       <ListItemText >{strBIPublisher}</ListItemText>
 </ListItem>
 
-<ListItem button key={strVisualAnalyzer} onClick={()=>context.obieeDispatch('show_dashboard_analyser')}>
+<ListItem button key={strVisualAnalyzer} onClick={()=>context.obieeDispatch({type:'show_dashboard_analyser'})}>
       <ListItemIcon><BarChartRoundedIcon /></ListItemIcon>
       <ListItemText >{strVisualAnalyzer}</ListItemText>
 </ListItem>
 
-<ListItem button key={strAnalytics} onClick={()=>context.obieeDispatch('show_dashboard_dashboard')}>
+<ListItem button key={strAnalytics} onClick={()=>context.obieeDispatch({type:'show_dashboard_dashboard'})}>
       <ListItemIcon><DashboardRoundedIcon /></ListItemIcon>
       <ListItemText >{strAnalytics}</ListItemText>
 </ListItem>
@@ -125,12 +125,12 @@ function ObieeDrawerMenuList(){
     <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
 
-          <ListItem button className={classes.nested} onClick={()=>context.obieeDispatch('show_approle')}>
+          <ListItem button className={classes.nested} onClick={()=>context.obieeDispatch({type:'show_approle'})}>
             <GroupAddIcon/> 
             <ListItemText>{strApplicarionRoles}</ListItemText>
           </ListItem>
-
-          <ListItem button className={classes.nested} >
+          
+          <ListItem button className={classes.nested} onClick={()=>context.obieeDispatch({type:'show_user_approle'})}>
             <PersonAddIcon/>
             <ListItemText>{strUserApproles}</ListItemText>
           </ListItem>
@@ -144,14 +144,14 @@ function ObieeDrawerMenuList(){
     </Collapse>
 
 
-    {/* <ListItem button key={strReports} onClick={e=>context.obieeDispatch('show_report')}>
+    {/* <ListItem button key={strReports} onClick={e=>context.obieeDispatch({type:'show_report'})}>
       <ListItemIcon><PrintIcon /></ListItemIcon>
       <ListItemText >{strReports}</ListItemText>
     </ListItem> */}
 
     <Divider />
 
-    <ListItem button key={strSetting} onClick={()=>context.obieeDispatch('show_setting')}>
+    <ListItem button key={strSetting} onClick={()=>context.obieeDispatch({type:'show_setting'})}>
       <ListItemIcon><SettingsIcon /></ListItemIcon>
       <ListItemText >{strSetting}</ListItemText>
     </ListItem>

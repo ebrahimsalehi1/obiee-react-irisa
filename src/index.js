@@ -30,12 +30,16 @@ const initialState = {
         namLastEmply: "z.omidvar",
         mail: "",
         membersOf: []
+    },
+    messageToShow:{
+        type:'info',
+        message:''
     }
 }   
 
 function reducer(state,action){
     console.log(state,action);
-    switch(action){
+    switch(action.type){
         case 'show_dashboard_home':
             return  {
                 ...state,
@@ -65,6 +69,11 @@ function reducer(state,action){
             return {
                 ...state,
                 shown_component:'show_approle'
+            }
+        case 'show_user_approle':
+            return {
+                ...state,
+                shown_component:'show_user_approle'
             }
         case 'show_report':
             return {
@@ -116,6 +125,19 @@ function reducer(state,action){
             return {
                 ...state,
                 theme: true,
+            }  
+        case 'show_message':
+            return {
+                ...state,
+                messageToShow: {
+                    type: action.messageToShow.type,
+                    message: action.messageToShow.message
+                }            
+            }  
+        case 'hide_message':
+            return {
+                ...state,
+                messageToShow: null            
             }  
         default:
             return state;    

@@ -3,5 +3,5 @@ import {UserContext} from '../Context';
 
 export function showLoading(){
     const context = React.useContext(UserContext);
-    context.obieeDispatch('show_loading');
+    context.obieeDispatch({type:'show_loading'});
 }

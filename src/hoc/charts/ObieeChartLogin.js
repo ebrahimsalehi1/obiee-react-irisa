@@ -6,7 +6,7 @@ import {
 import {Card} from "@material-ui/core";
 //import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
-import {loginStatisticData} from '../webservice/Statistic';
+import {loginStatisticData} from '../../webservice/Statistic';
 
 export default function ObieeChartLogin() {
 
@@ -18,7 +18,7 @@ export default function ObieeChartLogin() {
         async function fetchData(){
             const result = await loginStatisticData();
 
-            if(result.errorMessage){
+            if(result.error){
                 setShowmessage(result.errorPersian+"\n"+result.errorLatin);
               }
               else{

@@ -5,11 +5,11 @@ import {UserContext} from '../Context';
 import { makeStyles } from '@material-ui/core/styles';
 const DataGridDemo = React.lazy(()=>import('../widgets/ObieeTable'));
 //import {callRestGet,callRestPost,callRestPost2} from '../utils/Utils';
-import ObieeChartMonthlyByType from './ObieeChartMonthlyByType';
-//import ObieeChartLogin from './ObieeChartLogin';
-import ObieeChartPie from './ObieeChartPie';
-import ObieeChartBarLogin from './ObieeChartBarLogin';
-import ObieeProgress from './ObieeProgress';
+import ObieeChartMonthlyByType from './charts/ObieeChartMonthlyByType';
+//import ObieeChartLogin from './charts/ObieeChartLogin';
+import ObieeChartPie from './charts/ObieeChartPie';
+//import ObieeChartBarLogin from './charts/ObieeChartBarLogin';
+import ObieeProgress from './charts/ObieeProgress';
 import {ANALYTIC,VISUAL_ANALYSER,BI_PUBLISHER} from '../utils/Constants';
 import {getText} from '../utils/Utils';
 
@@ -73,13 +73,13 @@ function Dashboard(props){
                         onClick={()=>{
                             switch(item.id){
                                 case ANALYTIC:      
-                                    context.obieeDispatch('show_dashboard_analyser');
+                                    context.obieeDispatch({type:'show_dashboard_analyser'});
                                     break;  
                                 case VISUAL_ANALYSER:
-                                    context.obieeDispatch('show_dashboard_dashboard');
+                                    context.obieeDispatch({type:'show_dashboard_dashboard'});
                                     break;
                                 case BI_PUBLISHER:
-                                    context.obieeDispatch('show_dashboard_transactional');
+                                    context.obieeDispatch({type:'show_dashboard_transactional'});
                                     break;
                                 default:
 
@@ -96,10 +96,10 @@ function Dashboard(props){
                 urlName={context.obieeState.shown_component}
                 columns={[
                     //{ field: 'id', headerName: 'ID', width: 70 },
-                    { field: 'caption', headerName: getText('Caption'), width: 130 },
-                    { field: 'description', headerName: getText('Description'), width: 130 }
+                    { field: 'caption', headerName: getText('Caption'), width: 250 },
+                    { field: 'description', headerName: getText('Description'), width: 500 },
+                    { field: 'path', hide:true }
                   ]} />        
-
             </Grid>
             }
 
@@ -110,7 +110,7 @@ function Dashboard(props){
                     <ObieeChartMonthlyByType 
                     key={item.id} 
                     type={item.id} 
-                    //title={item.latinName+"-"+item.name}
+                    title={item.latinName+"-"+item.name}
                     />
                 </Grid>                
                 ))
@@ -118,7 +118,7 @@ function Dashboard(props){
 
             {type === 'REPORT_NONE' &&
             <Grid item xs={12} md={3} key={8}>
-                <ObieeProgress value={4512} percent={25} title="traffic"/>
+                <ObieeProgress title={"traffic"+"-"+"ترافیک پورتال"} />
             </Grid>
             }
 

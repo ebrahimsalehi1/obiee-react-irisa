@@ -9,12 +9,12 @@ import ObieeCrudApprole from './hoc/ObieeCrudApprole';
 import ObieeReports from './hoc/ObieeReports';
 import ObieeUsers from './hoc/ObieeUsers';
 import ObieeCrudUserOfApprole from './hoc/ObieeCrudUserOfApprole';
-import ObieeSnackbar from './widgets/ObieeSnackbar';
 import ObieeSettings from './hoc/ObieeSettings';
 import Grid from '@material-ui/core/Grid';
-//import LinearProgress from '@material-ui/core/LinearProgress';
-
+import ObieeShowMessage from './widgets/ObieeShowMessage';
 import {MuiThemeProvider,createMuiTheme} from '@material-ui/core/styles';
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 // import {themeLightLTR} from './utils/theme-light-ltr';
 // import {themeLightRTL} from './utils/theme-light-rtl';
 // import {themeDarkLTR} from './utils/theme-dark-ltr';
@@ -59,7 +59,7 @@ export default function App(props){
     const {handleLogedIn} = React.useContext(UserContext);
     const [openDrawer,setOpenDrawer] = React.useState(false);
     //const [whichCompShow,setWhichCompShow] = React.useState(2);
-    const [openMessage,setOpenMessage] = React.useState(false);
+    //const [openMessage,setOpenMessage] = React.useState(false);
 
     const context = React.useContext(UserContext);
 
@@ -70,12 +70,12 @@ export default function App(props){
         }
     });
 
-    console.log(context.obieeState.direction===false ? (context.obieeState.theme ? 'themeDarkLTR' : 'themeLightLTR') : (!context.obieeState.theme ? 'themeLightRTL' : 'themeDarkRTL'));
-    // <MuiThemeProvider theme={context.obieeState.direction===false ? (context.obieeState.theme ? themeDarkLTR : themeLightLTR) : (!context.obieeState.theme ? themeLightRTL : themeDarkRTL)}>
+    //console.log(context.obieeState.direction===false ? (context.obieeState.theme ? 'themeDarkLTR' : 'themeLightLTR') : (!context.obieeState.theme ? 'themeLightRTL' : 'themeDarkRTL'));
+    //<MuiThemeProvider theme={context.obieeState.direction===false ? (context.obieeState.theme ? themeDarkLTR : themeLightLTR) : (!context.obieeState.theme ? themeLightRTL : themeDarkRTL)}>
 
     return (
         <MuiThemeProvider theme={themeMain}>
-        {                        
+            {                        
                 !isAuthenticate &&
                     (<ObieeSigin handleLogin={(userName,pass)=>{
                         if(userName==='admin' && pass==='admin')
@@ -87,6 +87,11 @@ export default function App(props){
                     }}/>)
             
             }
+
+            {context.obieeState.progress && 
+                <LinearProgress />
+            }
+
 
             {isAuthenticate &&                            
                 <ObieeAppBar 
@@ -107,7 +112,7 @@ export default function App(props){
             //systemInfos={systemInfos}
             >
 
-            <Grid container spacing={1}  justify={"center"}  >
+            <Grid container spacing={1}  justify={"center"}>
 
             {context.obieeState.shown_component==='show_dashboard_home' &&
 
@@ -164,15 +169,13 @@ export default function App(props){
             </Grid>
             </ObieeDrawer>
 
-            <ObieeSnackbar
-                open={openMessage}
-                message={"Error, Somthing goes wrong, \n contact administrator"}
-                autoHideDuration={6000}
-                handleClose={()=>{
-                    setOpenMessage(false);
-                }}
-            />
-
+            {context.obieeState.messageToShow && context.obieeState.messageToShow.message &&
+            <ObieeShowMessage 
+                open={context.obieeState.messageToShow.message!==''} 
+                //onClose={()=>{context.obieeDispatch({type:'show_message',messaeToShow:{type:'',message:''}})}} 
+                message={context.obieeState.messageToShow.message} 
+                type={context.obieeState.messageToShow.type}/>
+             }
             </MuiThemeProvider>
     );
 }

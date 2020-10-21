@@ -17,7 +17,8 @@ import ObieeDialog from '../widgets/ObieeDialog';
 import ObieeConfirmationDialog from '../widgets/ObieeConfirmationDialog';
 import {getText} from '../utils/Utils';
 import {appRoleAll,approleCreate,approleEdit,approleDelete} from '../webservice/Approle';
-import ObieeShowMessage from '../widgets/ObieeShowMessage';
+//import ObieeShowMessage from '../widgets/ObieeShowMessage';
+import {UserContext} from '../Context';
 
 const useStyles = makeStyles(theme=>({
   root: {
@@ -45,22 +46,27 @@ export default function ObieeCrudApprole(props){
     const [showConfirmDelete,setShowConfirmDelete] = React.useState(false);
     const [search,setSearch] = React.useState('');
     const [approle,setApprole] = React.useState(undefined);
-    const [showmessage,setShowmessage] = React.useState('');
 
     const strSearchApproles = getText('Search approles');
+
+    const context = React.useContext(UserContext);
 
     React.useEffect(()=>{
 
       async function fetchData(){
 
+        context.obieeDispatch({type:'show_loading'});
         const result = await appRoleAll();
-
-        if(result.errorMessage){
-          setShowmessage(result.errorPersian+"\n"+result.errorLatin);
+        console.warn(result);
+        if(result.error){
+          context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
         }
         else{
           setApproles(result.data);
         }
+
+        context.obieeDispatch({type:'hide_loading'});
+
       }
 
       fetchData();
@@ -133,27 +139,37 @@ export default function ObieeCrudApprole(props){
           onAdd={async approleItem=>{
             console.log('add',approleItem);
 
+            context.obieeDispatch({type:'show_loading'});
+
             const result = await approleCreate(approleItem);
             console.log(result);
-            if(result.errorMessage){
-              setShowmessage(result.errorPersian+"\n"+result.errorLatin);
+            if(result.error){
+              //setShowmessage(result.errorPersian+"\n"+result.errorLatin);
+              context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
             }
             else{
             }
 
             setMode('');
+
+            context.obieeDispatch({type:'hide_loading'});
           }}
           onEdit={async approleItem=>{
             console.log('edit',approleItem);
 
+            context.obieeDispatch({type:'show_loading'});
+
             const result = await approleEdit(approleItem);
-            if(result.errorMessage){
-              setShowmessage(result.errorPersian+"\n"+result.errorLatin);
+            if(result.error){
+              //setShowmessage(result.errorPersian+"\n"+result.errorLatin);
+              context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
             }
             else{
             }
 
             setMode('');
+            context.obieeDispatch({type:'hide_loading'});
+
           }}
           onCancel={()=>{
             setMode('');
@@ -199,11 +215,7 @@ export default function ObieeCrudApprole(props){
         }
       </CardContent>
     </Card>
-    <ObieeShowMessage 
-      open={showmessage!==''} 
-      onClose={()=>{setShowmessage('')}} 
-      message={showmessage} 
-      type="error"/>
+
     </div>
     )
 }

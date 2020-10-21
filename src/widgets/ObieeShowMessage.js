@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-//import { types } from '@babel/core';
+import {UserContext} from '../Context';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -23,9 +23,27 @@ export default function ObieeShowMessage(props) {
   const classes = useStyles();
   const {open,onClose,message,type} = props;
 
+  //const [opn,setOpn] = React.useState(true);
+
+  const context = React.useContext(UserContext);
+
+  React.useEffect(()=>{
+
+    let myTimer;
+
+    myTimer = setTimeout(()=>{
+      context.obieeDispatch({type:'hide_message'});
+    },6000);
+
+    return ()=>{
+      clearTimeout(myTimer);
+    }
+
+  },[])
+
   return (
     <div className={classes.root}>
-      <Snackbar open={open} autoHideDuration={10000} onClose={onClose}>
+      <Snackbar open={open}  onClose={onClose}> 
         <Alert onClose={onClose} severity={type}>
           {message}
         </Alert>
@@ -39,3 +57,5 @@ export default function ObieeShowMessage(props) {
     </div>
   );
 }
+
+//autoHideDuration={6000}

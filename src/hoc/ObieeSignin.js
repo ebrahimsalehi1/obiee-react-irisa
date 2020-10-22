@@ -1,19 +1,25 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
+// import Avatar from '@material-ui/core/Avatar';
+// import Button from '@material-ui/core/Button';
+// import CssBaseline from '@material-ui/core/CssBaseline';
+// import TextField from '@material-ui/core/TextField';
+// import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import Checkbox from '@material-ui/core/Checkbox';
+// import Link from '@material-ui/core/Link';
+// import Grid from '@material-ui/core/Grid';
+// import Box from '@material-ui/core/Box';
+// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+// import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import ImageSignIn from "../../public/img/logo-irisa.png";
-import Copyright from '../widgets/ObieeCopyright';
+// import Container from '@material-ui/core/Container';
+// import ImageSignIn from "../../public/img/logo-irisa.png";
+// import Copyright from '../widgets/ObieeCopyright';
+import {UserContext} from '../Context';
+import {login} from '../webservice/Login';
+
+import '../../public/css/bootstrap-rtl.min.css';
+import '../../public/css/bootstrap.min.css';
+//import '../../public/css/style.css';
 
 // function Copyright() {
 //   return (
@@ -29,116 +35,159 @@ import Copyright from '../widgets/ObieeCopyright';
 // }
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+  mainBody:{
+    padding: '1px'
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+  footer :{
+    textAlign: 'center'
   },
-  form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+  footerLogo: {
+    color: '#0847a6'
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
+  footerText: {
+    fontSize: '0.8rem',
+    color: '#7D8799',
   },
+  linkColor:
+  {
+      color: '#37b37f'
+  },
+  veen: {
+    width: '65%',
+    margin: '30px auto 15px auto',
+    backgroundSize: 'cover',
+    minHeight: '480px',
+    display: 'block',
+    position: 'relative',
+    boxShadow: '0 0 0px rgba(0, 0, 0, .14), 0 2px 4px rgba(0, 0, 0, .14)',
+    backgroundColor: '#fff',
+    borderRadius: '8px',
+  },
+  leftDiv: {
+    width: '60%',
+    left: 0,
+    top: 0,
+    position: 'absolute',
+    backgroundImage: 'url(../../public/img/bg.png)',
+    height: '100%',
+    backgroundSize: '80%',
+    backgroundRepeat: 'no-repeat',
+    margin: 'auto',
+    backgroundPosition: 'center !important',
+  },
+  wrapper: {
+    position: 'absolute',
+    width: '40%',
+    height: '100%',
+    top: '7%',
+    right: 0,
+    background: 'transparent',
+    color: '#42526E',
+    overflow: 'hidden',
+  } ,
+  loginTitle:
+  {
+      color: '#42526E',
+      fontSize: '0.9rem',
+  },   
+  loginTitleSpan:{    
+    borderBottom: 'solid 3px #00885a'
+  },
+  logo: {
+    height: '75px',
+    marginTop: '10px'
+  },
+  logoText: {
+    fontWeight: 'bold',
+    color: '#00885a',
+    fontSize: '1rem',
+  },
+  darkBtn: {
+    borderColor: '#00885a',
+    background: '#00885a',
+    width: '60%'
+  },
+  darkBtnHover: {
+    borderColor: '#00885a',
+    background: '#00885a',
+    width: '60%',
+    boxShadow: '0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28)',
+    cursor: 'pointer'
+  },  
 }));
 
 export default function SignIn(props) {
   const classes = useStyles();
 
-  const {handleLogin} = props;
-
   const [userName,setUserName] = React.useState('');
-  const [pass,setPass] = React.useState('');
+  const [password,setPassword] = React.useState('');
+
+  const context = React.useContext(UserContext);
+
+  async function handleLogin(){
+    //const result = await login(userName,password);
+    //if(result && result[0])
+    if(userName==='admin' && password==='admin')
+      context.obieeDispatch({type:'login'})
+  }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        {/* <Avatar className={classes.avatar}> */}
-          {/* <LockOutlinedIcon /> */}
-          <img src={ImageSignIn} />
-          <br/>
+<div className={classes.mainBody}>
+    <div className={classes.veen}>
+        <div className={classes.leftDiv}>
+            <div>
+                <div className="row">
+                    <div className="col-md-12"></div>
+                </div>
+                <span id="tgl" style={{display: 'none', marginRight: '20px'}}></span>
+            </div>
+        </div>
 
-        {/* </Avatar> */}
-        {/* <Typography component="h1" variant="h5">
-          Sign in
-        </Typography> */}
-        {/* <form className={classes.form} noValidate> */}
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="User Name"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            onChange={e=>setUserName(e.target.value)}
-            onKeyPress={e=>{
-              if(e.charCode===13)
-                handleLogin(userName,pass);
-            }}
-            value={userName}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={e=>setPass(e.target.value)}
-            onKeyPress={e=>{
-              if(e.charCode===13)
-                handleLogin(userName,pass);
-            }}
-            value={pass}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" onChange={(e,v)=>{
-              console.log('onChange',e,v);
-            }}/>}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={e=>{
-              handleLogin(userName,pass);
-            }}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        {/* </form> */}
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
-  );
+        <div className={classes.wrapper}>
+            <form data-toggle="validator" role="form" id="login" tabIndex="500">
+                <div className={classes.loginTitle} style={{display: 'block'}}>
+                    <span className={classes.loginTitleSpan}>ورود به حساب کاربری</span>
+                </div>
+                <img className={classes.logo} src="../../public/img/logo.svg" alt=""/>
+                <h4 className={classes.logoText}>مدیریت گزارشات هرمزگان</h4>
+                <div className="form-group user-input">
+                    <label htmlFor="inputName" className="control-label">نام کاربری</label>
+                    <input type="text" className="form-control" id="inputName" placeholder="لطفا نام کاربری خود را وارد نمایید" required data-error="نام کاربری را وارد نمایید"
+                      onChange={e=>setUserName(e.target.value)}                    
+                    />
+                    <div className="help-block with-errors"></div>
+                </div>
+                <div className="form-group passwd">
+                    <label htmlFor="password" className="control-label">رمز عبور</label>
+                    <input type="password" className="form-control" id="password" placeholder="لطفا رمز عبور خود را وارد نمایید" required data-error="رمز عبور را وارد نمایید"
+                      onChange={e=>setPassword(e.target.value)}
+                    />
+                    <div className="help-block with-errors"></div>
+                </div>
+                <div className="form-group checkbox">
+                    <label><input type="checkbox" value=""/>به خاطر سپردن ورود من در این سیستم</label>
+                </div>
+
+                <div className="submit">
+                    <button  className={classes.darkBtn} onClick={handleLogin}>ورود</button>
+                </div>
+            </form>
+        </div> 
+        
+    </div>
+
+    <div className={classes.footer}>
+        <label className={classes.footerLogo}><img src="../../public/img/hoghoogh.jpg"/></label>
+        <br/>
+            <div>
+                <span className={classes.footerText}>
+                    کلیه حقوق متعلق به شرکت 
+                    <strong ><a className={classes.linkColor} href="http://www.irisaco.com"> ایریسا </a></strong> می باشد
+                </span>
+            </div>
+    </div>
+
+</div>
+    )
+  ;
 }

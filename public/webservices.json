@@ -73,7 +73,11 @@
     },
     {
         "name":"STATISTIC_DASHBOARD",
-        "bffUrl":"http://localhost:8081/obiee-bff/statistic/dashboard"
+        "bffUrl":"http://localhost:8081/obiee-bff/statistic/analytic"
+    },
+    {
+        "name":"LOGIN",
+        "bffUrl":"http://localhost:8081/obiee-bff/login"
     }
 
 ]

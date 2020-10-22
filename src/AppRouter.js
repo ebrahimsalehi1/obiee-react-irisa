@@ -6,57 +6,32 @@ import data from '../db.json';
 //import { TramRounded } from '@material-ui/icons';
 import {  BrowserRouter as Router,Route,Switch as SwitchRoute} from 'react-router-dom';
 //import { createBrowserHistory } from 'history';
+import {UserContext} from './Context';
+import App from './App';
 
-export default function App(){
-    const [isAuthenticate,setIsAuthenticate] = React.useState(false);
+function Comp1(){
     return (
         <div>
-            {
-                !isAuthenticate &&
-                <ObieeSigin handleLogin={(userName,pass)=>{
-                    if(userName==='admin' && pass==='admin')
-                        setIsAuthenticate(true);
-                    else
-                        setIsAuthenticate(false);
-                }}/>
-            }
-            <Router>
-                <SwitchRoute>
-                    <Route path="/" exact >
-                        {
-                                    
-                            !isAuthenticate ?
-                                (<ObieeSigin handleLogin={(userName,pass)=>{
-                                    if(userName==='admin' && pass==='admin')
-                                        setIsAuthenticate(true);
-                                    else
-                                        setIsAuthenticate(false);
-                                }}/>)
-                        
-                                :
-                                
-                                (<Dashboard systemInfos={data.systemInfos}/> )
-                        }
-                    </Route>
-                    <Route path="/login" exact render={()=>{
-                                    !isAuthenticate &&
-                                    <ObieeSigin handleLogin={(userName,pass)=>{
-                                        if(userName==='admin' && pass==='admin')
-                                            setIsAuthenticate(true);
-                                        else
-                                            setIsAuthenticate(false);
-                                    }}/>
-                            }} >
-                                login
-                            </Route>
+            Comp1 is loading
+        </div>
+    )
+}
 
+export default function AppRouter(){
 
-                    <Route>Page not found</Route>            
+    const context = React.useContext(UserContext);
 
-                </SwitchRoute>
-
-            </Router>
-
-            </div>
+    //const [isAuthenticate,setIsAuthenticate] = React.useState(false);
+    console.log("App is rendering",context.obieeState );
+    return (
+        <div>
+        <Router>
+            <SwitchRoute>
+                <Route path="/" exact>                   
+                    {!context.obieeState.isAuthenticated ? <ObieeSigin /> : <App/>}                                        
+                </Route> 
+            </SwitchRoute>
+        </Router>
+        </div>
     );
 }

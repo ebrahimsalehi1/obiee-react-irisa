@@ -48,11 +48,11 @@ export default function ObieeItemApprole(props){
 
     const{mode,onAdd,onEdit,onDelete,onCancel,onExternalEvent} = props;
 
-    const [approleName,setApproleName] = React.useState(props.approle && mode!=='add' ? props.approle.approleName:'');
-    const [approleDesc,setApproleDesc] = React.useState(props.approle && mode!=='add' ? props.approle.approleDesc : '');
+    const [approleName,setApproleName] = React.useState(props.approle && mode!=='add' ? props.approle.name:'');
+    const [approleDesc,setApproleDesc] = React.useState(props.approle && mode!=='add' ? props.approle.description : '');
     const [approleType,setApproleType] = React.useState(props.approle && mode!=='add' ? props.approle.approleType:'');
     const [appType,setAppType] = React.useState(props.approle && mode!=='add' ? props.approle.appType:'');
-    const [approleLatinName,setApproleLatinName] = React.useState(props.approle && mode!=='add' ? props.approle.approleLatinName:'');
+    const [approleLatinName,setApproleLatinName] = React.useState(props.approle && mode!=='add' ? props.approle.displayName:'');
 
     const strApproleLatinName = getText('Approle Latine Name');
     const strApproleName = getText('Approle Name');
@@ -105,7 +105,7 @@ export default function ObieeItemApprole(props){
             onChange={e=>setApproleLatinName(e.target.value)}
             />
         </Grid>
-        }
+      }
 
       {mode==='read' && 
       <Grid item xs={12} md={3}>
@@ -208,29 +208,29 @@ export default function ObieeItemApprole(props){
       } 
 
 
-        {mode==='read' &&
-        <Grid item xs={12} md={3}>
-        <IconButton 
-            type="submit" 
-            className={classes.iconButton} 
-            aria-label="edit" 
-            onClick={()=>onExternalEvent(props.approle)}
-            >
-            <EditIcon />
-            </IconButton>
+      {mode==='read' &&
+      <Grid item xs={12} md={3}>
+      <IconButton 
+          type="submit" 
+          className={classes.iconButton} 
+          aria-label="edit" 
+          onClick={()=>onExternalEvent(props.approle)}
+          >
+          <EditIcon />
+          </IconButton>
 
-            <IconButton 
-            type="submit" 
-            className={classes.iconButton} 
-            aria-label="delete" 
-            onClick={()=>{onDelete(approleName)}}
-            >
-            <DeleteIcon />
-            </IconButton>                    
-        </Grid>
-        // <Button size="large" variant="contained" color="primary" onClick={onEdit}>{strEdit}</Button>
-        }
-        </Grid>
+          <IconButton 
+          type="submit" 
+          className={classes.iconButton} 
+          aria-label="delete" 
+          onClick={()=>{onDelete(approleName)}}
+          >
+          <DeleteIcon />
+          </IconButton>                    
+      </Grid>
+      // <Button size="large" variant="contained" color="primary" onClick={onEdit}>{strEdit}</Button>
+      }
+      </Grid>
       </CardContent>
 
       <CardActions>

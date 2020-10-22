@@ -73,7 +73,7 @@
     },
     {
         "name":"STATISTIC_DASHBOARD",
-        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/statistic/dashboard"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/statistic/analytic"
     }
 
 ]

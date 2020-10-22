@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+//import AppRouter from './App';
+import AppRouter from './AppRouter';
+
 import { create } from 'jss';
 import rtl from 'jss-rtl';
 
@@ -34,7 +36,8 @@ const initialState = {
     messageToShow:{
         type:'info',
         message:''
-    }
+    },
+    isAuthenticated: false
 }   
 
 function reducer(state,action){
@@ -139,6 +142,17 @@ function reducer(state,action){
                 ...state,
                 messageToShow: null            
             }  
+        case 'login':
+            return {
+                ...state,
+                isAuthenticated: true
+            }  
+        case 'logoff':
+            return {
+                ...state,
+                isAuthenticated: false
+            }  
+    
         default:
             return state;    
     }
@@ -175,7 +189,7 @@ function IndexComp(props) {
     <React.Suspense fallback={<h1>Progress ....</h1>}>
         <UserContext.Provider value={{obieeState:state,obieeDispatch:dispatch}}>
             <StylesProvider jss={jssRtl}>
-                <App/>
+                <AppRouter/>
             </StylesProvider>
         </UserContext.Provider>
     </React.Suspense>

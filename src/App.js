@@ -55,11 +55,7 @@ const themeDarkRTL = createMuiTheme({
 
 export default function App(props){
 
-    const [isAuthenticate,setIsAuthenticate] = React.useState(true);
-    const {handleLogedIn} = React.useContext(UserContext);
     const [openDrawer,setOpenDrawer] = React.useState(false);
-    //const [whichCompShow,setWhichCompShow] = React.useState(2);
-    //const [openMessage,setOpenMessage] = React.useState(false);
 
     const context = React.useContext(UserContext);
 
@@ -75,44 +71,27 @@ export default function App(props){
 
     return (
         <MuiThemeProvider theme={themeMain}>
-            {                        
-                !isAuthenticate &&
-                    (<ObieeSigin handleLogin={(userName,pass)=>{
-                        if(userName==='admin' && pass==='admin')
-                            setIsAuthenticate(true);
-                        else
-                            setIsAuthenticate(false);
-
-                        handleLogedIn(isAuthenticate);
-                    }}/>)
-            
-            }
 
             {context.obieeState.progress && 
                 <LinearProgress />
             }
 
-
-            {isAuthenticate &&                            
-                <ObieeAppBar 
-                open={openDrawer} 
-                handleDrawerOpen={()=>{setOpenDrawer(true);}} 
-                handleSettings={()=>{
-                    setShowSystemSetting(true);
-                    setWhichCompShow(-1);
-                    }}
-                onHomeClick={()=>{setWhichCompShow(0)}}
-                /> 
-            }
+            <ObieeAppBar 
+            open={openDrawer} 
+            handleDrawerOpen={()=>{setOpenDrawer(true);}} 
+            handleSettings={()=>{
+                setShowSystemSetting(true);
+                setWhichCompShow(-1);
+                }}
+            onHomeClick={()=>{setWhichCompShow(0)}}
+            /> 
 
             <ObieeDrawer 
             open={openDrawer} 
             handleDrawerClose={()=>{setOpenDrawer(false);}}
-            isAuthenticate={isAuthenticate}
-            //systemInfos={systemInfos}
             >
 
-            <Grid container spacing={1}  justify={"center"}>
+            <Grid container spacing={1} justify={"center"}>
 
             {context.obieeState.shown_component==='show_dashboard_home' &&
 

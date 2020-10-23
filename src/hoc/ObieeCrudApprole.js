@@ -57,7 +57,7 @@ export default function ObieeCrudApprole(props){
 
         context.obieeDispatch({type:'show_loading'});
         const result = await appRoleAll();
-        console.warn(result);
+
         if(result.error){
           context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
         }

@@ -125,10 +125,15 @@ export default function SignIn(props) {
   const context = React.useContext(UserContext);
 
   async function handleLogin(){
-    //const result = await login(userName,password);
-    //if(result && result[0])
-    if(userName==='admin' && password==='admin')
+
+    const result = await login(userName,password);
+
+    if(result.error){
+      context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+    }
+    else{
       context.obieeDispatch({type:'login'})
+    }
   }
 
   return (
@@ -144,7 +149,7 @@ export default function SignIn(props) {
         </div>
 
         <div className={classes.wrapper}>
-            <form data-toggle="validator" role="form" id="login" tabIndex="500">
+            {/* <form data-toggle="validator" role="form" id="login" tabIndex="500"> */}
                 <div className={classes.loginTitle} style={{display: 'block'}}>
                     <span className={classes.loginTitleSpan}>ورود به حساب کاربری</span>
                 </div>
@@ -169,9 +174,9 @@ export default function SignIn(props) {
                 </div>
 
                 <div className="submit">
-                    <button  className={classes.darkBtn} onClick={handleLogin}>ورود</button>
+                    <button  className={classes.darkBtn} onClick={async ()=>{await handleLogin()}}>ورود</button>
                 </div>
-            </form>
+            {/* </form> */}
         </div> 
         
     </div>

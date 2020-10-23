@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ObieeDrawer(props) {
 
-  const {open,handleDrawerClose,children,isAuthenticate} = props;
+  const {open,handleDrawerClose,children} = props;
 
   const classes = useStyles();
   const theme = useTheme();
@@ -127,8 +127,6 @@ export default function ObieeDrawer(props) {
 //   };
 
   return (
-    <div>
-    {isAuthenticate && 
     <div className={classes.root}>
       <CssBaseline />
 
@@ -176,8 +174,6 @@ export default function ObieeDrawer(props) {
 
 
       </main>
-    </div>
-    }
     </div>
   );
 }

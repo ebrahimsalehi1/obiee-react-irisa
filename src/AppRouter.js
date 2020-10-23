@@ -9,19 +9,10 @@ import {  BrowserRouter as Router,Route,Switch as SwitchRoute} from 'react-route
 import {UserContext} from './Context';
 import App from './App';
 
-function Comp1(){
-    return (
-        <div>
-            Comp1 is loading
-        </div>
-    )
-}
-
 export default function AppRouter(){
 
     const context = React.useContext(UserContext);
 
-    //const [isAuthenticate,setIsAuthenticate] = React.useState(false);
     console.log("App is rendering",context.obieeState );
     return (
         <div>
@@ -30,6 +21,9 @@ export default function AppRouter(){
                 <Route path="/" exact>                   
                     {!context.obieeState.isAuthenticated ? <ObieeSigin /> : <App/>}                                        
                 </Route> 
+                <Route path="/test" exact>                   
+                        test
+                </Route>                 
             </SwitchRoute>
         </Router>
         </div>

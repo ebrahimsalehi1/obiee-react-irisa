@@ -143,14 +143,19 @@ function reducer(state,action){
                 messageToShow: null            
             }  
         case 'login':
+            localStorage.setItem("isAuthenticated","1");
             return {
                 ...state,
-                isAuthenticated: true
+                isAuthenticated: localStorage.getItem('isAuthenticated')=='1' ,
+                shown_component:'show_dashboard_home'                
             }  
         case 'logoff':
+            localStorage.setItem("isAuthenticated","0");
+            alert('logoff'+String(localStorage.getItem('isAuthenticated')=='1'));
+
             return {
                 ...state,
-                isAuthenticated: false
+                isAuthenticated: localStorage.getItem('isAuthenticated')=='1'
             }  
     
         default:
@@ -178,10 +183,6 @@ function IndexComp(props) {
         localStorage.setItem('language','en');  
         localStorage.setItem('user','z.omidvar');
     }
-    
-    //const [isRightToLeft,setIsRightToLeft] = React.useState(false);
-    //const [isDarkTheme,setIsDarkTheme] = React.useState(false);
-    //const [whichComp,setWhichComp] = React.useState(4);
 
     countRender.current++;
 

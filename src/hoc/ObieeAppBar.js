@@ -415,7 +415,7 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                 aria-label="account of current user"
                 aria-controls={menuId}
                 aria-haspopup="true"
-                //onClick={e=>{handleLogedIn(false)}}
+                onClick={()=>context.obieeDispatch({type:'logoff'})}
                 color="inherit"
               >
                 <Tooltip title={getText("Exit")} >

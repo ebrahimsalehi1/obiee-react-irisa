@@ -151,13 +151,10 @@ function reducer(state,action){
             }  
         case 'logoff':
             localStorage.setItem("isAuthenticated","0");
-            alert('logoff'+String(localStorage.getItem('isAuthenticated')=='1'));
-
             return {
                 ...state,
                 isAuthenticated: localStorage.getItem('isAuthenticated')=='1'
-            }  
-    
+            }      
         default:
             return state;    
     }

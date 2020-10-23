@@ -40,6 +40,9 @@ const useStyles = makeStyles(theme=>({
         margin: 0,
         minWidth: 190,
       },
+      cardContent:{
+        padding:0
+      }
 }));
 
 export default function ObieeItemApprole(props){
@@ -91,7 +94,7 @@ export default function ObieeItemApprole(props){
     
     return (
     <Card className={classes.root} variant="outlined">
-      <CardContent>
+      <CardContent className={classes.cardContent}>
       <Grid container spacing={1} >
 
       {(mode==='add' || mode==='edit') && 
@@ -231,9 +234,8 @@ export default function ObieeItemApprole(props){
       // <Button size="large" variant="contained" color="primary" onClick={onEdit}>{strEdit}</Button>
       }
       </Grid>
-      </CardContent>
 
-      <CardActions>
+
       {mode==='add' &&
         // <Button size="large" variant="contained" color="primary" onClick={()=>{onAdd(createRow())}}>{strSave}</Button>
         <ObieeButtonOperation onExecute={()=>
@@ -262,8 +264,12 @@ export default function ObieeItemApprole(props){
         //<Button size="large" variant="contained" color="primary" onClick={onCancel}>{strCancel}</Button>
         <ObieeButtonOperation onExecute={onCancel} title={strCancel} />         
       }
+
+      </CardContent>
+
+      {/* <CardActions>
       
-      </CardActions>
+      </CardActions> */}
 
     </Card>
     )

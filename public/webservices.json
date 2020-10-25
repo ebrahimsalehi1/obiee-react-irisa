@@ -52,10 +52,6 @@
         "bffUrl":"http://localhost:8081/obiee-bff/approle/listUsersOfRole/:1"
     },
     {
-        "name":"USER_INFO",
-        "bffUrl":"http://localhost:8081/obiee-bff/user/info/:1"
-    },
-    {
         "name":"STATISTIC_LOGIN",
         "bffUrl":"http://localhost:8081/obiee-bff/statistic/traffic"
     },
@@ -78,6 +74,19 @@
     {
         "name":"LOGIN",
         "bffUrl":"http://localhost:8081/obiee-bff/login"
+    },
+    {
+        "name":"USER_INFO",
+        "bffUrl":"http://localhost:8081/obiee-bff/user/info/:1"
+    },
+    {
+        "name":"USER_ALL",
+        "bffUrl":"http://localhost:8081/obiee-bff/user/all"
+    },
+    {
+        "name":"USER_SEARCH",
+        "bffUrl":"http://localhost:8081/obiee-bff/user/search/:1"
     }
+
 
 ]

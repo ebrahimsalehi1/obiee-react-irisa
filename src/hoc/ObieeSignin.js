@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // import Copyright from '../widgets/ObieeCopyright';
 import {UserContext} from '../Context';
 import {login} from '../webservice/Login';
+import {getUserInfo} from '../webservice/User';
 
 import '../../public/css/bootstrap-rtl.min.css';
 import '../../public/css/bootstrap.min.css';
@@ -126,13 +127,21 @@ export default function SignIn(props) {
 
   async function handleLogin(){
 
-    const result = await login(userName,password);
+    let result = await login(userName,password);
 
     if(result.error){
       context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
     }
     else{
-      context.obieeDispatch({type:'login'})
+      result =  await getUserInfo(localStorage.getItem('user'));
+      if(result.error){
+        context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:"error in get info"}});
+        context.obieeDispatch({type:'login'});
+      }
+      else{
+        console.log("login-",{userInfo:result.data})
+        context.obieeDispatch({type:'login',userInfo:result.data});
+      }
     }
   }
 

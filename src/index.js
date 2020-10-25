@@ -8,7 +8,7 @@ import rtl from 'jss-rtl';
 
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import {UserContext} from './Context';
-//const CircularProgress = React.lazy(()=>  import('@material-ui/core/CircularProgress'));
+// import { AlternateEmail } from '@material-ui/icons';
 
 const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 
@@ -23,16 +23,7 @@ const initialState = {
     theme: false,
     shown_component:'show_dashboard_home',
     progress: false,
-    userInfo:{
-        displayName: "",
-        name: "z.omidvar",
-        gUID: null,
-        description: null,
-        namFirstEmply: "",
-        namLastEmply: "z.omidvar",
-        mail: "",
-        membersOf: []
-    },
+    userInfo:null,
     messageToShow:{
         type:'info',
         message:''
@@ -147,7 +138,8 @@ function reducer(state,action){
             return {
                 ...state,
                 isAuthenticated: localStorage.getItem('isAuthenticated')=='1' ,
-                shown_component:'show_dashboard_home'                
+                shown_component:'show_dashboard_home',
+                userInfo: action.userInfo
             }  
         case 'logoff':
             localStorage.setItem("isAuthenticated","0");
@@ -155,6 +147,18 @@ function reducer(state,action){
                 ...state,
                 isAuthenticated: localStorage.getItem('isAuthenticated')=='1'
             }      
+        // case 'webservice_user_info':
+        //     let data = null;    
+        //     getUserInfo(localStorage.getItem('user'))
+        //     .then(res=>{
+        //         if(res.status===200)
+        //             data = res.data;        
+        //     })
+        //     return {
+        //         ...state,
+        //         userInfo: data
+        //     }
+        //     break;
         default:
             return state;    
     }

@@ -9,14 +9,23 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import data from '../../db.json';
+import {UserContext} from '../Context';
+import {appRoleAll,getListUsersOfRole} from '../webservice/Approle';
+import {getUserAll} from '../webservice/User';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 'auto',
   },
   paper: {
-    width: 200,
-    height: 230,
+    width: '100%',
+    height: 300,
     overflow: 'auto',
   },
   button: {
@@ -33,25 +42,73 @@ function intersection(a, b) {
 }
 
 export default function ObieeCrudUserOfApprole() {
+
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
-  const [left, setLeft] = React.useState(data.users);
-  const [right, setRight] = React.useState(data.userApproles.map(item=>{
-      return {id:item.id,name:item.name,family:item.family}
-  }));
+  const [left, setLeft] = React.useState([]); // data.users
+  const [right, setRight] = React.useState([]);
+  //data.userApproles.map(item=>{
+  //    return {id:item.id,name:item.name,family:item.family}
+  //}));
+  const [approles,setApproles] = React.useState([]);
+  //const [userOfApproles,setUserOfApproles] = React.useState([]);
 
-  const leftChecked = intersection(checked, left);
-  const rightChecked = intersection(checked, right);
+  //const rightChecked = intersection(checked, right);
+  //const leftChecked = intersection(checked, left);
+
+  const context = React.useContext(UserContext);
+
+  React.useEffect(()=>{
+
+    async function fetchData(){
+
+      context.obieeDispatch({type:'show_loading'});
+
+      //------------------------------------------------------
+
+      let result = await appRoleAll();
+
+      if(result.error){
+        context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+      }
+      else{
+        setApproles(result.data);
+      }
+
+      //------------------------------------------------------
+
+      result = await getUserAll();
+
+      if(result.error){
+        context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+      }
+      else{
+        setLeft(result.data);
+        //alert('finidhed')
+      }
+
+      //------------------------------------------------------
+
+      context.obieeDispatch({type:'hide_loading'});
+
+    }
+
+    fetchData();
+
+    }
+  ,[]);
 
   const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value.id);
+    const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
-
+    
     if (currentIndex === -1) {
-      newChecked.push(value.id);
+      newChecked.push(value);
     } else {    
       newChecked.splice(currentIndex, 1);
     }
+
+    console.log('handleToggle',currentIndex,newChecked);
 
     setChecked(newChecked);
   };
@@ -62,12 +119,15 @@ export default function ObieeCrudUserOfApprole() {
   };
 
   const handleCheckedRight = () => {
+    const leftChecked = checked;
     setRight(right.concat(leftChecked));
     setLeft(not(left, leftChecked));
     setChecked(not(checked, leftChecked));
+    console.log(leftChecked,right);
   };
 
-  const handleCheckedLeft = () => {
+  const handleCheckedLeft = () => {  
+    const rightChecked = checked;
     setLeft(left.concat(rightChecked));
     setRight(not(right, rightChecked));
     setChecked(not(checked, rightChecked));
@@ -78,35 +138,98 @@ export default function ObieeCrudUserOfApprole() {
     setRight([]);
   };
 
-  const customList = (items,uniqueId) => (
+  const customList = (items,uniqueId) => {
+
+    const textVal = React.useRef();
+    const [filteredItems,setFilteredItems] = React.useState([]);
+
+    React.useEffect(()=>{
+      setFilteredItems(items);
+    },[items]);
+
+    return (
+    <Card>
+    <Grid container spacing={0}>
+      <Grid item xs={10} md={10}>
+      <TextField
+      fullWidth
+      variant="outlined"
+      inputRef={textVal}
+      placeholder="Search"
+      inputProps={{ 'aria-label': 'search' }}    
+      onChange={e=>{
+        if(e.target.value.length === 0)
+          setFilteredItems(items);
+      }}  
+      />
+      </Grid>
+      <Grid item xs={2} md={2}>
+      <IconButton type="submit" className={classes.iconButton} aria-label="search"
+      onClick={()=>{
+        if(textVal.current.value.length>2){
+          const filteredItems = items.filter(item=>item.name.indexOf(textVal.current.value)!==-1);
+          setFilteredItems(filteredItems);
+        }
+      }}
+      >
+        <SearchIcon />
+      </IconButton>
+      </Grid>
+      </Grid>
     <Paper className={classes.paper}>
       <List dense component="div" role="list">
-        {items.map((value) => {
-          const labelId = `transfer-list-item-${value.id}-label`;
+        {filteredItems.map((value) => {
+          const labelId = `transfer-list-item-${value.name}-label-${uniqueId}`;
 
           return (
-            <ListItem key={value.id+uniqueId} role="listitem" button onClick={handleToggle(value)}>
+            <ListItem key={labelId} role="listitem" button onClick={handleToggle(value)}>
               <ListItemIcon>
                 <Checkbox
-                  checked={checked.indexOf(value.id) !== -1}
+                  checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
                   disableRipple
                   inputProps={{ 'aria-labelledby': labelId }}
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`${value.name} - ${value.family} - ${value.id}`} />
+              <ListItemText id={labelId} primary={`${value.displayName} - ${value.name}`} />
             </ListItem>
           );
         })}
         <ListItem />
       </List>
     </Paper>
-  );
+    </Card>
+    );
+  };
+
+  // console.log('UserOfApprole',
+  //   checked.length === 0,
+  //   leftChecked.length === 0,
+  //   rightChecked.length === 0);
 
   return (
-    <Grid container spacing={2} justify="center" alignItems="center" className={classes.root}>
-      <Grid item>{customList(left,1000000)}</Grid>
-      <Grid item>
+    <Grid container spacing={4} justify="center" alignItems="center" className={classes.root}>
+      <Grid item xs={12} md={12}>
+        <Autocomplete
+          id="combo-box-demo"
+          options={approles}
+          getOptionLabel={(option) => option.name}
+          fullWidth
+          renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+          onChange={async (e,val)=>{
+            const result = await getListUsersOfRole(val.name);
+            if(result.error){
+              context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+            }
+            else{
+              console.log('setUserOfApproles',result.data);
+              setRight(result.data);
+            }
+          }}
+        />        
+        </Grid>
+      <Grid item xs={12} md={5}>{customList(left,1000000)}</Grid>
+      <Grid item xs={12} md={2}>
         <Grid container direction="column" alignItems="center">
           <Button
             variant="outlined"
@@ -123,7 +246,7 @@ export default function ObieeCrudUserOfApprole() {
             size="small"
             className={classes.button}
             onClick={handleCheckedRight}
-            disabled={leftChecked.length === 0}
+            // disabled={leftChecked.length === 0}
             aria-label="move selected right"
           >
             &gt;
@@ -133,7 +256,7 @@ export default function ObieeCrudUserOfApprole() {
             size="small"
             className={classes.button}
             onClick={handleCheckedLeft}
-            disabled={rightChecked.length === 0}
+            // disabled={rightChecked.length === 0}
             aria-label="move selected left"
           >
             &lt;
@@ -150,7 +273,7 @@ export default function ObieeCrudUserOfApprole() {
           </Button>
         </Grid>
       </Grid>
-      <Grid item>{customList(right,2000000)}</Grid>
+      <Grid item xs={12} md={5}>{customList(right,2000000)}</Grid>
     </Grid>
   );
 }

@@ -340,7 +340,8 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                       case 'Application roles':
                         context.obieeDispatch({type:'show_approle'});
                         break;
-                      case 'User approles':
+                      case 'User approles':                        
+                        context.obieeDispatch({type:'show_user_approle'});
                         break;
                       case 'Objects of approle':
                         break;

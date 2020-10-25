@@ -54,3 +54,17 @@ export async function approleDelete(roleName){
 
     return result;
 }
+
+export async function getListUsersOfRole(roleName){
+    const result = {data:null,error:null};
+    await callRestGet('APPROLE_LIST_USERS_OF_ROLE',[roleName],null)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}
+

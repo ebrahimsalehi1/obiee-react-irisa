@@ -135,7 +135,7 @@ function ObieeDrawerMenuList(){
             <ListItemText>{strUserApproles}</ListItemText>
           </ListItem>
 
-          <ListItem button className={classes.nested} >
+          <ListItem button className={classes.nested} onClick={()=>context.obieeDispatch({type:'show_object_approle'})}>
             <FolderIcon/>
             <ListItemText>{strObjectsOfApprole}</ListItemText>
           </ListItem>

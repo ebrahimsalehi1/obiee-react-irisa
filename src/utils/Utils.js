@@ -67,6 +67,8 @@ export async function callRestPost2(key,urlParams,data){
 
 export async function callRestPost(key,urlParams,data){    
 
+    console.log('callRestPost',key,urlParams,data);
+    
     const url = getUrlParamList(key,urlParams);
 
     return await axios({

@@ -7,9 +7,7 @@ export const themeLightRTL = createMuiTheme({
     type:'themeLightRTL',
     direction: 'rtl',
     palette:{
-      primary: {
-        main: "#FFFFFF"
-      },    
+      type: 'light'    
     },
   overrides: {
     MuiDrawer:theme=>( {

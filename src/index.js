@@ -69,6 +69,11 @@ function reducer(state,action){
                 ...state,
                 shown_component:'show_user_approle'
             }
+        case 'show_object_approle':
+            return {
+                ...state,
+                shown_component:'show_object_approle'
+            }
         case 'show_report':
             return {
                 ...state,

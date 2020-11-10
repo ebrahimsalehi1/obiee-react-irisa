@@ -7,10 +7,8 @@ export const themeDarkLTR = createMuiTheme({
     type:'themeDarkLTR',
     direction: 'ltr',    
     palette:{
-      primary: {
-        main: "#000000"
-      },   
-      },
+        type:'dark' 
+    },
 overrides: {
       MuiDrawer:theme=>( {
             root: {

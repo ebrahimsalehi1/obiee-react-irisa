@@ -11,14 +11,15 @@ import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
-import data from '../../db.json';
+import data from '../../../db.json';
 const ObieeItemApprole = React.lazy(()=>import("./ObieeItemApprole"));
-import ObieeDialog from '../widgets/ObieeDialog';
-import ObieeConfirmationDialog from '../widgets/ObieeConfirmationDialog';
-import {getText} from '../utils/Utils';
-import {appRoleAll,approleCreate,approleEdit,approleDelete} from '../webservice/Approle';
+import ObieeDialog from '../../widgets/ObieeDialog';
+//import ObieeConfirmationDialog from '../../widgets/ObieeConfirmationDialog';
+import {getText} from '../../utils/Utils';
+import {appRoleAll,approleCreate,approleEdit,approleDelete} from '../../webservice/Approle';
 //import ObieeShowMessage from '../widgets/ObieeShowMessage';
-import {UserContext} from '../Context';
+import {UserContext} from '../../Context';
+import ObieeMaterialTable from '../../widgets/ObieeMaterialTable';
 
 const useStyles = makeStyles(theme=>({
   root: {
@@ -35,11 +36,9 @@ const useStyles = makeStyles(theme=>({
   },   
 }))
 
-export default function ObieeCrudApprole(props){
+export default function ObieeApprole(props){
 
     const classes = useStyles();
-
-    //const {url} = props;
 
     const [approles,setApproles] = React.useState([]); // data.approles
     const [filteredApproles,setFilteredApproles] = React.useState([]); // data.approles
@@ -77,6 +76,95 @@ export default function ObieeCrudApprole(props){
       }
     ,[]);
 
+    return (
+      <div className={classes.root}>
+      <ObieeMaterialTable
+          columns={[
+            { field: 'name', title: getText('Name'), headerStyle:{width:200} },
+            { field: 'displayName', title: getText('DisplayName'), headerStyle:{width:300} },
+            { field: 'description',title:'description'},
+          ]} 
+          data={approles}
+          actions={[
+            {
+              isFreeAction:true,
+              icon:AddIcon,   
+              tooltip:'Add a row on tree',
+              onClick: (event, rowData) => {
+                  setMode('add');
+              }   
+          },
+          ]}
+          editable={            
+              {
+                onRowDelete: (event,oldRow)=>new Promise((resolve,reject)=>{
+                  console.log('onRowDelete',event,oldRow);
+                  setMode('add');
+                }),
+                //onRowUpdate: (event,oldRow,newRow)=>console.log(event,oldRow,newRow),
+                //onRowDelete: (event,oldRow)=>console.log(event,oldRow)                
+              }            
+          }
+      />
+      {(mode==='add' || mode==='edit') &&
+      <ObieeDialog 
+      title="Add new Approle"
+      openModal={true}
+      //TransitionComponent
+      eventClose={()=>{
+        setMode('');
+      }}
+      >
+      <ObieeItemApprole 
+        mode={mode} 
+        approle={approle}
+        onAdd={async approleItem=>{
+          console.log('add',approleItem);
+
+          context.obieeDispatch({type:'show_loading'});
+
+          const result = await approleCreate(approleItem);
+          console.log(result);
+          if(result.error){
+            //setShowmessage(result.errorPersian+"\n"+result.errorLatin);
+            context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
+          }
+          else{
+          }
+
+          setMode('');
+
+          context.obieeDispatch({type:'hide_loading'});
+        }}
+        onEdit={async approleItem=>{
+          console.log('edit',approleItem);
+
+          context.obieeDispatch({type:'show_loading'});
+
+          const result = await approleEdit(approleItem);
+          if(result.error){
+            //setShowmessage(result.errorPersian+"\n"+result.errorLatin);
+            context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
+          }
+          else{
+          }
+
+          setMode('');
+          context.obieeDispatch({type:'hide_loading'});
+
+        }}
+        onCancel={()=>{
+          setMode('');
+          setApprole(undefined);          
+        }}
+      />
+      </ObieeDialog>
+      }
+
+      </div>
+    )
+
+    /*
     return (
     <div className={classes.root}> 
     <Card className={classes.root} variant="outlined">
@@ -208,28 +296,6 @@ export default function ObieeCrudApprole(props){
         />
         }
 
-        {/* {approles && approles.length>0 && filteredApproles.length==0 &&         
-          approles.map((approle,index)=>(
-                <ObieeItemApprole 
-                mode="read" 
-                key={index} 
-                approle={approle} 
-                onDelete={approleName=>{
-                    console.log('delete:'+approleName);
-                    setApprole(prev=>{
-                      const result = {prev,approleName:approleName};
-                      return result;
-                    });
-                    setShowConfirmDelete(true);
-                }}
-                onExternalEvent={approleItem=>{
-                  setApprole(approleItem);
-                  setMode('edit');
-                }}
-                />
-          ))
-        } */}
-
         {filteredApproles.length>0 &&         
           filteredApproles.map((approle,index)=>(
                 <ObieeItemApprole 
@@ -256,8 +322,10 @@ export default function ObieeCrudApprole(props){
 
     </div>
     )
+    */
+    
 }
 
-ObieeCrudApprole.propTypes = {
+ObieeApprole.propTypes = {
   url: PropTypes.string.isRequired,
 }

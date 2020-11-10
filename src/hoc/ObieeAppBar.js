@@ -343,7 +343,8 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                       case 'User approles':                        
                         context.obieeDispatch({type:'show_user_approle'});
                         break;
-                      case 'Objects of approle':
+                      case 'Objects Of approle':                        
+                        context.obieeDispatch({type:'show_object_approle'});
                         break;
                       case 'Setting':
                         context.obieeDispatch({type:'show_setting'});
@@ -362,7 +363,7 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                 <option value="BI Publisher"/>
                 <option value="Application roles"/>
                 <option value="User approles"/>
-                <option value="Objects of approle"/>
+                <option value="Objects Of approle"/>
                 <option value="Setting"/>
               </datalist>
 

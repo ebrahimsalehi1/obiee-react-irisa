@@ -8,10 +8,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import data from '../../db.json';
-import {UserContext} from '../Context';
-import {appRoleAll,getListUsersOfRole} from '../webservice/Approle';
-import {getUserAll} from '../webservice/User';
+import data from '../../../db.json';
+import {UserContext} from '../../Context';
+import {appRoleAll,getListUsersOfRole} from '../../webservice/Approle';
+import {getUserAll} from '../../webservice/User';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
@@ -33,23 +33,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function not(a, b) {
-  return a.filter((value) => b.indexOf(value) === -1);
-}
-
-function intersection(a, b) {
-  return a.filter((value) => b.indexOf(value) !== -1);
-}
-
-export default function ObieeCrudUserOfApprole() {
+export default function ObieeAssignObjectToApprole() {
 
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
   const [left, setLeft] = React.useState([]); // data.users
   const [right, setRight] = React.useState([]);
-  //data.userApproles.map(item=>{
-  //    return {id:item.id,name:item.name,family:item.family}
-  //}));
+
   const [approles,setApproles] = React.useState([]);
   //const [userOfApproles,setUserOfApproles] = React.useState([]);
 
@@ -72,6 +62,7 @@ export default function ObieeCrudUserOfApprole() {
         context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
       }
       else{
+        console.log('result.data',result.data);
         setApproles(result.data);
       }
 
@@ -202,20 +193,15 @@ export default function ObieeCrudUserOfApprole() {
     );
   };
 
-  // console.log('UserOfApprole',
-  //   checked.length === 0,
-  //   leftChecked.length === 0,
-  //   rightChecked.length === 0);
-
   return (
     <Grid container spacing={4} justify="center" alignItems="center" className={classes.root}>
       <Grid item xs={12} md={12}>
         <Autocomplete
           id="combo-box-demo"
           options={approles}
-          getOptionLabel={(option) => option.name}
+          getOptionLabel={(option) => option.name+(option.displayName ? ' - '+option.displayName:'')}
           fullWidth
-          renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+          renderInput={(params) => <TextField {...params} label="approles" variant="outlined" />}
           onChange={async (e,val)=>{
             const result = await getListUsersOfRole(val.name);
             if(result.error){
@@ -228,52 +214,7 @@ export default function ObieeCrudUserOfApprole() {
           }}
         />        
         </Grid>
-      <Grid item xs={12} md={5}>{customList(left,1000000)}</Grid>
-      <Grid item xs={12} md={2}>
-        <Grid container direction="column" alignItems="center">
-          <Button
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleAllRight}
-            disabled={left.length === 0}
-            aria-label="move all right"
-          >
-            ≫
-          </Button>
-          <Button
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleCheckedRight}
-            // disabled={leftChecked.length === 0}
-            aria-label="move selected right"
-          >
-            &gt;
-          </Button>
-          <Button
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleCheckedLeft}
-            // disabled={rightChecked.length === 0}
-            aria-label="move selected left"
-          >
-            &lt;
-          </Button>
-          <Button
-            variant="outlined"
-            size="small"
-            className={classes.button}
-            onClick={handleAllLeft}
-            disabled={right.length === 0}
-            aria-label="move all left"
-          >
-            ≪
-          </Button>
-        </Grid>
-      </Grid>
-      <Grid item xs={12} md={5}>{customList(right,2000000)}</Grid>
+
     </Grid>
   );
 }

@@ -7,9 +7,7 @@ export const themeLightLTR = createMuiTheme({
     type:'themeLightLTR',
     direction: 'ltr',
     palette:{
-      primary: {
-        main: "#FFFFFF"
-      },       
+      type: 'light'      
     },
   overrides: {
   MuiDrawer:theme=>( {
@@ -81,5 +79,15 @@ export const themeLightLTR = createMuiTheme({
             marginLeft: 0,
         }
     },
+    MuiOutlinedInput:{
+      height: 5,
+      padding: 14,
+    },
+    MuiDialogContent:{
+      root:{
+        padding:0,
+        margin:0
+      }
+    }
     }    
 }, locales['enUS']);

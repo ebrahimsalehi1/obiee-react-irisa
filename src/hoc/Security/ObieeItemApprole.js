@@ -14,12 +14,12 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import PropTypes from 'prop-types';
-import {getText} from '../utils/Utils';
+import {getText} from '../../utils/Utils';
 //import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import ObieeButtonOperation from '../widgets/ObieeButtonOperation';
+import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
 
 const useStyles = makeStyles(theme=>({
     root: {
@@ -41,7 +41,10 @@ const useStyles = makeStyles(theme=>({
         minWidth: 190,
       },
       cardContent:{
-        padding:0
+        root:{
+          padding:0,
+          border:'none'
+        }
       }
 }));
 
@@ -94,7 +97,7 @@ export default function ObieeItemApprole(props){
     
     return (
     <Card className={classes.root} variant="outlined">
-      <CardContent className={classes.cardContent}>
+      <CardContent className={classes.cardContent.root}>
       <Grid container spacing={1} >
 
       {(mode==='add' || mode==='edit') && 
@@ -211,14 +214,14 @@ export default function ObieeItemApprole(props){
       } 
 
 
-      {mode==='read' &&
+      {/* {mode==='read' &&
       <Grid item xs={12} md={3}>
       <IconButton 
           type="submit" 
           className={classes.iconButton} 
           aria-label="edit" 
           onClick={()=>onExternalEvent(props.approle)}
-          >
+          > 
           <EditIcon />
           </IconButton>
 
@@ -231,13 +234,12 @@ export default function ObieeItemApprole(props){
           <DeleteIcon />
           </IconButton>                    
       </Grid>
-      // <Button size="large" variant="contained" color="primary" onClick={onEdit}>{strEdit}</Button>
-      }
+      } */}
+
       </Grid>
 
-
+      <Grid item xs={12} md={6}>
       {mode==='add' &&
-        // <Button size="large" variant="contained" color="primary" onClick={()=>{onAdd(createRow())}}>{strSave}</Button>
         <ObieeButtonOperation onExecute={()=>
           {
             if(validation())
@@ -246,12 +248,16 @@ export default function ObieeItemApprole(props){
               alert('fields must be fill');              
           }} title={strSave} />
       }
+      </Grid>
+
+      {/* <Grid item xs={12} md={6}>
       {mode==='add' &&
-        //<Button size="large" variant="contained" color="primary" onClick={onCancel}>{strCancel}</Button>
         <ObieeButtonOperation onExecute={onCancel} title={strCancel} />         
       }
+      </Grid> */}
+
+      <Grid item xs={12} md={6}>
       {mode==='edit' &&    
-        //<Button size="large" variant="contained" color="primary" onClick={()=>{onEdit(props.approle)}}>{strSave}</Button>
         <ObieeButtonOperation onExecute={()=>
           {
             if(validation())
@@ -260,10 +266,13 @@ export default function ObieeItemApprole(props){
               alert('fields must be fill');              
           }} title={strSave} />        
       }
+      </Grid>
+
+      <Grid item xs={12} md={6}>
       {mode==='edit' &&
-        //<Button size="large" variant="contained" color="primary" onClick={onCancel}>{strCancel}</Button>
         <ObieeButtonOperation onExecute={onCancel} title={strCancel} />         
       }
+      </Grid>
 
       </CardContent>
 

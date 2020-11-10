@@ -28,6 +28,15 @@ const useDialogTitleStyles = makeStyles(theme => ({
     }
 }));
 
+// const useStyle = makeStyles(theme=>({
+//     dialogContent:{
+//         root:{
+//             padding:0,
+//             margin:0,
+//         }
+//     }
+// }));
+
 const DialogTitle = (props => {
     const { children, onClose } = props;
     const classes = useDialogTitleStyles();
@@ -64,10 +73,11 @@ const DialogActions = (props)=>{
 
 const usePaperDialogContentStyles = makeStyles(theme => ({
     root:{
-        paddingTop:"16px",
-        paddingLeft: "16px",
-        paddingRight: "16px",
-        paddingBottom: "16px",
+        // paddingTop:"16px",
+        // paddingLeft: "16px",
+        // paddingRight: "16px",
+        // paddingBottom: "16px",
+        padding:0,
         margin: 0,
         overflow: 'hidden',
         maxHeight: '600px',
@@ -76,13 +86,13 @@ const usePaperDialogContentStyles = makeStyles(theme => ({
     }
 }));
 
-const PaperDialogContent = (props) => {
-    const classes = usePaperDialogContentStyles();
-    const {children} = props;
-    return (<Paper>
-        {children}
-        </Paper>);
-}
+// const PaperDialogContent = (props) => {
+//     const classes = usePaperDialogContentStyles();
+//     const {children} = props;
+//     return (<Paper>
+//         {children}
+//         </Paper>);
+// }
 
 // function Transition(props) {
 //     return <Slide direction="left" {...props} />;
@@ -92,12 +102,11 @@ const PaperDialogContent = (props) => {
 //     return <Slide direction="up" ref={ref} {...props} />;
 //   });
 
-class ObieeDialog extends React.PureComponent {
+function ObieeDialog(props)  {
 
-    render() {
-        const {classes, eventClose, maxWidth,
+        const {eventClose, maxWidth,handleClose,
             openModal,title,children,fullScreen,
-            TransitionComponent,actionBar,onKeyDown,useOwnDialog,...others} = this.props;
+            TransitionComponent,actionBar,onKeyDown,useOwnDialog,...others} = props;
 
         return (
             <>
@@ -114,17 +123,17 @@ class ObieeDialog extends React.PureComponent {
                 {...others}
             >
 
-                <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
+                <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                         {title}
                 </DialogTitle>
 
                 <MuiDialogContent>
 
-                    <PaperDialogContent>
+                    {/* <PaperDialogContent> */}
 
                             {children}
 
-                    </PaperDialogContent>
+                    {/* </PaperDialogContent> */}
 
                 </MuiDialogContent>
 
@@ -136,7 +145,7 @@ class ObieeDialog extends React.PureComponent {
             }
             </>
         );
-    }
+    
 }
 
 ObieeDialog.propTypes = {

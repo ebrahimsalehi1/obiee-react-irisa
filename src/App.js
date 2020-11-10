@@ -5,26 +5,27 @@ import ObieeDrawer from './hoc/ObieeDrawer';
 import ObieeSigin from './hoc/ObieeSignin';
 import data from '../db.json';
 import {UserContext} from './Context';
-import ObieeCrudApprole from './hoc/ObieeCrudApprole';
+import ObieeApprole from './hoc/Security/ObieeApprole';
 import ObieeReports from './hoc/ObieeReports';
 import ObieeUsers from './hoc/ObieeUsers';
-import ObieeCrudUserOfApprole from './hoc/ObieeCrudUserOfApprole';
+import ObieeAssignUserToApprole from './hoc/Security/ObieeAssignUserToApprole';
+import ObieeAssignObjectToApprole from './hoc/Security/ObieeAssignObjectToApprole';
 import ObieeSettings from './hoc/ObieeSettings';
 import Grid from '@material-ui/core/Grid';
 import ObieeShowMessage from './widgets/ObieeShowMessage';
 import {MuiThemeProvider,createMuiTheme} from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-// import {themeLightLTR} from './utils/theme-light-ltr';
-// import {themeLightRTL} from './utils/theme-light-rtl';
-// import {themeDarkLTR} from './utils/theme-dark-ltr';
-// import {themeDarkRTL} from './utils/theme-dark-rtl';
+import {themeLightLTR} from './utils/theme-light-ltr';
+import {themeLightRTL} from './utils/theme-light-rtl';
+import {themeDarkLTR} from './utils/theme-dark-ltr';
+import {themeDarkRTL} from './utils/theme-dark-rtl';
 
-//import ObieeCrudApprole from './hoc/ObieeCrudApprole';
 //import { TramRounded } from '@material-ui/icons';
 //import {  BrowserRouter as Router,Route,Switch as SwitchRoute} from 'react-router-dom';
 //import { createBrowserHistory } from 'history';
 
+/*
 const themeLightLTR = createMuiTheme({
     direction: 'ltr',    
     palette:{
@@ -52,6 +53,7 @@ const themeDarkRTL = createMuiTheme({
         type:"dark"
     }
 });
+*/
 
 export default function App(props){
 
@@ -64,7 +66,9 @@ export default function App(props){
         palette:{
             type:context.obieeState.theme ? "dark":"light"
         }
-    });
+    });    
+
+    //const themeMain = context.obieeState.direction===false ? (context.obieeState.theme ? themeDarkLTR : themeLightLTR) : (!context.obieeState.theme ? themeLightRTL : themeDarkRTL);
 
     //console.log(context.obieeState.direction===false ? (context.obieeState.theme ? 'themeDarkLTR' : 'themeLightLTR') : (!context.obieeState.theme ? 'themeLightRTL' : 'themeDarkRTL'));
     //<MuiThemeProvider theme={context.obieeState.direction===false ? (context.obieeState.theme ? themeDarkLTR : themeLightLTR) : (!context.obieeState.theme ? themeLightRTL : themeDarkRTL)}>
@@ -130,11 +134,15 @@ export default function App(props){
             }
 
             {context.obieeState.shown_component==='show_approle' &&
-                <ObieeCrudApprole url={localStorage.esbip+'api/v1.0/approles'}/>
+                <ObieeApprole url={localStorage.esbip+'api/v1.0/approles'}/>
             }
 
             {context.obieeState.shown_component==='show_user_approle' &&
-                <ObieeCrudUserOfApprole url={localStorage.esbip+'api/v1.0/approles'}/>
+                <ObieeAssignUserToApprole url={localStorage.esbip+'api/v1.0/approles'}/>
+            }
+
+            {context.obieeState.shown_component==='show_object_approle' &&
+                <ObieeAssignObjectToApprole />
             }
 
             {context.obieeState.shown_component==='show_report' &&

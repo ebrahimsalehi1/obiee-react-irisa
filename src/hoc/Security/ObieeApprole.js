@@ -10,16 +10,18 @@ import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
 import PropTypes from 'prop-types';
 import data from '../../../db.json';
 const ObieeItemApprole = React.lazy(()=>import("./ObieeItemApprole"));
 import ObieeDialog from '../../widgets/ObieeDialog';
 //import ObieeConfirmationDialog from '../../widgets/ObieeConfirmationDialog';
-import {getText} from '../../utils/Utils';
+import {getText,addToList,deleteFromList,updateList} from '../../utils/Utils';
 import {appRoleAll,approleCreate,approleEdit,approleDelete} from '../../webservice/Approle';
 //import ObieeShowMessage from '../widgets/ObieeShowMessage';
 import {UserContext} from '../../Context';
 import ObieeMaterialTable from '../../widgets/ObieeMaterialTable';
+import Refresh from '@material-ui/icons/Refresh';
 
 const useStyles = makeStyles(theme=>({
   root: {
@@ -52,24 +54,24 @@ export default function ObieeApprole(props){
 
     const context = React.useContext(UserContext);
 
-    React.useEffect(()=>{
+    async function fetchData(){
 
-      async function fetchData(){
+      context.obieeDispatch({type:'show_loading'});
+      const result = await appRoleAll();
 
-        context.obieeDispatch({type:'show_loading'});
-        const result = await appRoleAll();
-
-        if(result.error){
-          context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
-        }
-        else{
-          setApproles(result.data);
-          setFilteredApproles(result.data);
-        }
-
-        context.obieeDispatch({type:'hide_loading'});
-
+      if(result.error){
+        context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
       }
+      else{
+        setApproles(result.data);
+        setFilteredApproles(result.data);
+      }
+
+      context.obieeDispatch({type:'hide_loading'});
+
+    }
+
+    React.useEffect(()=>{
 
       fetchData();
 
@@ -86,6 +88,7 @@ export default function ObieeApprole(props){
           ]} 
           data={approles}
           actions={[
+            {isFreeAction:true,icon:()=>(<Refresh />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{fetchData()}},
             {
               isFreeAction:true,
               icon:AddIcon,   
@@ -93,16 +96,49 @@ export default function ObieeApprole(props){
               onClick: (event, rowData) => {
                   setMode('add');
               }   
-          },
+            },
+            {
+              icon:EditIcon,   
+              tooltip:'Edit a row on tree',
+              onClick: (event, rowData) => {
+                  console.log('EDIT rowData',rowData);
+                  setMode('edit');
+                  setApprole(rowData);          
+              }
+            }          
           ]}
           editable={            
               {
-                onRowDelete: (event,oldRow)=>new Promise((resolve,reject)=>{
-                  console.log('onRowDelete',event,oldRow);
-                  setMode('add');
+                onRowDelete: oldRow => new Promise(async (resolve,reject)=>{
+                  console.log('onRowDelete',oldRow);
+
+                  context.obieeDispatch({type:'show_loading'});
+                  const result = await approleDelete(oldRow.name);
+          
+                  if(result.error){
+                    context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+                    resolve();
+                  }
+                  else{
+                    const newList = deleteFromList(approles,oldRow);
+                    if(newList.length > 0){
+                      setApproles(newList);
+                    }
+                    context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
+                    resolve();
+                  }
+          
+                  context.obieeDispatch({type:'hide_loading'});
+
                 }),
-                //onRowUpdate: (event,oldRow,newRow)=>console.log(event,oldRow,newRow),
-                //onRowDelete: (event,oldRow)=>console.log(event,oldRow)                
+                // onRowUpdate: (oldRow,newRow)=>new Promise((resolve,reject)=>{
+                //   console.log('onRowUpdate',oldRow,newRow);
+
+                //   setMode('edit');
+                //   setApprole(oldRow);
+                //   resolve();
+                // }),
+          
               }            
           }
       />
@@ -130,6 +166,9 @@ export default function ObieeApprole(props){
             context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
           }
           else{
+            const newList = addToList(approles,approleItem);
+            setApproles(newList);
+            context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
           }
 
           setMode('');
@@ -138,7 +177,6 @@ export default function ObieeApprole(props){
         }}
         onEdit={async approleItem=>{
           console.log('edit',approleItem);
-
           context.obieeDispatch({type:'show_loading'});
 
           const result = await approleEdit(approleItem);
@@ -147,6 +185,9 @@ export default function ObieeApprole(props){
             context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
           }
           else{
+            const newList = updateList(approles,approle,approleItem);
+            setApproles(newList);
+            context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
           }
 
           setMode('');

@@ -169,3 +169,69 @@ export async function callRestGet(key,urlParams){
         }});
     
 }
+
+export function addToList(data,newData){
+
+    let mdata;
+
+    if(newData && newData.id){
+        let max = 0;
+        data.forEach(item => {
+        if (item.id > max) {
+            max = item.id;
+        }
+        });
+
+        mdata = [...data,{...newData,id:max+1,parentId:null}];
+    }
+    else{
+        mdata = [...data,newData];
+    }
+
+    return mdata;
+}
+
+export function updateList(data,oldData,newData){
+
+    let mdata = [...data];
+
+    try{
+        const foundedIndex = mdata.indexOf(oldData);
+
+        if(foundedIndex!==undefined && foundedIndex>=0){
+            mdata.splice(foundedIndex,1,newData);      
+        }
+        else{
+            mdata = [];   
+        }
+    }
+    catch(err){
+        alert(err)
+        mdata = [];  
+    }
+    
+    return mdata;
+}
+
+export function deleteFromList(data,oldData){
+
+    let dataDelete = [...data];
+    try{
+        // tableData , childRows
+        if(!oldData.tableData.childRows)
+        {
+            console.log('dataDelete 1',dataDelete.length);
+            const index = oldData.tableData.id;
+            dataDelete.splice(index, 1);
+
+        }
+        else{
+            dataDelete = [];
+        }
+    }
+    catch(e){
+        dataDelete = [];
+    }    
+        
+    return dataDelete;
+}

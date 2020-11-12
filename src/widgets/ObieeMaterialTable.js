@@ -20,7 +20,6 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import MoreVert from '@material-ui/icons/MoreVert';
-import Refresh from '@material-ui/icons/Refresh';
 import {MuiThemeProvider,createMuiTheme, makeStyles} from '@material-ui/core/styles';
 import {callRestPost} from '../utils/Utils';
 import {UserContext} from '../Context';
@@ -173,7 +172,6 @@ export default function ObieeMaterialTable(props) {
                 editable={editable}
                 actions={[
                     {isFreeAction:true,icon:()=>(<MoreVert />),tooltip:'منوهای بیشتر',onClick:(event,rowData)=>{}},
-                    {isFreeAction:true,icon:()=>(<Refresh />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{}},
                     ...actions,
                 ]}
                 localization={{

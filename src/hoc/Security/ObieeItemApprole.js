@@ -54,15 +54,17 @@ export default function ObieeItemApprole(props){
 
     const{mode,onAdd,onEdit,onDelete,onCancel,onExternalEvent} = props;
 
+    console.log('ObieeItemApprole-props',props);
+
     const [approleName,setApproleName] = React.useState(props.approle && mode!=='add' ? props.approle.name:'');
     const [approleDesc,setApproleDesc] = React.useState(props.approle && mode!=='add' ? props.approle.description : '');
-    const [approleType,setApproleType] = React.useState(props.approle && mode!=='add' ? props.approle.approleType:'');
-    const [appType,setAppType] = React.useState(props.approle && mode!=='add' ? props.approle.appType:'');
-    const [approleLatinName,setApproleLatinName] = React.useState(props.approle && mode!=='add' ? props.approle.displayName:'');
+    const [approleType,setApproleType] = React.useState(mode!=='add' && props.approle.baseRoles ? props.approle.baseRoles[0].name:'');
+    const [appType,setAppType] = React.useState(props.approle && mode!=='add' ? props.approle.type:'');
+    const [approleDisplayName,setApproleDisplayName] = React.useState(props.approle && mode!=='add' ? props.approle.displayName:'');
 
-    const strApproleLatinName = getText('Approle Latine Name');
+    const strApproleDisplayName = getText('Approle Display Name');
     const strApproleName = getText('Approle Name');
-    const strApproleType = getText('Application Type');
+    const strApproleType = getText('Application Role Type');
     const strAppType = getText('Application Type');
     const strApproleDesc = getText('Approle Desc');
     const strSave = getText('Save');
@@ -72,8 +74,8 @@ export default function ObieeItemApprole(props){
 
     const createRow = () => {
       const result = {
-        name: approleLatinName ,
-        displayName: approleName,
+        name: approleName  ,
+        displayName: approleDisplayName,
         description: approleDesc,
         appId: "obi",
         type:appType,
@@ -85,7 +87,7 @@ export default function ObieeItemApprole(props){
 
     function validation(){
       if(approleName.length === 0 || 
-         approleLatinName.length === 0 ||
+         approleDisplayName.length === 0 ||
          approleDesc.length === 0 ||
          appType.length === 0 ||
          approleType.length === 0
@@ -99,28 +101,6 @@ export default function ObieeItemApprole(props){
     <Card className={classes.root} variant="outlined">
       <CardContent className={classes.cardContent.root}>
       <Grid container spacing={1} >
-
-      {(mode==='add' || mode==='edit') && 
-      <Grid item xs={12} md={12}>
-            <TextField  
-            label={strApproleLatinName}
-            placeholder={strApproleLatinName}
-            variant={"outlined"}
-            fullWidth
-            value={approleLatinName}
-            onChange={e=>setApproleLatinName(e.target.value)}
-            />
-        </Grid>
-      }
-
-      {mode==='read' && 
-      <Grid item xs={12} md={3}>
-            <Typography  
-            variant="h6"
-            component="span"
-            >{approleLatinName}</Typography>
-        </Grid>
-      }
 
       {(mode==='add' || mode==='edit') && 
       <Grid item xs={12} md={12}>
@@ -141,6 +121,28 @@ export default function ObieeItemApprole(props){
             variant="h6"
             component="span"
             >{approleName}</Typography>
+        </Grid>
+      }
+
+      {(mode==='add' || mode==='edit') && 
+      <Grid item xs={12} md={12}>
+            <TextField  
+            label={strApproleDisplayName}
+            placeholder={strApproleDisplayName}
+            variant={"outlined"}
+            fullWidth
+            value={approleDisplayName}
+            onChange={e=>setApproleDisplayName(e.target.value)}
+            />
+        </Grid>
+      }
+
+      {mode==='read' && 
+      <Grid item xs={12} md={3}>
+            <Typography  
+            variant="h6"
+            component="span"
+            >{approleDisplayName}</Typography>
         </Grid>
       }
 

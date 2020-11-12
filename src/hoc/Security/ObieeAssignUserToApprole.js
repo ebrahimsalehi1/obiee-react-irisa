@@ -18,6 +18,8 @@ import Card from '@material-ui/core/Card';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
+import {getText} from '../../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,10 +53,13 @@ export default function ObieeAssignUserToApprole() {
   //    return {id:item.id,name:item.name,family:item.family}
   //}));
   const [approles,setApproles] = React.useState([]);
-  //const [userOfApproles,setUserOfApproles] = React.useState([]);
+  const [currentApprole,setCurrentApprole] = React.useState();
+  const [currentUsers,setCurrentUsers] = React.useState([]);
 
   //const rightChecked = intersection(checked, right);
   //const leftChecked = intersection(checked, left);
+
+  const strSave = getText('Save');
 
   const context = React.useContext(UserContext);
 
@@ -218,14 +223,20 @@ export default function ObieeAssignUserToApprole() {
           fullWidth
           renderInput={(params) => <TextField {...params} label="approles" variant="outlined" />}
           onChange={async (e,val)=>{
+            context.obieeDispatch({type:'show_loading'});
+
             const result = await getListUsersOfRole(val.name);
+            setCurrentApprole(val);
             if(result.error){
               context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
             }
             else{
               console.log('setUserOfApproles',result.data);
+              setCurrentUsers(result.data);
               setRight(result.data);
             }
+
+            context.obieeDispatch({type:'hide_loading'});          
           }}
         />        
         </Grid>
@@ -275,6 +286,53 @@ export default function ObieeAssignUserToApprole() {
         </Grid>
       </Grid>
       <Grid item xs={12} md={5}>{customList(right,2000000)}</Grid>
+
+      <Grid
+        container
+        item
+        direction="row"
+        justify="flex-end"
+        alignItems="flex-end"
+      >
+          <ObieeButtonOperation onExecute={async ()=>
+            {
+              context.obieeDispatch({type:'show_loading'});
+
+              const listRemove =  not(currentUsers,right);
+              const listAdd = not(right,currentUsers);
+
+              //console.log('role',currentApprole,'listRemove',listRemove,'listAdd',listAdd);
+              //return;              
+    
+              const listFailed = [];
+              listAdd.forEach(async item=>{
+
+                const result = await approleAssignToRole(currentApprole.name,item.name);
+                if(result.error){
+                  listFailed.push(item);
+                }
+              });
+
+              listRemove.forEach(async item=>{
+
+                const result = await approleAssignToRole(currentApprole.name,item.name);
+                console.log(result);
+                if(result.error){
+                  listFailed.push(item);
+                }
+              });
+
+              if(listFailed.length === 0)
+                context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
+              else
+                context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
+
+
+              setMode('');
+    
+              context.obieeDispatch({type:'hide_loading'});          
+            }} title={strSave} />
+      </Grid>
     </Grid>
   );
 }

@@ -1,92 +1,91 @@
 [
     {
         "name":"REPORT_SAMPLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/reports/sample"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/reports/sample"
     },
     {
         "name":"REPORT_TRANSACTIONAL",
-        "bffUrl":"http://localhost:8081/obiee-bff/reports/transactional"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/reports/transactional"
     },
     {
         "name":"REPORT_ANALYSER",
-        "bffUrl":"http://localhost:8081/obiee-bff/reports/analyser"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/reports/analyser"
     },
     {
         "name":"REPORT_DASHBOARD",
-        "bffUrl":"http://localhost:8081/obiee-bff/reports/dashboard"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/reports/dashboard"
     },
     {
         "name":"APPROLE_HAS_ADMIN_ROLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/hasAdminRole/:1"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/approle/hasAdminRole/:1"
     },
     {
         "name":"APPROLE_ALL",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/all"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/approle/all"
     },
     {
         "name":"APPROLE_SEARCH",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/search/searchword"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/approle/search/searchword"
     },
     {
         "name":"APPROLE_CREATE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/create"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/approle/create"
     },
     {
         "name":"APPROLE_EDIT",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/edit"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/approle/edit"
     },
     {
         "name":"APPROLE_DELETE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/delete/:1"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/approle/delete/:1"
     },
     {
         "name":"APPROLE_ASSIGN_USER_TO_ROLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/assignUserToRole/:1/:2"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/approle/assignUserToRole/roleName/userName"
     },
     {
-        "name":"APPROLE_DELETE_USER_FROM_ROLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/deleteUserFromRole/:1/:2"
+        "name":"APPROLE_DELE",
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/approle/deleteUserFromRole/roleName/userName"
     },
     {
         "name":"APPROLE_LIST_USERS_OF_ROLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/listUsersOfRole/:1"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/approle/listUsersOfRole/roleName"
     },
     {
         "name":"STATISTIC_LOGIN",
-        "bffUrl":"http://localhost:8081/obiee-bff/statistic/traffic"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/statistic/traffic"
     },
     {
         "name":"STATISTIC_ANALYTIC",
-        "bffUrl":"http://localhost:8081/obiee-bff/statistic/analytic"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/statistic/analytic"
     },
     {
         "name":"STATISTIC_VISUALANALYSER",
-        "bffUrl":"http://localhost:8081/obiee-bff/statistic/visualAnalyser"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/statistic/visualAnalyser"
     },
     {
         "name":"STATISTIC_BIPUBLISHER",
-        "bffUrl":"http://localhost:8081/obiee-bff/statistic/biPublisher"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/statistic/biPublisher"
     },
     {
         "name":"STATISTIC_DASHBOARD",
-        "bffUrl":"http://localhost:8081/obiee-bff/statistic/analytic"
-    },
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/statistic/analytic"
+    },    
     {
         "name":"LOGIN",
-        "bffUrl":"http://localhost:8081/obiee-bff/login"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/login"
     },
     {
         "name":"USER_INFO",
-        "bffUrl":"http://localhost:8081/obiee-bff/user/info/:1"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/user/info/:1"
     },
     {
         "name":"USER_ALL",
-        "bffUrl":"http://localhost:8081/obiee-bff/user/all"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/user/all"
     },
     {
         "name":"USER_SEARCH",
-        "bffUrl":"http://localhost:8081/obiee-bff/user/search/:1"
+        "bffUrl":"http://172.25.40.135:8080/backforfront/obiee-bff/user/search/:1"
     }
-
 
 ]

@@ -5,14 +5,14 @@ const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 
 module.exports = {
     entry: 
-        ["babel-polyfill","./src/index.js"],
+        ["./src/index.js"],
     // output:{
     //     filename: "index.js",
     //     path: path.resolve(__dirname,"build")
     // },
     node: {
         fs: 'empty',
-      },
+      },    
     plugins: [new HtmlWebpackPlugin(
         {
             template: "./public/index.html",
@@ -21,10 +21,10 @@ module.exports = {
     ),
     new CopyWebpackPlugin({
         patterns:[
-            {
-                from:"public/webservices.json",
-                to:""
-            }
+            {from:"public/webservices.json",to:""},
+            {from:"public/img/*",to:""},
+            {from:"public/fonts/*",to:""},
+            {from:"public/css/*",to:""},
         ]
     }),
     new WriteFileWebpackPlugin({

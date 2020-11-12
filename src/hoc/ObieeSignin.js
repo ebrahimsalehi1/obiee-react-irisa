@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     top: 0,
     position: 'absolute',
-    backgroundImage: 'url(../../public/img/bg.png)',
+    backgroundImage: 'url(./public/img/bg.png)',
     height: '100%',
     backgroundSize: '80%',
     backgroundRepeat: 'no-repeat',
@@ -162,7 +162,7 @@ export default function SignIn(props) {
                 <div className={classes.loginTitle} style={{display: 'block'}}>
                     <span className={classes.loginTitleSpan}>ورود به حساب کاربری</span>
                 </div>
-                <img className={classes.logo} src="../../public/img/logo.svg" alt=""/>
+                <img className={classes.logo} src="./public/img/logo.svg" alt=""/>
                 <h4 className={classes.logoText}>مدیریت گزارشات هرمزگان</h4>
                 <div className="form-group user-input">
                     <label htmlFor="inputName" className="control-label">نام کاربری</label>
@@ -191,7 +191,7 @@ export default function SignIn(props) {
     </div>
 
     <div className={classes.footer}>
-        <label className={classes.footerLogo}><img src="../../public/img/hoghoogh.jpg"/></label>
+        <label className={classes.footerLogo}><img src="./public/img/hoghoogh.jpg"/></label>
         <br/>
             <div>
                 <span className={classes.footerText}>

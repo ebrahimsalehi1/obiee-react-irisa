@@ -1,26 +1,32 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import data from '../../../db.json';
 import {UserContext} from '../../Context';
 import {appRoleAll,getListUsersOfRole} from '../../webservice/Approle';
-import {getUserAll} from '../../webservice/User';
+import {tree} from '../../webservice/Catalog';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import ObieeMaterialTable from '../../widgets/ObieeMaterialTable';
+import {getText} from '../../utils/Utils';
+import Refresh from '@material-ui/icons/Refresh';
+import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import Select from '@material-ui/core/Select';
+import Child from '@material-ui/icons/ChildCare';
+import MenuItem from '@material-ui/core/MenuItem';
+//import db from './catalog.json';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width:'100%',
     margin: 'auto',
   },
   paper: {
@@ -36,17 +42,15 @@ const useStyles = makeStyles((theme) => ({
 export default function ObieeAssignObjectToApprole() {
 
   const classes = useStyles();
-  const [checked, setChecked] = React.useState([]);
-  const [left, setLeft] = React.useState([]); // data.users
-  const [right, setRight] = React.useState([]);
 
   const [approles,setApproles] = React.useState([]);
-  //const [userOfApproles,setUserOfApproles] = React.useState([]);
-
-  //const rightChecked = intersection(checked, right);
-  //const leftChecked = intersection(checked, left);
+  const [catalog,setCatalog] = React.useState([]);
+  const [rowExpanded,setRowExpanded] = React.useState(null);
+  const [permissionType,setPermissionType] = React.useState('Full control');
 
   const context = React.useContext(UserContext);
+
+  const strPermission = getText('Permission');
 
   React.useEffect(()=>{
 
@@ -68,14 +72,21 @@ export default function ObieeAssignObjectToApprole() {
 
       //------------------------------------------------------
 
-      result = await getUserAll();
+      const user = localStorage.getItem('user');
+      const sessionId = localStorage.getItem('sessionId');
+
+      result = await tree(
+        {
+        user: user,
+        sessionId:sessionId
+        }
+      );
 
       if(result.error){
         context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
       }
       else{
-        setLeft(result.data);
-        //alert('finidhed')
+        setCatalog(result.data);
       }
 
       //------------------------------------------------------
@@ -89,112 +100,62 @@ export default function ObieeAssignObjectToApprole() {
     }
   ,[]);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-    
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {    
-      newChecked.splice(currentIndex, 1);
-    }
-
-    console.log('handleToggle',currentIndex,newChecked);
-
-    setChecked(newChecked);
-  };
-
-  const handleAllRight = () => {
-    setRight(right.concat(left));
-    setLeft([]);
-  };
-
-  const handleCheckedRight = () => {
-    const leftChecked = checked;
-    setRight(right.concat(leftChecked));
-    setLeft(not(left, leftChecked));
-    setChecked(not(checked, leftChecked));
-    console.log(leftChecked,right);
-  };
-
-  const handleCheckedLeft = () => {  
-    const rightChecked = checked;
-    setLeft(left.concat(rightChecked));
-    setRight(not(right, rightChecked));
-    setChecked(not(checked, rightChecked));
-  };
-
-  const handleAllLeft = () => {
-    setLeft(left.concat(right));
-    setRight([]);
-  };
-
-  const customList = (items,uniqueId) => {
-
-    const textVal = React.useRef();
-    const [filteredItems,setFilteredItems] = React.useState([]);
-
-    React.useEffect(()=>{
-      setFilteredItems(items);
-    },[items]);
-
+  const Permissions = ()=>{
     return (
-    <Card>
-    <Grid container spacing={0}>
-      <Grid item xs={10} md={10}>
-      <TextField
-      fullWidth
-      variant="outlined"
-      inputRef={textVal}
-      placeholder="Search"
-      inputProps={{ 'aria-label': 'search' }}    
-      onChange={e=>{
-        if(e.target.value.length === 0)
-          setFilteredItems(items);
-      }}  
-      />
-      </Grid>
-      <Grid item xs={2} md={2}>
-      <IconButton type="submit" className={classes.iconButton} aria-label="search"
-      onClick={()=>{
-        if(textVal.current.value.length>2){
-          const filteredItems = items.filter(item=>item.name.indexOf(textVal.current.value)!==-1);
-          setFilteredItems(filteredItems);
-        }
-      }}
+      <FormControl variant="outlined" fullWidth className={classes.formControl}>
+      <InputLabel id="demo-simple-select-outlined-label">{strPermission}</InputLabel>
+      <Select
+        //labelId="demo-simple-select-outlined-label"
+        //id="demo-simple-select-outlined"
+        value={permissionType}
+        onChange={(e)=>{
+          console.log(e.target.value);
+          setPermissionType(e.target.value);
+        }}
+        label={strPermission}
       >
-        <SearchIcon />
-      </IconButton>
-      </Grid>
-      </Grid>
-    <Paper className={classes.paper}>
-      <List dense component="div" role="list">
-        {filteredItems.map((value) => {
-          const labelId = `transfer-list-item-${value.name}-label-${uniqueId}`;
+        <List component="nav"
+        subheader={<ListSubheader component="div">Permissions</ListSubheader>}
+        >
+          <ListItem button>
+            <ListItemText>Full control</ListItemText>
+          </ListItem>
+          <ListItem button>
+            <ListItemText>Modify</ListItemText>
+          </ListItem>
+          <ListItem button>
+            <ListItemText>Open</ListItemText>
+          </ListItem>
+          <ListItem button>
+            <ListItemText>No Access</ListItemText>
+          </ListItem>
+          <ListItem>
+            <ListItemText>Custom</ListItemText>
+            <Checkbox />
+            <Checkbox />
 
-          return (
-            <ListItem key={labelId} role="listitem" button onClick={handleToggle(value)}>
-              <ListItemIcon>
-                <Checkbox
-                  checked={checked.indexOf(value) !== -1}
-                  tabIndex={-1}
-                  disableRipple
-                  inputProps={{ 'aria-labelledby': labelId }}
-                />
-              </ListItemIcon>
-              <ListItemText id={labelId} primary={`${value.displayName} - ${value.name}`} />
-            </ListItem>
-          );
-        })}
-        <ListItem />
-      </List>
-    </Paper>
-    </Card>
-    );
-  };
+          </ListItem>
+          <ListItem>
+          <Checkbox />
+          </ListItem>
+
+          <ListItem>
+          <Checkbox />
+          </ListItem>
+
+          <ListItem>
+          <Checkbox />
+          </ListItem>
+          
+        </List>
+      </Select>
+    </FormControl>
+    )
+  }
+
 
   return (
-    <Grid container spacing={4} justify="center" alignItems="center" className={classes.root}>
+    <Grid container spacing={1} justify="center" alignItems="center" className={classes.root}>
       <Grid item xs={12} md={12}>
         <Autocomplete
           id="combo-box-demo"
@@ -214,6 +175,78 @@ export default function ObieeAssignObjectToApprole() {
           }}
         />        
         </Grid>
+
+      <Grid item xs={12} md={10}>
+      <ObieeMaterialTable
+          columns={[
+            { field: 'caption', title: getText('Caption'), headerStyle:{width:200} },
+            { field: 'description', title: getText('Description'), headerStyle:{width:300} },
+          ]} 
+          data={catalog}
+          actions={[
+            rowData => rowExpanded && rowExpanded.path===rowData.parentPath ?
+            ({
+              icon: () => (
+                  <Child
+                      color={'enabled'}
+                  />
+              ),
+              tooltip: 'Childs',
+               onClick: (event, rowData) => {
+                   if (!rowData.disabled) {
+                       // do stuff
+                   } else {
+                       return null;
+                   }
+               },
+          })
+          :null,
+          {isFreeAction:true,icon:()=>(<Refresh />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{fetchData()}},
+          {isFreeAction:true,icon:()=>(<TextField />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{fetchData()}},
+          ]}
+          options={{
+            rowStyle:(event,rowData)=>{                
+                if(rowExpanded && rowExpanded.path===event.parentPath)
+                    return {
+                        backgroundColor:'#70b1f2',
+                    }                  
+            },
+            // cellStyle:(event,rowData)=>{
+            //     return (
+            //         event===rowData.description && rowData.type==='PROD'  ? COLORS.prod :
+            //         event===rowData.description && rowData.type==='HR' ? COLORS.hr :
+            //         event===rowData.description && rowData.type==='ASSETINLOCATION' ? COLORS.assetinlocation : COLORS.other
+            //     )                        
+            // }
+        }}
+          parentChildData={(row, rows) => rows.find(a => a.path === row.parentPath)}
+          onTreeExpandChange={(event,nodes)=>{
+            //console.log('onTreeExpandChange',event,nodes)
+            if(nodes){
+                setRowExpanded(event);        
+            }
+        }}
+      />
+      </Grid>
+
+      <Grid item xs={12} md={2}>
+        <Grid 
+          spacing={0} 
+          container
+          direction="column"
+          justify="flex-start"
+          alignItems="stretch"        
+        >
+          <Grid item xs={12} md={12}>
+            <Permissions />
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Paper style={{"height":"400px"}}>
+
+            </Paper>
+          </Grid>
+        </Grid>
+      </Grid>
 
     </Grid>
   );

@@ -12,7 +12,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import PropTypes from 'prop-types';
-import data from '../../../db.json';
 const ObieeItemApprole = React.lazy(()=>import("./ObieeItemApprole"));
 import ObieeDialog from '../../widgets/ObieeDialog';
 //import ObieeConfirmationDialog from '../../widgets/ObieeConfirmationDialog';
@@ -42,8 +41,8 @@ export default function ObieeApprole(props){
 
     const classes = useStyles();
 
-    const [approles,setApproles] = React.useState([]); // data.approles
-    const [filteredApproles,setFilteredApproles] = React.useState([]); // data.approles
+    const [approles,setApproles] = React.useState([]); 
+    const [filteredApproles,setFilteredApproles] = React.useState([]); 
 
     const [mode,setMode] = React.useState('');
     const [showConfirmDelete,setShowConfirmDelete] = React.useState(false);

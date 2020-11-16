@@ -8,7 +8,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import data from '../../../db.json';
 import {UserContext} from '../../Context';
 import {appRoleAll,getListUsersOfRole} from '../../webservice/Approle';
 import {getUserAll} from '../../webservice/User';
@@ -47,11 +46,9 @@ export default function ObieeAssignUserToApprole() {
 
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
-  const [left, setLeft] = React.useState([]); // data.users
+  const [left, setLeft] = React.useState([]); 
   const [right, setRight] = React.useState([]);
-  //data.userApproles.map(item=>{
-  //    return {id:item.id,name:item.name,family:item.family}
-  //}));
+
   const [approles,setApproles] = React.useState([]);
   const [currentApprole,setCurrentApprole] = React.useState();
   const [currentUsers,setCurrentUsers] = React.useState([]);
@@ -77,7 +74,6 @@ export default function ObieeAssignUserToApprole() {
         context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
       }
       else{
-        console.log('result.data',result.data);
         setApproles(result.data);
       }
 
@@ -90,7 +86,6 @@ export default function ObieeAssignUserToApprole() {
       }
       else{
         setLeft(result.data);
-        //alert('finidhed')
       }
 
       //------------------------------------------------------
@@ -231,7 +226,6 @@ export default function ObieeAssignUserToApprole() {
               context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
             }
             else{
-              console.log('setUserOfApproles',result.data);
               setCurrentUsers(result.data);
               setRight(result.data);
             }

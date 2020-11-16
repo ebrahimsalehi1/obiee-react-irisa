@@ -129,17 +129,21 @@ export default function SignIn(props) {
 
     let result = await login(userName,password);
 
+    console.log('SignIn result',result);
+
     if(result.error){
       context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
     }
-    else{
+    else{       
+      localStorage.setItem('sessionId',result.data) ;
       result =  await getUserInfo(localStorage.getItem('user'));
+
       if(result.error){
         context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:"error in get info"}});
         context.obieeDispatch({type:'login'});
       }
-      else{
-        console.log("login-",{userInfo:result.data})
+      else{        
+        //console.log("login-",result.data)
         context.obieeDispatch({type:'login',userInfo:result.data});
       }
     }
@@ -202,6 +206,6 @@ export default function SignIn(props) {
     </div>
 
 </div>
-    )
+    ) 
   ;
 }

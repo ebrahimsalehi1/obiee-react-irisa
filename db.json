@@ -4,53 +4,1336 @@
         {"id":"VISUAL_ANALYSER","name":"گزارشات داده محور","latinName":"Visual Analyzer","type":"show_dashboard_dashboard"},
         {"id":"BI_PUBLISHER","name":"گزارشات تراکنشی","latinName":"BI Publisher","type":"show_dashboard_transactional"}
     ],
-    "users":[
-        {"id": "763434","name":"ahmad","family":"molaee","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},
-        {"id": "763431","name":"asghar","family":"samadi","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},
-        {"id": "763430","name":"karim","family":"erfani","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},
-        {"id": "763439","name":"amir","family":"kiani","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},
-        {"id": "763438","name":"maryam","family":"ahmadi","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"},
-        {"id": "763437","name":"sima","family":"salahi","post":"it manager","tel":"12232432","internalTel":"4532","mobile":"09123450912","email":"abc@googlr.com"}
-    ],
-    "reports" : [
-        {"name":"report 1","title":"report for PDS","link":"http://obiee.com/report1"},
-        {"name":"report 2","title":"report for WSE","link":"http://obiee.com/report2"},
-        {"name":"report 3","title":"report for FND","link":"http://obiee.com/report3"}
-    ],
-    "approles" : [
-        {"approleName":"approle 1","approleDesc":"approle desc 1","approleType":"author","approleLatinName":"approle Latin name 1","appType":"AN"},
-        {"approleName":"approle 2","approleDesc":"approle desc 2","approleType":"consumer","approleLatinName":"approle Latin name 2","appType":"BI"},
-        {"approleName":"approle 3","approleDesc":"approle desc 3","approleType":"admin","approleLatinName":"approle Latin name 3","appType":"AN"},
-        {"approleName":"approle 4","approleDesc":"approle desc 4","approleType":"context author","approleLatinName":"approle Latin name 4","appType":"BI"},
-        {"approleName":"approle 5","approleDesc":"approle desc 5","approleType":"author","approleLatinName":"approle Latin name 5","appType":"BI"}
-    ],
-    "userApproles" : [
+    "USER_ALL":[
         {
-            "id": "763434","name":"ahmad","family":"molaee", 
-            "approles":[{"approleName":"approle 1","approleDesc":"approle desc 1","approleType":"author"},
-            {"approleName":"approle 2","approleDesc":"approle desc 2","approleType":"consumer"}]
+            "displayName": "",
+            "name": "LCMUser",
+            "gUID": null,
+            "description": null,
+            "namFirstEmply": "",
+            "namLastEmply": "LCMUser",
+            "mail": "",
+            "membersOf": []
         },
-
-        {"id": "763431","name":"asghar","family":"samadi",
-            "approles":[{"approleName":"approle 3","approleDesc":"approle desc 3","approleType":"admin"}]},
-
-        {"id": "763430","name":"karim","family":"erfani",
-        "approles":[{"approleName":"approle 4","approleDesc":"approle desc 4","approleType":"context author"},
-        {"approleName":"approle 5","approleDesc":"approle desc 5","approleType":"author"}]}
-
-    ],
-    "reportApproles" : [
         {
-            "reportName":"report 1","title":"report for PDS","link":"http://obiee.com/report1", 
-            "approles":[{"approleName":"approle 1","approleDesc":"approle desc 1","approleType":"author"},
-            {"approleName":"approle 2","approleDesc":"approle desc 2","approleType":"consumer"}]
+            "displayName": "",
+            "name": "OracleSystemUser",
+            "gUID": null,
+            "description": null,
+            "namFirstEmply": "",
+            "namLastEmply": "OracleSystemUser",
+            "mail": "",
+            "membersOf": []
         },
-
-        {"reportName":"report 2","title":"report for WSE","link":"http://obiee.com/report2",
-            "approles":[{"approleName":"approle 3","approleDesc":"approle desc 3","approleType":"admin"}]},
-
-        {"reportName":"report 3","title":"report for FND","link":"http://obiee.com/report3",
-        "approles":[{"approleName":"approle 4","approleDesc":"approle desc 4","approleType":"context author"},
-        {"approleName":"approle 5","approleDesc":"approle desc 5","approleType":"author"}]}
-    ]
+        {
+            "displayName": "",
+            "name": "weblogic",
+            "gUID": null,
+            "description": null,
+            "namFirstEmply": "",
+            "namLastEmply": "weblogic",
+            "mail": "",
+            "membersOf": []
+        },
+        {
+            "displayName": "",
+            "name": "m.khashei",
+            "gUID": null,
+            "description": null,
+            "namFirstEmply": "",
+            "namLastEmply": "m.khashei",
+            "mail": "",
+            "membersOf": []
+        },
+        {
+            "displayName": "",
+            "name": "z.omidvar",
+            "gUID": null,
+            "description": null,
+            "namFirstEmply": "",
+            "namLastEmply": "z.omidvar",
+            "mail": "",
+            "membersOf": []
+        }
+    ],
+    "REPORT_ANALYSER" : [        
+        {
+            "path": "/shared/Transactional Report/Visual Analyzer& BI Publisher/VisualAnalyzer",
+            "parentPath": "/shared/Transactional Report/Visual Analyzer& BI Publisher",
+            "caption": "VisualAnalyzer",
+            "description": "VisualAnalyzer",
+            "laseModified": "2020-11-14T14:11:02.000+0000",
+            "created": "2020-09-06T12:37:32.000+0000",
+            "creator": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": null,
+                "displayname": "weblogic"
+            },
+            "lastModifier": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": null,
+                "displayname": "weblogic"
+            },
+            "owner": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": null,
+                "displayname": "weblogic"
+            },
+            "signature": "",
+            "linkPath": "",
+            "type": {
+                "value": "Visual Analyzer Projects"
+            },
+            "itemAccessPermissions": [
+                {
+                    "account": {
+                        "name": "AAC_ADMIN",
+                        "guid": "AAC_ADMIN",
+                        "type": null,
+                        "displayname": "AAC_ADMIN"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 3,
+                            "acessLabel": "OPEN"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "BIServiceAdministrator",
+                        "guid": "BIServiceAdministrator",
+                        "type": null,
+                        "displayname": "BIServiceAdministrator"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 8192,
+                                "acessLabel": "VIEWREPORTOUTPUT"
+                            },
+                            {
+                                "accessValue": 4096,
+                                "acessLabel": "SCHEDULEREPORT"
+                            },
+                            {
+                                "accessValue": 2048,
+                                "acessLabel": "RUNREPORT"
+                            },
+                            {
+                                "accessValue": 32,
+                                "acessLabel": "TAKEOWNERSHIP"
+                            },
+                            {
+                                "accessValue": 16,
+                                "acessLabel": "ASSIGNPERMISSION"
+                            },
+                            {
+                                "accessValue": 8,
+                                "acessLabel": "DELETE"
+                            },
+                            {
+                                "accessValue": 4,
+                                "acessLabel": "WRITE"
+                            },
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 65535,
+                            "acessLabel": "FULLCONTROLL"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "z.omidvar",
+                        "guid": "z.omidvar",
+                        "type": null,
+                        "displayname": "z.omidvar"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 8192,
+                                "acessLabel": "VIEWREPORTOUTPUT"
+                            },
+                            {
+                                "accessValue": 4096,
+                                "acessLabel": "SCHEDULEREPORT"
+                            },
+                            {
+                                "accessValue": 2048,
+                                "acessLabel": "RUNREPORT"
+                            },
+                            {
+                                "accessValue": 32,
+                                "acessLabel": "TAKEOWNERSHIP"
+                            },
+                            {
+                                "accessValue": 16,
+                                "acessLabel": "ASSIGNPERMISSION"
+                            },
+                            {
+                                "accessValue": 8,
+                                "acessLabel": "DELETE"
+                            },
+                            {
+                                "accessValue": 4,
+                                "acessLabel": "WRITE"
+                            },
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 65535,
+                            "acessLabel": "FULLCONTROLL"
+                        }
+                    }
+                }
+            ],
+            "subCatalogItems": null,
+            "properties": {
+                "Build": "12.2.1.3.0 (Build BIPS-20170820114118 64-bit)",
+                "compositeSignature": "projectfolder1",
+                "Desc": "VisualAnalyzer"
+            },
+            "userPermission": null
+        }
+    ],
+    "REPORT_TRANSACTIONAL":[
+        {
+            "path": "/shared/Transactional Report/CSS/REPORTS/MMMMMMMMMMMMMMMM.xdo",
+            "parentPath": "/shared/Transactional Report/CSS/REPORTS",
+            "caption": "MMMMMMMMMMMMMMMM.xdo",
+            "description": "مممممممممممممممممم",
+            "laseModified": "2020-11-14T14:11:02.000+0000",
+            "created": "2020-09-06T12:40:39.000+0000",
+            "creator": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": 0,
+                "displayname": "weblogic"
+            },
+            "lastModifier": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": 0,
+                "displayname": "weblogic"
+            },
+            "owner": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": 0,
+                "displayname": "weblogic"
+            },
+            "signature": "",
+            "linkPath": "",
+            "type": {
+                "value": "Report"
+            },
+            "itemAccessPermissions": [
+                {
+                    "account": {
+                        "name": "AAC_ADMIN",
+                        "guid": "AAC_ADMIN",
+                        "type": 4,
+                        "displayname": "AAC_ADMIN"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 3,
+                            "acessLabel": "OPEN"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "BIServiceAdministrator",
+                        "guid": "BIServiceAdministrator",
+                        "type": 4,
+                        "displayname": "BIServiceAdministrator"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 8192,
+                                "acessLabel": "VIEWREPORTOUTPUT"
+                            },
+                            {
+                                "accessValue": 4096,
+                                "acessLabel": "SCHEDULEREPORT"
+                            },
+                            {
+                                "accessValue": 2048,
+                                "acessLabel": "RUNREPORT"
+                            },
+                            {
+                                "accessValue": 32,
+                                "acessLabel": "TAKEOWNERSHIP"
+                            },
+                            {
+                                "accessValue": 16,
+                                "acessLabel": "ASSIGNPERMISSION"
+                            },
+                            {
+                                "accessValue": 8,
+                                "acessLabel": "DELETE"
+                            },
+                            {
+                                "accessValue": 4,
+                                "acessLabel": "WRITE"
+                            },
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 65535,
+                            "acessLabel": "FULLCONTROLL"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "z.omidvar",
+                        "guid": "z.omidvar",
+                        "type": 0,
+                        "displayname": "z.omidvar"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 8,
+                                "acessLabel": "DELETE"
+                            },
+                            {
+                                "accessValue": 4,
+                                "acessLabel": "WRITE"
+                            },
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 15,
+                            "acessLabel": "MODIFY"
+                        }
+                    }
+                }
+            ],
+            "subCatalogItems": null,
+            "properties": {
+                "bip:AUTHOR": "weblogic",
+                "bip:MODIFIED": "1597483688421",
+                "Build": "12.2.1.3.0 (Build BIPS-20170820114118 64-bit)",
+                "compositeSignature": ".xdo",
+                "Desc": "مممممممممممممممممم",
+                "bip:OBJ_TYPE": "ReportItem",
+                "bip:propertyMap": "1"
+            },
+            "userPermission": null
+        },
+        {
+            "path": "/shared/Transactional Report/CSS/REPORTS/test2.xdo",
+            "parentPath": "/shared/Transactional Report/CSS/REPORTS",
+            "caption": "test2.xdo",
+            "description": "",
+            "laseModified": "2020-11-15T05:51:08.000+0000",
+            "created": "2020-09-06T12:40:39.000+0000",
+            "creator": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": 0,
+                "displayname": "weblogic"
+            },
+            "lastModifier": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": 0,
+                "displayname": "weblogic"
+            },
+            "owner": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": 0,
+                "displayname": "weblogic"
+            },
+            "signature": "",
+            "linkPath": "",
+            "type": {
+                "value": "Report"
+            },
+            "itemAccessPermissions": [
+                {
+                    "account": {
+                        "name": "AAC_ADMIN",
+                        "guid": "AAC_ADMIN",
+                        "type": 4,
+                        "displayname": "AAC_ADMIN"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 3,
+                            "acessLabel": "OPEN"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "BIServiceAdministrator",
+                        "guid": "BIServiceAdministrator",
+                        "type": 4,
+                        "displayname": "BIServiceAdministrator"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 8192,
+                                "acessLabel": "VIEWREPORTOUTPUT"
+                            },
+                            {
+                                "accessValue": 4096,
+                                "acessLabel": "SCHEDULEREPORT"
+                            },
+                            {
+                                "accessValue": 2048,
+                                "acessLabel": "RUNREPORT"
+                            },
+                            {
+                                "accessValue": 32,
+                                "acessLabel": "TAKEOWNERSHIP"
+                            },
+                            {
+                                "accessValue": 16,
+                                "acessLabel": "ASSIGNPERMISSION"
+                            },
+                            {
+                                "accessValue": 8,
+                                "acessLabel": "DELETE"
+                            },
+                            {
+                                "accessValue": 4,
+                                "acessLabel": "WRITE"
+                            },
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 65535,
+                            "acessLabel": "FULLCONTROLL"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "z.omidvar",
+                        "guid": "z.omidvar",
+                        "type": 0,
+                        "displayname": "z.omidvar"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 8,
+                                "acessLabel": "DELETE"
+                            },
+                            {
+                                "accessValue": 4,
+                                "acessLabel": "WRITE"
+                            },
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 15,
+                            "acessLabel": "MODIFY"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "z.zarei",
+                        "guid": "z.zarei",
+                        "type": 0,
+                        "displayname": "Zahra Zarei"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 3,
+                            "acessLabel": "OPEN"
+                        }
+                    }
+                }
+            ],
+            "subCatalogItems": null,
+            "properties": {
+                "bip:AUTHOR": "a.salimian",
+                "bip:MODIFIED": "1597488928897",
+                "Build": "12.2.1.3.0 (Build BIPS-20170820114118 64-bit)",
+                "compositeSignature": ".xdo",
+                "bip:OBJ_TYPE": "ReportItem",
+                "bip:propertyMap": "1"
+            },
+            "userPermission": null
+        }
+    ],
+    "REPORT_DASHBOARD": [
+        {
+            "path": "/shared/BI Analytics/_portal/666666666666666",
+            "parentPath": "/shared/BI Analytics/_portal",
+            "caption": "666666666666666",
+            "description": "666666666666666",
+            "laseModified": "2020-11-14T14:11:01.000+0000",
+            "created": "2020-09-08T14:22:32.000+0000",
+            "creator": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": null,
+                "displayname": "weblogic"
+            },
+            "lastModifier": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": null,
+                "displayname": "weblogic"
+            },
+            "owner": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": null,
+                "displayname": "weblogic"
+            },
+            "signature": "",
+            "linkPath": "",
+            "type": {
+                "value": "Dashboard"
+            },
+            "itemAccessPermissions": [
+                {
+                    "account": {
+                        "name": "AAC_ADMIN",
+                        "guid": "AAC_ADMIN",
+                        "type": null,
+                        "displayname": "AAC_ADMIN"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 3,
+                            "acessLabel": "OPEN"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "BIConsumer",
+                        "guid": "BIConsumer",
+                        "type": null,
+                        "displayname": "BIConsumer"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 8192,
+                                "acessLabel": "VIEWREPORTOUTPUT"
+                            },
+                            {
+                                "accessValue": 4096,
+                                "acessLabel": "SCHEDULEREPORT"
+                            },
+                            {
+                                "accessValue": 2048,
+                                "acessLabel": "RUNREPORT"
+                            },
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 14339,
+                            "acessLabel": "CUSTOM"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "BIServiceAdministrator",
+                        "guid": "BIServiceAdministrator",
+                        "type": null,
+                        "displayname": "BIServiceAdministrator"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 8192,
+                                "acessLabel": "VIEWREPORTOUTPUT"
+                            },
+                            {
+                                "accessValue": 4096,
+                                "acessLabel": "SCHEDULEREPORT"
+                            },
+                            {
+                                "accessValue": 2048,
+                                "acessLabel": "RUNREPORT"
+                            },
+                            {
+                                "accessValue": 32,
+                                "acessLabel": "TAKEOWNERSHIP"
+                            },
+                            {
+                                "accessValue": 16,
+                                "acessLabel": "ASSIGNPERMISSION"
+                            },
+                            {
+                                "accessValue": 8,
+                                "acessLabel": "DELETE"
+                            },
+                            {
+                                "accessValue": 4,
+                                "acessLabel": "WRITE"
+                            },
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 65535,
+                            "acessLabel": "FULLCONTROLL"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "m.mortazavi",
+                        "guid": "m.mortazavi",
+                        "type": null,
+                        "displayname": "Mohammad Mortazavi"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 3,
+                            "acessLabel": "OPEN"
+                        }
+                    }
+                }
+            ],
+            "subCatalogItems": null,
+            "properties": {
+                "Build": "12.2.1.3.0 (Build BIPS-20170820114118 64-bit)",
+                "compositeSignature": "dashboardfolder1",
+                "Desc": "666666666666666"
+            },
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/OPM.WDSH",
+            "parentPath": "/shared/BI Analytics/_portal",
+            "caption": "OPM.WDSH",
+            "description": "داشبورد وب معاونت بهره برداری",
+            "laseModified": "2020-11-15T18:05:03.000+0000",
+            "created": "2020-09-07T04:25:16.000+0000",
+            "creator": {
+                "name": "weblogic",
+                "guid": "weblogic",
+                "type": null,
+                "displayname": "weblogic"
+            },
+            "lastModifier": {
+                "name": "z.omidvar",
+                "guid": "z.omidvar",
+                "type": null,
+                "displayname": "z.omidvar"
+            },
+            "owner": {
+                "name": "z.omidvar",
+                "guid": "z.omidvar",
+                "type": null,
+                "displayname": "z.omidvar"
+            },
+            "signature": "",
+            "linkPath": "",
+            "type": {
+                "value": "Dashboard"
+            },
+            "itemAccessPermissions": [
+                {
+                    "account": {
+                        "name": "FND_AC_GRP",
+                        "guid": "FND_AC_GRP",
+                        "type": null,
+                        "displayname": "FND_AC_GRP"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 8,
+                                "acessLabel": "DELETE"
+                            },
+                            {
+                                "accessValue": 4,
+                                "acessLabel": "WRITE"
+                            },
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 15,
+                            "acessLabel": "MODIFY"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "m.mortazavi",
+                        "guid": "m.mortazavi",
+                        "type": null,
+                        "displayname": "Mohammad Mortazavi"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 3,
+                            "acessLabel": "OPEN"
+                        }
+                    }
+                },
+                {
+                    "account": {
+                        "name": "z.omidvar",
+                        "guid": "z.omidvar",
+                        "type": null,
+                        "displayname": "z.omidvar"
+                    },
+                    "permission": {
+                        "accessModeList": [
+                            {
+                                "accessValue": 8192,
+                                "acessLabel": "VIEWREPORTOUTPUT"
+                            },
+                            {
+                                "accessValue": 4096,
+                                "acessLabel": "SCHEDULEREPORT"
+                            },
+                            {
+                                "accessValue": 2048,
+                                "acessLabel": "RUNREPORT"
+                            },
+                            {
+                                "accessValue": 32,
+                                "acessLabel": "TAKEOWNERSHIP"
+                            },
+                            {
+                                "accessValue": 16,
+                                "acessLabel": "ASSIGNPERMISSION"
+                            },
+                            {
+                                "accessValue": 8,
+                                "acessLabel": "DELETE"
+                            },
+                            {
+                                "accessValue": 4,
+                                "acessLabel": "WRITE"
+                            },
+                            {
+                                "accessValue": 2,
+                                "acessLabel": "TRAVERSE"
+                            },
+                            {
+                                "accessValue": 1,
+                                "acessLabel": "READ"
+                            }
+                        ],
+                        "accessPermission": {
+                            "accessValue": 65535,
+                            "acessLabel": "FULLCONTROLL"
+                        }
+                    }
+                }
+            ],
+            "subCatalogItems": null,
+            "properties": {
+                "Build": "12.2.1.3.0 (Build BIPS-20170820114118 64-bit)",
+                "compositeSignature": "dashboardfolder1",
+                "Desc": "داشبورد وب معاونت بهره برداری"
+            },
+            "userPermission": null
+        }
+    ],
+    "APPROLE_ALL" : [
+        {
+            "displayName": "BI Consumer",
+            "name": "BIConsumer",
+            "gUID": "66F340154D414B9DBD16DCEDBC7CC7A9",
+            "description": "Users granted this role can consume content but are restricted in what they can create.",
+            "appId": "obi",
+            "type": null,
+            "baseRoles": [],
+            "members": null
+        },
+        {
+            "displayName": null,
+            "name": "FND_USER",
+            "gUID": "43B167CB4F384EA3846D7C75F6CC4437",
+            "description": null,
+            "appId": "obi",
+            "type": null,
+            "baseRoles": [
+                {
+                    "displayName": "BI Content Author",
+                    "name": "BIContentAuthor",
+                    "gUID": "9E411B76DF7043CC92E3420A1357DB6C",
+                    "description": "BIContentAuthor",
+                    "appId": "obi",
+                    "type": null,
+                    "baseRoles": [],
+                    "members": null
+                },
+                {
+                    "displayName": "BIServiceAdministrator",
+                    "name": "BIServiceAdministrator",
+                    "gUID": "0A49D90D07E24897B888349762B59D7A",
+                    "description": "Users granted this role can consume content but are restricted in what they can create.",
+                    "appId": "obi",
+                    "type": null,
+                    "baseRoles": [],
+                    "members": null
+                }
+            ],
+            "members": null
+        }
+    ],
+    "APPROLE_LIST_USERS_OF_ROLE" : [
+        {
+            "displayName": "Asghar Salimian",
+            "name": "a.salimian",
+            "gUID": null,
+            "description": null,
+            "namFirstEmply": "aliasghar",
+            "namLastEmply": "salimian",
+            "mail": "a.salimian@irisaco.com",
+            "membersOf": []
+        },
+        {
+            "displayName": "",
+            "name": "weblogic",
+            "gUID": null,
+            "description": null,
+            "namFirstEmply": "",
+            "namLastEmply": "weblogic",
+            "mail": "",
+            "membersOf": []
+        },
+        {
+            "displayName": "Mohammad Mortazavi",
+            "name": "m.mortazavi",
+            "gUID": null,
+            "description": null,
+            "namFirstEmply": "Mohammad",
+            "namLastEmply": "Mortazavi",
+            "mail": "m.mortazavi@irisaco.com",
+            "membersOf": []
+        }
+    ],
+    "CATALOG_TREE" : [        
+        {
+            "path": "/",
+            "parentPath": null,
+            "caption": "Catalog Root",
+            "description": "",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Folder"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared",
+            "parentPath": "/",
+            "caption": "Shared Folders",
+            "description": "",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Folder"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics",
+            "parentPath": "/shared",
+            "caption": "BI Analytics",
+            "description": "",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Folder"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal",
+            "parentPath": "/shared/BI Analytics",
+            "caption": "Dashboards",
+            "description": "",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "DashboardGroup"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/666666666666666",
+            "parentPath": "/shared/BI Analytics/_portal",
+            "caption": "666666666666666",
+            "description": "666666666666666",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Dashboard"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/666666666666666/dashboard layout",
+            "parentPath": "/shared/BI Analytics/_portal/666666666666666",
+            "caption": "dashboard layout",
+            "description": "",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Object"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/666666666666666/page 1",
+            "parentPath": "/shared/BI Analytics/_portal/666666666666666",
+            "caption": "page 1",
+            "description": "",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Page"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/OPM.MDSH",
+            "parentPath": "/shared/BI Analytics/_portal",
+            "caption": "OPM.MDSH",
+            "description": "داشبورد موبایل معاونت بهره برداری",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Dashboard"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/OPM.MDSH/dashboard layout",
+            "parentPath": "/shared/BI Analytics/_portal/OPM.MDSH",
+            "caption": "dashboard layout",
+            "description": "",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Object"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/OPM.MDSH/page 1",
+            "parentPath": "/shared/BI Analytics/_portal/OPM.MDSH",
+            "caption": "page 1",
+            "description": "",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Page"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/OPM.WDSH",
+            "parentPath": "/shared/BI Analytics/_portal",
+            "caption": "OPM.WDSH",
+            "description": "داشبورد وب معاونت بهره برداری",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Dashboard"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/OPM.WDSH/dashboard layout",
+            "parentPath": "/shared/BI Analytics/_portal/OPM.WDSH",
+            "caption": "dashboard layout",
+            "description": "",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Object"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/OPM.WDSH/page 1",
+            "parentPath": "/shared/BI Analytics/_portal/OPM.WDSH",
+            "caption": "page 1",
+            "description": "",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Page"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/PUM.MDSH",
+            "parentPath": "/shared/BI Analytics/_portal",
+            "caption": "PUM.MDSH",
+            "description": "داشبورد موبایل معاونت خرید",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Dashboard"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        },
+        {
+            "path": "/shared/BI Analytics/_portal/PUM.MDSH/dashboard layout",
+            "parentPath": "/shared/BI Analytics/_portal/PUM.MDSH",
+            "caption": "dashboard layout",
+            "description": "",
+            "laseModified": null,
+            "created": null,
+            "creator": null,
+            "lastModifier": null,
+            "owner": null,
+            "signature": null,
+            "linkPath": null,
+            "type": {
+                "value": "Object"
+            },
+            "itemAccessPermissions": [],
+            "subCatalogItems": null,
+            "properties": {},
+            "userPermission": null
+        }        
+    ],
+    "APPROLE_HAS_ADMIN_ROLE":true,
+    "STATISTIC_LOGIN":{
+        "value": 1545,
+        "percent": 45
+    },
+    "STATISTIC_ANALYTIC":[
+        {
+            "month": "تیر",
+            "count": 3650
+        },
+        {
+            "month": "مرداد",
+            "count": 1920
+        },
+        {
+            "month": "شهریور",
+            "count": 1580
+        },
+        {
+            "month": "مهر",
+            "count": 1015
+        }
+    ],
+    "STATISTIC_VISUALANALYSER":[
+        {
+            "month": "تیر",
+            "count": 1000
+        },
+        {
+            "month": "مرداد",
+            "count": 2920
+        },
+        {
+            "month": "شهریور",
+            "count": 1650
+        },
+        {
+            "month": "مهر",
+            "count": 1075
+        }
+    ],
+    "STATISTIC_BIPUBLISHER":[
+        {
+            "month": "تیر",
+            "count": 1700
+        },
+        {
+            "month": "مرداد",
+            "count": 3125
+        },
+        {
+            "month": "شهریور",
+            "count": 4256
+        },
+        {
+            "month": "مهر",
+            "count": 3951
+        }
+    ],
+    "STATISTIC_DASHBOARD":[
+        {
+            "month": "تیر",
+            "count": 3650
+        },
+        {
+            "month": "مرداد",
+            "count": 1920
+        },
+        {
+            "month": "شهریور",
+            "count": 1580
+        },
+        {
+            "month": "مهر",
+            "count": 1015
+        }
+    ],
+    "LOGIN":"h148h51c071hp42fidr7230dk1o486hkcba1234gqid5lk3q"        
 }

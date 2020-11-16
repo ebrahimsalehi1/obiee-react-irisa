@@ -11,7 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
-import data from '../../db.json';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';

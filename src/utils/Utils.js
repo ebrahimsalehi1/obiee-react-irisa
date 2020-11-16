@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import translationEn from '../../public/locales/en/translation.json';
 import translationFa from '../../public/locales/fa/translation.json';
+import config from '../../public/config.json';
+import jsonData from '../../db.json';
 
 export function getText(keyStr){
 
@@ -44,8 +46,6 @@ export async function callRestPost2(key,urlParams,data){
 
     const url = getUrlParamList(key,urlParams);
 
-    console.log('callRestPost url',url);
-
     return await fetch(url,{
             method:'POST',
             //mode: 'cors',
@@ -65,10 +65,20 @@ export async function callRestPost2(key,urlParams,data){
         .then(response=>response.json());
 }
 
-export async function callRestPost(key,urlParams,data){    
+export async function callRestPost(key,urlParams,data){        
+    if(config && config.serviceType==='file'){
 
-    console.log('callRestPost',key,urlParams,data);
-    
+        return new Promise((resolve,reject)=>{
+            const foundData = jsonData[key];
+            if(foundData)
+                resolve({data:foundData,status:200})
+            else
+                setTimeout(()=>{
+                    resolve({data:"OK",status:200});
+                },2000);    
+        });
+    }
+
     const url = getUrlParamList(key,urlParams);
 
     return await axios({
@@ -91,6 +101,14 @@ export async function callRestPost(key,urlParams,data){
 }
 
 export async function callRestPut(key,urlParams,data){    
+
+    if(config && config.serviceType==='file'){
+        return new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve({data:"Ok",status:200});
+            },2000);    
+        });
+    }
 
     const url = getUrlParamList(key,urlParams);
 
@@ -115,6 +133,14 @@ export async function callRestPut(key,urlParams,data){
 
 export async function callRestDelete(key,urlParams,data){    
 
+    if(config && config.serviceType==='file'){
+        return new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve({data:"Ok",status:200});
+            },2000);    
+        });
+    }
+
     const url = getUrlParamList(key,urlParams);
 
     return await axios({
@@ -137,6 +163,18 @@ export async function callRestDelete(key,urlParams,data){
 }
 
 export async function callRestGet(key,urlParams){    
+
+    if(config && config.serviceType==='file'){
+
+        return new Promise((resolve,reject)=>{
+            const foundData = jsonData[key];
+
+            if(foundData)
+                resolve({data:foundData,status:200})
+            else
+                resolve({data:"OK",status:200})    
+        });
+    }
 
     const url = getUrlParamList(key,urlParams);
 
@@ -220,7 +258,6 @@ export function deleteFromList(data,oldData){
         // tableData , childRows
         if(!oldData.tableData.childRows)
         {
-            console.log('dataDelete 1',dataDelete.length);
             const index = oldData.tableData.id;
             dataDelete.splice(index, 1);
 

@@ -3,7 +3,6 @@ import Dashboard from './hoc/Dashboard';
 import ObieeAppBar from './hoc/ObieeAppBar';
 import ObieeDrawer from './hoc/ObieeDrawer';
 import ObieeSigin from './hoc/ObieeSignin';
-import data from '../db.json';
 import {UserContext} from './Context';
 import ObieeApprole from './hoc/Security/ObieeApprole';
 import ObieeReports from './hoc/ObieeReports';
@@ -15,6 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import ObieeShowMessage from './widgets/ObieeShowMessage';
 import {MuiThemeProvider,createMuiTheme} from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import data from '../db.json';
 
 import {themeLightLTR} from './utils/theme-light-ltr';
 import {themeLightRTL} from './utils/theme-light-rtl';

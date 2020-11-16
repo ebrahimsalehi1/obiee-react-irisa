@@ -134,13 +134,13 @@ export default function ObieeMaterialTable(props) {
             context.obieeDispatch({type:'show_loading'});
       
             const user = localStorage.getItem('user');
-      
+     
             await callRestPost(url,[],{
                 "user": user,
                 "searchWord":""
             })
             .then(res=>{
-              console.log("ObieeTable data",res);
+              console.log("ObieeTable data",res,url);
               setState({data:res.data});
       
               context.obieeDispatch({type:'hide_loading'});
@@ -204,7 +204,7 @@ export default function ObieeMaterialTable(props) {
                     },
                     toolbarButtonAlignment:'left',
                     toolbarAlignment:'left',
-                    //selection: true
+                    selection: true
                     //searchFieldAlignment:'left'
                 }}
                 parentChildData={parentChildData}

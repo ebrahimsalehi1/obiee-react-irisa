@@ -1,7 +1,6 @@
 import React from 'react';
 import Dashboard from './hoc/Dashboard';
 import ObieeSigin from './hoc/ObieeSignin';
-import data from '../db.json';
 //import ObieeCrudApprole from './hoc/ObieeCrudApprole';
 //import { TramRounded } from '@material-ui/icons';
 import {

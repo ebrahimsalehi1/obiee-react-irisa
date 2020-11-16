@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const ObieeMaterialTable = React.lazy(()=>import('../widgets/ObieeMaterialTable'));
 import ObieeChartMonthlyByType from './charts/ObieeChartMonthlyByType';
 import ObieeChartPie from './charts/ObieeChartPie';
-import ObieeProgress from './charts/ObieeProgress';
+import ObieeProgress from './charts/ObieeProgress2';
 import {ANALYTIC,VISUAL_ANALYSER,BI_PUBLISHER} from '../utils/Constants';
 import {getText} from '../utils/Utils';
 

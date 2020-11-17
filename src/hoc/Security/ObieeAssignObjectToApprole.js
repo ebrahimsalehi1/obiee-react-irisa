@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {UserContext} from '../../Context';
 import {appRoleAll,getListUsersOfRole} from '../../webservice/Approle';
-import {tree} from '../../webservice/Catalog';
+import {tree,permissionFull} from '../../webservice/Catalog';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import ObieeMaterialTable from '../../widgets/ObieeMaterialTable';
@@ -23,6 +23,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Checkbox from '@material-ui/core/Checkbox';
+import Input from '@material-ui/core/Input';
+import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +39,24 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(0.5, 0),
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 150,
+    maxWidth: 300,
+  }
 }));
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 export default function ObieeAssignObjectToApprole() {
 
@@ -46,7 +65,9 @@ export default function ObieeAssignObjectToApprole() {
   const [approles,setApproles] = React.useState([]);
   const [catalog,setCatalog] = React.useState([]);
   const [rowExpanded,setRowExpanded] = React.useState(null);
-  const [permissionType,setPermissionType] = React.useState('Full control');
+  const [permissionType,setPermissionType] = React.useState('Form Control');
+  const [customPermissionType,setCustomPermissionType] = React.useState([]);
+  const [run,setRun] = React.useState('');
 
   const context = React.useContext(UserContext);
 
@@ -102,55 +123,120 @@ export default function ObieeAssignObjectToApprole() {
 
   const Permissions = ()=>{
     return (
-      <FormControl variant="outlined" fullWidth className={classes.formControl}>
+      <Grid container spacing={1} justify="center" alignItems="center" >
+      <Grid item xs={6} md={6}>
+      <FormControl variant="outlined" fullWidth className={classes.formControl}>        
       <InputLabel id="demo-simple-select-outlined-label">{strPermission}</InputLabel>
       <Select
-        //labelId="demo-simple-select-outlined-label"
-        //id="demo-simple-select-outlined"
+        labelId="demo-simple-select-outlined-label"
+        id="demo-simple-select-outlined"
         value={permissionType}
+        MenuProps={MenuProps}        
         onChange={(e)=>{
-          console.log(e.target.value);
           setPermissionType(e.target.value);
-        }}
+        }}        
         label={strPermission}
       >
-        <List component="nav"
-        subheader={<ListSubheader component="div">Permissions</ListSubheader>}
-        >
-          <ListItem button>
-            <ListItemText>Full control</ListItemText>
-          </ListItem>
-          <ListItem button>
-            <ListItemText>Modify</ListItemText>
-          </ListItem>
-          <ListItem button>
-            <ListItemText>Open</ListItemText>
-          </ListItem>
-          <ListItem button>
-            <ListItemText>No Access</ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>Custom</ListItemText>
-            <Checkbox />
-            <Checkbox />
-
-          </ListItem>
-          <ListItem>
-          <Checkbox />
-          </ListItem>
-
-          <ListItem>
-          <Checkbox />
-          </ListItem>
-
-          <ListItem>
-          <Checkbox />
-          </ListItem>
-          
-        </List>
+        <MenuItem key="Full Control" value="Full Control">Full Control</MenuItem>
+        <MenuItem key="Modify" value="Modify">Modify</MenuItem>
+        <MenuItem key="Open" value="Open">Open</MenuItem>
+        <MenuItem key="No Access" value="No Access">No Access</MenuItem>        
+        <MenuItem key="Custom" value="Custom">Custom</MenuItem>                
       </Select>
     </FormControl>
+      </Grid>
+      <Grid item xs={6} md={6}>  
+    {permissionType==='Custom' && 
+    <FormControl variant="outlined" fullWidth className={classes.formControl}>
+        <InputLabel id="demo-mutiple-checkbox-label">Custom Options </InputLabel>
+        <Select
+          labelId="demo-mutiple-checkbox-label"
+          id="demo-mutiple-checkbox"
+          multiple
+          value={customPermissionType}
+          onChange={event=>setCustomPermissionType(event.target.value)}
+          input={<Input />}
+          renderValue={(selected) => selected.join(', ')}
+          MenuProps={MenuProps}
+        >
+          <MenuItem key={"Read"} value={"Read"}>
+            <Checkbox checked={customPermissionType.indexOf("Read")!==-1} />
+            <ListItemText primary={"Read"} />
+          </MenuItem>
+
+          <MenuItem key={"Exceute"} value={"Exceute"}>
+            <Checkbox checked={customPermissionType.indexOf("Exceute")!==-1} />
+            <ListItemText primary={"Exceute"} />
+          </MenuItem>
+
+          <MenuItem key={"Write"} value={"Write"}>
+            <Checkbox checked={customPermissionType.indexOf("Write")!==-1} />
+            <ListItemText primary={"Write"} />
+          </MenuItem>
+
+          <MenuItem key={"Delete"} value={"Delete"}>
+            <Checkbox checked={customPermissionType.indexOf("Delete")!==-1} />
+            <ListItemText primary={"Delete"} />
+          </MenuItem>
+
+          <MenuItem key={"Change Permissions"} value={"Change Permissions"}>
+            <Checkbox checked={customPermissionType.indexOf("Change Permissions")!==-1} />
+            <ListItemText primary={"Change Permissions"} />
+          </MenuItem>
+
+          <MenuItem key={"Set Ownership"} value={"Set Ownership"}>
+            <Checkbox checked={customPermissionType.indexOf("Set Ownership")!==-1} />
+            <ListItemText primary={"Set Ownership"} />
+          </MenuItem>
+
+          <MenuItem key={"Run publisher Report"} value={"Run publisher Report"}>
+            <Checkbox checked={customPermissionType.indexOf("Run publisher Report")!==-1} />
+            <ListItemText primary={"Run publisher Report"} />
+          </MenuItem>
+
+          <MenuItem key={"Schedule Publisher Report"} value={"Schedule Publisher Report"}>
+            <Checkbox checked={customPermissionType.indexOf("Schedule Publisher Report")!==-1} />
+            <ListItemText primary={"Schedule Publisher Report"} />
+          </MenuItem>
+
+          <MenuItem key={"View Publisher Output"} value={"View Publisher Output"}>
+            <Checkbox checked={customPermissionType.indexOf("View Publisher Output")!==-1} />
+            <ListItemText primary={"View Publisher Output"} />
+          </MenuItem>
+
+        </Select>
+      </FormControl>
+    }
+    </Grid>
+    </Grid>
     )
+  }
+
+  function handleExecute(){
+
+    let result;
+
+    switch(permissionType){
+      case 'Full Control':
+        result = await permissionFull();
+        break;
+      case 'Modify':
+        break;
+      case 'Open':
+        break;
+      case 'No Access':
+        break;
+      case 'Custom':
+        break;              
+    }
+
+    if(result.error){
+      context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+    }
+    else{
+      context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
+    }
+
   }
 
 
@@ -176,7 +262,7 @@ export default function ObieeAssignObjectToApprole() {
         />        
         </Grid>
 
-      <Grid item xs={12} md={10}>
+      <Grid item xs={12} md={12}>
       <ObieeMaterialTable
           columns={[
             { field: 'caption', title: getText('Caption'), headerStyle:{width:200} },
@@ -201,8 +287,10 @@ export default function ObieeAssignObjectToApprole() {
                },
           })
           :null,
-          {isFreeAction:true,icon:()=>(<Refresh />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{fetchData()}},
-          {isFreeAction:true,icon:()=>(<TextField />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{fetchData()}},
+          //{isFreeAction:true,icon:()=>(<Refresh />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{fetchData()}},
+          {isFreeAction:true,icon:()=>(<Permissions />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{}},
+          {isFreeAction:true,icon:()=>( <ObieeButtonOperation onExecute={()=>handleExecute} title="Set"/>),tooltip:'بروزرسانی',onClick:(event,rowData)=>{}},
+
           ]}
           options={{
             rowStyle:(event,rowData)=>{                
@@ -226,10 +314,11 @@ export default function ObieeAssignObjectToApprole() {
                 setRowExpanded(event);        
             }
         }}
+        onRowClick={(event,rowData)=>console.log(rowData)}
       />
       </Grid>
 
-      <Grid item xs={12} md={2}>
+      {/* <Grid item xs={12} md={2}>
         <Grid 
           spacing={0} 
           container
@@ -246,7 +335,7 @@ export default function ObieeAssignObjectToApprole() {
             </Paper>
           </Grid>
         </Grid>
-      </Grid>
+      </Grid> */}
 
     </Grid>
   );

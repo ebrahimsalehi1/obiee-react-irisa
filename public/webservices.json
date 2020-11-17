@@ -92,27 +92,39 @@
         "bffUrl":"http://localhost:8081/obiee-bff/catalog/tree"
     },
     {
-        "name":"CATALOG_ITEM_PERMISSION",
+        "name":"CATALOG_PERMISSION_ITEM",
         "bffUrl":"http://localhost:8081/obiee-bff/catalog/itemPermission"
     },
     {
-        "name":"CATALOG_MODIFY_PERMISSION",
+        "name":"CATALOG_PERMISSION_MODIFY",
         "bffUrl":"http://localhost:8081/obiee-bff/catalog/addModifyPermission"
     },
     {
-        "name":"CATALOG_OPEN_PERMISSION",
+        "name":"CATALOG_PERMISSION_OPEN",
         "bffUrl":"http://localhost:8081/obiee-bff/catalog/addOpenPermission"
     },
     {
-        "name":"CATALOG_RUN_REPORT_PERMISSION",
+        "name":"CATALOG_PERMISSION_RUN_REPORT",
         "bffUrl":"http://localhost:8081/obiee-bff/catalog/addRunReportPermission"
     },
     {
-        "name":"CATALOG_FULL_PERMISSION",
+        "name":"CATALOG_PERMISSION_FULL",
         "bffUrl":"http://localhost:8081/obiee-bff/catalog/addFullPermission"
     },
     {
-        "name":"CATALOG_VIEW_REPORT_PERMISSION",
+        "name":"CATALOG_PERMISSION_VIEW_REPORT_OUTPUT",
         "bffUrl":"http://localhost:8081/obiee-bff/catalog/addViewReportOutputPermission"
+    },
+    {
+        "name":"CATALOG_PERMISSION_NO_ACCESS",
+        "bffUrl":"http://localhost:8081/obiee-bff/catalog/addNoAccessPermission"
+    },
+    {
+        "name":"CATALOG_PERMISSION_SCHEDULE_REPORT",
+        "bffUrl":"http://localhost:8081/obiee-bff/catalog/addScheduleReportPermission"
+    },
+    {
+        "name":"CATALOG_PERMISSION_CUSTOM",
+        "bffUrl":"http://localhost:8081/obiee-bff/catalog/addCustomPermission"
     }
 ]

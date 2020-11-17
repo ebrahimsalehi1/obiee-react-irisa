@@ -22,6 +22,7 @@ import red from '@material-ui/core/colors/red';
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: '100%',
+        cursor:'grab',
     },
     expand: {
         transform: 'rotate(0deg)',

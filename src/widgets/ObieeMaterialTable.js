@@ -126,9 +126,6 @@ export default function ObieeMaterialTable(props) {
         data:data
     });
 
-
-    const [show,setShow] = React.useState(false);
-
     async function loadWebService(){
         if(url){
             context.obieeDispatch({type:'show_loading'});
@@ -204,7 +201,7 @@ export default function ObieeMaterialTable(props) {
                     },
                     toolbarButtonAlignment:'left',
                     toolbarAlignment:'left',
-                    selection: true
+                    selection: options && options.selection ? options.selection:false,
                     //searchFieldAlignment:'left'
                 }}
                 parentChildData={parentChildData}

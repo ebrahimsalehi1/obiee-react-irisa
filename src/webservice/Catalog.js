@@ -16,9 +16,9 @@ export async function tree(data){
     return result;
 }
 
-export async function approleCreate(data){
+export async function permissionFull(data){
     const result = {data:null,error:null};
-    await callRestPost('APPROLE_CREATE',null,data)
+    await callRestPut('CATALOG_PERMISSION_FULL',null,data)
     .then(res=>{
          result.data = res.data;   
     })
@@ -29,9 +29,9 @@ export async function approleCreate(data){
     return result;
 }
 
-export async function approleEdit(data){
+export async function permissionNoAccess(data){
     const result = {data:null,error:null};
-    await callRestPut('APPROLE_EDIT',null,data)
+    await callRestPut('CATALOG_PERMISSION_NO_ACCESS',null,data)
     .then(res=>{
          result.data = res.data;   
     })
@@ -42,9 +42,9 @@ export async function approleEdit(data){
     return result;
 }
 
-export async function approleDelete(roleName){
+export async function permissionModify(data){
     const result = {data:null,error:null};
-    await callRestDelete('APPROLE_DELETE',[roleName],null)
+    await callRestPut('CATALOG_PERMISSION_MODIFY',null,data)
     .then(res=>{
          result.data = res.data;   
     })
@@ -55,9 +55,9 @@ export async function approleDelete(roleName){
     return result;
 }
 
-export async function getListUsersOfRole(roleName){
+export async function permissionOpen(data){
     const result = {data:null,error:null};
-    await callRestGet('APPROLE_LIST_USERS_OF_ROLE',[roleName],null)
+    await callRestPut('CATALOG_PERMISSION_OPEN',null,data)
     .then(res=>{
          result.data = res.data;   
     })
@@ -68,9 +68,9 @@ export async function getListUsersOfRole(roleName){
     return result;
 }
 
-export async function approleAssignToRole(roleName,user){
+export async function permissionViewReportOutput(data){
     const result = {data:null,error:null};
-    await callRestPut('APPROLE_ASSIGN_USER_TO_ROLE',[roleName,user],null)
+    await callRestPut('CATALOG_PERMISSION_VIEW_REPORT_OUTPUT',null,data)
     .then(res=>{
          result.data = res.data;   
     })
@@ -81,3 +81,28 @@ export async function approleAssignToRole(roleName,user){
     return result;
 }
 
+export async function permissionScheduleReport(data){
+    const result = {data:null,error:null};
+    await callRestPut('CATALOG_PERMISSION_SCHEDULE_REPORT',null,data)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}
+
+export async function permissionCustom(data){
+    const result = {data:null,error:null};
+    await callRestPut('CATALOG_PERMISSION_CUSTOM',null,data)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}

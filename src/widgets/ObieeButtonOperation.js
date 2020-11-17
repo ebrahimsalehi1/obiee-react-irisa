@@ -64,6 +64,8 @@ export default function ObieeButtonOperation(props) {
       setLoading(true);
 
       await onExecute();
+
+      setLoading(false);
     }
   };
 

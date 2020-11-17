@@ -61,7 +61,7 @@
     {"str":"Operation Successful","val":"عملیات با موفقیت انجام شد"},
     {"str":"Approle Display Name","val":"عنوان نمایشی"},
     {"str":"Permission","val":"سطح دسترسی"},
-    {"str":"","val":""},
+    {"str":"Admin","val":"کاربر اصلی"},
     {"str":"","val":""},
     {"str":"","val":""},
     {"str":"","val":""},

@@ -1,130 +1,130 @@
 [
     {
         "name":"REPORT_SAMPLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/reports/sample"
+        "bffUrl":":0/obiee-bff/reports/sample"
     },
     {
         "name":"REPORT_TRANSACTIONAL",
-        "bffUrl":"http://localhost:8081/obiee-bff/reports/transactional"
+        "bffUrl":":0/obiee-bff/reports/transactional"
     },
     {
         "name":"REPORT_ANALYSER",
-        "bffUrl":"http://localhost:8081/obiee-bff/reports/analyser"
+        "bffUrl":":0/obiee-bff/reports/analyser"
     },
     {
         "name":"REPORT_DASHBOARD",
-        "bffUrl":"http://localhost:8081/obiee-bff/reports/dashboard"
+        "bffUrl":":0/obiee-bff/reports/dashboard"
     },
     {
         "name":"APPROLE_HAS_ADMIN_ROLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/hasAdminRole/:1"
+        "bffUrl":":0/obiee-bff/approle/hasAdminRole/:1"
     },
     {
         "name":"APPROLE_ALL",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/all"
+        "bffUrl":":0/obiee-bff/approle/all"
     },
     {
         "name":"APPROLE_SEARCH",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/search/searchword"
+        "bffUrl":":0/obiee-bff/approle/search/searchword"
     },
     {
         "name":"APPROLE_CREATE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/create"
+        "bffUrl":":0/obiee-bff/approle/create"
     },
     {
         "name":"APPROLE_EDIT",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/edit"
+        "bffUrl":":0/obiee-bff/approle/edit"
     },
     {
         "name":"APPROLE_DELETE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/delete/:1"
+        "bffUrl":":0/obiee-bff/approle/delete/:1"
     },
     {
         "name":"APPROLE_ASSIGN_USER_TO_ROLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/assignUserToRole/:1/:2"
+        "bffUrl":":0/obiee-bff/approle/assignUserToRole/:1/:2"
     },
     {
         "name":"APPROLE_DELETE_USER_FROM_ROLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/deleteUserFromRole/:1/:2"
+        "bffUrl":":0/obiee-bff/approle/deleteUserFromRole/:1/:2"
     },
     {
         "name":"APPROLE_LIST_USERS_OF_ROLE",
-        "bffUrl":"http://localhost:8081/obiee-bff/approle/listUsersOfRole/:1"
+        "bffUrl":":0/obiee-bff/approle/listUsersOfRole/:1"
     },
     {
         "name":"STATISTIC_LOGIN",
-        "bffUrl":"http://localhost:8081/obiee-bff/statistic/traffic"
+        "bffUrl":":0/obiee-bff/statistic/traffic"
     },
     {
         "name":"STATISTIC_ANALYTIC",
-        "bffUrl":"http://localhost:8081/obiee-bff/statistic/analytic"
+        "bffUrl":":0/obiee-bff/statistic/analytic"
     },
     {
         "name":"STATISTIC_VISUALANALYSER",
-        "bffUrl":"http://localhost:8081/obiee-bff/statistic/visualAnalyser"
+        "bffUrl":":0/obiee-bff/statistic/visualAnalyser"
     },
     {
         "name":"STATISTIC_BIPUBLISHER",
-        "bffUrl":"http://localhost:8081/obiee-bff/statistic/biPublisher"
+        "bffUrl":":0/obiee-bff/statistic/biPublisher"
     },
     {
         "name":"STATISTIC_DASHBOARD",
-        "bffUrl":"http://localhost:8081/obiee-bff/statistic/analytic"
+        "bffUrl":":0/obiee-bff/statistic/analytic"
     },
     {
         "name":"LOGIN",
-        "bffUrl":"http://localhost:8081/obiee-bff/login"
+        "bffUrl":":0/obiee-bff/login"
     },
     {
         "name":"USER_INFO",
-        "bffUrl":"http://localhost:8081/obiee-bff/user/info/:1"
+        "bffUrl":":0/obiee-bff/user/info/:1"
     },
     {
         "name":"USER_ALL",
-        "bffUrl":"http://localhost:8081/obiee-bff/user/all"
+        "bffUrl":":0/obiee-bff/user/all"
     },
     {
         "name":"USER_SEARCH",
-        "bffUrl":"http://localhost:8081/obiee-bff/user/search/:1"
+        "bffUrl":":0/obiee-bff/user/search/:1"
     },
     {
         "name":"CATALOG_TREE",
-        "bffUrl":"http://localhost:8081/obiee-bff/catalog/tree"
+        "bffUrl":":0/obiee-bff/catalog/tree"
     },
     {
         "name":"CATALOG_PERMISSION_ITEM",
-        "bffUrl":"http://localhost:8081/obiee-bff/catalog/itemPermission"
+        "bffUrl":":0/obiee-bff/catalog/itemPermission"
     },
     {
         "name":"CATALOG_PERMISSION_MODIFY",
-        "bffUrl":"http://localhost:8081/obiee-bff/catalog/addModifyPermission"
+        "bffUrl":":0/obiee-bff/catalog/addModifyPermission"
     },
     {
         "name":"CATALOG_PERMISSION_OPEN",
-        "bffUrl":"http://localhost:8081/obiee-bff/catalog/addOpenPermission"
+        "bffUrl":":0/obiee-bff/catalog/addOpenPermission"
     },
     {
         "name":"CATALOG_PERMISSION_RUN_REPORT",
-        "bffUrl":"http://localhost:8081/obiee-bff/catalog/addRunReportPermission"
+        "bffUrl":":0/obiee-bff/catalog/addRunReportPermission"
     },
     {
         "name":"CATALOG_PERMISSION_FULL",
-        "bffUrl":"http://localhost:8081/obiee-bff/catalog/addFullPermission"
+        "bffUrl":":0/obiee-bff/catalog/addFullPermission"
     },
     {
         "name":"CATALOG_PERMISSION_VIEW_REPORT_OUTPUT",
-        "bffUrl":"http://localhost:8081/obiee-bff/catalog/addViewReportOutputPermission"
+        "bffUrl":":0/obiee-bff/catalog/addViewReportOutputPermission"
     },
     {
         "name":"CATALOG_PERMISSION_NO_ACCESS",
-        "bffUrl":"http://localhost:8081/obiee-bff/catalog/addNoAccessPermission"
+        "bffUrl":":0/obiee-bff/catalog/addNoAccessPermission"
     },
     {
         "name":"CATALOG_PERMISSION_SCHEDULE_REPORT",
-        "bffUrl":"http://localhost:8081/obiee-bff/catalog/addScheduleReportPermission"
+        "bffUrl":":0/obiee-bff/catalog/addScheduleReportPermission"
     },
     {
         "name":"CATALOG_PERMISSION_CUSTOM",
-        "bffUrl":"http://localhost:8081/obiee-bff/catalog/addCustomPermission"
+        "bffUrl":":0/obiee-bff/catalog/addCustomPermission"
     }
 ]

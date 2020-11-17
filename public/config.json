@@ -1,3 +1,8 @@
 {
-    "serviceType":"file"    
+    "serviceType":"file",
+    "host":"http://localhost:8081",
+    "languageType":"multiple",
+    "themeType":"light-dark",
+    "features":["report-transactional","report-analytic","report-analyser","approle","user-approle","object-approle"],
+    "serviceCaching":true     
 }

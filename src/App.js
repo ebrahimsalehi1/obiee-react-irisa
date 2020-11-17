@@ -9,7 +9,7 @@ import ObieeReports from './hoc/ObieeReports';
 import ObieeUsers from './hoc/ObieeUsers';
 import ObieeAssignUserToApprole from './hoc/Security/ObieeAssignUserToApprole';
 import ObieeAssignObjectToApprole from './hoc/Security/ObieeAssignObjectToApprole';
-import ObieeSettings from './hoc/ObieeSettings';
+import ObieeSettings from './hoc/setting/ObieeSettings';
 import Grid from '@material-ui/core/Grid';
 import ObieeShowMessage from './widgets/ObieeShowMessage';
 import {MuiThemeProvider,createMuiTheme} from '@material-ui/core/styles';

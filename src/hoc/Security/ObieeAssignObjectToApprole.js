@@ -3,7 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {UserContext} from '../../Context';
 import {appRoleAll,getListUsersOfRole} from '../../webservice/Approle';
-import {tree,permissionFull} from '../../webservice/Catalog';
+import {tree,permissionFull,
+        permissionNoAccess,permissionModify,permissionOpen,
+        permissionViewReportOutput,permissionScheduleReport,permissionCustom} from '../../webservice/Catalog';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import ObieeMaterialTable from '../../widgets/ObieeMaterialTable';
@@ -212,19 +214,24 @@ export default function ObieeAssignObjectToApprole() {
     )
   }
 
-  function handleExecute(){
+  async function handleExecute(){
 
     let result;
+
+    // permissionViewReportOutput,permissionScheduleReport,permissionCustom
 
     switch(permissionType){
       case 'Full Control':
         result = await permissionFull();
         break;
       case 'Modify':
+        result = await permissionModify();
         break;
       case 'Open':
+        result = await permissionOpen();
         break;
       case 'No Access':
+        result = await permissionNoAccess();
         break;
       case 'Custom':
         break;              

@@ -1,4 +1,3 @@
-import { resolvePlugin } from '@babel/core';
 import axios from 'axios';
 
 import translationEn from '../../public/locales/en/translation.json';
@@ -23,11 +22,10 @@ export function setTitle(title){
 }
 
 function getUrlByKey(key){
-    return JSON.parse(localStorage.getItem("webservices")).filter(item=>item.name===key)[0]['bffUrl'];    
+    return JSON.parse(localStorage.getItem("webservices")).filter(item=>item.name===key)[0]['bffUrl'].replace(":0",config.host);    
 }
 
 function getUrlParamList(key,urlParams){
-
 
     let url = new String(getUrlByKey(key));
     if(urlParams===null || urlParams===undefined || urlParams.length===0)

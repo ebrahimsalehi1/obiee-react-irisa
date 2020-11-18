@@ -1,8 +1,20 @@
 {
-    "serviceType":"file",
+    "serviceType":"service",
     "host":"http://localhost:8081",
-    "languageType":"multiple",
-    "themeType":"light-dark",
-    "features":["report-transactional","report-analytic","report-analyser","approle","user-approle","object-approle"],
-    "serviceCaching":true     
+    "features":[
+        "user-profile",
+        {"language":["persian","english"]},
+        {"theme":["light","dark"]},
+        "caching",
+        "logging",
+        "datastore",
+
+        "dashboard",
+        "report-transactional",
+        "report-analytic",
+        "report-analyser",
+        "approle",
+        "user-approle",
+        "object-approle"
+        ]
 }

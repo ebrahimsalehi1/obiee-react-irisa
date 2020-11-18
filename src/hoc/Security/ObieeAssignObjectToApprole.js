@@ -10,20 +10,20 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import ObieeMaterialTable from '../../widgets/ObieeMaterialTable';
 import {getText} from '../../utils/Utils';
-import Refresh from '@material-ui/icons/Refresh';
-import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
+// import Refresh from '@material-ui/icons/Refresh';
+// import AddIcon from '@material-ui/icons/Add';
+// import EditIcon from '@material-ui/icons/Edit';
 import Select from '@material-ui/core/Select';
 import Child from '@material-ui/icons/ChildCare';
 import MenuItem from '@material-ui/core/MenuItem';
 //import db from './catalog.json';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import Paper from '@material-ui/core/Paper';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+// import Paper from '@material-ui/core/Paper';
+// import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
+// import ListSubheader from '@material-ui/core/ListSubheader';
 import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
@@ -69,7 +69,6 @@ export default function ObieeAssignObjectToApprole() {
   const [rowExpanded,setRowExpanded] = React.useState(null);
   const [permissionType,setPermissionType] = React.useState('Form Control');
   const [customPermissionType,setCustomPermissionType] = React.useState([]);
-  const [run,setRun] = React.useState('');
 
   const context = React.useContext(UserContext);
 

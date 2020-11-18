@@ -13,15 +13,11 @@ const useStyles = makeStyles(theme=>({
     }
 }));
 
-
-export default function Profile({userName,displayName,email,mobile,tel,internalTel}){
+export default function Profile(props){
 
     const classes = useStyles();
+    const {userInfo} = props;
     
-    // const [userName,setUserName] = React.useState('');
-    // const [displayName,setDisplayName] = React.useState('');
-    // const [email,setEmail] = React.useState('');
-
     const strUserName = getText('User Name');    
     const strDisplayName = getText('Display Name');
     const strEmail = getText('Email');
@@ -41,7 +37,7 @@ export default function Profile({userName,displayName,email,mobile,tel,internalT
                     variant="outlined"
                     fullWidth
                     disabled
-                    value={userName}
+                    value={userInfo.name ? userInfo.name:' '}
                 />
             </Grid>
 
@@ -52,7 +48,7 @@ export default function Profile({userName,displayName,email,mobile,tel,internalT
                     variant="outlined"
                     fullWidth
                     disabled
-                    value={displayName}
+                    value={userInfo.displayName ? userInfo.displayName : ' '}
                 />
             </Grid>
 
@@ -63,7 +59,7 @@ export default function Profile({userName,displayName,email,mobile,tel,internalT
                     variant="outlined"
                     fullWidth
                     disabled
-                    value={email}
+                    value={userInfo.mail ? userInfo.mail:' '}
                 />
             </Grid>
 
@@ -74,7 +70,7 @@ export default function Profile({userName,displayName,email,mobile,tel,internalT
                     variant="outlined"
                     fullWidth
                     disabled
-                    value={mobile}
+                    value={userInfo.mobile ? userInfo.mobile:' '}
                 />
             </Grid>
 
@@ -85,7 +81,7 @@ export default function Profile({userName,displayName,email,mobile,tel,internalT
                     variant="outlined"
                     fullWidth
                     disabled
-                    value={tel}
+                    value={userInfo.tel ? userInfo.tel : ' '}
                 />
             </Grid>
 
@@ -96,7 +92,7 @@ export default function Profile({userName,displayName,email,mobile,tel,internalT
                     variant="outlined"
                     fullWidth
                     disabled
-                    value={internalTel}
+                    value={userInfo.internalTel ? userInfo.internalTel : ' '}
                 />
             </Grid>
 

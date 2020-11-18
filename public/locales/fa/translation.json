@@ -62,6 +62,7 @@
     {"str":"Approle Display Name","val":"عنوان نمایشی"},
     {"str":"Permission","val":"سطح دسترسی"},
     {"str":"Admin","val":"کاربر اصلی"},
+    {"str":"Administrator Options","val":"امکانات کاربر اصلی"},
     {"str":"","val":""},
     {"str":"","val":""},
     {"str":"","val":""},

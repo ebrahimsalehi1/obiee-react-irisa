@@ -19,7 +19,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 //import db from './catalog.json';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-// import Paper from '@material-ui/core/Paper';
+import Paper from '@material-ui/core/Paper';
 // import List from '@material-ui/core/List';
 // import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -27,6 +27,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
+import Chip from '@material-ui/core/Chip';
+import CloseIcon from '@material-ui/icons/Close';
+import { EmojiNature } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,15 +63,29 @@ const MenuProps = {
   },
 };
 
+const CUSTOM_TYPE = [
+  {id:0,desc:"Exceute"},
+  {id:1,desc:"Read"},
+  {id:2,desc:"Write"},
+  {id:4,desc:"Change Permissions"},
+  {id:8,desc:"Delete"},
+  {id:32,desc:"Set Ownership"},
+  {id:2048,desc:"Run publisher Report"},
+  {id:4096,desc:"Schedule Publisher Report"},
+  {id:8192,desc:"View Publisher Output"},
+];
+
 export default function ObieeAssignObjectToApprole() {
 
   const classes = useStyles();
 
   const [approles,setApproles] = React.useState([]);
+  const [selectedApprole,setSelectedApprole] = React.useState();
   const [catalog,setCatalog] = React.useState([]);
   const [rowExpanded,setRowExpanded] = React.useState(null);
   const [permissionType,setPermissionType] = React.useState('Form Control');
   const [customPermissionType,setCustomPermissionType] = React.useState([]);
+  const [paths,setPaths] = React.useState([]);
 
   const context = React.useContext(UserContext);
 
@@ -149,7 +166,7 @@ export default function ObieeAssignObjectToApprole() {
       <Grid item xs={6} md={6}>  
     {permissionType==='Custom' && 
     <FormControl variant="outlined" fullWidth className={classes.formControl}>
-        <InputLabel id="demo-mutiple-checkbox-label">Custom Options </InputLabel>
+        <InputLabel id="demo-mutiple-checkbox-label">Custom Options</InputLabel>
         <Select
           labelId="demo-mutiple-checkbox-label"
           id="demo-mutiple-checkbox"
@@ -165,10 +182,10 @@ export default function ObieeAssignObjectToApprole() {
             <ListItemText primary={"Read"} />
           </MenuItem>
 
-          <MenuItem key={"Exceute"} value={"Exceute"}>
+          {/* <MenuItem key={"Exceute"} value={"Exceute"}>
             <Checkbox checked={customPermissionType.indexOf("Exceute")!==-1} />
             <ListItemText primary={"Exceute"} />
-          </MenuItem>
+          </MenuItem> */}
 
           <MenuItem key={"Write"} value={"Write"}>
             <Checkbox checked={customPermissionType.indexOf("Write")!==-1} />
@@ -215,25 +232,89 @@ export default function ObieeAssignObjectToApprole() {
 
   async function handleExecute(){
 
-    let result;
+    console.log('customPermissionType',paths,paths.map(item=>item.path)
+    );
 
-    // permissionViewReportOutput,permissionScheduleReport,permissionCustom
+    if(paths.length === 0 || selectedApprole.length===0){
+      alert('You cannot set permission because you must choose something');
+      return;
+    }
+
+    let result;
+    const user = localStorage.getItem('user');
+
+    let data =
+    {
+      user:user,
+      paths: paths.map(item=>item.path),
+      isRecursive: true,
+      itemAccessPermissions: [
+          {
+              account: {
+                  name: selectedApprole
+              }
+          },
+          {
+              account: {
+                  name: "BIServiceAdministrator"
+              }
+          }
+      ]
+    }
 
     switch(permissionType){
       case 'Full Control':
-        result = await permissionFull();
+
+        result = await permissionFull(data);
         break;
       case 'Modify':
-        result = await permissionModify();
+        result = await permissionModify(data);
         break;
       case 'Open':
-        result = await permissionOpen();
+        result = await permissionOpen(data);
         break;
       case 'No Access':
-        result = await permissionNoAccess();
+        result = await permissionNoAccess(data);
         break;
       case 'Custom':
+        const customPermissionTypeValues = customPermissionType.map(item=>{
+          return CUSTOM_TYPE.filter(obj=>obj.desc===item)[0].id
+        });
+
+        const sumValues = customPermissionTypeValues.reduce((item,acc)=>acc+item,0)
+
+        data={
+          user:user,
+          //sessionId":"5454",
+          paths: paths.map(item=>item.path),
+          isRecursive: true,
+          itemAccessPermissions: [
+              {
+                  account: {
+                      name: selectedApprole
+                  },
+                  permission: {
+                      "accessModeList": customPermissionTypeValues,
+                      "accessPermission": sumValues
+                  }
+              },
+              {
+                  account: {
+                      "name": "BIServiceAdministrator"
+                  },
+                  permission: {
+                      accessModeList: customPermissionTypeValues,
+                      accessPermission: sumValues
+                  }
+              }
+          ]
+          }
+          result = await permissionCustom(data);
+          console.log('permissionCustom',result);
         break;              
+      
+      default:
+
     }
 
     if(result.error){
@@ -243,6 +324,16 @@ export default function ObieeAssignObjectToApprole() {
       context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
     }
 
+  }
+
+  function handleDelete(itemToDelete){
+    const newList = [...paths];
+    const currentIndex = newList.indexOf(itemToDelete);
+
+    if(currentIndex !== -1){
+      newList.splice(currentIndex,1);
+      setPaths(newList);
+    }
   }
 
 
@@ -255,18 +346,37 @@ export default function ObieeAssignObjectToApprole() {
           getOptionLabel={(option) => option.name+(option.displayName ? ' - '+option.displayName:'')}
           fullWidth
           renderInput={(params) => <TextField {...params} label="approles" variant="outlined" />}
-          onChange={async (e,val)=>{
-            const result = await getListUsersOfRole(val.name);
-            if(result.error){
-              context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
-            }
-            else{
-              console.log('setUserOfApproles',result.data);
-              setRight(result.data);
-            }
+          onChange={async (event,val)=>{
+            setSelectedApprole(val.name);
           }}
         />        
         </Grid>
+
+        <Grid item xs={12} md={12}>
+        <Grid 
+          spacing={0} 
+          container
+          direction="column"
+          justify="flex-start"
+          alignItems="stretch"        
+        >
+          <Grid item xs={12} md={12}>
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <Paper style={{"height":"50px"}}>
+              {
+                paths && paths.map(item=>(
+                  <Chip
+                  label={item.caption}
+                  onDelete={()=>{handleDelete(item);}}
+                  deleteIcon={<CloseIcon />}
+                />
+                ))
+              }
+            </Paper>
+          </Grid>
+        </Grid>
+      </Grid>
 
       <Grid item xs={12} md={12}>
       <ObieeMaterialTable
@@ -295,7 +405,7 @@ export default function ObieeAssignObjectToApprole() {
           :null,
           //{isFreeAction:true,icon:()=>(<Refresh />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{fetchData()}},
           {isFreeAction:true,icon:()=>(<Permissions />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{}},
-          {isFreeAction:true,icon:()=>( <ObieeButtonOperation onExecute={()=>handleExecute} title="Set"/>),tooltip:'بروزرسانی',onClick:(event,rowData)=>{}},
+          {isFreeAction:true,icon:()=>( <ObieeButtonOperation onExecute={()=>handleExecute()} title="Set"/>),tooltip:'بروزرسانی',onClick:(event,rowData)=>{}},
 
           ]}
           options={{
@@ -317,31 +427,20 @@ export default function ObieeAssignObjectToApprole() {
           onTreeExpandChange={(event,nodes)=>{
             //console.log('onTreeExpandChange',event,nodes)
             if(nodes){
-                setRowExpanded(event);        
+                setRowExpanded(event);  
             }
         }}
-        onRowClick={(event,rowData)=>console.log(rowData)}
+        onRowClick={(event,rowData)=>{
+          console.log(rowData);
+          const newPaths = [...paths];
+          if(newPaths.indexOf(rowData)===-1){
+            newPaths.push(rowData);
+            setPaths(newPaths);        
+          }
+        }
+      }
       />
       </Grid>
-
-      {/* <Grid item xs={12} md={2}>
-        <Grid 
-          spacing={0} 
-          container
-          direction="column"
-          justify="flex-start"
-          alignItems="stretch"        
-        >
-          <Grid item xs={12} md={12}>
-            <Permissions />
-          </Grid>
-          <Grid item xs={12} md={12}>
-            <Paper style={{"height":"400px"}}>
-
-            </Paper>
-          </Grid>
-        </Grid>
-      </Grid> */}
 
     </Grid>
   );

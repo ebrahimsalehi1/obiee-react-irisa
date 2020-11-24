@@ -9,7 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import {UserContext} from '../../Context';
-import {appRoleAll,getListUsersOfRole} from '../../webservice/Approle';
+import {appRoleAll,getListUsersOfRole,approleAssignUserToRole} from '../../webservice/Approle';
 import {getUserAll} from '../../webservice/User';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
@@ -290,41 +290,50 @@ export default function ObieeAssignUserToApprole() {
       >
           <ObieeButtonOperation onExecute={async ()=>
             {
+
+              if(currentUsers.length === 0 || currentApprole.length===0){
+                context.obieeDispatch({type:'show_message',messageToShow:{type:'warning',message:getText('Fill Inputs')}});
+                return;
+              }
+
               context.obieeDispatch({type:'show_loading'});
 
               const listRemove =  not(currentUsers,right);
               const listAdd = not(right,currentUsers);
-
-              //console.log('role',currentApprole,'listRemove',listRemove,'listAdd',listAdd);
-              //return;              
-    
+  
+              console.log('state1',currentApprole,listAdd,listRemove);
               const listFailed = [];
-              listAdd.forEach(async item=>{
-
-                const result = await approleAssignToRole(currentApprole.name,item.name);
+              listAdd.forEach(async (item)=>{
+                const result = await approleAssignUserToRole(currentApprole.name,item.name);
                 if(result.error){
                   listFailed.push(item);
                 }
               });
 
-              listRemove.forEach(async item=>{
+              //console.log('state2','approleAssignUserToRole',result);
 
-                const result = await approleAssignToRole(currentApprole.name,item.name);
+              listRemove.forEach(async (item)=>{
+
+                console.log('listRemove');
+
+                const result = await approleAssignUserToRole(currentApprole.name,item.name);
                 console.log(result);
                 if(result.error){
                   listFailed.push(item);
                 }
               });
 
+              console.log('state3',listFailed);
+
               if(listFailed.length === 0)
                 context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
               else
                 context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
-
-
-              setMode('');
     
               context.obieeDispatch({type:'hide_loading'});          
+
+              //setMode('');
+
             }} title={strSave} />
       </Grid>
     </Grid>

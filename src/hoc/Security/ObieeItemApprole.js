@@ -58,7 +58,7 @@ export default function ObieeItemApprole(props){
 
     const [approleName,setApproleName] = React.useState(props.approle && mode!=='add' ? props.approle.name:'');
     const [approleDesc,setApproleDesc] = React.useState(props.approle && mode!=='add' ? props.approle.description : '');
-    const [approleType,setApproleType] = React.useState(mode!=='add' && props.approle.baseRoles ? props.approle.baseRoles[0].name:'');
+    const [approleType,setApproleType] = React.useState(mode!=='add' && props.approle.baseRoles && props.approle.baseRoles.length>0 ? props.approle.baseRoles[0].name:'');
     const [appType,setAppType] = React.useState(props.approle && mode!=='add' ? props.approle.type:'');
     const [approleDisplayName,setApproleDisplayName] = React.useState(props.approle && mode!=='add' ? props.approle.displayName:'');
 

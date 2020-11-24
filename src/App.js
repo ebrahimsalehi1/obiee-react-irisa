@@ -61,14 +61,15 @@ export default function App(props){
 
     const context = React.useContext(UserContext);
 
-    const themeMain = createMuiTheme({
-        direction: context.obieeState.direction ? 'rtl':'ltr',    
-        palette:{
-            type:context.obieeState.theme ? "dark":"light"
-        }
-    });    
+    // const themeMain = createMuiTheme({
+    //     direction: context.obieeState.direction ? 'rtl':'ltr',    
+    //     palette:{
+    //         type:context.obieeState.theme ? "dark":"light"
+    //     }
+    // });    
 
     //const themeMain = context.obieeState.direction===false ? (context.obieeState.theme ? themeDarkLTR : themeLightLTR) : (!context.obieeState.theme ? themeLightRTL : themeDarkRTL);
+    const themeMain = themeLightRTL;
 
     //console.log(context.obieeState.direction===false ? (context.obieeState.theme ? 'themeDarkLTR' : 'themeLightLTR') : (!context.obieeState.theme ? 'themeLightRTL' : 'themeDarkRTL'));
     //<MuiThemeProvider theme={context.obieeState.direction===false ? (context.obieeState.theme ? themeDarkLTR : themeLightLTR) : (!context.obieeState.theme ? themeLightRTL : themeDarkRTL)}>

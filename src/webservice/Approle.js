@@ -68,7 +68,8 @@ export async function getListUsersOfRole(roleName){
     return result;
 }
 
-export async function approleAssignToRole(roleName,user){
+export async function approleAssignUserToRole(roleName,user){
+    alert(1)
     const result = {data:null,error:null};
     await callRestPut('APPROLE_ASSIGN_USER_TO_ROLE',[roleName,user],null)
     .then(res=>{

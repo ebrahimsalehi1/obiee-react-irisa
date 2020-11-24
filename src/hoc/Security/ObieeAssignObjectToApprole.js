@@ -29,7 +29,6 @@ import Input from '@material-ui/core/Input';
 import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
 import Chip from '@material-ui/core/Chip';
 import CloseIcon from '@material-ui/icons/Close';
-import { EmojiNature } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -232,11 +231,8 @@ export default function ObieeAssignObjectToApprole() {
 
   async function handleExecute(){
 
-    console.log('customPermissionType',paths,paths.map(item=>item.path)
-    );
-
     if(paths.length === 0 || selectedApprole.length===0){
-      alert('You cannot set permission because you must choose something');
+      context.obieeDispatch({type:'show_message',messageToShow:{type:'warning',message:getText('Fill Inputs')}});
       return;
     }
 
@@ -367,7 +363,7 @@ export default function ObieeAssignObjectToApprole() {
               {
                 paths && paths.map(item=>(
                   <Chip
-                  label={item.caption}
+                  label={item.description ? item.description : item.caption}
                   onDelete={()=>{handleDelete(item);}}
                   deleteIcon={<CloseIcon />}
                 />
@@ -435,7 +431,9 @@ export default function ObieeAssignObjectToApprole() {
           const newPaths = [...paths];
           if(newPaths.indexOf(rowData)===-1){
             newPaths.push(rowData);
-            setPaths(newPaths);        
+            setPaths(newPaths);     
+            
+            context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Node Added')+" ["+(rowData.description ? rowData.description : rowData.caption)+" ]"}});
           }
         }
       }

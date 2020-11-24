@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ObieeButtonOperation(props) {
 
-  const {onExecute,title} = props;
+  const {onExecute,title,className} = props;
 
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
@@ -86,7 +86,7 @@ export default function ObieeButtonOperation(props) {
         <Button
           variant="contained"
           color="primary"
-          className={buttonClassname}
+          className={className}
           disabled={loading}
           onClick={handleButtonClick}
         >

@@ -17,6 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {UserContext} from '../Context';
 import {login} from '../webservice/Login';
 import {getUserInfo} from '../webservice/User';
+import ObieeButtonOperation from '../widgets/ObieeButtonOperation';
 
 import '../../public/css/bootstrap-rtl.min.css';
 import '../../public/css/bootstrap.min.css';
@@ -132,10 +133,12 @@ export default function SignIn(props) {
     console.log('SignIn result',result);
 
     if(result.error){
-      context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+      context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin+(result.error.errorMessage ? ". "+result.error.errorMessage : "")}});
     }
     else{       
       localStorage.setItem('sessionId',result.data) ;
+      localStorage.setItem('user',userName);
+
       result =  await getUserInfo(localStorage.getItem('user'));
 
       if(result.error){
@@ -187,7 +190,13 @@ export default function SignIn(props) {
                 </div>
 
                 <div className="submit">
-                    <button  className={classes.darkBtn} onClick={async ()=>{await handleLogin()}}>ورود</button>
+                    {/* <button  className={classes.darkBtn} onClick={async ()=>{await handleLogin()}}>ورود</button> */}
+                    
+                    <ObieeButtonOperation 
+                    className={classes.darkBtn}  
+                    onExecute={async ()=>{await handleLogin()}}
+                    title="ورود"/>
+
                 </div>
             {/* </form> */}
         </div> 

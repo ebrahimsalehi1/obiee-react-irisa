@@ -131,6 +131,7 @@ export default function ObieeMaterialTable(props) {
             context.obieeDispatch({type:'show_loading'});
       
             const user = localStorage.getItem('user');
+            //const user = context.obieeState.userInfo.name;
      
             await callRestPost(url,[],{
                 "user": user,

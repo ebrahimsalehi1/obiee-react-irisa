@@ -3,31 +3,36 @@ import axios from 'axios';
 import translationEn from '../../public/locales/en/translation.json';
 import translationFa from '../../public/locales/fa/translation.json';
 import config from '../../public/config.json';
+import webservices from '../../public/webservices.json';
+
 import jsonData from '../../db.json';
 
 export function getText(keyStr){
 
-    const lang = localStorage.getItem('language');
+    //const lang = localStorage.getItem('language');
+    const lang = config.language;
 
     const result =  lang==='en' ? translationEn.filter(item=>item.str===keyStr).map(item=>item.val): translationFa.filter(item=>item.str===keyStr).map(item=>item.val);
     return String(result[0]);
 }
 
-export function getTitle(){
-    return localStorage.getItem('title');
-}
+// export function getTitle(){
+//     return localStorage.getItem('title');
+// }
 
-export function setTitle(title){
-    return localStorage.setItem('title',title);
-}
+// export function setTitle(title){
+//     return localStorage.setItem('title',title);
+// }
 
 function getUrlByKey(key){
-    return JSON.parse(localStorage.getItem("webservices")).filter(item=>item.name===key)[0]['bffUrl'].replace(":0",config.host);    
+    //return JSON.parse(localStorage.getItem("webservices")).filter(item=>item.name===key)[0]['bffUrl'].replace(":0",config.host);    
+    return webservices.filter(item=>item.name===key)[0]['bffUrl'].replace(":0",config.host);
 }
 
 function getUrlParamList(key,urlParams){
 
     let url = new String(getUrlByKey(key));
+    
     if(urlParams===null || urlParams===undefined || urlParams.length===0)
         return url;
 
@@ -64,6 +69,7 @@ export async function callRestPost2(key,urlParams,data){
 }
 
 export async function callRestPost(key,urlParams,data){        
+   
     if(config && config.serviceType==='file'){
 
         return new Promise((resolve,reject)=>{
@@ -76,7 +82,7 @@ export async function callRestPost(key,urlParams,data){
                 },2000);    
         });
     }
-
+    
     const url = getUrlParamList(key,urlParams);
 
     return await axios({
@@ -109,7 +115,7 @@ export async function callRestPut(key,urlParams,data){
     }
 
     const url = getUrlParamList(key,urlParams);
-
+log('callRestPut',key,urlParams)
     return await axios({
             url:url,
             method:'PUT',
@@ -242,7 +248,6 @@ export function updateList(data,oldData,newData){
         }
     }
     catch(err){
-        alert(err)
         mdata = [];  
     }
     
@@ -269,4 +274,12 @@ export function deleteFromList(data,oldData){
     }    
         
     return dataDelete;
+}
+
+export function hasSystemFeatures(feature){
+    const res = config.features.filter(item=>{
+        return item[feature];        
+    });
+
+    return  res && res.length>0;
 }

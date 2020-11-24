@@ -1,20 +1,23 @@
 {
     "serviceType":"service",
-    "host":"http://localhost:8081",
+    "host":"http://172.25.40.135:8080/backforfront",
+    "language":"fa",
+    "direction":"rtl",
     "features":[
-        "user-profile",
-        {"language":["persian","english"]},
-        {"theme":["light","dark"]},
-        "caching",
-        "logging",
-        "datastore",
+        {"appbar-search":false},
+        {"user-profile":true},
+        {"language":false},
+        {"theme":false},
+        {"caching":false},
+        {"logging":false},
+        {"datastore":false},
 
-        "dashboard",
-        "report-transactional",
-        "report-analytic",
-        "report-analyser",
-        "approle",
-        "user-approle",
-        "object-approle"
-        ]
+        {"dashboard":true},
+        {"report-transactional":true},
+        {"report-analytic":true},
+        {"report-analyser":true},
+        {"approle":true},
+        {"user-approle":true},
+        {"object-approle":true}
+    ]
 }

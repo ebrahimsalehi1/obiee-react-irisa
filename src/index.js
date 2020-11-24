@@ -177,32 +177,32 @@ function IndexComp(props) {
     const [state,dispatch] = React.useReducer(reducer,initialState);
     const countRender = React.useRef(0);
 
-    if(countRender.current === 0){
-        fetch('webservices.json',{
-            headers: {
-                'Content-Type': 'application/json'
-              }
-        })
-        .then(response=>response.json())
-        .then(data=>localStorage.setItem("webservices",JSON.stringify(data)))
-        .catch(err=>{
-            console.log("err",err);
-        });
+    // if(countRender.current === 0){
+    //     fetch('webservices.json',{
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //           }
+    //     })
+    //     .then(response=>response.json())
+    //     .then(data=>localStorage.setItem("webservices",JSON.stringify(data)))
+    //     .catch(err=>{
+    //         console.log("err",err);
+    //     });
     
-        fetch('config.json',{
-            headers: {
-                'Content-Type': 'application/json'
-              }
-        })
-        .then(response=>response.json())
-        .then(data=>localStorage.setItem("config",JSON.stringify(data)))
-        .catch(err=>{
-            console.log("err",err);
-        });
+    //     fetch('config.json',{
+    //         headers: {
+    //             'Content-Type': 'application/json'  
+    //           }
+    //     })
+    //     .then(response=>response.json())
+    //     .then(data=>localStorage.setItem("config",JSON.stringify(data)))
+    //     .catch(err=>{
+    //         console.log("err",err);
+    //     });     
 
-        localStorage.setItem('language','en');  
-        localStorage.setItem('user','z.omidvar');
-    }
+    //     localStorage.setItem('language','fa');  
+    //     localStorage.setItem('user','z.omidvar');
+    // }
 
     countRender.current++;
 

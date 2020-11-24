@@ -34,6 +34,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 //import ObieeAppearance from './ObieeApperance';
 //import {showLoading} from '../utils/GeneralContext';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import {hasSystemFeatures} from '../utils/Utils';
 
 const drawerWidth = 240;
 //const mtheme = useTheme();
@@ -257,7 +258,8 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
   //   </Menu>
   // );
 
-  const renderLanguages = (
+  const renderLanguages =  
+  (
     <Menu
       anchorEl={languageMenu}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -286,7 +288,7 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
       Deutsch
     </MenuItem>
   </Menu>
-  );
+  ) ;
 
  const context = React.useContext(UserContext);
 
@@ -311,6 +313,7 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
             <Typography className={classes.title} variant="h6" noWrap>
             <Text keyStr="IrisaProductions"/>
             </Typography>
+            {hasSystemFeatures('appbar-search') ?  
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
@@ -367,7 +370,8 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                 <option value="Setting"/>
               </datalist>
 
-            </div>
+            </div> : null
+            }
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
             
@@ -387,7 +391,7 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
 
                 {/* </IconButton>   */}
 
-
+              {hasSystemFeatures('language') ?
               <IconButton 
                 color="inherit"
                 aria-label="Show list of languages"
@@ -396,14 +400,17 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
                 <Tooltip title={getText("Appearance")} >
                 <LanguageIcon/>
                 </Tooltip>
-              </IconButton> 
+              </IconButton> : null
+              }
+              {hasSystemFeatures('theme') ?
               <IconButton 
                 color="inherit"
                 aria-label="Brightness"    
                 onClick={()=>context.obieeState.theme ? context.obieeDispatch({type:'change_to_light'}) : context.obieeDispatch({type:'change_to_dark'})}            
                 >
                 {!context.obieeState.theme ? <BrightnessHighIcon/> : <BrightnessLowIcon/>}
-              </IconButton>
+              </IconButton> : null
+              }
               {/* <IconButton 
                 color="inherit"
                 aria-label="left to right / right to left"        
@@ -452,8 +459,8 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
       /> */}
 
       {/* {renderMobileMenu} */}
-      {renderMenu}
-      {renderLanguages}
+      {/* {renderMenu}  */}
+      {hasSystemFeatures('language') ? renderLanguages:null}
       </div>
   );
 }

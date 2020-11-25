@@ -20,6 +20,9 @@ const useDialogTitleStyles = makeStyles(theme => ({
         borderBottom: `1px solid ${theme.palette.divider}`,
         padding: '16px',
     },
+    typography:{
+        textAlign:'right'
+    },
     closeButton: {
         position: 'absolute',
         right: theme.spacing(2),
@@ -28,21 +31,13 @@ const useDialogTitleStyles = makeStyles(theme => ({
     }
 }));
 
-// const useStyle = makeStyles(theme=>({
-//     dialogContent:{
-//         root:{
-//             padding:0,
-//             margin:0,
-//         }
-//     }
-// }));
 
 const DialogTitle = (props => {
     const { children, onClose } = props;
     const classes = useDialogTitleStyles();
     return (
         <MuiDialogTitle disableTypography className={classes.root}>
-            <Typography variant="h5" >{children}</Typography>
+            <Typography variant="h5" className={classes.typography}>{children}</Typography>
             {onClose ? (
                 <IconButton aria-label="Close" className={classes.closeButton} onClick={onClose}>
                     <CloseIcon />

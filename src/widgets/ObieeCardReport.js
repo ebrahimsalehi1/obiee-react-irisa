@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: '100%',
         cursor:'grab',
+        textAlign:'right'
     },
     expand: {
         transform: 'rotate(0deg)',

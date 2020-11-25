@@ -2,6 +2,7 @@ import {createMuiTheme} from '@material-ui/core/styles';
 //import { faIR } from '@material-ui/core/locale';
 import * as locales from '@material-ui/core/locale';
 import { blue } from '@material-ui/core/colors';
+//import '../../public/fonts/*';
 
 export const themeLightRTL = createMuiTheme({
     type:'themeLightRTL',
@@ -67,17 +68,86 @@ export const themeLightRTL = createMuiTheme({
     MuiCardHeader: {
         root: {
             padding: '8px'
-        }, title: {
+        }, 
+        title: {
             fontSize: '0.75rem',
             fontWeight: 'bold',
-            color: '#263238'
-        }, action: {
+            color: '#263238',
+        }, 
+        action: {
             marginTop: 0,
             color:'black'
-        }, avatar: {
+        }, 
+        avatar: {
             marginRight: 9,
             marginLeft: 0,
         }
     },
-    }
+    MuiDialogContent:{
+      root:{
+        padding:0,
+      }
+    },
+    MuiDialogActions:{
+      root:{
+        padding:0,
+      }
+    },
+    MuiTypography:{ 
+      root:{
+        textAlign:'left',
+        fontFamily: 'iran-Sans-web'
+      }
+    },
+
+    MuiInputBase:{
+      input:{textAlign:'left'}
+    },
+    // material-table Start
+    MuiTableRow:{
+      root:{
+          fontFamily: 'IRANSans-web',
+          fontSize:10,
+          height: 60                    
+      },
+      head: {
+          height: 40,
+          borderBottom: "1px solid #c7c7c7"
+      }
+    },
+    MuiTableCell: {
+      root: {
+                  padding: '0 4px',
+                  textAlign: "center"
+              },
+      body: {
+                  fontSize: '11px'
+              },
+      head: {
+                  fontSize: '0.7rem',
+                  height: 60
+              },
+      alignLeft:{textAlign:'center'}
+    },
+    MuiTablePagination: {
+      caption: {
+          fontSize: '11px'
+      }
+    },
+    MuiTableSortLabel: {
+      root: {
+          //color: "#009ce6",
+          color: '#263238',
+          alignContent: 'center',
+      }
+    },
+    MuiTable:{
+      root:{
+          direction:'rtl',
+          width: '100%',
+      }
+    }        
+    // material-table End
+
+  }
 }, locales['faIR']);

@@ -1,9 +1,5 @@
 import React from 'react';
 import MaterialTable from 'material-table';
-
-//import PropTypes from 'prop-types';
-//import Add from '@material-ui/icons/Add';
-
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
@@ -20,7 +16,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import MoreVert from '@material-ui/icons/MoreVert';
-import {MuiThemeProvider,createMuiTheme, makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import {callRestPost} from '../utils/Utils';
 import {UserContext} from '../Context';
 
@@ -44,72 +40,17 @@ const tableIcons = {
     ViewColumn: React.forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-const useStyles = makeStyles(theme=>({
-    root: {
-        width: '100%',
-        //maxWidth: '36ch',
-        //backgroundColor: theme.palette.background.paper,
-      },    
-}));
-
-const myStyleTheme = createMuiTheme(
-{
-    overrides:{
-        MuiToolbar:{root:{direction:"ltr"}},
-        MuiInputBase:{
-            input:{textAlign:'right'}
-        },
-        MuiTableRow:{
-                    root:{
-                        fontFamily: 'IRANSans-web',
-                        fontSize:10,
-                        height: 60
-                    },
-                    head: {
-                        height: 40,
-                        borderBottom: "1px solid #c7c7c7"
-                    }
-                },
-        MuiTableCell: {
-            root: {
-                        padding: '0 4px',
-                        textAlign: "center"
-                    },
-            body: {
-                        fontSize: '11px'
-                    },
-            head: {
-                        fontSize: '0.7rem',
-                        height: 60
-                    },
-            alignLeft:{textAlign:'center'}
-        },
-        MuiTablePagination: {
-                    caption: {
-                        fontSize: '11px'
-                    }
-                },
-        MuiTableSortLabel: {
-                    root: {
-                        //color: "#009ce6",
-                        color: '#263238',
-                        alignContent: 'center',
-                    }
-                },
-        // MTableHeader: {
-        //     header:{
-        //         fontFamily: 'IRANSans-web',
-        //         fontSize:20,
-        //         height: 60
-        //     }
-        // }
-    }
-
-    });
+// const useStyles = makeStyles(theme=>({
+//     root: {
+//         width: '100%',
+//         //maxWidth: '36ch',
+//         //backgroundColor: theme.palette.background.paper,
+//       },    
+// }));
 
 export default function ObieeMaterialTable(props) {
 
-    const classes = useStyles();
+    //const classes = useStyles();
     const tableRef = React.createRef();
 
     const context = React.useContext(UserContext);
@@ -156,58 +97,57 @@ export default function ObieeMaterialTable(props) {
 
 
     return (
-        <MuiThemeProvider theme={myStyleTheme}>
-        <div className={classes.root}>
-            <MaterialTable
-                icons={icons ? icons : tableIcons}
-                tableRef={tableRef}
-                title={""}
-                columns={columns}
-                data={url && Array.isArray(state.data) ? state.data : data}
-                editable={editable}
-                actions={[
-                    {isFreeAction:true,icon:()=>(<MoreVert />),tooltip:'منوهای بیشتر',onClick:(event,rowData)=>{}},
-                    ...actions,
-                ]}
-                localization={{
-                    pagination: {
-                        labelDisplayedRows: '{from}-{to} ', // از {count}
-                        labelRowsPerPage:'سطرها در صفحه:',
-                        labelRowsSelect: "سطرها",
+        <MaterialTable
+            icons={icons ? icons : tableIcons}
+            tableRef={tableRef}
+            title={""}
+            columns={columns}
+            data={url && Array.isArray(state.data) ? state.data : data}
+            editable={editable}
+            actions={[
+                {isFreeAction:true,icon:()=>(<MoreVert />),tooltip:'منوهای بیشتر',onClick:(event,rowData)=>{}},
+                ...actions,
+            ]}
+            localization={{
+                pagination: {
+                    labelDisplayedRows: '{from}-{to} ', // از {count}
+                    labelRowsPerPage:'سطرها در صفحه:',
+                    labelRowsSelect: "سطرها",
+                },
+                toolbar: {
+                    nRowsSelected: '{0} سطر(ها) انتخاب شده',
+                    searchPlaceholder:'جستجو'
+                },
+                header: {
+                    actions: 'عملیات'
+                },
+                body: {
+                    emptyDataSourceMessage: 'رکوردی برای نمایش وجود ندارد',
+                    filterRow: {
+                        filterTooltip: 'فیلتر'
                     },
-                    toolbar: {
-                        nRowsSelected: '{0} سطر(ها) انتخاب شده',
-                        searchPlaceholder:'جستجو'
-                    },
-                    header: {
-                        actions: 'عملیات'
-                    },
-                    body: {
-                        emptyDataSourceMessage: 'رکوردی برای نمایش وجود ندارد',
-                        filterRow: {
-                            filterTooltip: 'فیلتر'
-                        }
+                    editRow:{
+                        deleteText:'آیا برای حذف اطلاعات مطمین هستید؟'
                     }
-                }}
-                options={{
-                    ...options,
-                    headerStyle: {
-                        //backgroundColor: '#01579b',
-                        //color: '#FFF',
-                        fontFamily: 'IRANSans-web',
-                        fontSize:12
-                    },
-                    toolbarButtonAlignment:'left',
-                    toolbarAlignment:'left',
-                    selection: options && options.selection ? options.selection:false,
-                    //searchFieldAlignment:'left'
-                }}
-                parentChildData={parentChildData}
-                onTreeExpandChange={onTreeExpandChange}
-                detailPanel={detailPanel}
-                {...others}
-            />
-        </div>
-        </MuiThemeProvider>
+                }
+            }}
+            options={{
+                ...options,
+                headerStyle: {
+                    //backgroundColor: '#01579b',
+                    //color: '#FFF',
+                    fontFamily: 'IRANSans-web',
+                    fontSize:12
+                },
+                toolbarButtonAlignment:'left',
+                toolbarAlignment:'left',
+                selection: options && options.selection ? options.selection:false,
+                //searchFieldAlignment:'left'
+            }}
+            parentChildData={parentChildData}
+            onTreeExpandChange={onTreeExpandChange}
+            detailPanel={detailPanel}
+            {...others}
+        />
     );
 }

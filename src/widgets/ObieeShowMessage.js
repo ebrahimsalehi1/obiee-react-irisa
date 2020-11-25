@@ -43,7 +43,11 @@ export default function ObieeShowMessage(props) {
 
   return (
     <div className={classes.root}>
-      <Snackbar open={open}  onClose={onClose}> 
+      <Snackbar 
+      open={open}  
+      onClose={onClose}                 
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      > 
         <Alert onClose={onClose} severity={type}>
           {message}
         </Alert>

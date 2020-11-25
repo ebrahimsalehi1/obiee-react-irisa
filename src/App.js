@@ -161,7 +161,8 @@ export default function App(props){
                 open={context.obieeState.messageToShow.message!==''} 
                 //onClose={()=>{context.obieeDispatch({type:'show_message',messaeToShow:{type:'',message:''}})}} 
                 message={context.obieeState.messageToShow.message} 
-                type={context.obieeState.messageToShow.type}/>
+                type={context.obieeState.messageToShow.type}
+                />
              }
             </MuiThemeProvider>
     );

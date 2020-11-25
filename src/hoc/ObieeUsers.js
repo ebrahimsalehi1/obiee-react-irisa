@@ -58,7 +58,6 @@ export default function ObieeUsers(props){
       //     headers:{'Access-Control-Allow-Origin':url}
       //   }).
       // then(res=>{
-      //     console.log(res.data,res.status);
       //     setUserList(res.data);
       // }).
       // catch(err=>{
@@ -68,10 +67,6 @@ export default function ObieeUsers(props){
       //setApproles(data.approles);
   
     },[]);
-
-    // React.useEffect(()=>{
-    //     console.log('use effect data',approles);
-    // },[approles])
 
     return (
     <Card className={classes.root} >
@@ -101,7 +96,6 @@ export default function ObieeUsers(props){
                   item.name.includes(search) ||
                   item.family.includes(search) 
                 );
-                //console.log(search,filteredData);
             setUsers(filteredData);
           }}
           >

@@ -104,7 +104,6 @@ export default function ObieeAssignObjectToApprole() {
         context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
       }
       else{
-        console.log('result.data',result.data);
         setApproles(result.data);
       }
 
@@ -306,7 +305,6 @@ export default function ObieeAssignObjectToApprole() {
           ]
           }
           result = await permissionCustom(data);
-          console.log('permissionCustom',result);
         break;              
       
       default:
@@ -421,13 +419,11 @@ export default function ObieeAssignObjectToApprole() {
         }}
           parentChildData={(row, rows) => rows.find(a => a.path === row.parentPath)}
           onTreeExpandChange={(event,nodes)=>{
-            //console.log('onTreeExpandChange',event,nodes)
             if(nodes){
                 setRowExpanded(event);  
             }
         }}
         onRowClick={(event,rowData)=>{
-          console.log(rowData);
           const newPaths = [...paths];
           if(newPaths.indexOf(rowData)===-1){
             newPaths.push(rowData);

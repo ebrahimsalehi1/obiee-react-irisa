@@ -1,6 +1,6 @@
 {
     "serviceType":"service",
-    "host":"http://172.25.40.135:8080/backforfront",
+    "host":"http://localhost:8081",
     "language":"fa",
     "direction":"rtl",
     "features":[

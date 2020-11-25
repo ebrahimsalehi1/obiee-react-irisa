@@ -71,7 +71,6 @@ export default function App(props){
     //const themeMain = context.obieeState.direction===false ? (context.obieeState.theme ? themeDarkLTR : themeLightLTR) : (!context.obieeState.theme ? themeLightRTL : themeDarkRTL);
     const themeMain = themeLightRTL;
 
-    //console.log(context.obieeState.direction===false ? (context.obieeState.theme ? 'themeDarkLTR' : 'themeLightLTR') : (!context.obieeState.theme ? 'themeLightRTL' : 'themeDarkRTL'));
     //<MuiThemeProvider theme={context.obieeState.direction===false ? (context.obieeState.theme ? themeDarkLTR : themeLightLTR) : (!context.obieeState.theme ? themeLightRTL : themeDarkRTL)}>
 
     return (

@@ -49,30 +49,6 @@ export default function ObieeReports(props){
     const [reports,setReports] = React.useState(data.reports);
     const [search,setSearch] = React.useState('');
 
-    React.useEffect(()=>{
-
-      // axios(
-      //   {
-      //     url:url,
-      //     method:'get',
-      //     headers:{'Access-Control-Allow-Origin':url}
-      //   }).
-      // then(res=>{
-      //     console.log(res.data,res.status);
-      //     setUserList(res.data);
-      // }).
-      // catch(err=>{
-
-      // })
-
-      //setApproles(data.approles);
-  
-    },[]);
-
-    // React.useEffect(()=>{
-    //     console.log('use effect data',approles);
-    // },[approles])
-
     return (
     <Card className={classes.root} >
       <CardContent>
@@ -102,7 +78,6 @@ export default function ObieeReports(props){
                   item.title.includes(search) ||
                   item.link.includes(search) 
                 );
-                //console.log(search,filteredData);
             setReports(filteredData);
           }}
           >

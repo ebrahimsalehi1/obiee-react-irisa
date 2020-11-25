@@ -27,7 +27,6 @@ import BrightnessLowIcon from '@material-ui/icons/Brightness4';
 //import LeftToRightPageIcon from '@material-ui/icons/FormatTextdirectionLToR';
 import clsx from 'clsx';
 import {UserContext} from '../Context';
-//import {useTranslation} from 'react-i18next';
 import Text from '../widgets/ObieeText';
 import {getText} from '../utils/Utils';
 import Tooltip from '@material-ui/core/Tooltip';

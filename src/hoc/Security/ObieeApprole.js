@@ -100,7 +100,6 @@ export default function ObieeApprole(props){
               icon:EditIcon,   
               tooltip:'Edit a row on tree',
               onClick: (event, rowData) => {
-                  console.log('EDIT rowData',rowData);
                   setMode('edit');
                   setApprole(rowData);          
               }
@@ -109,7 +108,6 @@ export default function ObieeApprole(props){
           editable={            
               {
                 onRowDelete: oldRow => new Promise(async (resolve,reject)=>{
-                  console.log('onRowDelete',oldRow);
 
                   context.obieeDispatch({type:'show_loading'});
                   const result = await approleDelete(oldRow.name);
@@ -131,7 +129,6 @@ export default function ObieeApprole(props){
 
                 }),
                 // onRowUpdate: (oldRow,newRow)=>new Promise((resolve,reject)=>{
-                //   console.log('onRowUpdate',oldRow,newRow);
 
                 //   setMode('edit');
                 //   setApprole(oldRow);
@@ -154,12 +151,10 @@ export default function ObieeApprole(props){
         mode={mode} 
         approle={approle}
         onAdd={async approleItem=>{
-          console.log('add',approleItem);
 
           context.obieeDispatch({type:'show_loading'});
 
           const result = await approleCreate(approleItem);
-          console.log(result);
           if(result.error){
             //setShowmessage(result.errorPersian+"\n"+result.errorLatin);
             context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
@@ -175,7 +170,6 @@ export default function ObieeApprole(props){
           context.obieeDispatch({type:'hide_loading'});
         }}
         onEdit={async approleItem=>{
-          console.log('edit',approleItem);
           context.obieeDispatch({type:'show_loading'});
 
           const result = await approleEdit(approleItem);
@@ -229,9 +223,7 @@ export default function ObieeApprole(props){
                     (item.desciption && item.desciption.toUpperCase().includes(search.toUpperCase()))
                   );
               setFilteredApproles(filteredData);   
-              
-              console.log(e.target.value,filteredData,filteredApproles);
-              
+                            
             }}
             variant='outlined'
             fullWidth
@@ -248,8 +240,6 @@ export default function ObieeApprole(props){
                   //(item.desciption && item.desciption.toUpperCase().includes(searchWord.toUpperCase()))
                 );
             setFilteredApproles(filteredData);            
-
-            console.log(searchWord.toUpperCase(),filteredData,filteredApproles);
 
           }}
           >
@@ -281,12 +271,10 @@ export default function ObieeApprole(props){
           mode={mode} 
           approle={approle}
           onAdd={async approleItem=>{
-            console.log('add',approleItem);
 
             context.obieeDispatch({type:'show_loading'});
 
             const result = await approleCreate(approleItem);
-            console.log(result);
             if(result.error){
               //setShowmessage(result.errorPersian+"\n"+result.errorLatin);
               context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
@@ -299,7 +287,6 @@ export default function ObieeApprole(props){
             context.obieeDispatch({type:'hide_loading'});
           }}
           onEdit={async approleItem=>{
-            console.log('edit',approleItem);
 
             context.obieeDispatch({type:'show_loading'});
 
@@ -343,7 +330,6 @@ export default function ObieeApprole(props){
                 key={index} 
                 approle={approle} 
                 onDelete={approleName=>{
-                    console.log('delete:'+approleName);
                     setApprole(prev=>{
                       const result = {prev,approleName:approleName};
                       return result;

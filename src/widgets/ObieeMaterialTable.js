@@ -138,14 +138,11 @@ export default function ObieeMaterialTable(props) {
                 "searchWord":""
             })
             .then(res=>{
-              console.log("ObieeTable data",res,url);
               setState({data:res.data});
       
               context.obieeDispatch({type:'hide_loading'});
             })
             .catch(err=>{
-                console.log('ObieeTable err',err);
-
               context.obieeDispatch({type:'hide_loading'});
               context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:'Error occured'}});
               //context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});

@@ -54,8 +54,6 @@ export default function ObieeItemApprole(props){
 
     const{mode,onAdd,onEdit,onDelete,onCancel,onExternalEvent} = props;
 
-    console.log('ObieeItemApprole-props',props);
-
     const [approleName,setApproleName] = React.useState(props.approle && mode!=='add' ? props.approle.name:'');
     const [approleDesc,setApproleDesc] = React.useState(props.approle && mode!=='add' ? props.approle.description : '');
     const [approleType,setApproleType] = React.useState(mode!=='add' && props.approle.baseRoles && props.approle.baseRoles.length>0 ? props.approle.baseRoles[0].name:'');

@@ -35,7 +35,6 @@ const initialState = {
 }   
 
 function reducer(state,action){
-    console.log(state,action);
     switch(action.type){
         case 'show_dashboard_home':
             return  {
@@ -175,36 +174,6 @@ function reducer(state,action){
 function IndexComp(props) {    
 
     const [state,dispatch] = React.useReducer(reducer,initialState);
-    const countRender = React.useRef(0);
-
-    // if(countRender.current === 0){
-    //     fetch('webservices.json',{
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //           }
-    //     })
-    //     .then(response=>response.json())
-    //     .then(data=>localStorage.setItem("webservices",JSON.stringify(data)))
-    //     .catch(err=>{
-    //         console.log("err",err);
-    //     });
-    
-    //     fetch('config.json',{
-    //         headers: {
-    //             'Content-Type': 'application/json'  
-    //           }
-    //     })
-    //     .then(response=>response.json())
-    //     .then(data=>localStorage.setItem("config",JSON.stringify(data)))
-    //     .catch(err=>{
-    //         console.log("err",err);
-    //     });     
-
-    //     localStorage.setItem('language','fa');  
-    //     localStorage.setItem('user','z.omidvar');
-    // }
-
-    countRender.current++;
 
     return (        
     <React.Suspense fallback={<h1>Progress ....</h1>}>

@@ -62,7 +62,6 @@ export default function ObieeCardReport(props){
         setExpanded(!expanded);
         //expanded.current = (expanded.current+1)%2;
         //expanded.current.in = !expanded.current.in;
-       // console.log('expanded',expanded);
       };
 
         // const strReports = getText('Reports');

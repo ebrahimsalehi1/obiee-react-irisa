@@ -109,8 +109,6 @@ export default function ObieeAssignUserToApprole() {
       newChecked.splice(currentIndex, 1);
     }
 
-    console.log('handleToggle',currentIndex,newChecked);
-
     setChecked(newChecked);
   };
 
@@ -124,7 +122,6 @@ export default function ObieeAssignUserToApprole() {
     setRight(right.concat(leftChecked));
     setLeft(not(left, leftChecked));
     setChecked(not(checked, leftChecked));
-    console.log(leftChecked,right);
   };
 
   const handleCheckedLeft = () => {  
@@ -202,11 +199,6 @@ export default function ObieeAssignUserToApprole() {
     </Card>
     );
   };
-
-  // console.log('UserOfApprole',
-  //   checked.length === 0,
-  //   leftChecked.length === 0,
-  //   rightChecked.length === 0);
 
   return (
     <Grid container spacing={4} justify="center" alignItems="center" className={classes.root}>
@@ -301,7 +293,6 @@ export default function ObieeAssignUserToApprole() {
               const listRemove =  not(currentUsers,right);
               const listAdd = not(right,currentUsers);
   
-              console.log('state1',currentApprole,listAdd,listRemove);
               const listFailed = [];
               listAdd.forEach(async (item)=>{
                 const result = await approleAssignUserToRole(currentApprole.name,item.name);
@@ -310,20 +301,13 @@ export default function ObieeAssignUserToApprole() {
                 }
               });
 
-              //console.log('state2','approleAssignUserToRole',result);
-
               listRemove.forEach(async (item)=>{
 
-                console.log('listRemove');
-
-                const result = await approleAssignUserToRole(currentApprole.name,item.name);
-                console.log(result);
+              const result = await approleAssignUserToRole(currentApprole.name,item.name);
                 if(result.error){
                   listFailed.push(item);
                 }
               });
-
-              console.log('state3',listFailed);
 
               if(listFailed.length === 0)
                 context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
@@ -331,8 +315,6 @@ export default function ObieeAssignUserToApprole() {
                 context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
     
               context.obieeDispatch({type:'hide_loading'});          
-
-              //setMode('');
 
             }} title={strSave} />
       </Grid>

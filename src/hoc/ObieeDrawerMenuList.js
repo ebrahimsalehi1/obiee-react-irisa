@@ -67,8 +67,6 @@ function ObieeDrawerMenuList(){
   const strUserInfo = getText('User');
   const strSetting = getText('Setting');
 
-  console.log('rendering DrawerMenuList');
-
   return (
 
     <List

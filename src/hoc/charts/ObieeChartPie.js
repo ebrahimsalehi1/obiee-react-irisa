@@ -39,7 +39,6 @@ export default function ObieeChartPie(props) {
     setState({
       activeIndex: index,name:data.name
     });
-    console.log('onPieEnter',data.name);
   };
 
   function renderActiveShape (props) {

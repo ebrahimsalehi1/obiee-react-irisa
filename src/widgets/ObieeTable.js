@@ -39,7 +39,6 @@ export default function DataGridDemo(props) {
           "searchWord":""
       })
       .then(res=>{
-        console.log("ObieeTable data",res);
         setProws(res.data);
 
         context.obieeDispatch({type:'hide_loading'});
@@ -48,7 +47,6 @@ export default function DataGridDemo(props) {
         context.obieeDispatch({type:'hide_loading'});
         context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:'Error occured'}});
         //context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
-        //console.log('ObieeTable err',err);
       });
     }
 
@@ -62,7 +60,6 @@ export default function DataGridDemo(props) {
         columns={columns} 
         pageSize={5}  
         onRowClick={(rowParams) =>{
-          console.log(rowParams.data.path);
           window.open(urlStart+rowParams.data.path, "_blank");
         }}
         />

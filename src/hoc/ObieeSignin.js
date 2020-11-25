@@ -130,9 +130,8 @@ export default function SignIn(props) {
 
     let result = await login(userName,password);
 
-    console.log('SignIn result',result);
-
     if(result.error){
+      alert(result.error.errorMessage ? result.error.errorMessage : "...");
       context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin+(result.error.errorMessage ? ". "+result.error.errorMessage : "")}});
     }
     else{       
@@ -146,7 +145,6 @@ export default function SignIn(props) {
         context.obieeDispatch({type:'login'});
       }
       else{        
-        //console.log("login-",result.data)
         context.obieeDispatch({type:'login',userInfo:result.data});
       }
     }
@@ -194,7 +192,9 @@ export default function SignIn(props) {
                     
                     <ObieeButtonOperation 
                     className={classes.darkBtn}  
-                    onExecute={async ()=>{await handleLogin()}}
+                    onExecute={()=>{
+                      handleLogin();
+                    }}
                     title="ورود"/>
 
                 </div>

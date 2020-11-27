@@ -115,7 +115,7 @@ export async function callRestPut(key,urlParams,data){
     }
 
     const url = getUrlParamList(key,urlParams);
-log('callRestPut',key,urlParams)
+
     return await axios({
             url:url,
             method:'PUT',

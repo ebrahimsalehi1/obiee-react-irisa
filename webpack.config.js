@@ -59,6 +59,13 @@ module.exports = {
                 }
             },
             {
+                test: /\.(woff|woff2|eot|ttf)$/,
+                loader: 'url-loader',
+                options: {
+                    outputPath: 'fonts',
+                }
+            },
+            {
                 test: /\.(js|jsx)$/,
                 enforce: 'pre',
                 use: ['source-map-loader'],

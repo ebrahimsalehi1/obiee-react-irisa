@@ -2,7 +2,22 @@ import {createMuiTheme} from '@material-ui/core/styles';
 //import { faIR } from '@material-ui/core/locale';
 import * as locales from '@material-ui/core/locale';
 import { blue } from '@material-ui/core/colors';
-//import '../../public/fonts/*';
+//import IranSansWebWoff from '../../public/fonts/iran-sans-web.woff';
+import IranSansWebWoff2 from '../../public/fonts/iran-sans-web.woff2';
+//import IranSansWebTTF from '../../public/fonts/iran-sans-web.ttf';
+//import IranSansWebEOT from '../../public/fonts/iran-sans-web.eot';
+
+const IranSansWeb = {
+  fontFamily: 'IranSansWeb',
+  fontStyle: 'normal',
+  fontDisplay: 'swap',
+  fontWeight: 400,
+  src: `
+    url(${IranSansWebWoff2}) format('woff2')
+  `,
+  unicodeRange:
+    'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
+};
 
 export const themeLightRTL = createMuiTheme({
     type:'themeLightRTL',
@@ -96,7 +111,13 @@ export const themeLightRTL = createMuiTheme({
     MuiTypography:{ 
       root:{
         textAlign:'left',
-        fontFamily: 'iran-Sans-web'
+        fontFamily: IranSansWeb
+      },
+      h4:{
+        fontFamily: IranSansWeb
+      },
+      subtitle1:{
+        fontFamily: IranSansWeb
       }
     },
 
@@ -106,7 +127,7 @@ export const themeLightRTL = createMuiTheme({
     // material-table Start
     MuiTableRow:{
       root:{
-          fontFamily: 'IRANSans-web',
+          fontFamily: 'IranSans',
           fontSize:10,
           height: 60                    
       },
@@ -143,7 +164,7 @@ export const themeLightRTL = createMuiTheme({
     },
     MuiTable:{
       root:{
-          direction:'rtl',
+          direction:'ltr',
           width: '100%',
       }
     }        

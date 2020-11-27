@@ -2,14 +2,14 @@ import React from 'react';
 // import Avatar from '@material-ui/core/Avatar';
 // import Button from '@material-ui/core/Button';
 // import CssBaseline from '@material-ui/core/CssBaseline';
-// import TextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
 // import Checkbox from '@material-ui/core/Checkbox';
 // import Link from '@material-ui/core/Link';
 // import Grid from '@material-ui/core/Grid';
 // import Box from '@material-ui/core/Box';
 // import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-// import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 // import Container from '@material-ui/core/Container';
 // import ImageSignIn from "../../public/img/logo-irisa.png";
@@ -18,6 +18,7 @@ import {UserContext} from '../Context';
 import {login} from '../webservice/Login';
 import {getUserInfo} from '../webservice/User';
 import ObieeButtonOperation from '../widgets/ObieeButtonOperation';
+import {getText} from '../utils/Utils';
 
 import '../../public/css/bootstrap-rtl.min.css';
 import '../../public/css/bootstrap.min.css';
@@ -168,7 +169,8 @@ export default function SignIn(props) {
                     <span className={classes.loginTitleSpan}>ورود به حساب کاربری</span>
                 </div>
                 <img className={classes.logo} src="./public/img/logo.svg" alt=""/>
-                <h4 className={classes.logoText}>مدیریت گزارشات هرمزگان</h4>
+                {/* <h4 className={classes.logoText}>مدیریت گزارشات هرمزگان</h4>                 */}
+                <Typography component="h4" variant="subtitle1">{getText('IrisaProductions')}</Typography>
                 <div className="form-group user-input">
                     <label htmlFor="inputName" className="control-label">نام کاربری</label>
                     <input type="text" className="form-control" id="inputName" placeholder="لطفا نام کاربری خود را وارد نمایید" required data-error="نام کاربری را وارد نمایید"
@@ -191,7 +193,7 @@ export default function SignIn(props) {
                     {/* <button  className={classes.darkBtn} onClick={async ()=>{await handleLogin()}}>ورود</button> */}
                     
                     <ObieeButtonOperation 
-                    className={classes.darkBtn}  
+                    //className={classes.darkBtn}  
                     onExecute={()=>{
                       handleLogin();
                     }}

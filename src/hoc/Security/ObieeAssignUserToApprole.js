@@ -282,38 +282,50 @@ export default function ObieeAssignUserToApprole() {
       >
           <ObieeButtonOperation onExecute={async ()=>
             {
+              console.log('currentUsers',currentUsers);
 
-              if(currentUsers.length === 0 || currentApprole.length===0){
+              const listRemove =  not(currentUsers,right);
+              const listAdd = not(right,currentUsers);
+
+              if((listRemove.length === 0 && listAdd.length===0) || currentApprole.length===0){
                 context.obieeDispatch({type:'show_message',messageToShow:{type:'warning',message:getText('Fill Inputs')}});
                 return;
               }
 
               context.obieeDispatch({type:'show_loading'});
-
-              const listRemove =  not(currentUsers,right);
-              const listAdd = not(right,currentUsers);
-  
-              const listFailed = [];
+              
+              //var listFailed = [];
+              let error = false;
               listAdd.forEach(async (item)=>{
                 const result = await approleAssignUserToRole(currentApprole.name,item.name);
                 if(result.error){
-                  listFailed.push(item);
+                  //listFailed.push(item);
+                  context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin+(result.error.errorMessage ? ". "+result.error.errorMessage : "")}});
+                  context.obieeDispatch({type:'hide_loading'});    
+                  error = true;    
+                  return; 
                 }
               });
+
+              if(error)
+                return;
 
               listRemove.forEach(async (item)=>{
 
-              const result = await approleAssignUserToRole(currentApprole.name,item.name);
-                if(result.error){
-                  listFailed.push(item);
+                const result = await approleAssignUserToRole(currentApprole.name,item.name);
+                if(result.error){                
+                  //listFailed.push(item);   
+                  context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin+(result.error.errorMessage ? ". "+result.error.errorMessage : "")}});            
+                  context.obieeDispatch({type:'hide_loading'});  
+                  error = true;    
+                  return;       
                 }
               });
 
-              if(listFailed.length === 0)
-                context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
-              else
-                context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+"\n"+result.error.errorLatin}});
-    
+              if(error)
+                return;
+              
+              context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
               context.obieeDispatch({type:'hide_loading'});          
 
             }} title={strSave} />

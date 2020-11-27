@@ -3,7 +3,7 @@
     {"str":"last Name","val":"نام خانوادگی"},
     {"str":"department id","val":"شناسه واحد"},
     {"str":"salary","val":"حقوق"},
-    {"str":"IrisaProductions","val":"محیط عملیاتی ایریسا"},
+    {"str":"IrisaProductions","val":"مدیریت گزارشات هرمزگان"},
 
     {"str":"Reports","val":"گزارشات"},
     {"str":"Users","val":"کاربران"},
@@ -65,6 +65,8 @@
     {"str":"Administrator Options","val":"امکانات کاربر اصلی"},
     {"str":"Node Added","val":"نود اضافه شد"},
     {"str":"Fill Inputs","val":"لطفا فیلدهای خالی را وارد کنید"},
+    {"str":"Add new Approle","val":"اضافه نمودن نقش جدید"},
+    {"str":"Edit Approle","val":"ویرایش نقش"},
     {"str":"","val":""},
     {"str":"","val":""},
     {"str":"","val":""},

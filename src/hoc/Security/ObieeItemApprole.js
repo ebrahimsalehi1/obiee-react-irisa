@@ -155,8 +155,8 @@ export default function ObieeItemApprole(props){
           onChange={(e)=>{setAppType(e.target.value)}}
           label={strAppType}
         >
-          <MenuItem value={'BI'}>BI</MenuItem>
-          <MenuItem value={'AN'}>AN</MenuItem>
+          <MenuItem value={'BI'}>{getText('BI Publisher')}</MenuItem>
+          <MenuItem value={'AN'}>{getText('Analytics')}</MenuItem>
         </Select>
       </FormControl>
       </Grid>
@@ -238,8 +238,17 @@ export default function ObieeItemApprole(props){
 
       </Grid>
 
-      <Grid item xs={12} md={6}>
-      {mode==='add' &&
+      </CardContent>
+
+      <CardActions>
+      <Grid spacing={0} container>
+        <Grid item xs={12} md={2}>
+        {(mode==='add' || mode==='edit') &&
+          <ObieeButtonOperation onExecute={onCancel} title={strCancel} />         
+        }
+        </Grid>
+        <Grid item xs={12} md={2}>
+        {mode==='add' &&
         <ObieeButtonOperation onExecute={()=>
           {
             if(validation())
@@ -247,38 +256,19 @@ export default function ObieeItemApprole(props){
             else 
               alert('fields must be fill');              
           }} title={strSave} />
-      }
+        }
+        {mode==='edit' &&    
+          <ObieeButtonOperation onExecute={()=>
+            {
+              if(validation())
+                onEdit(createRow());
+              else 
+                alert('fields must be fill');              
+            }} title={strSave} />        
+        }
+        </Grid>
       </Grid>
-
-      {/* <Grid item xs={12} md={6}>
-      {mode==='add' &&
-        <ObieeButtonOperation onExecute={onCancel} title={strCancel} />         
-      }
-      </Grid> */}
-
-      <Grid item xs={12} md={6}>
-      {mode==='edit' &&    
-        <ObieeButtonOperation onExecute={()=>
-          {
-            if(validation())
-              onEdit(createRow());
-            else 
-              alert('fields must be fill');              
-          }} title={strSave} />        
-      }
-      </Grid>
-
-      <Grid item xs={12} md={6}>
-      {mode==='edit' &&
-        <ObieeButtonOperation onExecute={onCancel} title={strCancel} />         
-      }
-      </Grid>
-
-      </CardContent>
-
-      {/* <CardActions>
-      
-      </CardActions> */}
+      </CardActions>
 
     </Card>
     )

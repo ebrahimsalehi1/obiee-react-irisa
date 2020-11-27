@@ -140,7 +140,7 @@ export default function ObieeApprole(props){
       />
       {(mode==='add' || mode==='edit') &&
       <ObieeDialog 
-      title="Add new Approle"
+      title={mode==='add' ? getText("Add new Approle") : mode==='edit' ? getText("Edit Approle"):""}
       openModal={true}
       //TransitionComponent
       eventClose={()=>{

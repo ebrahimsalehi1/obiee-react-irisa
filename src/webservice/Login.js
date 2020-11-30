@@ -2,10 +2,10 @@
 import {callRestPost} from '../utils/Utils';
 import {inspectErrors} from './ErrorHandling';
 
-export async function login(userName,password){
+export async function login(data){
 
     const result = {data:null,error:null};
-    await callRestPost('LOGIN',null)
+    await callRestPost('LOGIN',null,data)
     .then(res=>{
          result.data = res.data;   
     })

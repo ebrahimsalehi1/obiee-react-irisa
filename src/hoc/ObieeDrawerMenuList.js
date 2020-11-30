@@ -109,7 +109,7 @@ function ObieeDrawerMenuList(){
 
 <Divider />
 
-<ListItem button key={strSecurity} onClick={handleClick}>
+<ListItem button key={strSecurity} onClick={handleClick} disabled={!context.obieeState.hasAdminRole}>
     <ListItemIcon><LockIcon /> </ListItemIcon>
     <ListItemText >{strSecurity}</ListItemText>
     <IconButton>

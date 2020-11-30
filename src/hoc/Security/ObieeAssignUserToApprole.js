@@ -9,7 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import {UserContext} from '../../Context';
-import {appRoleAll,getListUsersOfRole,approleAssignUserToRole} from '../../webservice/Approle';
+import {appRoleAll,getListUsersOfRole,approleAssignUserToRole,approleDeleteUserFromRole} from '../../webservice/Approle';
 import {getUserAll} from '../../webservice/User';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
@@ -312,7 +312,7 @@ export default function ObieeAssignUserToApprole() {
 
               listRemove.forEach(async (item)=>{
 
-                const result = await approleAssignUserToRole(currentApprole.name,item.name);
+                const result = await approleDeleteUserFromRole(currentApprole.name,item.name);
                 if(result.error){                
                   //listFailed.push(item);   
                   context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin+(result.error.errorMessage ? ". "+result.error.errorMessage : "")}});            

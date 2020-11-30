@@ -1,5 +1,6 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
+import "../public/css/style.css";
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -27,6 +28,7 @@ const initialState = {
     shown_component:'show_dashboard_home',
     progress: false,
     userInfo:null,
+    hasAdminRole:null,
     messageToShow:{
         type:'info',
         message:''
@@ -146,7 +148,8 @@ function reducer(state,action){
                 ...state,
                 isAuthenticated: localStorage.getItem('isAuthenticated')=='1' ,
                 shown_component:'show_dashboard_home',
-                userInfo: action.userInfo
+                userInfo: action.userInfo,
+                hasAdminRole: action.hasAdminRole
             }  
         case 'logoff':
             localStorage.setItem("isAuthenticated","0");

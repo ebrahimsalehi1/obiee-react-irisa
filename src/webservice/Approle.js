@@ -82,3 +82,16 @@ export async function approleAssignUserToRole(roleName,user){
     return result;
 }
 
+export async function approleDeleteUserFromRole(roleName,user){
+
+    const result = {data:null,error:null};
+    await callRestPut('APPROLE_DELETE_USER_FROM_ROLE',[roleName,user],null)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}

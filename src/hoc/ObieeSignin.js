@@ -16,7 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // import Copyright from '../widgets/ObieeCopyright';
 import {UserContext} from '../Context';
 import {login} from '../webservice/Login';
-import {getUserInfo} from '../webservice/User';
+import {getUserInfo,hasAdminRole} from '../webservice/User';
 import ObieeButtonOperation from '../widgets/ObieeButtonOperation';
 import {getText} from '../utils/Utils';
 
@@ -129,7 +129,14 @@ export default function SignIn(props) {
 
   async function handleLogin(){
 
-    let result = await login(userName,password);
+    let userInfoData;
+    let hasAdminRoleData;
+
+    const data = {
+      userName:userName,
+      password:password
+    };
+    let result = await login(data);
 
     if(result.error){
       alert(result.error.errorMessage ? result.error.errorMessage : "...");
@@ -145,8 +152,22 @@ export default function SignIn(props) {
         context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:"error in get info"}});
         context.obieeDispatch({type:'login'});
       }
-      else{        
-        context.obieeDispatch({type:'login',userInfo:result.data});
+      else{     
+        userInfoData = result.data;
+
+        result =  await hasAdminRole(localStorage.getItem('user'));
+        
+        if(result.error){
+          context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:"error in get info"}});
+          context.obieeDispatch({type:'login'});  
+        }
+        else{
+          hasAdminRoleData = result.data;            
+        }
+
+        console.log('login information',userInfoData,hasAdminRoleData);
+
+        context.obieeDispatch({type:'login',userInfo:userInfoData,hasAdminRole:hasAdminRoleData});
       }
     }
   }

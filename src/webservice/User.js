@@ -30,3 +30,16 @@ export async function getUserAll(user){
     return result;
 }
 
+export async function hasAdminRole(user){
+
+    const result = {data:null,error:null};
+    await callRestGet('APPROLE_HAS_ADMIN_ROLE',[user],null)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}

@@ -106,3 +106,16 @@ export async function permissionCustom(data){
 
     return result;
 }
+
+export async function getItemPermission(data){
+    const result = {data:null,error:null};
+    await callRestPost('CATALOG_PERMISSION_ITEM',null,data)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}

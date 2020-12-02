@@ -109,7 +109,8 @@ function ObieeDrawerMenuList(){
 
 <Divider />
 
-<ListItem button key={strSecurity} onClick={handleClick} disabled={!context.obieeState.hasAdminRole}>
+{context.obieeState.hasAdminRole && 
+<ListItem button key={strSecurity} onClick={handleClick}>
     <ListItemIcon><LockIcon /> </ListItemIcon>
     <ListItemText >{strSecurity}</ListItemText>
     <IconButton>
@@ -119,7 +120,7 @@ function ObieeDrawerMenuList(){
     </IconButton>
 
     </ListItem>
-
+  }
     <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
 
@@ -140,6 +141,7 @@ function ObieeDrawerMenuList(){
 
         </List>
     </Collapse>
+
 
 
     {/* <ListItem button key={strReports} onClick={e=>context.obieeDispatch({type:'show_report'})}>

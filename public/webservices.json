@@ -92,10 +92,6 @@
         "bffUrl":":0/obiee-bff/catalog/tree"
     },
     {
-        "name":"CATALOG_PERMISSION_ITEM",
-        "bffUrl":":0/obiee-bff/catalog/itemPermission"
-    },
-    {
         "name":"CATALOG_PERMISSION_MODIFY",
         "bffUrl":":0/obiee-bff/catalog/addModifyPermission"
     },
@@ -126,5 +122,9 @@
     {
         "name":"CATALOG_PERMISSION_CUSTOM",
         "bffUrl":":0/obiee-bff/catalog/addCustomPermission"
+    },
+    {
+        "name":"CATALOG_PERMISSION_ROLE",
+        "bffUrl":":0/obiee-bff/catalog/rolePermission"
     }
 ]

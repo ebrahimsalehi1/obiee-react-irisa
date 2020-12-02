@@ -1,6 +1,6 @@
 {
-    "serviceType":"service",
-    "host":"http://localhost:8081",
+    "serviceType":"file",
+    "host":"http://172.25.40.135:8080/backforfront",
     "language":"fa",
     "direction":"rtl",
     "features":[
@@ -19,5 +19,8 @@
         {"approle":true},
         {"user-approle":true},
         {"object-approle":true}
-    ]
+    ],
+    "featuresBI":{
+        "treeTypes": ["Folder","Dashboard","DashboardGroup","Page","Report","DataModel"]
+    }
 }

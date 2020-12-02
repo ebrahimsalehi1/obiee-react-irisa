@@ -107,13 +107,27 @@ export async function permissionCustom(data){
     return result;
 }
 
-export async function getItemPermission(data){
+// export async function getItemPermission(data){
+//     const result = {data:null,error:null};
+//     await callRestPost('CATALOG_PERMISSION_ITEM',null,data)
+//     .then(res=>{
+//          result.data = res.data;   
+//     })
+//     .catch(err=>{
+//         result.error = inspectErrors(err);
+//     });
+
+//     return result;
+// }
+
+export async function getRolePermission(data){
     const result = {data:null,error:null};
-    await callRestPost('CATALOG_PERMISSION_ITEM',null,data)
+    await callRestPost('CATALOG_PERMISSION_ROLE',null,data)
     .then(res=>{
          result.data = res.data;   
     })
     .catch(err=>{
+        alert('error')
         result.error = inspectErrors(err);
     });
 

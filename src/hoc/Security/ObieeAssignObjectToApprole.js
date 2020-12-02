@@ -6,7 +6,7 @@ import {appRoleAll} from '../../webservice/Approle';
 import {tree,permissionFull,
         permissionNoAccess,permissionModify,permissionOpen,
         //permissionViewReportOutput,permissionScheduleReport,
-        permissionCustom,getItemPermission} from '../../webservice/Catalog';
+        permissionCustom,getItemPermission,getRolePermission} from '../../webservice/Catalog';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import ObieeMaterialTable from '../../widgets/ObieeMaterialTable';
@@ -31,6 +31,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
 import CloseIcon from '@material-ui/icons/Close';
 import ObieePermissionDialog from '../../widgets/ObieePermissionDialog';
+import config from "../../../public/config.json";
+import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -123,7 +125,9 @@ export default function ObieeAssignObjectToApprole() {
       result = await tree(
         {
         user: user,
-        sessionId:sessionId
+        sessionId:sessionId,
+        types: config.featuresBI.treeTypes,
+        detail:true
         }
       );
 
@@ -166,11 +170,6 @@ export default function ObieeAssignObjectToApprole() {
               account: {
                   name: selectedApprole
               }
-          },
-          {
-              account: {
-                  name: "BIServiceAdministrator"
-              }
           }
       ]
     }
@@ -209,15 +208,6 @@ export default function ObieeAssignObjectToApprole() {
                   permission: {
                       "accessModeList": customPermissionTypeValues,
                       "accessPermission": sumValues
-                  }
-              },
-              {
-                  account: {
-                      "name": "BIServiceAdministrator"
-                  },
-                  permission: {
-                      accessModeList: customPermissionTypeValues,
-                      accessPermission: sumValues
                   }
               }
           ]
@@ -343,7 +333,7 @@ export default function ObieeAssignObjectToApprole() {
 
   return (
     <Grid container spacing={1} justify="center" alignItems="center" className={classes.root}>
-      <Grid item xs={12} md={12}>
+      <Grid item xs={12} md={11}>
         <Autocomplete
           id="combo-box-demo"
           options={approles}
@@ -355,6 +345,34 @@ export default function ObieeAssignObjectToApprole() {
           }}
         />        
         </Grid>
+
+      <Grid item xs={12} md={1}>
+        <ObieeButtonOperation title={getText('Search')} onExecute={async ()=>{
+            context.obieeDispatch({type:'show_loading'});
+
+            const user = localStorage.getItem('user');
+            //const sessionId = localStorage.getItem('sessionId');
+      
+            const result = await getRolePermission(
+              {
+                user: user,
+                account: selectedApprole,
+                types: config.featuresBI.treeTypes
+              }
+            );
+            console.log('result',result);
+            if(result.error){
+              context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+            }
+            else{
+              setCatalog(result.data);
+              console.log('getRolePermission',result.data);
+            }      
+      
+            context.obieeDispatch({type:'hide_loading'});
+
+        }} />
+      </Grid>
 
         <Grid item xs={12} md={12}>
         <Grid 
@@ -368,9 +386,10 @@ export default function ObieeAssignObjectToApprole() {
           </Grid>
 
           <Grid item xs={12} md={12}>
-          <Grid item xs={12} md={12}>
+
+          {/* <Grid item xs={12} md={12}>
             <Checkbox />{getText('Select All')}
-            <Paper style={{"height":"50px"}}>
+            <Paper style={{"height":"200px"}}>
               {
                 paths && paths.map(item=>(
                   <Chip
@@ -379,41 +398,14 @@ export default function ObieeAssignObjectToApprole() {
                   deleteIcon={<CloseIcon />}
                   color="primary"
                   onClick={async ()=>{    
-                    context.obieeDispatch({type:'show_loading'});
-
-                    const user = localStorage.getItem('user');              
-                    const sessionId = localStorage.getItem('sessionId');
-
-                    const data = {
-                      user: user,
-                      sessonId:sessionId,
-                      path: item.path,
-                      account :"BIServiceAdministrator"
-                    }
-                                  
-                    const result = await getItemPermission(data);
-              
-                    if(result.error){
-                      context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
-                    }
-                    else{
-                      console.log("getItemPermission",result.data);
-                      setOpenPermissionDialog(
-                        { open:true,
-                          permissionType:result.data[0].permission.accessPermission.acessLabel,
-                          customPermissionType:result.data[0].permission.accessModeList.map(item=>item.acessLabel)
-                        }
-                      );
-                    }
-                    
-
-                    context.obieeDispatch({type:'hide_loading'});
+                    console.log('click me',item);  
                   }}
                 />
                 ))
               }
             </Paper>
-            </Grid>
+          </Grid> */}
+
           </Grid>
         </Grid>
       </Grid>
@@ -449,6 +441,7 @@ export default function ObieeAssignObjectToApprole() {
 
           ]}
           options={{
+            selection:true,
             rowStyle:(event,rowData)=>{                
                 if(rowExpanded && rowExpanded.path===event.parentPath)
                     return {
@@ -463,13 +456,22 @@ export default function ObieeAssignObjectToApprole() {
             }
          }}
         onRowClick={(event,rowData)=>{
-          const newPaths = [...paths];
-          if(newPaths.indexOf(rowData)===-1){
-            newPaths.push(rowData);
-            setPaths(newPaths);     
+          setOpenPermissionDialog(
+            { open:true,
+              permissionType:null, //result.data[0].permission.accessPermission.acessLabel,
+              customPermissionType:null //result.data[0].permission.accessModeList.map(item=>item.acessLabel)
+            }
+          );
+
+          console.log('clicked row data',rowData.itemAccessPermissions);
+
+          // const newPaths = [...paths];
+          // if(newPaths.indexOf(rowData)===-1){
+          //   newPaths.push(rowData);
+          //   setPaths(newPaths);     
             
-            context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Node Added')+" ["+(rowData.description ? rowData.description : rowData.caption)+" ]"}});
-          }
+          //   context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Node Added')+" ["+(rowData.description ? rowData.description : rowData.caption)+" ]"}});
+          // }
         }
       }
       />

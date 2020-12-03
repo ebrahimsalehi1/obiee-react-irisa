@@ -56,11 +56,11 @@ export default function ObieeMaterialTable(props) {
     const context = React.useContext(UserContext);
 
     const { 
-        icons,columns,data,actions,editable,title,endpoint,
+        icons,data,actions,editable,title,endpoint,
         url,gridLoad,
         formItemsAdd,formItemsEdit,
-        options,parentChildData,detailPanel,
-        onTreeExpandChange,...others
+        options
+        
     } = props;
 
     const [state, setState] = React.useState({
@@ -100,14 +100,12 @@ export default function ObieeMaterialTable(props) {
         <MaterialTable
             icons={icons ? icons : tableIcons}
             tableRef={tableRef}
-            title={""}
-            columns={columns}
             data={url && Array.isArray(state.data) ? state.data : data}
-            editable={editable}
-            actions={[
-                {isFreeAction:true,icon:()=>(<MoreVert />),tooltip:'منوهای بیشتر',onClick:(event,rowData)=>{}},
-                ...actions,
-            ]}
+            // editable={editable}
+            // actions={[
+            //     {isFreeAction:true,icon:()=>(<MoreVert />),tooltip:'منوهای بیشتر',onClick:(event,rowData)=>{}},
+            //     ...actions,
+            // ]}
             localization={{
                 pagination: {
                     labelDisplayedRows: '{from}-{to} ', // از {count}
@@ -136,7 +134,7 @@ export default function ObieeMaterialTable(props) {
                 headerStyle: {
                     //backgroundColor: '#01579b',
                     //color: '#FFF',
-                    fontFamily: 'IRANSans-web',
+                    fontFamily: 'IRANSans',
                     fontSize:12
                 },
                 toolbarButtonAlignment:'left',
@@ -144,10 +142,7 @@ export default function ObieeMaterialTable(props) {
                 selection: options && options.selection ? options.selection:false,
                 //searchFieldAlignment:'left'
             }}
-            parentChildData={parentChildData}
-            onTreeExpandChange={onTreeExpandChange}
-            detailPanel={detailPanel}
-            {...others}
+            {...props}
         />
     );
 }

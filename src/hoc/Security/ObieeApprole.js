@@ -80,6 +80,7 @@ export default function ObieeApprole(props){
     return (
       <div className={classes.root}>
       <ObieeMaterialTable
+          title=""
           columns={[
             { field: 'name', title: getText('Name'), headerStyle:{width:200} },
             { field: 'displayName', title: getText('DisplayName'), headerStyle:{width:300} },

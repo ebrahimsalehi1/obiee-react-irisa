@@ -79,7 +79,11 @@ export const themeLightRTL = createMuiTheme({
             backgroundColor: '#3f51b5'
         }
     },
-
+    MuiListItemText:{
+      primary:{
+        textAlign:'right',
+      }
+    },
     MuiCardHeader: {
         root: {
             padding: '8px'
@@ -88,6 +92,7 @@ export const themeLightRTL = createMuiTheme({
             fontSize: '0.75rem',
             fontWeight: 'bold',
             color: '#263238',
+            fontFamily: 'IRANSans'
         }, 
         action: {
             marginTop: 0,
@@ -120,10 +125,12 @@ export const themeLightRTL = createMuiTheme({
         fontFamily: 'IRANSans'
       },
       body1:{
+        fontFamily: 'IRANSans',
+      },
+      caption:{
         fontFamily: 'IRANSans'
       }
     },
-
     MuiInputBase:{
       input:{textAlign:'left'}
     },

@@ -19,6 +19,11 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
 import {getText} from '../../utils/Utils';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(0.5, 0),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
   },
 }));
 
@@ -52,6 +61,8 @@ export default function ObieeAssignUserToApprole() {
   const [approles,setApproles] = React.useState([]);
   const [currentApprole,setCurrentApprole] = React.useState();
   const [currentUsers,setCurrentUsers] = React.useState([]);
+
+  const [infoType,setInfoType] = React.useState('user');
 
   //const rightChecked = intersection(checked, right);
   //const leftChecked = intersection(checked, left);
@@ -202,13 +213,13 @@ export default function ObieeAssignUserToApprole() {
 
   return (
     <Grid container spacing={4} justify="center" alignItems="center" className={classes.root}>
-      <Grid item xs={12} md={12}>
+      <Grid item xs={12} md={10}>
         <Autocomplete
           id="combo-box-demo"
           options={approles}
           getOptionLabel={(option) => option.name+(option.displayName ? ' - '+option.displayName:'')}
           fullWidth
-          renderInput={(params) => <TextField {...params} label="approles" variant="outlined" />}
+          renderInput={(params) => <TextField {...params} label={getText("Approle Name")} variant="outlined" />}
           onChange={async (e,val)=>{
             context.obieeDispatch({type:'show_loading'});
 
@@ -225,7 +236,24 @@ export default function ObieeAssignUserToApprole() {
             context.obieeDispatch({type:'hide_loading'});          
           }}
         />        
-        </Grid>
+      </Grid>
+      <Grid item xs={12} md={2}>
+      <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">{getText('Show By')}</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={infoType}
+            onChange={(event)=>{
+                setInfoType(event.target.value);
+            }}
+          >
+            <MenuItem value={'user'}>User</MenuItem>
+            <MenuItem value={'group'}>Group</MenuItem>
+            <MenuItem value={'approle'}>Approle</MenuItem>
+          </Select>
+        </FormControl>    
+      </Grid>
       <Grid item xs={12} md={5}>{customList(left,1000000)}</Grid>
       <Grid item xs={12} md={2}>
         <Grid container direction="column" alignItems="center">

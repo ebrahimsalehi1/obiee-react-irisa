@@ -4,7 +4,7 @@
     src: url('../fonts/iran-sans-web.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/iran-sans-web.woff2') format('woff2'), /* Super Modern Browsers */ url('../fonts/iran-sans-web.woff') format('woff'), /* Pretty Modern Browsers */ url('../fonts/iran-sans-ultra-light.ttf'), /* Pretty Modern Browsers */ url('../fonts/iran-sans-web.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
-body {
+/* body {
     background-color: #f4f5f7;
     font-family: IRANSans !important;
     font-size: 14px;
@@ -135,13 +135,13 @@ a {
     border-color: #00885a;
 }
 
- input[type="checkbox"]/*, input[type="radio"] */
+ input[type="checkbox"]
 {
     width: unset !important;
     margin-right: -20px;
     margin-left: 5px !important;
     height: 13px !important;
-}
+} 
 div.checkbox
 {
     height: 10px;
@@ -368,4 +368,4 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill,
 {
     font-size: 0.7rem;
 }
-
+ */

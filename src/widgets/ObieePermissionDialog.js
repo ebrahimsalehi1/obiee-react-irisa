@@ -16,6 +16,7 @@ import ObieeDialog from './ObieeDialog';
 import {getText} from '../utils/Utils';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -46,13 +47,13 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 300,
-    maxWidth: 400,
+    minWidth: 500,
+    maxWidth: 600,
   }
 }));
 
 export default function ObieePermissionDialog(props){
-    const {onClose,onAddPermission,onRemovePermission} = props;
+    const {itemAccessPermissions,onClose,onAddPermission,onRemovePermission} = props;
 
     const [permissionType,setPermissionType] = React.useState(props.permissionType ? props.permissionType : 'Form Control');
     const [customPermissionType,setCustomPermissionType] = React.useState(props.customPermissionType ? props.customPermissionType : []);
@@ -75,15 +76,43 @@ export default function ObieePermissionDialog(props){
         </>        
         }
         >
-        <Grid container spacing={1} className={classes.root}>
+        <Box className={classes.formControl}>
+        <Grid container spacing={2} className={classes.root}>
         <Grid item xs={12} md={12}>
-        <FormControl variant="outlined" fullWidth className={classes.formControl}>        
-        <InputLabel id="demo-simple-select-outlined-label">{getText('Permission')}</InputLabel>
+        {/*<InputLabel id="demo-mutiple-checkbox-label">Custom Options</InputLabel> */}
+        <Select
+          labelId="demo-mutiple-checkbox-label"
+          id="demo-mutiple-checkbox"
+          multiple
+          value={customPermissionType}
+          variant="outlined"
+          fullWidth
+          onChange={event=>setCustomPermissionType(event.target.value)}
+          input={<Input />}
+          renderValue={(selected) => selected.join(', ')}
+          MenuProps={MenuProps}
+          label="aa"
+        >
+        {itemAccessPermissions.map(item=>(
+          <MenuItem key={item.account.name} value={item.account.name}>
+              <Checkbox checked={itemAccessPermissions.indexOf(item.account.name)!==-1} />
+              <ListItemText primary={item.account.name+"-"+item.account.displayname} />
+            </MenuItem>
+        ))
+        }
+        </Select>
+        </Grid>
+
+        <Grid item xs={12} md={12}>
+        {/* <FormControl variant="outlined" fullWidth className={classes.formControl}>         */}
+        {/* <InputLabel id="demo-simple-select-outlined-label">{getText('Permission')}</InputLabel> */}
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={permissionType}
-          MenuProps={MenuProps}        
+          MenuProps={MenuProps}       
+          variant="outlined" 
+          fullWidth
           onChange={(e)=>{
             setPermissionType(e.target.value);
           }}        
@@ -95,20 +124,17 @@ export default function ObieePermissionDialog(props){
           <MenuItem key="No Access" value="No Access">No Access</MenuItem>        
           <MenuItem key="Custom" value="Custom">Custom</MenuItem>                
         </Select>
-      </FormControl>
         </Grid>
-        <Grid item xs={12} md={12}>  
-      <FormControl 
-        variant="outlined" 
-        fullWidth 
-        className={classes.formControl} 
-        disabled={permissionType!=='Custom'}>
-          <InputLabel id="demo-mutiple-checkbox-label">Custom Options</InputLabel>
+        <Grid item xs={12} md={12}>
+
+        {/* <InputLabel id="demo-mutiple-checkbox-label">Custom Options</InputLabel> */}
           <Select
             labelId="demo-mutiple-checkbox-label"
             id="demo-mutiple-checkbox"
             multiple
             value={customPermissionType}
+            variant="outlined"
+            fullWidth
             onChange={event=>setCustomPermissionType(event.target.value)}
             input={<Input />}
             renderValue={(selected) => selected.join(', ')}
@@ -133,11 +159,6 @@ export default function ObieePermissionDialog(props){
               <Checkbox checked={customPermissionType.indexOf("DELETE")!==-1} />
               <ListItemText primary={"Delete"} />
             </MenuItem>
-  
-            {/* <MenuItem key={"Change Permissions"} value={"Change Permissions"}>
-              <Checkbox checked={customPermissionType.indexOf("Change Permissions")!==-1} />
-              <ListItemText primary={"Change Permissions"} />
-            </MenuItem> */}
   
             <MenuItem key={"SET OWNERSHIP"} value={"SET OWNERSHIP"}>
               <Checkbox checked={customPermissionType.indexOf("SET OWNERSHIP")!==-1} />
@@ -165,10 +186,21 @@ export default function ObieePermissionDialog(props){
             </MenuItem>
   
           </Select>
+
+      {/* </FormControl> */}
+        </Grid>
+        {/* <Grid item xs={12} md={12}>  
+      <FormControl 
+        variant="outlined" 
+        fullWidth 
+        className={classes.formControl} 
+        disabled={permissionType!=='Custom'}>
+
         </FormControl>
       
+      </Grid> */}
       </Grid>
-      </Grid>
+      </Box>
       </ObieeDialog>
       );
 }

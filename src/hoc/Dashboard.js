@@ -70,6 +70,7 @@ function Dashboard(props){
             {type !== 'REPORT_NONE' &&
             <Grid item xs={12} md={12} key={4}>
             <ObieeMaterialTable
+                title=""
                 columns={[
                     { field: 'caption', title: getText('Caption'), headerStyle: {width: 250} },
                     { field: 'description', title: getText('Description'), headerStyle: {width: 500} }

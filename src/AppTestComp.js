@@ -17,10 +17,41 @@ export default function App(props){
     return (
         <MuiThemeProvider theme={themeMain}>
             <button onClick={()=>setOpen(true)}>click me</button>
-            {open &&
+        {open &&
         <ObieePermissionDialog 
         onClose={()=>setOpen(false)}
+        itemAccessPermissions={[
+            {
+                "account": {
+                    "name": "smm2",
+                    "guid": "smm2",
+                    "type": 4,
+                    "displayname": "محمد"
+                },
+                "permission": {
+                    "accessModeList": [
+                        {
+                            "accessValue": 2048,
+                            "acessLabel": "RUNREPORT"
+                        },
+                        {
+                            "accessValue": 2,
+                            "acessLabel": "TRAVERSE"
+                        },
+                        {
+                            "accessValue": 1,
+                            "acessLabel": "READ"
+                        }
+                    ],
+                    "accessPermission": {
+                        "accessValue": 2051,
+                        "acessLabel": "EXECUTE"
+                    }
+                }
+            }
+            ]}
         />
+
         }
         </MuiThemeProvider>
     );

@@ -33,6 +33,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import ObieePermissionDialog from '../../widgets/ObieePermissionDialog';
 import config from "../../../public/config.json";
 import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
+import IconPermDataSetting from '@material-ui/icons/PermDataSetting';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -387,31 +388,13 @@ export default function ObieeAssignObjectToApprole() {
 
           <Grid item xs={12} md={12}>
 
-          {/* <Grid item xs={12} md={12}>
-            <Checkbox />{getText('Select All')}
-            <Paper style={{"height":"200px"}}>
-              {
-                paths && paths.map(item=>(
-                  <Chip
-                  label={item.description ? item.description : item.caption}
-                  onDelete={()=>{handleDelete(item);}}
-                  deleteIcon={<CloseIcon />}
-                  color="primary"
-                  onClick={async ()=>{    
-                    console.log('click me',item);  
-                  }}
-                />
-                ))
-              }
-            </Paper>
-          </Grid> */}
-
           </Grid>
         </Grid>
       </Grid>
 
       <Grid item xs={12} md={12}>
       <ObieeMaterialTable
+          title=""
           columns={[
             { field: 'caption', title: getText('Caption'), headerStyle:{width:200} },
             { field: 'description', title: getText('Description'), headerStyle:{width:300} },
@@ -437,7 +420,7 @@ export default function ObieeAssignObjectToApprole() {
           // :null,
           {isFreeAction:true,icon:()=>(<Refresh />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{fetchData()}},
           //{isFreeAction:true,icon:()=>(<Permissions />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{}},
-          //{isFreeAction:true,icon:()=>( <ObieeButtonOperation onExecute={()=>handleAddPermission()} title="Set"/>),tooltip:'بروزرسانی',onClick:(event,rowData)=>{}},
+          {icon:()=><IconPermDataSetting/>,tooltip:getText('Set Permission'),onClick:(event,rowData)=>{alert('hi')}},
 
           ]}
           options={{

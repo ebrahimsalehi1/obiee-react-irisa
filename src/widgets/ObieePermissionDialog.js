@@ -99,7 +99,7 @@ export default function ObieePermissionDialog(props){
       return a.filter((value) => b.indexOf(value.accessValue) !== -1);
     }
 
-    //const [permissionType,setPermissionType] = React.useState(props.permissionType ? props.permissionType : 'Form Control');
+    const [permissionType,setPermissionType] = React.useState('');
     //const [customPermissionType,setCustomPermissionType] = React.useState(props.customPermissionType ? props.customPermissionType : []);    
     const [selectedApprole,setSelectedApprole] = React.useState(null);
     const [flag,setFlag] = React.useState(false);
@@ -111,7 +111,7 @@ export default function ObieePermissionDialog(props){
       defaultValueCustom=intersectionCustom(CustomData2,filteredAceessPermission[0].permission.accessModeList.map(obj=>obj.accessValue));
       console.log(filteredAceessPermission[0].permission.accessModeList);
     }
-    console.log('ObieePermissionDialog is rendering',defaultValueCustom);
+    console.log('ObieePermissionDialog is rendering',props.itemAccessPermissions);
 
     return (
         <ObieeDialog 
@@ -147,7 +147,7 @@ export default function ObieePermissionDialog(props){
 
             const newDataArr = [...newData];
             const addToAccessPermissions = newDataArr.filter(item=>props.itemAccessPermissions.map(obj=>obj.account.name).indexOf(item.name)===-1);
-            console.log('addToAccessPermissions',addToAccessPermissions);
+            //console.log('addToAccessPermissions',addToAccessPermissions);
 
             addToAccessPermissions.forEach(item=>{
               props.itemAccessPermissions.push(
@@ -165,9 +165,9 @@ export default function ObieePermissionDialog(props){
                 }
               );
             });
-            const removeFromAccessPermissions = props.itemAccessPermissions.filter(item=>newDataArr.map(obj=>obj.name).indexOf(item.account.name)===-1);
-            console.log('removeFromAccessPermissions',removeFromAccessPermissions);
 
+            //const removeFromAccessPermissions = props.itemAccessPermissions.filter(item=>newDataArr.map(obj=>obj.name).indexOf(item.account.name)===-1);
+            //console.log('removeFromAccessPermissions',removeFromAccessPermissions);
             //setFlag(!flag);
           }}
           renderInput={(params) => <TextField {...params} label="approles" variant="outlined" />}
@@ -218,15 +218,96 @@ export default function ObieePermissionDialog(props){
           variant="outlined" 
           fullWidth
           onChange={(e)=>{
-            //setPermissionType(e.target.value);
+            setPermissionType(e.target.value);
             //alert(e.target.value)
 
             props.itemAccessPermissions.forEach((item,index)=>{
               if(selectedApprole && item.account.name===selectedApprole.name)
               {
-                //console.log('find object',item.permission.accessModeList,item.permission.accessModeList.reduce((item,acc)=>acc+item.accessValue,0));
-                props.itemAccessPermissions[index].permission.accessPermission.acessLabel = e.target.value;
-                props.itemAccessPermissions[index].permission.accessPermission.accessValue = item.permission.accessModeList.reduce((acc,item)=>acc+item.accessValue,0);
+               
+                //props.itemAccessPermissions[index].permission.accessPermission.acessLabel = e.target.value;
+
+                switch(e.target.value){
+                  case "FULL CONTROL":
+                    props.itemAccessPermissions[index].permission = 
+                      {
+                        accessModeList: [ 
+                            2,
+                            1,
+                            4,
+                            8,
+                            16,
+                            32,
+                            2048,
+                            4096,
+                            8192
+                          ],
+                        accessPermission: {
+                          accessValue: 65535,
+                          acessLabel: e.target.value
+                        }
+                      }
+                    break;
+                  case "MODIFY":
+                    props.itemAccessPermissions[index].permission = 
+                      {
+                        accessModeList: [ 
+                            2,
+                            1,
+                            4,
+                            8
+                        ],
+                        accessPermission: {
+                          accessValue: 15,
+                          acessLabel: e.target.value
+                        }
+                      }
+                    break;
+                  case "OPEN":
+                    props.itemAccessPermissions[index].permission = 
+                      {
+                          accessModeList: [ 
+                              2,
+                              1
+                          ],
+                          accessPermission: {
+                          accessValue: 3,
+                          acessLabel: e.target.value
+                        }
+                      }
+                    break;
+                  case "EXECUTE":
+                    props.itemAccessPermissions[index].permission = 
+                      {
+                          accessModeList: [ 
+                              2,
+                              1,
+                              2048
+                          ],
+                          accessPermission: {
+                          accessValue: 2051,
+                          acessLabel: e.target.value
+                        }
+                      }
+                    break;
+                  case "NO ACCESS":
+                    props.itemAccessPermissions[index].permission = 
+                      {
+                          accessModeList: [0],
+                          accessPermission: {
+                          accessValue: 0,
+                          acessLabel: e.target.value
+                        }
+                      }
+                    break;
+                  case "CUSTOM":
+                    //props.itemAccessPermissions[index].permission.accessPermission.acessLabel = e.target.value;
+                    //props.itemAccessPermissions[index].permission.accessPermission.accessValue = item.permission.accessModeList.reduce((acc,item)=>acc+item.accessValue,0);
+
+                    break;
+                  default:
+                    break;
+                }
               }});
 
             console.log('onChange - type',e.target.value,props.itemAccessPermissions);
@@ -234,11 +315,11 @@ export default function ObieePermissionDialog(props){
           }}
           label={getText('Permission')}
         >
-          <MenuItem key="Full Control" value="Full Control">Full Control</MenuItem>
+          <MenuItem key="Full Control" value="FULL CONTROL">Full Control</MenuItem>
           <MenuItem key="MODIFY" value="MODIFY">Modify</MenuItem>
-          <MenuItem key="Open" value="Open">Open</MenuItem>
+          <MenuItem key="Open" value="OPEN">Open</MenuItem>
           <MenuItem key="EXECUTE" value="EXECUTE">Execute</MenuItem>          
-          <MenuItem key="No Access" value="No Access">No Access</MenuItem>        
+          <MenuItem key="No Access" value="NO ACCESS">No Access</MenuItem>        
           <MenuItem key="CUSTOM" value="CUSTOM">Custom</MenuItem>                
         </Select>
         </Grid>
@@ -249,7 +330,7 @@ export default function ObieePermissionDialog(props){
           limitTags={3}
           id="combo-box-custom-list"
           options={CustomData2}
-          disabled={selectedApprole===null}
+          disabled={selectedApprole===null || permissionType!=='CUSTOM'}
           disableCloseOnSelect
           getOptionLabel={(option) => option.acessLabel}
           fullWidth
@@ -265,10 +346,11 @@ export default function ObieePermissionDialog(props){
             //const addToAccessPermissions = newDataArr.filter(item=>props.itemAccessPermissions.map(obj=>obj.account.name).indexOf(item.name)===-1);
             //console.log('addToAccessPermissions',addToAccessPermissions);
 
-            props.itemAccessPermissions.forEach(item=>{
+            props.itemAccessPermissions.forEach((item,index)=>{
               if(selectedApprole && item.account.name===selectedApprole.name)
               {
-                item.permission.accessModeList = newDataArr;
+                props.itemAccessPermissions[index].permission.accessModeList = newDataArr;
+                props.itemAccessPermissions[index].permission.accessPermission.accessValue = item.permission.accessModeList.reduce((acc,item)=>acc+item.accessValue,0);
               }
             });
 

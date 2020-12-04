@@ -68,13 +68,13 @@ const MenuProps = {
 };
 
 const CUSTOM_TYPE = [
-  {id:0,desc:"EXECUTE"},
+  {id:0,desc:"CUSTOM"},
   {id:1,desc:"READ"},
   {id:2,desc:"TRAVERSE"},
   {id:4,desc:"WRITE"},
   {id:8,desc:"DELETE"},
   {id:32,desc:"SET OWNERSHIP"},
-  {id:2048,desc:"RUN PUBLISHER REPORT"},
+  {id:2048,desc:"RUNREPORT"},
   {id:2051,desc:"OPEN"},
   {id:4096,desc:"SCHEDULE PUBLISHER REPORT"},
   {id:8192,desc:"VIEW PUBLISHER OUTPUT"},

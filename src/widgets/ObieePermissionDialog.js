@@ -17,6 +17,10 @@ import {getText} from '../utils/Utils';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+import Chip from '@material-ui/core/Chip';
+import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -29,6 +33,33 @@ const MenuProps = {
     },
   },
 };
+
+
+const CustomData = [
+  {accessValue:0,acessLabel:"CUSTOM",title:"Custom"},
+  {accessValue:1,acessLabel:"READ",title:"Read"},
+  {accessValue:2,acessLabel:"TRAVERSE",title:"Traverse"},
+  {accessValue:4,acessLabel:"WRITE",title:"Write"},
+  {accessValue:8,acessLabel:"DELETE",title:"Delete"},
+  {accessValue:32,acessLabel:"SET OWNERSHIP",title:"Set Ownership"},
+  {accessValue:2048,acessLabel:"RUNREPORT",title:"Run Report"},
+  {accessValue:2051,acessLabel:"OPEN",title:"Open"},
+  {accessValue:4096,acessLabel:"SCHEDULE PUBLISHER REPORT",title:"Schedule Publisher Report"},
+  {accessValue:8192,acessLabel:"VIEW PUBLISHER OUTPUT",title:"View Publisher Output"},
+];
+
+const CustomData2 = [
+  {accessValue:0,acessLabel:"CUSTOM"},
+  {accessValue:1,acessLabel:"READ"},
+  {accessValue:2,acessLabel:"TRAVERSE"},
+  {accessValue:4,acessLabel:"WRITE"},
+  {accessValue:8,acessLabel:"DELETE"},
+  {accessValue:32,acessLabel:"SET OWNERSHIP"},
+  {accessValue:2048,acessLabel:"RUNREPORT"},
+  {accessValue:2051,acessLabel:"OPEN"},
+  {accessValue:4096,acessLabel:"SCHEDULE PUBLISHER REPORT"},
+  {accessValue:8192,acessLabel:"VIEW PUBLISHER OUTPUT"},
+];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,15 +83,35 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function ObieePermissionDialog(props){
-    const {itemAccessPermissions,onClose,onAddPermission,onRemovePermission} = props;
+const filterOptions = createFilterOptions({
+  matchFrom: 'start',
+  stringify: (option) => option.acessLabel,
+});
 
-    const [permissionType,setPermissionType] = React.useState(props.permissionType ? props.permissionType : 'Form Control');
-    const [customPermissionType,setCustomPermissionType] = React.useState(props.customPermissionType ? props.customPermissionType : []);
+export default function ObieePermissionDialog(props){
+    const {approles,onClose,onAddPermission,onRemovePermission} = props;  //  props.itemAccessPermissions
+
+    function intersection(a, b) {
+      return a.filter((value) => b.indexOf(value.name) !== -1);
+    }
+
+    function intersectionCustom(a, b) {
+      return a.filter((value) => b.indexOf(value.accessValue) !== -1);
+    }
+
+    //const [permissionType,setPermissionType] = React.useState(props.permissionType ? props.permissionType : 'Form Control');
+    //const [customPermissionType,setCustomPermissionType] = React.useState(props.customPermissionType ? props.customPermissionType : []);    
+    const [selectedApprole,setSelectedApprole] = React.useState(null);
+    const [flag,setFlag] = React.useState(false);
 
     const classes = useStyles();
-
-    console.log('ObieePermissionDialog is rendering');
+    const filteredAceessPermission = props.itemAccessPermissions.filter(item=>selectedApprole && item.account.name===selectedApprole.name);
+    let defaultValueCustom = [];
+    if(filteredAceessPermission.length===1){
+      defaultValueCustom=intersectionCustom(CustomData2,filteredAceessPermission[0].permission.accessModeList.map(obj=>obj.accessValue));
+      console.log(filteredAceessPermission[0].permission.accessModeList);
+    }
+    console.log('ObieePermissionDialog is rendering',defaultValueCustom);
 
     return (
         <ObieeDialog 
@@ -70,8 +121,8 @@ export default function ObieePermissionDialog(props){
         eventClose={onClose}
         actionBar={
         <>
-        <ObieeButtonOperation className={classes.button} onExecute={()=>onAddPermission(permissionType,customPermissionType)} title={getText("Add")}/>
-        <ObieeButtonOperation className={classes.button} onExecute={()=>onRemovePermission(permissionType,customPermissionType)} title={getText("Delete")}/>
+        <ObieeButtonOperation className={classes.button} onExecute={()=>onAddPermission(props.itemAccessPermissions)} title={getText("Add")}/>
+        <ObieeButtonOperation className={classes.button} onExecute={()=>onRemovePermission(props.itemAccessPermissions)} title={getText("Delete")}/>
         <ObieeButtonOperation className={classes.button} onExecute={onClose} title={getText("Cancel")}/>
         </>        
         }
@@ -80,27 +131,79 @@ export default function ObieePermissionDialog(props){
         <Grid container spacing={2} className={classes.root}>
         <Grid item xs={12} md={12}>
         {/*<InputLabel id="demo-mutiple-checkbox-label">Custom Options</InputLabel> */}
-        <Select
-          labelId="demo-mutiple-checkbox-label"
-          id="demo-mutiple-checkbox"
+        <Autocomplete
           multiple
-          value={customPermissionType}
-          variant="outlined"
+          id="combo-box-demo"
+          options={approles}
+          disableCloseOnSelect
+          getOptionLabel={(option) => option.displayName ? option.displayName : option.name}
           fullWidth
-          onChange={event=>setCustomPermissionType(event.target.value)}
-          input={<Input />}
-          renderValue={(selected) => selected.join(', ')}
-          MenuProps={MenuProps}
-          label="aa"
-        >
-        {itemAccessPermissions.map(item=>(
-          <MenuItem key={item.account.name} value={item.account.name}>
-              <Checkbox checked={itemAccessPermissions.indexOf(item.account.name)!==-1} />
-              <ListItemText primary={item.account.name+"-"+item.account.displayname} />
-            </MenuItem>
-        ))
-        }
-        </Select>
+          defaultValue={intersection(approles,props.itemAccessPermissions.map(obj=>obj.account.name))}
+          onChange={(e,approle)=>{
+            const newData = new Set(approle);
+            approle.forEach(item=>{
+              newData.add(item);
+            })
+
+            const newDataArr = [...newData];
+            const addToAccessPermissions = newDataArr.filter(item=>props.itemAccessPermissions.map(obj=>obj.account.name).indexOf(item.name)===-1);
+            console.log('addToAccessPermissions',addToAccessPermissions);
+
+            addToAccessPermissions.forEach(item=>{
+              props.itemAccessPermissions.push(
+                {
+                  account: {
+                      name: item.name
+                  },
+                  permission: {
+                      accessModeList: [],
+                      accessPermission: {
+                        accessValue: 0,
+                        acessLabel: ""
+                      }
+                  }
+                }
+              );
+            });
+            const removeFromAccessPermissions = props.itemAccessPermissions.filter(item=>newDataArr.map(obj=>obj.name).indexOf(item.account.name)===-1);
+            console.log('removeFromAccessPermissions',removeFromAccessPermissions);
+
+            //setFlag(!flag);
+          }}
+          renderInput={(params) => <TextField {...params} label="approles" variant="outlined" />}
+          renderOption={(option, { selected }) =>  (
+            <React.Fragment>
+              <Checkbox
+                //icon={icon}
+                //checkedIcon={checkedIcon}
+                //style={{ marginRight: 8 }}
+                checked={selected}
+                //selectedApproles.filter(item=>item.name===option.name).length==1}   
+              />
+              {option.displayName ? option.displayName : option.name}
+            </React.Fragment>
+          )}
+          renderTags={(value, getTagProps) =>
+            value.map((option, index) => (
+              <Chip
+                variant={selectedApprole && selectedApprole.name===option.name ? "default":"outlined"}
+                color="primary"
+                //color={selectedApprole && selectedApprole.name===option.name ? "secondary":"primary"}
+                key={option.name} 
+                label={option.name}
+                onClick={()=>{
+                  if(selectedApprole && selectedApprole.name===option.name)
+                    setSelectedApprole(null);
+                  else  
+                    setSelectedApprole(option);
+                }}
+                onDelete={() => console.log("test")}
+                {...getTagProps({ index })}
+              />
+            ))
+          }
+        />   
+
         </Grid>
 
         <Grid item xs={12} md={12}>
@@ -109,96 +212,81 @@ export default function ObieePermissionDialog(props){
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={permissionType}
-          MenuProps={MenuProps}       
+          value={filteredAceessPermission.length===1 && filteredAceessPermission[0].permission.accessPermission.acessLabel}
+          MenuProps={MenuProps}    
+          disabled={selectedApprole===null}   
           variant="outlined" 
           fullWidth
           onChange={(e)=>{
-            setPermissionType(e.target.value);
-          }}        
+            //setPermissionType(e.target.value);
+            //alert(e.target.value)
+
+            props.itemAccessPermissions.forEach((item,index)=>{
+              if(selectedApprole && item.account.name===selectedApprole.name)
+              {
+                //console.log('find object',item.permission.accessModeList,item.permission.accessModeList.reduce((item,acc)=>acc+item.accessValue,0));
+                props.itemAccessPermissions[index].permission.accessPermission.acessLabel = e.target.value;
+                props.itemAccessPermissions[index].permission.accessPermission.accessValue = item.permission.accessModeList.reduce((acc,item)=>acc+item.accessValue,0);
+              }});
+
+            console.log('onChange - type',e.target.value,props.itemAccessPermissions);
+            setFlag(!flag)
+          }}
           label={getText('Permission')}
         >
           <MenuItem key="Full Control" value="Full Control">Full Control</MenuItem>
-          <MenuItem key="Modify" value="Modify">Modify</MenuItem>
+          <MenuItem key="MODIFY" value="MODIFY">Modify</MenuItem>
           <MenuItem key="Open" value="Open">Open</MenuItem>
+          <MenuItem key="EXECUTE" value="EXECUTE">Execute</MenuItem>          
           <MenuItem key="No Access" value="No Access">No Access</MenuItem>        
-          <MenuItem key="Custom" value="Custom">Custom</MenuItem>                
+          <MenuItem key="CUSTOM" value="CUSTOM">Custom</MenuItem>                
         </Select>
         </Grid>
+
         <Grid item xs={12} md={12}>
+        <Autocomplete
+          multiple
+          limitTags={3}
+          id="combo-box-custom-list"
+          options={CustomData2}
+          disabled={selectedApprole===null}
+          disableCloseOnSelect
+          getOptionLabel={(option) => option.acessLabel}
+          fullWidth
+          defaultValue={defaultValueCustom}
+          onChange={(e,customValue)=>{
 
-        {/* <InputLabel id="demo-mutiple-checkbox-label">Custom Options</InputLabel> */}
-          <Select
-            labelId="demo-mutiple-checkbox-label"
-            id="demo-mutiple-checkbox"
-            multiple
-            value={customPermissionType}
-            variant="outlined"
-            fullWidth
-            onChange={event=>setCustomPermissionType(event.target.value)}
-            input={<Input />}
-            renderValue={(selected) => selected.join(', ')}
-            MenuProps={MenuProps}
-          >
-            <MenuItem key={"READ"} value={"READ"}>
-              <Checkbox checked={customPermissionType.indexOf("READ")!==-1} />
-              <ListItemText primary={"Read"} />
-            </MenuItem>
-          
-            <MenuItem key={"TRAVERSE"} value={"TRAVERSE"}>
-              <Checkbox checked={customPermissionType.indexOf("TRAVERSE")!==-1} />
-              <ListItemText primary={"Exceute"} />
-            </MenuItem>
-  
-            <MenuItem key={"WRITE"} value={"WRITE"}>
-              <Checkbox checked={customPermissionType.indexOf("WRITE")!==-1} />
-              <ListItemText primary={"Write"} />
-            </MenuItem>
-  
-            <MenuItem key={"DELETE"} value={"DELETE"}>
-              <Checkbox checked={customPermissionType.indexOf("DELETE")!==-1} />
-              <ListItemText primary={"Delete"} />
-            </MenuItem>
-  
-            <MenuItem key={"SET OWNERSHIP"} value={"SET OWNERSHIP"}>
-              <Checkbox checked={customPermissionType.indexOf("SET OWNERSHIP")!==-1} />
-              <ListItemText primary={"Set Ownership"} />
-            </MenuItem>
-  
-            <MenuItem key={"RUN PUBLISHER REPORT"} value={"RUN PUBLISHER REPORT"}>
-              <Checkbox checked={customPermissionType.indexOf("RUN PUBLISHER REPORT")!==-1} />
-              <ListItemText primary={"Run publisher Report"} />
-            </MenuItem>
-  
-            <MenuItem key={"OPEN"} value={"OPEN"}>
-              <Checkbox checked={customPermissionType.indexOf("OPEN")!==-1} />
-              <ListItemText primary={"Open"} />
-            </MenuItem>
+            const newData = new Set(customValue);
+            // approle.forEach(item=>{
+            //   newData.add(item);
+            // })
 
-            <MenuItem key={"SCHEDULE PUBLISHER REPORT"} value={"SCHEDULE PUBLISHER REPORT"}>
-              <Checkbox checked={customPermissionType.indexOf("SCHEDULE PUBLISHER REPORT")!==-1} />
-              <ListItemText primary={"Schedule Publisher Report"} />
-            </MenuItem>
-  
-            <MenuItem key={"VIEW PUBLISHER OUTPUT"} value={"VIEW PUBLISHER OUTPUT"}>
-              <Checkbox checked={customPermissionType.indexOf("VIEW PUBLISHER OUTPUT")!==-1} />
-              <ListItemText primary={"View Publisher Output"} />
-            </MenuItem>
-  
-          </Select>
+            const newDataArr = [...newData];
+            //const addToAccessPermissions = newDataArr.filter(item=>props.itemAccessPermissions.map(obj=>obj.account.name).indexOf(item.name)===-1);
+            //console.log('addToAccessPermissions',addToAccessPermissions);
 
-      {/* </FormControl> */}
+            props.itemAccessPermissions.forEach(item=>{
+              if(selectedApprole && item.account.name===selectedApprole.name)
+              {
+                item.permission.accessModeList = newDataArr;
+              }
+            });
+
+            console.log('onChange',props.itemAccessPermissions);
+
+          }}
+          renderInput={(params) => <TextField {...params} label="custom" variant="outlined" />}
+          renderOption={(option, { selected }) =>  (
+            <React.Fragment>
+              <Checkbox
+                checked={selected}
+              />
+              {option.acessLabel}
+            </React.Fragment>
+          )}
+          //filterOptions={filterOptions}
+        />   
         </Grid>
-        {/* <Grid item xs={12} md={12}>  
-      <FormControl 
-        variant="outlined" 
-        fullWidth 
-        className={classes.formControl} 
-        disabled={permissionType!=='Custom'}>
-
-        </FormControl>
-      
-      </Grid> */}
       </Grid>
       </Box>
       </ObieeDialog>

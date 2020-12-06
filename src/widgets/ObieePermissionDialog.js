@@ -35,30 +35,31 @@ const MenuProps = {
 };
 
 
-const CustomData = [
-  {accessValue:0,acessLabel:"CUSTOM",title:"Custom"},
-  {accessValue:1,acessLabel:"READ",title:"Read"},
-  {accessValue:2,acessLabel:"TRAVERSE",title:"Traverse"},
-  {accessValue:4,acessLabel:"WRITE",title:"Write"},
-  {accessValue:8,acessLabel:"DELETE",title:"Delete"},
-  {accessValue:32,acessLabel:"SET OWNERSHIP",title:"Set Ownership"},
-  {accessValue:2048,acessLabel:"RUNREPORT",title:"Run Report"},
-  {accessValue:2051,acessLabel:"OPEN",title:"Open"},
-  {accessValue:4096,acessLabel:"SCHEDULE PUBLISHER REPORT",title:"Schedule Publisher Report"},
-  {accessValue:8192,acessLabel:"VIEW PUBLISHER OUTPUT",title:"View Publisher Output"},
-];
+// const CustomData = [
+//   {accessValue:0,accessLabel:"CUSTOM",title:"Custom"},
+//   {accessValue:1,accessLabel:"READ",title:"Read"},
+//   {accessValue:2,accessLabel:"TRAVERSE",title:"Traverse"},
+//   {accessValue:4,accessLabel:"WRITE",title:"Write"},
+//   {accessValue:8,accessLabel:"DELETE",title:"Delete"},
+//   {accessValue:32,accessLabel:"SET OWNERSHIP",title:"Set Ownership"},
+//   {accessValue:2048,accessLabel:"RUNREPORT",title:"Run Report"},
+//   {accessValue:2051,accessLabel:"OPEN",title:"Open"},
+//   {accessValue:4096,accessLabel:"SCHEDULE PUBLISHER REPORT",title:"Schedule Publisher Report"},
+//   {accessValue:8192,accessLabel:"VIEW PUBLISHER OUTPUT",title:"View Publisher Output"},
+// ];
 
 const CustomData2 = [
-  {accessValue:0,acessLabel:"CUSTOM"},
-  {accessValue:1,acessLabel:"READ"},
-  {accessValue:2,acessLabel:"TRAVERSE"},
-  {accessValue:4,acessLabel:"WRITE"},
-  {accessValue:8,acessLabel:"DELETE"},
-  {accessValue:32,acessLabel:"SET OWNERSHIP"},
-  {accessValue:2048,acessLabel:"RUNREPORT"},
-  {accessValue:2051,acessLabel:"OPEN"},
-  {accessValue:4096,acessLabel:"SCHEDULE PUBLISHER REPORT"},
-  {accessValue:8192,acessLabel:"VIEW PUBLISHER OUTPUT"},
+  {accessValue:0,accessLabel:"NO ACCESS"},
+  {accessValue:1,accessLabel:"READ"},
+  {accessValue:2,accessLabel:"TRAVERSE"},
+  {accessValue:4,accessLabel:"WRITE"},
+  {accessValue:8,accessLabel:"DELETE"},
+  {accessValue:16,accessLabel:"ASSIGN PERMISSION"},
+  {accessValue:32,accessLabel:"SET OWNERSHIP"},
+  {accessValue:2048,accessLabel:"RUNREPORT"},
+  //{accessValue:2051,accessLabel:"EXECUTE"}, OPEN
+  {accessValue:4096,accessLabel:"SCHEDULE PUBLISHER REPORT"},
+  {accessValue:8192,accessLabel:"VIEW PUBLISHER OUTPUT"},
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -85,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
 
 const filterOptions = createFilterOptions({
   matchFrom: 'start',
-  stringify: (option) => option.acessLabel,
+  stringify: (option) => option.accessLabel,
 });
 
 export default function ObieePermissionDialog(props){
@@ -99,19 +100,14 @@ export default function ObieePermissionDialog(props){
       return a.filter((value) => b.indexOf(value.accessValue) !== -1);
     }
 
-    const [permissionType,setPermissionType] = React.useState('');
-    //const [customPermissionType,setCustomPermissionType] = React.useState(props.customPermissionType ? props.customPermissionType : []);    
+    const [permissionType,setPermissionType] = React.useState(null);
+    const [customPermissionType,setCustomPermissionType] = React.useState([]);    
     const [selectedApprole,setSelectedApprole] = React.useState(null);
-    const [flag,setFlag] = React.useState(false);
+    //const [flag,setFlag] = React.useState(false);
 
     const classes = useStyles();
-    const filteredAceessPermission = props.itemAccessPermissions.filter(item=>selectedApprole && item.account.name===selectedApprole.name);
-    let defaultValueCustom = [];
-    if(filteredAceessPermission.length===1){
-      defaultValueCustom=intersectionCustom(CustomData2,filteredAceessPermission[0].permission.accessModeList.map(obj=>obj.accessValue));
-      console.log(filteredAceessPermission[0].permission.accessModeList);
-    }
-    console.log('ObieePermissionDialog is rendering',props.itemAccessPermissions);
+
+    //console.log('ObieePermissionDialog is rendering');
 
     return (
         <ObieeDialog 
@@ -121,8 +117,8 @@ export default function ObieePermissionDialog(props){
         eventClose={onClose}
         actionBar={
         <>
-        <ObieeButtonOperation className={classes.button} onExecute={()=>onAddPermission(props.itemAccessPermissions)} title={getText("Add")}/>
-        <ObieeButtonOperation className={classes.button} onExecute={()=>onRemovePermission(props.itemAccessPermissions)} title={getText("Delete")}/>
+        <ObieeButtonOperation className={classes.button} onExecute={async ()=>{await onAddPermission(props.itemAccessPermissions)}} title={getText("Add")}/>
+        <ObieeButtonOperation className={classes.button} onExecute={async ()=>{await onRemovePermission(props.itemAccessPermissions)}} title={getText("Delete")}/>
         <ObieeButtonOperation className={classes.button} onExecute={onClose} title={getText("Cancel")}/>
         </>        
         }
@@ -159,7 +155,7 @@ export default function ObieePermissionDialog(props){
                       accessModeList: [],
                       accessPermission: {
                         accessValue: 0,
-                        acessLabel: ""
+                        accessLabel: ""
                       }
                   }
                 }
@@ -168,7 +164,6 @@ export default function ObieePermissionDialog(props){
 
             //const removeFromAccessPermissions = props.itemAccessPermissions.filter(item=>newDataArr.map(obj=>obj.name).indexOf(item.account.name)===-1);
             //console.log('removeFromAccessPermissions',removeFromAccessPermissions);
-            //setFlag(!flag);
           }}
           renderInput={(params) => <TextField {...params} label="approles" variant="outlined" />}
           renderOption={(option, { selected }) =>  (
@@ -190,8 +185,30 @@ export default function ObieePermissionDialog(props){
                 color="primary"
                 //color={selectedApprole && selectedApprole.name===option.name ? "secondary":"primary"}
                 key={option.name} 
-                label={option.name}
-                onClick={()=>{
+                label={option.displayName ? option.displayName:option.name}
+                onClick={()=>{                  
+
+                  const filteredAceessPermission = props.itemAccessPermissions.filter(item=>item.account.name===option.name);
+                  if(filteredAceessPermission.length===1)
+                    setPermissionType(filteredAceessPermission[0].permission.accessPermission.accessLabel);
+
+                  if(filteredAceessPermission.length===1){
+
+                    // if(filteredAceessPermission[0].permission.accessModeList && 
+                    //   filteredAceessPermission[0].permission.accessModeList.length>0 && 
+                    //   filteredAceessPermission[0].permission.accessModeList[0].accessValue)
+                    //   defaultValueCustom = CustomData2.filter(item=>filteredAceessPermission[0].permission.accessModeList.map(obj=>obj.accessValue).indexOf(item.accessValue)!==-1);
+                    // else                    
+                    //   defaultValueCustom = CustomData2.filter(item=>filteredAceessPermission[0].permission.accessModeList.indexOf(item.accessValue)!==-1);
+                    
+                    //defaultValueCustom = CustomData2.filter(item=>filteredAceessPermission[0].permission.accessModeList.map(obj=>obj.accessValue).indexOf(item.accessValue)!==-1);
+                    //defaultValueCustom = filteredAceessPermission[0].permission.accessModeList;
+
+                    const defaultValueCustom = CustomData2.filter(item=>filteredAceessPermission[0].permission.accessModeList.map(obj=>obj.accessValue).indexOf(item.accessValue)!==-1);
+
+                    setCustomPermissionType(defaultValueCustom);
+                  }
+
                   if(selectedApprole && selectedApprole.name===option.name)
                     setSelectedApprole(null);
                   else  
@@ -212,39 +229,34 @@ export default function ObieePermissionDialog(props){
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={filteredAceessPermission.length===1 && filteredAceessPermission[0].permission.accessPermission.acessLabel}
+          value={permissionType}
           MenuProps={MenuProps}    
           disabled={selectedApprole===null}   
           variant="outlined" 
           fullWidth
           onChange={(e)=>{
-            setPermissionType(e.target.value);
-            //alert(e.target.value)
 
             props.itemAccessPermissions.forEach((item,index)=>{
               if(selectedApprole && item.account.name===selectedApprole.name)
               {
-               
-                //props.itemAccessPermissions[index].permission.accessPermission.acessLabel = e.target.value;
-
                 switch(e.target.value){
                   case "FULL CONTROL":
                     props.itemAccessPermissions[index].permission = 
                       {
                         accessModeList: [ 
-                            2,
-                            1,
-                            4,
-                            8,
-                            16,
-                            32,
-                            2048,
-                            4096,
-                            8192
+                            {accessValue:2,accessLabel:"TRAVERSE"},
+                            {accessValue:1,accessLabel:"READ"},
+                            {accessValue:4,accessLabel:"WRITE"},
+                            {accessValue:8,accessLabel:"DELETE"},
+                            {accessValue:16,accessLabel:"ASSIGN PERMISSION"},
+                            {accessValue:32,accessLabel:"SET OWNERSHIP"},
+                            {accessValue:2048,accessLabel:"RUNREPORT"},
+                            {accessValue:4096,accessLabel:"SCHEDULE PUBLISHER REPORT"},
+                            {accessValue:8192,accessLabel:"VIEW PUBLISHER OUTPUT"}
                           ],
                         accessPermission: {
                           accessValue: 65535,
-                          acessLabel: e.target.value
+                          accessLabel: e.target.value
                         }
                       }
                     break;
@@ -252,14 +264,14 @@ export default function ObieePermissionDialog(props){
                     props.itemAccessPermissions[index].permission = 
                       {
                         accessModeList: [ 
-                            2,
-                            1,
-                            4,
-                            8
+                            {accessValue:2,accessLabel:"TRAVERSE"},
+                            {accessValue:1,accessLabel:"READ"},
+                            {accessValue:4,accessLabel:"WRITE"},
+                            {accessValue:8,accessLabel:"DELETE"}
                         ],
                         accessPermission: {
                           accessValue: 15,
-                          acessLabel: e.target.value
+                          accessLabel: e.target.value
                         }
                       }
                     break;
@@ -267,41 +279,41 @@ export default function ObieePermissionDialog(props){
                     props.itemAccessPermissions[index].permission = 
                       {
                           accessModeList: [ 
-                              2,
-                              1
+                            {accessValue:2,accessLabel:"TRAVERSE"},
+                            {accessValue:1,accessLabel:"READ"}
                           ],
                           accessPermission: {
-                          accessValue: 3,
-                          acessLabel: e.target.value
-                        }
+                            accessValue: 3,
+                            accessLabel: e.target.value
+                          }
                       }
                     break;
                   case "EXECUTE":
                     props.itemAccessPermissions[index].permission = 
                       {
                           accessModeList: [ 
-                              2,
-                              1,
-                              2048
+                            {accessValue:1,accessLabel:"READ"},
+                            {accessValue:2,accessLabel:"TRAVERSE"},
+                            {accessValue:2048,accessLabel:"RUNREPORT"}
                           ],
                           accessPermission: {
                           accessValue: 2051,
-                          acessLabel: e.target.value
+                          accessLabel: e.target.value
                         }
                       }
                     break;
                   case "NO ACCESS":
                     props.itemAccessPermissions[index].permission = 
                       {
-                          accessModeList: [0],
+                          accessModeList: [{accessValue:0,accessLabel:"NO ACCESS"}],
                           accessPermission: {
                           accessValue: 0,
-                          acessLabel: e.target.value
+                          accessLabel: e.target.value
                         }
                       }
                     break;
                   case "CUSTOM":
-                    //props.itemAccessPermissions[index].permission.accessPermission.acessLabel = e.target.value;
+                    //props.itemAccessPermissions[index].permission.accessPermission.accessLabel = e.target.value;
                     //props.itemAccessPermissions[index].permission.accessPermission.accessValue = item.permission.accessModeList.reduce((acc,item)=>acc+item.accessValue,0);
 
                     break;
@@ -310,8 +322,20 @@ export default function ObieePermissionDialog(props){
                 }
               }});
 
-            console.log('onChange - type',e.target.value,props.itemAccessPermissions);
-            setFlag(!flag)
+              const filteredAceessPermission = props.itemAccessPermissions.filter(item=>selectedApprole && item.account.name===selectedApprole.name);
+                           
+              if(filteredAceessPermission.length===1){
+                //const defaultValueCustom=intersectionCustom(CustomData2,filteredAceessPermission[0].permission.accessModeList.map(obj=>obj.accessValue));
+                //const defaultValueCustom=filteredAceessPermission[0].permission.accessModeList;//.map(obj=>obj.accessLabel);
+                
+                const defaultValueCustom = CustomData2.filter(item=>filteredAceessPermission[0].permission.accessModeList.map(obj=>obj.accessValue).indexOf(item.accessValue)!==-1);
+                //const defaultValueCustom = intersection(CustomData,filteredAceessPermission[0].permission.accessModeList);
+                console.log('ebrahim',filteredAceessPermission[0].permission);
+
+                setCustomPermissionType(defaultValueCustom);
+              }
+
+              setPermissionType(e.target.value);              
           }}
           label={getText('Permission')}
         >
@@ -330,32 +354,39 @@ export default function ObieePermissionDialog(props){
           limitTags={3}
           id="combo-box-custom-list"
           options={CustomData2}
-          disabled={selectedApprole===null || permissionType!=='CUSTOM'}
+          disabled={selectedApprole===null}
+          disableClearable={permissionType!=='CUSTOM'}
           disableCloseOnSelect
-          getOptionLabel={(option) => option.acessLabel}
+          getOptionLabel={(option) => option.accessLabel}
           fullWidth
-          defaultValue={defaultValueCustom}
+          //getOptionDisabled={(option) => customPermissionType.filter(item=>item.accessLabel==='NO ACCESS').length===1 ? option.accessLabel==='CUSTOM' : true }
+          value={customPermissionType}
           onChange={(e,customValue)=>{
 
+            if(permissionType!=='CUSTOM')
+              return;
+
             const newData = new Set(customValue);
-            // approle.forEach(item=>{
-            //   newData.add(item);
-            // })
 
             const newDataArr = [...newData];
-            //const addToAccessPermissions = newDataArr.filter(item=>props.itemAccessPermissions.map(obj=>obj.account.name).indexOf(item.name)===-1);
-            //console.log('addToAccessPermissions',addToAccessPermissions);
+
+            if(newDataArr.filter(item=>item.accessLabel==='NO ACCESS').length===1 && newDataArr.length>1){
+              return;
+            }
+
 
             props.itemAccessPermissions.forEach((item,index)=>{
               if(selectedApprole && item.account.name===selectedApprole.name)
               {
                 props.itemAccessPermissions[index].permission.accessModeList = newDataArr;
                 props.itemAccessPermissions[index].permission.accessPermission.accessValue = item.permission.accessModeList.reduce((acc,item)=>acc+item.accessValue,0);
+                props.itemAccessPermissions[index].permission.accessPermission.accessLabel = 'CUSTOM';
+
+                setCustomPermissionType(props.itemAccessPermissions[index].permission.accessModeList);
               }
             });
 
-            console.log('onChange',props.itemAccessPermissions);
-
+ 
           }}
           renderInput={(params) => <TextField {...params} label="custom" variant="outlined" />}
           renderOption={(option, { selected }) =>  (
@@ -363,7 +394,7 @@ export default function ObieePermissionDialog(props){
               <Checkbox
                 checked={selected}
               />
-              {option.acessLabel}
+              {option.accessLabel}
             </React.Fragment>
           )}
           //filterOptions={filterOptions}

@@ -92,8 +92,7 @@ export default function ObieeAssignObjectToApprole() {
   //const [permissionType,setPermissionType] = React.useState('Form Control');
   //const [customPermissionType,setCustomPermissionType] = React.useState([]);
 
-  const [openPermissionDialog,setOpenPermissionDialog] = React.useState({open:false,permissionType:'Form Control',customPermissionType:[]});
-
+  const [openPermissionDialog,setOpenPermissionDialog] = React.useState({open:false,itemAccessPermissions:[],approles:[]});
   
   const [paths,setPaths] = React.useState([]);
 
@@ -151,7 +150,7 @@ export default function ObieeAssignObjectToApprole() {
   ,[]);
 
 
-  async function handleAddPermission(permissionType,customPermissionType){
+  async function handleAddPermission0(permissionType,customPermissionType){
 
     if(paths.length === 0 || selectedApprole.length===0){
       context.obieeDispatch({type:'show_message',messageToShow:{type:'warning',message:getText('Fill Inputs')}});
@@ -219,6 +218,36 @@ export default function ObieeAssignObjectToApprole() {
       default:
 
     }
+
+    if(result.error){
+      context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+    }
+    else{
+      context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
+    }
+
+  }
+
+  async function handleAddPermission(itemAccessPermissions){
+
+    // if(paths.length === 0 || selectedApprole.length===0){
+    //   context.obieeDispatch({type:'show_message',messageToShow:{type:'warning',message:getText('Fill Inputs')}});
+    //   return;
+    // }
+
+    let result;
+    const user = localStorage.getItem('user');
+    const sessionId = localStorage.getItem('sessionId');
+
+    const data={
+          user:user,
+          sessionId:sessionId,
+          paths: paths.map(item=>item.path),
+          isRecursive: true,
+          itemAccessPermissions: itemAccessPermissions
+          }
+          result = await permissionCustom(data);
+
 
     if(result.error){
       context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
@@ -420,7 +449,18 @@ export default function ObieeAssignObjectToApprole() {
           // :null,
           {isFreeAction:true,icon:()=>(<Refresh />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{fetchData()}},
           //{isFreeAction:true,icon:()=>(<Permissions />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{}},
-          {icon:()=><IconPermDataSetting/>,tooltip:getText('Set Permission'),onClick:(event,rowData)=>{alert('hi')}},
+          {icon:()=><IconPermDataSetting/>,tooltip:getText('Set Permission'),onClick:(event,rowData)=>{
+            //console.log('all row',rowData);
+
+            setPaths(rowData);
+
+            setOpenPermissionDialog(
+              { open: true,
+                itemAccessPermissions: [],
+                approles: approles
+              }
+            );
+          }},
 
           ]}
           options={{
@@ -439,30 +479,37 @@ export default function ObieeAssignObjectToApprole() {
             }
          }}
         onRowClick={(event,rowData)=>{
+
           setOpenPermissionDialog(
             { open:true,
-              permissionType:null, //result.data[0].permission.accessPermission.acessLabel,
-              customPermissionType:null //result.data[0].permission.accessModeList.map(item=>item.acessLabel)
+              itemAccessPermissions:rowData.itemAccessPermissions,
+              approles:approles
             }
           );
 
           console.log('clicked row data',rowData.itemAccessPermissions);
 
-          // const newPaths = [...paths];
-          // if(newPaths.indexOf(rowData)===-1){
-          //   newPaths.push(rowData);
-          //   setPaths(newPaths);     
+          const newPaths = [...paths];
+          if(newPaths.indexOf(rowData)===-1){
+            newPaths.push(rowData);
+            setPaths(newPaths);     
             
-          //   context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Node Added')+" ["+(rowData.description ? rowData.description : rowData.caption)+" ]"}});
-          // }
+            context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Node Added')+" ["+(rowData.description ? rowData.description : rowData.caption)+" ]"}});
+          }
+
         }
       }
       />
         {openPermissionDialog.open &&
         <ObieePermissionDialog 
         onClose={()=>setOpenPermissionDialog({...openPermissionDialog , open:false})}
-        onAddPermission={(permissionType,customPermissionType)=>{console.log('onAddPermission',permissionType,customPermissionType);}}
-        onRemovePermission={(permissionType,customPermissionType)=>{console.log('onRemovePermission',permissionType,customPermissionType);}}
+        itemAccessPermissions={openPermissionDialog.itemAccessPermissions}
+        approles={openPermissionDialog.approles}
+        onAddPermission={async (itemAccessPermissions)=>{
+          console.log('onAddPermission',itemAccessPermissions);
+          await handleAddPermission(itemAccessPermissions);
+        }}
+        onRemovePermission={async (itemAccessPermissions)=>{console.log('onRemovePermission',itemAccessPermissions);}}
         />
         }
       </Grid>

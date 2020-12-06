@@ -31,20 +31,20 @@ export default function App(props){
         //             "accessModeList": [
         //                 {
         //                     "accessValue": 2048,
-        //                     "acessLabel": "RUNREPORT"
+        //                     "accessLabel": "RUNREPORT"
         //                 },
         //                 {
         //                     "accessValue": 2,
-        //                     "acessLabel": "TRAVERSE"
+        //                     "accessLabel": "TRAVERSE"
         //                 },
         //                 {
         //                     "accessValue": 1,
-        //                     "acessLabel": "READ"
+        //                     "accessLabel": "READ"
         //                 }
         //             ],
         //             "accessPermission": {
         //                 "accessValue": 2051,
-        //                 "acessLabel": "EXECUTE"
+        //                 "accessLabel": "EXECUTE"
         //             }
         //         }
         //     }

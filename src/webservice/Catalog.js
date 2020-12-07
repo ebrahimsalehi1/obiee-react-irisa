@@ -107,18 +107,18 @@ export async function permissionCustom(data){
     return result;
 }
 
-// export async function getItemPermission(data){
-//     const result = {data:null,error:null};
-//     await callRestPost('CATALOG_PERMISSION_ITEM',null,data)
-//     .then(res=>{
-//          result.data = res.data;   
-//     })
-//     .catch(err=>{
-//         result.error = inspectErrors(err);
-//     });
+export async function deletePermission(data){
+    const result = {data:null,error:null};
+    await callRestDelete('CATALOG_PERMISSION_DELETE',null,data)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
 
-//     return result;
-// }
+    return result;
+}
 
 export async function getRolePermission(data){
     const result = {data:null,error:null};

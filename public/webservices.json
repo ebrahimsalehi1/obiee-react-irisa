@@ -52,6 +52,10 @@
         "bffUrl":":0/obiee-bff/approle/listUsersOfRole/:1"
     },
     {
+        "name":"APPROLE_",
+        "bffUrl":":0/obiee-bff/approle/removerolefromgroup/:1"
+    },
+    {
         "name":"STATISTIC_LOGIN",
         "bffUrl":":0/obiee-bff/statistic/traffic"
     },
@@ -126,5 +130,9 @@
     {
         "name":"CATALOG_PERMISSION_ROLE",
         "bffUrl":":0/obiee-bff/catalog/rolePermission"
+    },
+    {
+        "name":"CATALOG_PERMISSION_DELETE",
+        "bffUrl":":0/obiee-bff/catalog/deletePermission"
     }
 ]

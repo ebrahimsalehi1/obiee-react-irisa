@@ -283,3 +283,22 @@ export function hasSystemFeatures(feature){
 
     return  res && res.length>0;
 }
+
+export function getBIUrl(type,path,user){
+    let url = '';
+
+    switch(type){
+        case 'REPORT_TRANSACTIONAL':
+            url += config.urlBIPublisher+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
+            break;
+        case 'REPORT_DASHBOARD':
+            url += config.urlBIAnalytics+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
+            break;
+        case 'REPORT_ANALYSER':
+            url += config.urlBIVisualAnalyser+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
+            break;            
+    }
+
+    return url;
+
+}

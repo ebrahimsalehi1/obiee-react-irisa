@@ -140,7 +140,7 @@ export default function ObieeMaterialTable(props) {
                 toolbarButtonAlignment:'left',
                 toolbarAlignment:'left',
                 selection: options && options.selection ? options.selection:false,
-                //searchFieldAlignment:'left'
+                searchFieldAlignment:'left'
             }}
             {...props}
         />

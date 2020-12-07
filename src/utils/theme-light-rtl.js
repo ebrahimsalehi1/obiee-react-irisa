@@ -81,7 +81,7 @@ export const themeLightRTL = createMuiTheme({
     },
     MuiListItemText:{
       primary:{
-        textAlign:'right',
+        textAlign:'left',
       }
     },
     MuiCardHeader: {
@@ -118,9 +118,24 @@ export const themeLightRTL = createMuiTheme({
         textAlign:'left',
         fontFamily: 'IRANSans'
       },
+      h1:{
+        fontFamily: 'IRANSans'
+      },
+      h2:{
+        fontFamily: 'IRANSans'
+      },
+      h3:{
+        fontFamily: 'IRANSans'
+      },
       h4:{
         fontFamily: 'IRANSans'
       },
+      h5:{
+        fontFamily: 'IRANSans'
+      },
+      h6:{
+        fontFamily: 'IRANSans'
+      },                                                     
       subtitle1:{
         fontFamily: 'IRANSans'
       },
@@ -134,11 +149,14 @@ export const themeLightRTL = createMuiTheme({
     MuiInputBase:{
       input:{textAlign:'left'}
     },
+
+    //MuiToolbar:{root:{direction:"ltr"}},
+
     // material-table Start
     MuiTableRow:{
       root:{
           fontFamily: 'IRANSans',
-          fontSize:10,
+          fontSize:14,
           height: 60                    
       },
       head: {
@@ -174,8 +192,13 @@ export const themeLightRTL = createMuiTheme({
     },
     MuiTable:{
       root:{
-          direction:'ltr',
+          //direction:'ltr',
           width: '100%',
+      }
+    },
+    MTableToolbar:{
+      root:{
+        direction:'ltr',
       }
     }        
     // material-table End

@@ -144,7 +144,7 @@ export default function ObieeItemApprole(props){
         </Grid>
       }
 
-      {(mode==='add' || mode==='edit') && 
+      {/* {(mode==='add' || mode==='edit') && 
         <Grid item xs={12} md={6}>
         <FormControl variant="outlined" fullWidth className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">{strAppType}</InputLabel>
@@ -160,7 +160,7 @@ export default function ObieeItemApprole(props){
         </Select>
       </FormControl>
       </Grid>
-      }
+      } */}
 
       {/* {mode==='read' &&
       <Grid item xs={12} md={3}>
@@ -172,7 +172,7 @@ export default function ObieeItemApprole(props){
       } */}
 
       {(mode==='add' || mode==='edit') &&
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
         <FormControl variant="outlined" fullWidth className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">{strApproleType}</InputLabel>
         <Select
@@ -183,9 +183,9 @@ export default function ObieeItemApprole(props){
           label={strApproleType}
         >
           {/* <MenuItem value={'author'}>Author</MenuItem> */}
-          <MenuItem value={'BIConsumer'}>Consumer</MenuItem>
-          <MenuItem value={'BIServiceAdministrator'}>Admin</MenuItem>
-          <MenuItem value={'BIContentAuthor'}>Content Author</MenuItem>
+          <MenuItem value={'BIConsumer'}>{getText('Consumer')}</MenuItem>
+          {/* <MenuItem value={'BIServiceAdministrator'}>Admin</MenuItem> */}
+          <MenuItem value={'BIContentAuthor'}>{getText('Content Author')}</MenuItem>
         </Select>
       </FormControl>
         </Grid>

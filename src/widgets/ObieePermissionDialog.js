@@ -84,13 +84,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const filterOptions = createFilterOptions({
-  matchFrom: 'start',
-  stringify: (option) => option.accessLabel,
-});
+// const filterOptions = createFilterOptions({
+//   matchFrom: 'start',
+//   stringify: (option) => option.accessLabel,
+// });
 
 export default function ObieePermissionDialog(props){
-    const {approles,onClose,onAddPermission,onRemovePermission} = props;  //  props.itemAccessPermissions
+    const {actionType,approles,onClose,onAddPermission,onRemovePermission} = props;  //  props.itemAccessPermissions
 
     function intersection(a, b) {
       return a.filter((value) => b.indexOf(value.name) !== -1);
@@ -107,7 +107,7 @@ export default function ObieePermissionDialog(props){
 
     const classes = useStyles();
 
-    //console.log('ObieePermissionDialog is rendering');
+    console.log('ObieePermissionDialog is rendering',actionType);
 
     return (
         <ObieeDialog 
@@ -117,9 +117,13 @@ export default function ObieePermissionDialog(props){
         eventClose={onClose}
         actionBar={
         <>
-        <ObieeButtonOperation className={classes.button} onExecute={async ()=>{await onAddPermission(props.itemAccessPermissions)}} title={getText("Add")}/>
-        <ObieeButtonOperation className={classes.button} onExecute={async ()=>{await onRemovePermission(props.itemAccessPermissions)}} title={getText("Delete")}/>
         <ObieeButtonOperation className={classes.button} onExecute={onClose} title={getText("Cancel")}/>
+        {actionType==='add' && 
+        <ObieeButtonOperation className={classes.button} onExecute={async ()=>{await onAddPermission(props.itemAccessPermissions)}} title={getText("Add")}/>
+        }
+        {actionType==='remove' && 
+        <ObieeButtonOperation className={classes.button} onExecute={async ()=>{await onRemovePermission(props.itemAccessPermissions)}} title={getText("Delete")}/>
+        }
         </>        
         }
         >
@@ -222,7 +226,8 @@ export default function ObieePermissionDialog(props){
         />   
 
         </Grid>
-
+        
+        {actionType==='add' && 
         <Grid item xs={12} md={12}>
         {/* <FormControl variant="outlined" fullWidth className={classes.formControl}>         */}
         {/* <InputLabel id="demo-simple-select-outlined-label">{getText('Permission')}</InputLabel> */}
@@ -330,7 +335,6 @@ export default function ObieePermissionDialog(props){
                 
                 const defaultValueCustom = CustomData2.filter(item=>filteredAceessPermission[0].permission.accessModeList.map(obj=>obj.accessValue).indexOf(item.accessValue)!==-1);
                 //const defaultValueCustom = intersection(CustomData,filteredAceessPermission[0].permission.accessModeList);
-                console.log('ebrahim',filteredAceessPermission[0].permission);
 
                 setCustomPermissionType(defaultValueCustom);
               }
@@ -347,7 +351,9 @@ export default function ObieePermissionDialog(props){
           <MenuItem key="CUSTOM" value="CUSTOM">Custom</MenuItem>                
         </Select>
         </Grid>
+        }
 
+        {actionType==='add' && 
         <Grid item xs={12} md={12}>
         <Autocomplete
           multiple
@@ -400,6 +406,7 @@ export default function ObieePermissionDialog(props){
           //filterOptions={filterOptions}
         />   
         </Grid>
+        }
       </Grid>
       </Box>
       </ObieeDialog>

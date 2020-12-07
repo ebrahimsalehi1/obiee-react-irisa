@@ -9,7 +9,7 @@ import ObieeChartMonthlyByType from './charts/ObieeChartMonthlyByType';
 import ObieeChartPie from './charts/ObieeChartPie';
 import ObieeProgress from './charts/ObieeProgress2';
 import {ANALYTIC,VISUAL_ANALYSER,BI_PUBLISHER} from '../utils/Constants';
-import {getText} from '../utils/Utils';
+import {getText,getBIUrl} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -50,10 +50,10 @@ function Dashboard(props){
                         onClick={()=>{
                             switch(item.id){
                                 case ANALYTIC:      
-                                    context.obieeDispatch({type:'show_dashboard_analyser'});
+                                    context.obieeDispatch({type:'show_dashboard_dashboard'});
                                     break;  
                                 case VISUAL_ANALYSER:
-                                    context.obieeDispatch({type:'show_dashboard_dashboard'});
+                                    context.obieeDispatch({type:'show_dashboard_analyser'});
                                     break;
                                 case BI_PUBLISHER:
                                     context.obieeDispatch({type:'show_dashboard_transactional'});
@@ -72,15 +72,24 @@ function Dashboard(props){
             <ObieeMaterialTable
                 title=""
                 columns={[
-                    { field: 'caption', title: getText('Caption'), headerStyle: {width: 250} },
+                    { field: 'caption', title: getText('Caption'), headerStyle: {width: 250}
+                    ,render:rowData=>(<a href={getBIUrl(context.obieeState.shown_component==='show_dashboard_transactional' ? 'REPORT_TRANSACTIONAL' :
+                    context.obieeState.shown_component==='show_dashboard_analyser' ? 'REPORT_ANALYSER'  :
+                    context.obieeState.shown_component==='show_dashboard_dashboard' ? 'REPORT_DASHBOARD' : '',
+                    rowData.path,localStorage.getItem('user')
+                    )} target={"blank"}>{rowData.caption}</a>)
+                    },
                     { field: 'description', title: getText('Description'), headerStyle: {width: 500} }
                 ]} 
                 url={
                     context.obieeState.shown_component==='show_dashboard_transactional' ? 'REPORT_TRANSACTIONAL' :
-                    context.obieeState.shown_component==='show_dashboard_analyser' ? 'REPORT_DASHBOARD'  :
-                    context.obieeState.shown_component==='show_dashboard_dashboard' ? 'REPORT_ANALYSER' : ''
+                    context.obieeState.shown_component==='show_dashboard_analyser' ? 'REPORT_ANALYSER'  :
+                    context.obieeState.shown_component==='show_dashboard_dashboard' ? 'REPORT_DASHBOARD' : ''
                 }
                 actions={[]}
+                onRowClick={(event,rowData)=>{
+                    console.log('reports',rowData);                        
+                }}
             />
 
 

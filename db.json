@@ -1,7 +1,7 @@
 {
     "systemInfos":[
-        {"id":"ANALYTIC","name":"داشبوردهای تحلیلی","latinName":"Analytics","type":"show_dashboard_analyser"},
-        {"id":"VISUAL_ANALYSER","name":"گزارشات داده محور","latinName":"Visual Analyzer","type":"show_dashboard_dashboard"},
+        {"id":"ANALYTIC","name":"داشبوردهای تحلیلی","latinName":"Analytics","type":"show_dashboard_dashboard"},
+        {"id":"VISUAL_ANALYSER","name":"گزارشات داده محور","latinName":"Visual Analyzer","type":"show_dashboard_analyser"},
         {"id":"BI_PUBLISHER","name":"گزارشات تراکنشی","latinName":"BI Publisher","type":"show_dashboard_transactional"}
     ],
     "USER_ALL":[

@@ -46,15 +46,43 @@
     {
         "name":"APPROLE_DELETE_USER_FROM_ROLE",
         "bffUrl":":0/obiee-bff/approle/deleteUserFromRole/:1/:2"
-    },
+    },  
     {
         "name":"APPROLE_LIST_USERS_OF_ROLE",
         "bffUrl":":0/obiee-bff/approle/listUsersOfRole/:1"
     },
     {
-        "name":"APPROLE_",
+        "name":"APPROLE_REMOVE_ROLE_FROM_GROUP",
         "bffUrl":":0/obiee-bff/approle/removerolefromgroup/:1"
     },
+    {
+        "name":"APPROLE_LIST_APPROLE",
+        "bffUrl":":0/obiee-bff/approle/rolemembers/:1"
+    },    
+    {
+        "name":"GROUP_ALL",
+        "bffUrl":":0/obiee-bff/group/all"
+    },    
+    {
+        "name":"APPROLE_LIST_GROUP",
+        "bffUrl":":0/obiee-bff/approle/groupmembers/:1"
+    },         
+    {
+        "name":"APPROLE_ASSIGN_TO_ROLE",
+        "bffUrl":":0/obiee-bff/approle/assignroletorole/:1/:2"
+    },
+    {
+        "name":"APPROLE_REMOVE_FROM_ROLE",
+        "bffUrl":":0/obiee-bff/approle/removerolefromrole/:1/:2"
+    },
+    {
+        "name":"APPROLE_ASSIGN_TO_GROUP",
+        "bffUrl":":0/obiee-bff/approle/assignroletogroup"
+    },
+    {
+        "name":"APPROLE_REMOVE_FROM_GROUP",
+        "bffUrl":":0/obiee-bff/approle/removerolefromgroup"
+    },    
     {
         "name":"STATISTIC_LOGIN",
         "bffUrl":":0/obiee-bff/statistic/traffic"

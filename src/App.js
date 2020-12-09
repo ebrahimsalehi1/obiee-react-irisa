@@ -13,7 +13,7 @@ import ObieeSettings from './hoc/setting/ObieeSettings';
 import Grid from '@material-ui/core/Grid';
 import ObieeShowMessage from './widgets/ObieeShowMessage';
 import {MuiThemeProvider,createMuiTheme} from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
+
 import data from '../db.json';
 
 import {themeLightLTR} from './utils/theme-light-ltr';
@@ -75,10 +75,6 @@ export default function App(props){
 
     return (
         <MuiThemeProvider theme={themeMain}>
-
-            {context.obieeState.progress && 
-                <LinearProgress />
-            }
 
             <ObieeAppBar 
             open={openDrawer} 

@@ -9,7 +9,7 @@ import ObieeChartMonthlyByType from './charts/ObieeChartMonthlyByType';
 import ObieeChartPie from './charts/ObieeChartPie';
 import ObieeProgress from './charts/ObieeProgress2';
 import {ANALYTIC,VISUAL_ANALYSER,BI_PUBLISHER} from '../utils/Constants';
-import {getText,getBIUrl} from '../utils/Utils';
+import {getText,getBIUrl,biLogin} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -73,11 +73,14 @@ function Dashboard(props){
                 title=""
                 columns={[
                     { field: 'caption', title: getText('Caption'), headerStyle: {width: 250}
-                    ,render:rowData=>(<a href={getBIUrl(context.obieeState.shown_component==='show_dashboard_transactional' ? 'REPORT_TRANSACTIONAL' :
+                    ,render:rowData=>(<>{context.obieeState.shown_component!=='show_dashboard_analyser' ? 
+                        <a href={getBIUrl(context.obieeState.shown_component==='show_dashboard_transactional' ? 'REPORT_TRANSACTIONAL' :
                     context.obieeState.shown_component==='show_dashboard_analyser' ? 'REPORT_ANALYSER'  :
                     context.obieeState.shown_component==='show_dashboard_dashboard' ? 'REPORT_DASHBOARD' : '',
-                    rowData.path,localStorage.getItem('user')
-                    )} target={"blank"}>{rowData.caption}</a>)
+                    rowData.linkPath,localStorage.getItem('user')
+                    )} target={"blank"}>{rowData.caption}</a> : <a  onClick={()=>{
+                        biLogin('REPORT_ANALYSER',localStorage.getItem('user'),'biviewer','biviewer12c')
+                    }}>{rowData.caption}</a>}</>)
                     },
                     { field: 'description', title: getText('Description'), headerStyle: {width: 500} }
                 ]} 

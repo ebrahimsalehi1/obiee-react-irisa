@@ -95,3 +95,85 @@ export async function approleDeleteUserFromRole(roleName,user){
 
     return result;
 }
+
+export async function getListRolesOfRole(roleName){
+    const result = {data:null,error:null};
+    await callRestGet('APPROLE_LIST_APPROLE',[roleName],null)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}
+
+export async function getListGroupsOfRole(roleName){
+    const result = {data:null,error:null};
+    await callRestGet('APPROLE_LIST_GROUP',[roleName],null)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}
+
+export async function approleAssignRoleToRole(parenRoleName,childRoleName){
+
+    const result = {data:null,error:null};
+    await callRestPut('APPROLE_ASSIGN_TO_ROLE',[parenRoleName,childRoleName],null)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}
+
+export async function approleRemoveRoleFromRole(parenRoleName,childRoleName){
+
+    const result = {data:null,error:null};
+    await callRestPut('APPROLE_REMOVE_FROM_ROLE',[parenRoleName,childRoleName],null)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}
+
+export async function approleAssignGroupToRole(data){
+
+    const result = {data:null,error:null};
+    await callRestPut('APPROLE_ASSIGN_TO_GROUP',[],data)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}
+
+export async function approleRemoveGroupFromRole(data){
+
+    const result = {data:null,error:null};
+    await callRestPut('APPROLE_REMOVE_FROM_GROUP',[],data)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}

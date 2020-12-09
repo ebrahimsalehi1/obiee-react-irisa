@@ -9,8 +9,15 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import {UserContext} from '../../Context';
-import {appRoleAll,getListUsersOfRole,approleAssignUserToRole,approleDeleteUserFromRole} from '../../webservice/Approle';
+import {
+  appRoleAll,
+  getListRolesOfRole,approleAssignRoleToRole,approleRemoveRoleFromRole,
+  getListGroupsOfRole,approleAssignGroupToRole,approleRemoveGroupFromRole,
+  getListUsersOfRole,approleAssignUserToRole,approleDeleteUserFromRole
+} from '../../webservice/Approle';
 import {getUserAll} from '../../webservice/User';
+import {getGroupAll} from '../../webservice/Group';
+
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
@@ -60,9 +67,11 @@ export default function ObieeAssignUserToApprole() {
 
   const [approles,setApproles] = React.useState([]);
   const [currentApprole,setCurrentApprole] = React.useState();
-  const [currentUsers,setCurrentUsers] = React.useState([]);
+  const [currentData,setCurrentData] = React.useState([]);
+  const [groups,setGroups] = React.useState([]);
+  const [users,setUsers] = React.useState([]);
 
-  const [infoType,setInfoType] = React.useState('user');
+  const [infoType,setInfoType] = React.useState('approle');
 
   //const rightChecked = intersection(checked, right);
   //const leftChecked = intersection(checked, left);
@@ -70,6 +79,124 @@ export default function ObieeAssignUserToApprole() {
   const strSave = getText('Save');
 
   const context = React.useContext(UserContext);
+
+  async function loadData(type){
+    let result = null;
+    switch(type){
+      case 'approle':
+        if(approles.length>0){
+          setLeft(approles);
+          break;
+        }
+
+        result = await appRoleAll();
+
+        if(result.error){
+          context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+        }
+        else{
+          setApproles(result.data);
+          setLeft(result.data);
+        }        
+        break;
+      case 'group':
+        if(groups.length>0){
+          setLeft(groups);
+          break;
+        }
+
+        result = await getGroupAll();
+
+        if(result.error){
+          context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+        }
+        else{
+          setGroups(result.data);
+          setLeft(result.data);
+        }        
+        break;
+      case 'user':
+        if(users.length>0){
+          setLeft(users);
+          break;
+        }
+
+        result = await getUserAll();
+
+        if(result.error){
+          context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+        }
+        else{
+          setUsers(result.data);
+          setLeft(result.data);
+        }        
+        break;
+      default:
+        break;
+    }
+
+  }
+
+  async function loadDataByApprole(type,approle){
+
+    let result = null;
+
+    switch(type){
+      case 'approle':        
+        result = await getListRolesOfRole(approle);
+        if(result.error){
+          context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+        }
+        else{
+          if(result.data){
+            setCurrentData(result.data);
+            setRight(result.data);
+          }
+          else{
+            setCurrentData([]);
+            setRight([]);
+            context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:getText('ERROR-204')}});
+          }
+        }
+        break;
+      case 'group':
+        result = await getListGroupsOfRole(approle);
+        if(result.error){
+          context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+        }
+        else{
+          if(result.data){
+            setCurrentData(result.data);
+            setRight(result.data);
+          }
+          else{
+            setCurrentData([]);
+            setRight([]);
+            context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:getText('ERROR-204')}});
+          }
+        }
+        break;
+      case 'user':
+        result = await getListUsersOfRole(approle);
+        if(result.error){
+          context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+        }
+        else{
+          if(result.data){
+            setCurrentData(result.data);
+            setRight(result.data);
+          }
+          else{
+            setCurrentData([]);
+            setRight([]);
+            context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:getText('ERROR-204')}});
+          }
+        }
+        break;
+      default:
+
+    }
+  }
 
   React.useEffect(()=>{
 
@@ -79,25 +206,8 @@ export default function ObieeAssignUserToApprole() {
 
       //------------------------------------------------------
 
-      let result = await appRoleAll();
-
-      if(result.error){
-        context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
-      }
-      else{
-        setApproles(result.data);
-      }
-
-      //------------------------------------------------------
-
-      result = await getUserAll();
-
-      if(result.error){
-        context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
-      }
-      else{
-        setLeft(result.data);
-      }
+      loadData('approle');
+      //loadDataByApprole(infoType,val.name);
 
       //------------------------------------------------------
 
@@ -220,39 +330,64 @@ export default function ObieeAssignUserToApprole() {
           getOptionLabel={(option) => option.name+(option.displayName ? ' - '+option.displayName:'')}
           fullWidth
           renderInput={(params) => <TextField {...params} label={getText("Approle Name")} variant="outlined" />}
-          onChange={async (e,val)=>{
+          onChange={async (e,val)=>{     
+            
             context.obieeDispatch({type:'show_loading'});
 
-            const result = await getListUsersOfRole(val.name);
             setCurrentApprole(val);
-            if(result.error){
-              context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
-            }
-            else{
-              setCurrentUsers(result.data);
-              setRight(result.data);
-            }
+            await loadDataByApprole(infoType,val.name);
 
             context.obieeDispatch({type:'hide_loading'});          
+            
           }}
         />        
       </Grid>
       <Grid item xs={12} md={2}>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">{getText('Show By')}</InputLabel>
+      {/* <FormControl variant="outlined" className={classes.formControl}> */}
+        {/* <InputLabel id="demo-simple-select-label">{getText('Show By')}</InputLabel> */}
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
+            variant="outlined"
             value={infoType}
-            onChange={(event)=>{
-                setInfoType(event.target.value);
+            label={getText('Show By')}
+            onChange={async (event)=>{
+
+              if(!currentApprole){
+                context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:getText('Fill Inputs')+" . "+getText('Approle Name')}});
+                return;
+              }
+
+              context.obieeDispatch({type:'show_loading'});
+
+              switch(event.target.value){
+                case "approle":
+                  await loadData('approle');
+                  await loadDataByApprole('approle',currentApprole.name);
+                  break;
+                case "group":
+                  await loadData('group');
+                  await loadDataByApprole('group',currentApprole.name);                  
+                  break;
+                case "user":  
+                  await loadData('user');
+                  await loadDataByApprole('user',currentApprole.name);
+                  break;
+                default:
+                  break;
+              }
+
+              setInfoType(event.target.value);
+
+              context.obieeDispatch({type:'hide_loading'});          
+
             }}
           >
-            <MenuItem value={'user'}>User</MenuItem>
-            <MenuItem value={'group'}>Group</MenuItem>
-            <MenuItem value={'approle'}>Approle</MenuItem>
+            <MenuItem value={'approle'}>{getText('Approle')}</MenuItem>
+            <MenuItem value={'group'}>{getText('Group')}</MenuItem>
+            <MenuItem value={'user'}>{getText('User')}</MenuItem>
           </Select>
-        </FormControl>    
+        {/* </FormControl>     */}
       </Grid>
       <Grid item xs={12} md={5}>{customList(left,1000000)}</Grid>
       <Grid item xs={12} md={2}>
@@ -308,12 +443,12 @@ export default function ObieeAssignUserToApprole() {
         justify="flex-end"
         alignItems="flex-end"
       >
+
           <ObieeButtonOperation onExecute={async ()=>
             {
-              console.log('currentUsers',currentUsers);
 
-              const listRemove =  not(currentUsers,right);
-              const listAdd = not(right,currentUsers);
+              const listRemove =  not(currentData,right);
+              const listAdd = not(right,currentData);
 
               if((listRemove.length === 0 && listAdd.length===0) || currentApprole.length===0){
                 context.obieeDispatch({type:'show_message',messageToShow:{type:'warning',message:getText('Fill Inputs')}});
@@ -322,14 +457,26 @@ export default function ObieeAssignUserToApprole() {
 
               context.obieeDispatch({type:'show_loading'});
               
-              //var listFailed = [];
               let error = false;
               listAdd.forEach(async (item)=>{
-                const result = await approleAssignUserToRole(currentApprole.name,item.name);
+
+                let result = null;
+
+                switch(infoType){
+                  case 'approle':
+                    result = await approleAssignRoleToRole(currentApprole.name,item.name);
+                    break;
+                  case 'group':
+                    break;
+                  case 'user':
+                    result = await approleAssignUserToRole(currentApprole.name,item.name);
+                    break;
+                  default:  
+                    break;
+                }
+
                 if(result.error){
-                  //listFailed.push(item);
                   context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin+(result.error.errorMessage ? ". "+result.error.errorMessage : "")}});
-                  context.obieeDispatch({type:'hide_loading'});    
                   error = true;    
                   return; 
                 }
@@ -340,11 +487,23 @@ export default function ObieeAssignUserToApprole() {
 
               listRemove.forEach(async (item)=>{
 
-                const result = await approleDeleteUserFromRole(currentApprole.name,item.name);
+                let result = null;
+
+                switch(infoType){
+                  case 'approle':
+                    result = await approleRemoveRoleFromRole(currentApprole.name,item.name);
+                    break;
+                  case 'group':
+                    break;
+                  case 'user':
+                    result = await approleDeleteUserFromRole(currentApprole.name,item.name);
+                    break;
+                  default:  
+                    break;
+                }
+                
                 if(result.error){                
-                  //listFailed.push(item);   
                   context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin+(result.error.errorMessage ? ". "+result.error.errorMessage : "")}});            
-                  context.obieeDispatch({type:'hide_loading'});  
                   error = true;    
                   return;       
                 }
@@ -354,7 +513,6 @@ export default function ObieeAssignUserToApprole() {
                 return;
               
               context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
-              context.obieeDispatch({type:'hide_loading'});          
 
             }} title={strSave} />
       </Grid>

@@ -1,13 +1,14 @@
 {
     "serviceType":"webservice",
-    "host":"http://172.25.40.135:8080/backforfront",
+    "host":"http://localhost:8081",
     "urlBIAnalytics":"http://172.25.40.135:9502/analytics/saw.dll?Portal&PortalPath=",
     "urlBIPublisher":"http://172.25.40.135:9502/analytics/saw.dll?bipublisherEntry&Action=open&itemType=.xdo&bipPath=",
     "urlBIVisualAnalyser":"http://172.25.40.135:9502/va/project.jsp?pageid=visualAnalyzer&reportpath=",
+    "urlBIVisualAnalyser0":"http://172.25.40.135:9502/va/project.jsp?reportpath=",
     "language":"fa",
     "direction":"rtl",
     "features":[
-        {"appbar-search":false},
+        {"appbar":{"search":false,"titleFormat":"titleOnly;titleFormPath"}},
         {"user-profile":true},
         {"language":false},
         {"theme":false},

@@ -34,6 +34,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 //import {showLoading} from '../utils/GeneralContext';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import {hasSystemFeatures} from '../utils/Utils';
+import ObieeAppProgress from '../widgets/ObieeAppProgress';
 
 const drawerWidth = 240;
 //const mtheme = useTheme();
@@ -445,8 +446,10 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
           </Toolbar>
 
           {context.obieeState.progress && 
-            <LinearProgress />
-          }
+            // <LinearProgress />
+                            <ObieeAppProgress />
+
+          } 
 
         </AppBar>               
       

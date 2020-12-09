@@ -302,3 +302,36 @@ export function getBIUrl(type,path,user){
     return url;
 
 }
+
+
+export function biLogin(key,impersonate,biuser,bipasswd) {
+
+    let url = config.urlBIVisualAnalyser;
+
+       var popup = 
+ window.open    
+ (url,"_blank","width=" + screen.width + ", height=" + screen.height,false);
+        
+        popup.onload=function () {
+           console.log('this is a test for visual analyser-step 1');
+        alert(1)
+   loginForm = popup.document.   getElementsByClassName('bitech-login-form')[0];
+        loginForm.action = url + '&impersonate='+ impersonate;
+        popup.document.getElementById('idUser').value = biuser;
+        popup.document.getElementById('idPassword').value = bipasswd;
+        loginForm.submit();
+   
+     }
+
+//  popup.addEventListener('load', function () {
+//           console.log('this is a test for visual analyser-step 1');
+//           alert(1)
+//  loginForm = popup.document.getElementsByClassName('bitech-login-form')[0];
+//        loginForm.action = url + '&impersonate='+ impersonate;
+//        popup.document.getElementById('idUser').value = biuser;
+//        popup.document.getElementById('idPassword').value = bipasswd;
+//        loginForm.submit();
+ 
+//     });
+ 
+}

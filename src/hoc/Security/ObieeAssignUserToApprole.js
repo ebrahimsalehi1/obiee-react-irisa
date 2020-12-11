@@ -457,62 +457,95 @@ export default function ObieeAssignUserToApprole() {
 
               context.obieeDispatch({type:'show_loading'});
               
-              let error = false;
-              listAdd.forEach(async (item)=>{
+             
+              async function addToList(){
+                let flag = true;
+                await listAdd.forEach(async (item)=>{
 
-                let result = null;
+                  let result = null;
 
-                switch(infoType){
-                  case 'approle':
-                    result = await approleAssignRoleToRole(currentApprole.name,item.name);
-                    break;
-                  case 'group':
-                    break;
-                  case 'user':
-                    result = await approleAssignUserToRole(currentApprole.name,item.name);
-                    break;
-                  default:  
-                    break;
+                  switch(infoType){
+                    case 'approle':
+                      result = await approleAssignRoleToRole(currentApprole.name,item.name);
+                      break;
+                    case 'group':
+                      result = await approleAssignGroupToRole(
+                        {
+                          appStripId:"obi",
+                          group:item.name,
+                          applicationRole:currentApprole.name                        
+                        }   
+                        );
+                      break;
+                    case 'user':
+                      result = await approleAssignUserToRole(currentApprole.name,item.name);
+                      break;
+                    default:  
+                      break;
+                  }
+
+                  if(result.error){
+                    context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin+(result.error.errorMessage ? ". "+result.error.errorMessage : "")}});
+                    flag = false; 
+                  }
+
+                });
+
+                return flag;
+              }
+
+              let error = await addToList();
+
+                if(!error){
+                  context.obieeDispatch({type:'hide_loading'});
+                  return;
                 }
 
-                if(result.error){
-                  context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin+(result.error.errorMessage ? ". "+result.error.errorMessage : "")}});
-                  error = true;    
-                  return; 
-                }
-              });
+              async function removeFromList(){
+                let flag = true;
+                await listRemove.forEach(async (item)=>{
 
-              if(error)
+                  let result = null;
+
+                  switch(infoType){
+                    case 'approle':
+                      result = await approleRemoveRoleFromRole(currentApprole.name,item.name);
+                      break;
+                    case 'group':                    
+                      result = await approleRemoveGroupFromRole(
+                        {
+                          appStripId:"obi",
+                          group:item.name,
+                          applicationRole:currentApprole.name                        
+                        }   
+                        );
+                      break;
+                    case 'user':
+                      result = await approleDeleteUserFromRole(currentApprole.name,item.name);
+                      break;
+                    default:  
+                      break;
+                  }
+                  
+                  if(result.error){                
+                    context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin+(result.error.errorMessage ? ". "+result.error.errorMessage : "")}});            
+                    flag = false;    
+                  }
+
+                });
+
+                return flag;
+              }
+
+              error = await removeFromList();
+
+              if(!error){
+                context.obieeDispatch({type:'hide_loading'});
                 return;
-
-              listRemove.forEach(async (item)=>{
-
-                let result = null;
-
-                switch(infoType){
-                  case 'approle':
-                    result = await approleRemoveRoleFromRole(currentApprole.name,item.name);
-                    break;
-                  case 'group':
-                    break;
-                  case 'user':
-                    result = await approleDeleteUserFromRole(currentApprole.name,item.name);
-                    break;
-                  default:  
-                    break;
-                }
-                
-                if(result.error){                
-                  context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin+(result.error.errorMessage ? ". "+result.error.errorMessage : "")}});            
-                  error = true;    
-                  return;       
-                }
-              });
-
-              if(error)
-                return;
+              }
               
               context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
+              context.obieeDispatch({type:'hide_loading'});
 
             }} title={strSave} />
       </Grid>

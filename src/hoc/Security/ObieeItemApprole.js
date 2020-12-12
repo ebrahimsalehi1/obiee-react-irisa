@@ -107,6 +107,7 @@ export default function ObieeItemApprole(props){
           placeholder={strApproleName}
           variant={"outlined"}
           fullWidth
+          disabled={mode==='edit'}
           value={approleName}
           onChange={(e)=>setApproleName(e.target.value)}
           />
@@ -244,12 +245,12 @@ export default function ObieeItemApprole(props){
       <Grid spacing={0} container>
         <Grid item xs={12} md={2}>
         {(mode==='add' || mode==='edit') &&
-          <ObieeButtonOperation onExecute={onCancel} title={strCancel} />         
+          <ObieeButtonOperation type='button' onExecute={onCancel} title={strCancel} />         
         }
         </Grid>
         <Grid item xs={12} md={2}>
         {mode==='add' &&
-        <ObieeButtonOperation onExecute={()=>
+        <ObieeButtonOperation type='button' onExecute={()=>
           {
             if(validation())
               onAdd(createRow());
@@ -258,7 +259,7 @@ export default function ObieeItemApprole(props){
           }} title={strSave} />
         }
         {mode==='edit' &&    
-          <ObieeButtonOperation onExecute={()=>
+          <ObieeButtonOperation type='button' onExecute={()=>
             {
               if(validation())
                 onEdit(createRow());

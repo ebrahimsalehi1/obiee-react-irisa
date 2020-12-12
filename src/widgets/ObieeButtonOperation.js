@@ -14,10 +14,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   wrapper: {
-    //margin: theme.spacing(1),
+    margin: theme.spacing(1),
     position: 'relative',
   },
   buttonSuccess: {
+    backgroundColor: blue[500],
+    '&:hover': {
+      backgroundColor: blue[700],
+    },
+  },
+  buttonFailed: {
     backgroundColor: blue[500],
     '&:hover': {
       backgroundColor: blue[700],
@@ -41,12 +47,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ObieeButtonOperation(props) {
-
-  const {onExecute,title,className} = props;
-
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
+
+  const {onExecute,title,type} = props;    
 
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
@@ -57,15 +62,18 @@ export default function ObieeButtonOperation(props) {
       setSuccess(false);
       setLoading(true);
 
-      await onExecute();
+       let flag = await onExecute();
+
+      setSuccess(flag);
       setLoading(false);
+
     }
   };
 
   return (
     <div className={classes.root}>
-
-      {/* <div className={classes.wrapper}>
+      {type.toLowerCase()==='fab' &&
+      <div className={classes.wrapper}>
         <Fab
           aria-label="save"
           color="primary"
@@ -75,13 +83,14 @@ export default function ObieeButtonOperation(props) {
           {success ? <CheckIcon /> : <SaveIcon />}
         </Fab>
         {loading && <CircularProgress size={68} className={classes.fabProgress} />}
-      </div> */}
-
+      </div>
+      }
+      {type.toLowerCase()==='button' &&
       <div className={classes.wrapper}>
         <Button
           variant="contained"
           color="primary"
-          className={className}
+          className={buttonClassname}
           disabled={loading}
           onClick={handleButtonClick}
         >
@@ -89,6 +98,7 @@ export default function ObieeButtonOperation(props) {
         </Button>
         {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
       </div>
+      }
     </div>
   );
 }

@@ -444,7 +444,7 @@ export default function ObieeAssignUserToApprole() {
         alignItems="flex-end"
       >
 
-          <ObieeButtonOperation onExecute={async ()=>
+          <ObieeButtonOperation  type='button' onExecute={async ()=>
             {
 
               const listRemove =  not(currentData,right);

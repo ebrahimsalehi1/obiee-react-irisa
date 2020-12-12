@@ -73,12 +73,12 @@ function Dashboard(props){
                 title=""
                 columns={[
                     { field: 'caption', title: getText('Caption'), headerStyle: {width: 250}
-                    ,render:rowData=>(<>{context.obieeState.shown_component!=='show_dashboard_analyser' ? 
+                    ,render:rowData=>(<>{context.obieeState.shown_component!=='show_dashboard_analyser1' ? 
                         <a href={getBIUrl(context.obieeState.shown_component==='show_dashboard_transactional' ? 'REPORT_TRANSACTIONAL' :
                     context.obieeState.shown_component==='show_dashboard_analyser' ? 'REPORT_ANALYSER'  :
                     context.obieeState.shown_component==='show_dashboard_dashboard' ? 'REPORT_DASHBOARD' : '',
                     rowData.linkPath,localStorage.getItem('user')
-                    )} target={"blank"}>{rowData.caption}</a> : <a  onClick={()=>{
+                    )} target={"_blank"}>{rowData.caption}</a> : <a  onClick={()=>{
                         biLogin('REPORT_ANALYSER',localStorage.getItem('user'),'biviewer','biviewer12c')
                     }}>{rowData.caption}</a>}</>)
                     },

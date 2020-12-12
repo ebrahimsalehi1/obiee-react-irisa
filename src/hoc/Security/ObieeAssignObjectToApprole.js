@@ -315,7 +315,7 @@ export default function ObieeAssignObjectToApprole() {
         </Grid>
 
       <Grid item xs={12} md={1}>
-        <ObieeButtonOperation title={getText('Search')} onExecute={async ()=>{
+        <ObieeButtonOperation type='button' title={getText('Search')} onExecute={async ()=>{
             context.obieeDispatch({type:'show_loading'});
 
             const user = localStorage.getItem('user');
@@ -426,7 +426,7 @@ export default function ObieeAssignObjectToApprole() {
 
           {
             icon:AddIcon,   
-            tooltip:getText('Add'),
+            tooltip:getText('Add Permission'),
             position:'row',
             onClick: (event, rowData) => {
 
@@ -449,7 +449,7 @@ export default function ObieeAssignObjectToApprole() {
           },
           {
             icon:DeleteIcon,   
-            tooltip:getText('Delete'),
+            tooltip:getText('Delete Permission'),
             position:'row',
             onClick: (event, rowData) => {
 

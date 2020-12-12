@@ -25,7 +25,7 @@ const tableIcons = {
     Check: React.forwardRef((props, ref) => <Check {...props} ref={ref} />),
     Clear: React.forwardRef((props, ref) => <Clear {...props} ref={ref} />),
     Delete: React.forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-    DetailPanel: React.forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    DetailPanel: React.forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
     Edit: React.forwardRef((props, ref) => <Edit {...props} ref={ref} />),
     Export: React.forwardRef((props, ref) => <SaveAlt {...props} ref={ref} onClick={e=>alert('SaveAlt Click me')} />),
     Filter: React.forwardRef((props, ref) => <FilterList {...props} ref={ref} />),

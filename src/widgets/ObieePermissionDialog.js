@@ -117,12 +117,12 @@ export default function ObieePermissionDialog(props){
         eventClose={onClose}
         actionBar={
         <>
-        <ObieeButtonOperation className={classes.button} onExecute={onClose} title={getText("Cancel")}/>
+        <ObieeButtonOperation  type='button' className={classes.button} onExecute={onClose} title={getText("Cancel")}/>
         {actionType==='add' && 
-        <ObieeButtonOperation className={classes.button} onExecute={async ()=>{await onAddPermission(props.itemAccessPermissions)}} title={getText("Add")}/>
+        <ObieeButtonOperation  type='button' className={classes.button} onExecute={async ()=>{await onAddPermission(props.itemAccessPermissions)}} title={getText("Add")}/>
         }
         {actionType==='remove' && 
-        <ObieeButtonOperation className={classes.button} onExecute={async ()=>{await onRemovePermission(props.itemAccessPermissions)}} title={getText("Delete")}/>
+        <ObieeButtonOperation  type='button' className={classes.button} onExecute={async ()=>{await onRemovePermission(props.itemAccessPermissions)}} title={getText("Delete")}/>
         }
         </>        
         }

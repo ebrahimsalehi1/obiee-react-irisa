@@ -62,8 +62,8 @@ function ObieeDrawerMenuList(){
   const strApplicarionRoles = getText('Application roles');
   const strUserApproles = getText('User Approles');
   const strObjectsOfApprole = getText('Objects of Approle');
-  const strReports = getText('Reports');
-  const strDashboard = getText('Dashboard');
+  //const strReports = getText('Reports');
+  //const strDashboard = getText('Dashboard');
   const strUserInfo = getText('User');
   const strSetting = getText('Setting');
 
@@ -87,14 +87,14 @@ function ObieeDrawerMenuList(){
 
 <Divider />
 
-<ListItem button key={strDashboard} onClick={()=>context.obieeDispatch({type:'show_dashboard_home'})}>
+<ListItem button key={getText('Main Page')} onClick={()=>context.obieeDispatch({type:'show_dashboard_home'})}>
       <ListItemIcon><HomeIcon /></ListItemIcon>
-      <ListItemText >{strDashboard}</ListItemText>
+      <ListItemText >{getText('Main Page')}</ListItemText>
 </ListItem>
 
-<ListItem button key={strBIPublisher} onClick={()=>context.obieeDispatch({type:'show_dashboard_transactional'})}>
-      <ListItemIcon><DescriptionRoundedIcon /></ListItemIcon>
-      <ListItemText >{strBIPublisher}</ListItemText>
+<ListItem button key={strAnalytics} onClick={()=>context.obieeDispatch({type:'show_dashboard_dashboard'})}>
+      <ListItemIcon><DashboardRoundedIcon /></ListItemIcon>
+      <ListItemText >{strAnalytics}</ListItemText>
 </ListItem>
 
 <ListItem button key={strVisualAnalyzer} onClick={()=>context.obieeDispatch({type:'show_dashboard_analyser'})}>
@@ -102,10 +102,11 @@ function ObieeDrawerMenuList(){
       <ListItemText >{strVisualAnalyzer}</ListItemText>
 </ListItem>
 
-<ListItem button key={strAnalytics} onClick={()=>context.obieeDispatch({type:'show_dashboard_dashboard'})}>
-      <ListItemIcon><DashboardRoundedIcon /></ListItemIcon>
-      <ListItemText >{strAnalytics}</ListItemText>
+<ListItem button key={strBIPublisher} onClick={()=>context.obieeDispatch({type:'show_dashboard_transactional'})}>
+      <ListItemIcon><DescriptionRoundedIcon /></ListItemIcon>
+      <ListItemText >{strBIPublisher}</ListItemText>
 </ListItem>
+
 
 <Divider />
 

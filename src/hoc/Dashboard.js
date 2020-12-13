@@ -35,7 +35,6 @@ function Dashboard(props){
 
     return (
             <Grid container spacing={1} className={classes.root} justify={"center"} alignItems={"center"}>
-
             { 
                 systemInfos &&
                 systemInfos.map((item,index)=>(
@@ -126,11 +125,11 @@ function Dashboard(props){
             </Grid>
             }
 
-            {type === 'REPORT_NONE' &&
+            {/* {type === 'REPORT_NONE' &&
             <Grid item xs={12} md={3} key={7}>
                 <ObieeChartPie />
             </Grid>
-            }
+            } */}
 
             </Grid>
     )

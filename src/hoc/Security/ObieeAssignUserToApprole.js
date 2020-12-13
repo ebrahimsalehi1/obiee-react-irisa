@@ -144,6 +144,7 @@ export default function ObieeAssignUserToApprole() {
     switch(type){
       case 'approle':        
         result = await getListRolesOfRole(approle);
+        
         if(result.error){
           context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
         }
@@ -151,7 +152,7 @@ export default function ObieeAssignUserToApprole() {
           if(result.data){
             setCurrentData(result.data);
             setRight(result.data);
-          }
+          } 
           else{
             setCurrentData([]);
             setRight([]);

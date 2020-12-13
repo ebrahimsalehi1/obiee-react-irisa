@@ -71,6 +71,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "recharts": "^1.8.5",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "validator": "^13.5.2"
   }
 }

@@ -88,18 +88,18 @@ export default function ObieeApprole(props){
           ]} 
           data={approles}
           actions={[
-            {isFreeAction:true,icon:()=>(<Refresh />),tooltip:'بروزرسانی',onClick:(event,rowData)=>{fetchData()}},
+            {isFreeAction:true,icon:()=>(<Refresh />),tooltip:getText('Refresh'),onClick:(event,rowData)=>{fetchData()}},
             {
               isFreeAction:true,
               icon:AddIcon,   
-              tooltip:'Add a row on tree',
+              tooltip:getText('Add new Approle'),
               onClick: (event, rowData) => {
                   setMode('add');
               }   
             },
             {
               icon:EditIcon,   
-              tooltip:'Edit a row on tree',
+              tooltip:getText('Edit Approle'),
               onClick: (event, rowData) => {
                   setMode('edit');
                   setApprole(rowData);          

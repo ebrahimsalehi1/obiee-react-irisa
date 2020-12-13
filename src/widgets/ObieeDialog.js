@@ -21,12 +21,12 @@ const useDialogTitleStyles = makeStyles(theme => ({
         padding: '16px',
     },
     typography:{
-        textAlign:'right'
+        textAlign:'left'
     },
     closeButton: {
         position: 'absolute',
         right: theme.spacing(2),
-        top: theme.spacing(2),
+        top: theme.spacing(2),  
         color: theme.palette.grey[500],
     }
 }));

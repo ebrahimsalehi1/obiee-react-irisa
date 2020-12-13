@@ -147,9 +147,34 @@ export const themeLightRTL = createMuiTheme({
       }
     },
     MuiInputBase:{
-      input:{textAlign:'left'}
+      input:{
+        textAlign:'left',
+        fontFamily:'IRANSans'
+      },
+      root:{
+        fontFamily:'IRANSans'
+      }
     },
-
+    MuiSelect:{
+      select:{
+        fontFamily:'IRANSans',
+      }
+    },
+    MuiInputLabel:{
+      formControl:{
+        fontFamily:'IRANSans',
+      }
+    },
+    MuiMenuItem:{
+      root:{
+        fontFamily:'IRANSans',
+      }
+    },
+    MuiButton:{
+      label:{
+        fontFamily:'IRANSans',
+      }
+    },
     //MuiToolbar:{root:{direction:"ltr"}},
 
     // material-table Start
@@ -166,16 +191,18 @@ export const themeLightRTL = createMuiTheme({
     },
     MuiTableCell: {
       root: {
-                  padding: '0 4px',
-                  textAlign: "center"
-              },
+              padding: '0 4px',
+              textAlign: "center",
+              fontFamily: 'IRANSans'
+            },
       body: {
-                  fontSize: '11px'
-              },
+              fontSize: '11px',
+              fontFamily: 'IRANSans'
+            },
       head: {
                   fontSize: '0.7rem',
                   height: 60
-              },
+            },
       alignLeft:{textAlign:'center'}
     },
     MuiTablePagination: {

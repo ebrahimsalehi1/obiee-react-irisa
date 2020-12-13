@@ -20,6 +20,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
+import validator from "validator";
 
 const useStyles = makeStyles(theme=>({
     root: {
@@ -87,7 +88,7 @@ export default function ObieeItemApprole(props){
       if(approleName.length === 0 || 
          approleDisplayName.length === 0 ||
          approleDesc.length === 0 ||
-         appType.length === 0 ||
+         //appType.length === 0 ||
          approleType.length === 0
         )
         return false;
@@ -103,10 +104,12 @@ export default function ObieeItemApprole(props){
       {(mode==='add' || mode==='edit') && 
       <Grid item xs={12} md={12}>
           <TextField  
-          label={strApproleName}
+          label={strApproleName}ث
           placeholder={strApproleName}
           variant={"outlined"}
           fullWidth
+          error={!validator.isAlpha(approleName, 'en-US')}
+          helperText={!validator.isAlpha(approleName, 'en-US') ? getText('Input Failed'):null}
           disabled={mode==='edit'}
           value={approleName}
           onChange={(e)=>setApproleName(e.target.value)}

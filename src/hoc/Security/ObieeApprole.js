@@ -138,6 +138,7 @@ export default function ObieeApprole(props){
           
               }            
           }
+          deleteText={getText('Delete Approle')}
       />
       {(mode==='add' || mode==='edit') &&
       <ObieeDialog 

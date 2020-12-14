@@ -1,6 +1,6 @@
 {
     "serviceType":"webservice",
-    "host":"http://localhost:8081",
+    "host":"http://172.25.40.135:8080/backforfront",
     "urlBIAnalytics":"http://172.25.40.135:9502/analytics/saw.dll?Portal&PortalPath=",
     "urlBIPublisher":"http://172.25.40.135:9502/analytics/saw.dll?bipublisherEntry&Action=open&itemType=.xdo&bipPath=",
     "urlBIVisualAnalyser":"http://172.25.40.135:9502/va/project.jsp?pageid=visualAnalyzer&reportpath=",

@@ -56,10 +56,13 @@ export default function ObieeMaterialTable(props) {
     const context = React.useContext(UserContext);
 
     const { 
-        icons,data,actions,editable,title,endpoint,
-        url,gridLoad,
-        formItemsAdd,formItemsEdit,
-        options
+        icons,data,
+        //actions,editable,title,endpoint,
+        url,
+        //gridLoad,
+        //formItemsAdd,formItemsEdit,
+        options,
+        deleteText
         
     } = props;
 
@@ -125,7 +128,7 @@ export default function ObieeMaterialTable(props) {
                         filterTooltip: 'فیلتر'
                     },
                     editRow:{
-                        deleteText:'آیا برای حذف اطلاعات مطمین هستید؟'
+                        deleteText: deleteText ? deleteText : 'آیا برای حذف اطلاعات مطمین هستید؟'
                     }
                 }
             }}

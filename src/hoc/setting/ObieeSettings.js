@@ -31,13 +31,13 @@ export default function ObieeSettings(){
             setValTab(newValue);
          }}
          tabData={
-             [
-                 {title:getText('Profile'),id:0},
-                 //{title:'Systems',id:1},
-                 //{title:'languages',id:2},
-                 //{title:'change password',id:3},
-                 {title:getText('Admin'),id:4},
-             ]
+            [
+            {title:getText('Profile'),id:0},
+            //{title:'Systems',id:1},
+            //{title:'languages',id:2},
+            //{title:'change password',id:3},
+            //{title:getText('Admin'),id:4},
+            ]
          }
          />
 
@@ -47,9 +47,8 @@ export default function ObieeSettings(){
         <ObieeProfile userInfo={context.obieeState.userInfo} />       
         }
 
-        {
-            valTab === 1 &&
-            <ObieeHosts />  
+        {valTab === 1 &&
+        <ObieeHosts />  
         }
 
         {valTab === 3 && 

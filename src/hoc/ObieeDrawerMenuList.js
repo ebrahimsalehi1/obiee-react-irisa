@@ -64,7 +64,7 @@ function ObieeDrawerMenuList(){
   const strObjectsOfApprole = getText('Objects of Approle');
   //const strReports = getText('Reports');
   //const strDashboard = getText('Dashboard');
-  const strUserInfo = context.obieeState.userInfo.name; //getText('User');
+  const strUserInfo = context.obieeState.userInfo && context.obieeState.userInfo.name ? context.obieeState.userInfo.name : ""; //getText('User');
   const strSetting = getText('Setting');
 
   return (

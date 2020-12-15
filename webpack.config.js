@@ -5,17 +5,18 @@ const WriteFileWebpackPlugin = require('write-file-webpack-plugin');
 
 module.exports = {
     entry: 
-        ["./src/index.js"],
-    // output:{
-    //     filename: "index.js",
-    //     path: path.resolve(__dirname,"build")
-    // },
+        "./src/index.js",
+    output: {
+            path: path.resolve( __dirname, 'dist' ),
+            filename: 'main.js',
+            publicPath: '/front/dist/',
+        },
     node: {
         fs: 'empty',
       },    
     plugins: [new HtmlWebpackPlugin(
         {
-            template: "./public/index.html",
+            template: path.resolve( __dirname, 'public/index.html' ),
             filename: "index.html",
         }
     ),

@@ -162,5 +162,9 @@
     {
         "name":"CATALOG_PERMISSION_DELETE",
         "bffUrl":":0/obiee-bff/catalog/deletePermission"
+    },
+    {
+        "name":"LOGIN_IS_SESSION_VALID",
+        "bffUrl":":0/obiee-bff/isSessionValid"
     }
 ]

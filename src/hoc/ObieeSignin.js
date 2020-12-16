@@ -153,6 +153,8 @@ export default function SignIn(props) {
         context.obieeDispatch({type:'login'});
       }
       else{     
+        //context.obieeDispatch('is_session_valid',{isAuthenticated:true})
+
         userInfoData = result.data;
 
         result =  await hasAdminRole(localStorage.getItem('user'));
@@ -167,7 +169,7 @@ export default function SignIn(props) {
 
         console.log('login information',userInfoData,hasAdminRoleData);
 
-        context.obieeDispatch({type:'login',userInfo:userInfoData,hasAdminRole:hasAdminRoleData});
+        context.obieeDispatch({type:'login',userInfo:userInfoData,hasAdminRole:hasAdminRoleData,isAuthenticated:true});
       }
     }
   }

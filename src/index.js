@@ -14,6 +14,7 @@ import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import {UserContext} from './Context';
 // import { AlternateEmail } from '@material-ui/icons';
+import {isSessionValid} from './webservice/Login';
 
 const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 
@@ -38,6 +39,7 @@ const initialState = {
 }   
 
 function reducer(state,action){
+
     switch(action.type){
         case 'show_dashboard_home':
             return  {
@@ -144,32 +146,26 @@ function reducer(state,action){
                 messageToShow: null            
             }  
         case 'login':
-            localStorage.setItem("isAuthenticated","1");
+            //localStorage.setItem("isAuthenticated","1");
             return {
                 ...state,
-                isAuthenticated: localStorage.getItem('isAuthenticated')=='1' ,
+                isAuthenticated: action.isAuthenticated, //localStorage.getItem('isAuthenticated')=='1' ,
                 shown_component:'show_dashboard_home',
                 userInfo: action.userInfo,
                 hasAdminRole: action.hasAdminRole
             }  
         case 'logoff':
-            localStorage.setItem("isAuthenticated","0");
+            //localStorage.setItem("isAuthenticated","0");
+            localStorage.setItem("sessionId","0");
             return {
                 ...state,
-                isAuthenticated: localStorage.getItem('isAuthenticated')=='1'
-            }      
-        // case 'webservice_user_info':
-        //     let data = null;    
-        //     getUserInfo(localStorage.getItem('user'))
-        //     .then(res=>{
-        //         if(res.status===200)
-        //             data = res.data;        
-        //     })
-        //     return {
-        //         ...state,
-        //         userInfo: data
-        //     }
-        //     break;
+                isAuthenticated: false//localStorage.getItem('isAuthenticated')=='1'
+            }                  
+        case 'is_session_valid':
+            return {
+                ...state,
+                isAuthenticated: action.isAuthenticated
+            }  
         default:
             return state;    
     }
@@ -178,6 +174,8 @@ function reducer(state,action){
 function IndexComp(props) {    
 
     const [state,dispatch] = React.useReducer(reducer,initialState);
+
+    const context = React.useContext(UserContext);
 
     return (        
     <React.Suspense fallback={<h1>Progress ....</h1>}>

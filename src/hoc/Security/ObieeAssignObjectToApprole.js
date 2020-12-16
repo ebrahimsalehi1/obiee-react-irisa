@@ -332,7 +332,6 @@ export default function ObieeAssignObjectToApprole() {
               context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
             }
             else{
-              console.log("ebrahim",result.data);
 
               if(result.data)
                 setCatalog(result.data);

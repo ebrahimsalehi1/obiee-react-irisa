@@ -16,7 +16,7 @@ export async function login(data){
     return result;
 }
 
-export async function isSessionValid2(data){
+export async function isSessionValid(data){
 
     const result = {data:null,error:null};
     await callRestPost('LOGIN_IS_SESSION_VALID',null,data)
@@ -30,7 +30,8 @@ export async function isSessionValid2(data){
     return result;
 }
 
-export async function isSessionValid(data){
+export async function isSessionValid2(data){
     return await callRestPost('LOGIN_IS_SESSION_VALID',null,data);
 }
+
 

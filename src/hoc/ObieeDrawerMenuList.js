@@ -30,6 +30,7 @@ import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ObieeDrawerMenuList(){
+function ObieeDrawerMenuList(props){
 
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -67,6 +68,8 @@ function ObieeDrawerMenuList(){
   const strUserInfo = context.obieeState.userInfo && context.obieeState.userInfo.name ? context.obieeState.userInfo.name : ""; //getText('User');
   const strSetting = getText('Setting');
 
+  //console.log('ObieeDrawerMenuList is rendering',props);
+
   return (
 
     <List
@@ -80,30 +83,40 @@ function ObieeDrawerMenuList(){
       className={classes.root}
     >
 
-<ListItem button key={strUserInfo} onClick={()=>context.obieeDispatch({type:'show_settimg_userinfo'})}>
+<ListItem button key={strUserInfo} onClick={()=>context.obieeDispatch({type:'show_setting_userinfo'})}>
+    <Tooltip title={strUserInfo} >
       <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+    </Tooltip>  
       <ListItemText >{strUserInfo}</ListItemText>
 </ListItem>
 
 <Divider />
 
 <ListItem button key={getText('Main Page')} onClick={()=>context.obieeDispatch({type:'show_dashboard_home'})}>
+  <Tooltip title={getText('Main Page')} >
       <ListItemIcon><HomeIcon /></ListItemIcon>
+  </Tooltip>    
       <ListItemText >{getText('Main Page')}</ListItemText>
 </ListItem>
 
 <ListItem button key={strAnalytics} onClick={()=>context.obieeDispatch({type:'show_dashboard_dashboard'})}>
+    <Tooltip title={strAnalytics} >
       <ListItemIcon><DashboardRoundedIcon /></ListItemIcon>
+    </Tooltip>  
       <ListItemText >{strAnalytics}</ListItemText>
 </ListItem>
 
 <ListItem button key={strVisualAnalyzer} onClick={()=>context.obieeDispatch({type:'show_dashboard_analyser'})}>
+    <Tooltip title={strVisualAnalyzer} >
       <ListItemIcon><BarChartRoundedIcon /></ListItemIcon>
+    </Tooltip>  
       <ListItemText >{strVisualAnalyzer}</ListItemText>
 </ListItem>
 
 <ListItem button key={strBIPublisher} onClick={()=>context.obieeDispatch({type:'show_dashboard_transactional'})}>
+    <Tooltip title={strBIPublisher} >
       <ListItemIcon><DescriptionRoundedIcon /></ListItemIcon>
+    </Tooltip>  
       <ListItemText >{strBIPublisher}</ListItemText>
 </ListItem>
 
@@ -111,8 +124,10 @@ function ObieeDrawerMenuList(){
 <Divider />
 
 {context.obieeState.hasAdminRole && 
-<ListItem button key={strSecurity} onClick={handleClick}>
-    <ListItemIcon><LockIcon /> </ListItemIcon>
+<ListItem button={props.open} key={strSecurity} onClick={props.open ? handleClick : null}>
+    <Tooltip title={strSecurity} >
+      <ListItemIcon><LockIcon /> </ListItemIcon>
+    </Tooltip>  
     <ListItemText >{strSecurity}</ListItemText>
     <IconButton>
     {
@@ -153,7 +168,9 @@ function ObieeDrawerMenuList(){
     <Divider />
 
     <ListItem button key={strSetting} onClick={()=>context.obieeDispatch({type:'show_setting'})}>
-      <ListItemIcon><SettingsIcon /></ListItemIcon>
+      <Tooltip title={strSetting} >
+        <ListItemIcon><SettingsIcon /></ListItemIcon>
+      </Tooltip>
       <ListItemText >{strSetting}</ListItemText>
     </ListItem>
 
@@ -166,17 +183,3 @@ function ObieeDrawerMenuList(){
 
 export default React.memo(ObieeDrawerMenuList);
 
-{/* <Grid 
-container 
-spacing={0} 
-direction="row"
-alignItems="flex-start"
->
-    <Grid item xs={11} md={11}>
-</Grid>
-
-<Grid item xs={1} md={1}>
-<Copyright/>
-</Grid>
-
-</Grid> */}

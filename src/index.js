@@ -14,7 +14,8 @@ import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import {UserContext} from './Context';
 // import { AlternateEmail } from '@material-ui/icons';
-import {isSessionValid} from './webservice/Login';
+//import {isSessionValid} from './webservice/Login';
+import {getText} from './utils/Utils';
 
 const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 
@@ -35,7 +36,8 @@ const initialState = {
         type:'info',
         message:''
     },
-    isAuthenticated: false
+    isAuthenticated: false,
+    formTitle: ""
 }   
 
 function reducer(state,action){
@@ -44,52 +46,62 @@ function reducer(state,action){
         case 'show_dashboard_home':
             return  {
                 ...state,
-                shown_component:'show_dashboard_home'
+                shown_component:'show_dashboard_home',
+                formTitle: getText('Dashboard')
             }
         case 'show_dashboard_transactional':
             return  {
                 ...state,
-                shown_component:'show_dashboard_transactional'
+                shown_component:'show_dashboard_transactional',
+                formTitle: getText('BI Publisher')
             }
         case 'show_dashboard_analyser':
             return  {
                 ...state,
-                shown_component:'show_dashboard_analyser'
+                shown_component:'show_dashboard_analyser',
+                formTitle: getText('Visual Analyzer')
             }
         case 'show_dashboard_dashboard':
             return  {
                 ...state,
-                shown_component:'show_dashboard_dashboard'
+                shown_component:'show_dashboard_dashboard',
+                formTitle: getText('Analytics')
             }
         case 'show_users':
             return {
                 ...state,
-                shown_component:'show_users'
+                shown_component:'show_users',
+                formTitle: getText('')
             }
         case 'show_approle':
             return {
                 ...state,
-                shown_component:'show_approle'
+                shown_component:'show_approle',
+                formTitle: getText('Application roles')
             }
         case 'show_user_approle':
             return {
                 ...state,
-                shown_component:'show_user_approle'
+                shown_component:'show_user_approle',
+                formTitle: getText('User Approles')
             }
         case 'show_object_approle':
             return {
                 ...state,
-                shown_component:'show_object_approle'
+                shown_component:'show_object_approle',
+                formTitle: getText('Objects of Approle')
             }
         case 'show_report':
             return {
                 ...state,
-                shown_component:'show_report'
+                shown_component:'show_report',
+                formTitle: getText('')
             }
         case 'show_setting':
             return {
                 ...state,
-                shown_component:'show_setting'
+                shown_component:'show_setting',
+                formTitle: getText('Setting')
             }
         case 'change_language_en':
             localStorage.setItem("language","en");
@@ -164,7 +176,9 @@ function reducer(state,action){
         case 'is_session_valid':
             return {
                 ...state,
-                isAuthenticated: action.isAuthenticated
+                isAuthenticated: action.isAuthenticated,
+                userInfo: action.userInfo,
+                hasAdminRole: action.hasAdminRole
             }  
         default:
             return state;    
@@ -175,7 +189,11 @@ function IndexComp(props) {
 
     const [state,dispatch] = React.useReducer(reducer,initialState);
 
-    const context = React.useContext(UserContext);
+    //const context = React.useContext(UserContext);
+
+    React.useEffect(()=>{
+
+    },[]);
 
     return (        
     <React.Suspense fallback={<h1>Progress ....</h1>}>

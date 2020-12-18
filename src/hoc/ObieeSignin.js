@@ -15,8 +15,9 @@ import { makeStyles } from '@material-ui/core/styles';
 // import ImageSignIn from "../../public/img/logo-irisa.png";
 // import Copyright from '../widgets/ObieeCopyright';
 import {UserContext} from '../Context';
-import {login} from '../webservice/Login';
-import {getUserInfo,hasAdminRole} from '../webservice/User';
+//import {login} from '../webservice/Login';
+import {loginAndGetData} from '../webservice/MultiActions';
+//import {getUserInfo,hasAdminRole} from '../webservice/User';
 import ObieeButtonOperation from '../widgets/ObieeButtonOperation';
 import {getText} from '../utils/Utils';
 
@@ -127,15 +128,29 @@ export default function SignIn(props) {
 
   const context = React.useContext(UserContext);
 
-  async function handleLogin(){
+  async function handleLogin(){ 
 
-    let userInfoData;
-    let hasAdminRoleData;
+    //let userInfoData;
+    //let hasAdminRoleData;
 
     const data = {
       userName:userName,
       password:password
     };
+    let result = await loginAndGetData(data);
+    console.log("ebrahim",result);
+    if(result.error){
+      context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error}});
+    }
+    else{
+      context.obieeDispatch(
+        {type:'login',
+         userInfo:result.userInfoData,
+         hasAdminRole:result.hasAdminRoleData,
+         isAuthenticated:result.isAuthenticated
+        });
+    }
+    /*
     let result = await login(data);
 
     if(result.error){
@@ -153,7 +168,6 @@ export default function SignIn(props) {
         context.obieeDispatch({type:'login'});
       }
       else{     
-        //context.obieeDispatch('is_session_valid',{isAuthenticated:true})
 
         userInfoData = result.data;
 
@@ -167,11 +181,10 @@ export default function SignIn(props) {
           hasAdminRoleData = result.data;            
         }
 
-        console.log('login information',userInfoData,hasAdminRoleData);
-
         context.obieeDispatch({type:'login',userInfo:userInfoData,hasAdminRole:hasAdminRoleData,isAuthenticated:true});
       }
     }
+    */
   }
 
   return (

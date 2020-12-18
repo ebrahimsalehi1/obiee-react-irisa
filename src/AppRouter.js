@@ -14,6 +14,7 @@ import {
 import {UserContext} from './Context';
 import App from './App';
 import {isSessionValid} from './webservice/Login';
+import {isSessionValidAndGetData} from './webservice/MultiActions';
 
 export default function AppRouter(){
 
@@ -26,25 +27,39 @@ export default function AppRouter(){
       const checkSessionIsValid = async ()=>{
 
           if(!localStorage.getItem('sessionId') || localStorage.getItem('sessionId')==="0"){
-              return false;
+              return null;
           }
 
-          let isValid;
+          //let isValid;
 
-          const result = await isSessionValid({sessionId:localStorage.getItem('sessionId')});
+          const data = {sessionId:localStorage.getItem('sessionId')};
+          const result = await isSessionValidAndGetData(data,localStorage.getItem('user'));
+          return result;
+
+          /*
+          const result = await isSessionValid(data);
           if(result.status===200)
               isValid = result.data;
           else
               isValid = false;
 
           return isValid;
+          */
       
       }
 
-      const isValid = await checkSessionIsValid();
-      setIsSessionValidate(isValid);
+      const result = await checkSessionIsValid();
+      if(result)
+        if(!result.error){
+          setIsSessionValidate(result.isAuthenticated);
 
-      context.obieeDispatch({type:'is_session_valid',isAuthenticated:isValid})
+          context.obieeDispatch({type:'is_session_valid',
+            userInfo:result.userInfo,
+            hasAdminRole:result.hasAdminRole,
+            isAuthenticated:result.isAuthenticated
+          });    
+        }
+
 
   },[]);
 

@@ -31,6 +31,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -258,7 +259,7 @@ export default function ObieeAssignUserToApprole() {
     setRight([]);
   };
 
-  const customList = (items,uniqueId) => {
+  const customList = (items,uniqueId,title) => {
 
     const textVal = React.useRef();
     const [filteredItems,setFilteredItems] = React.useState([]);
@@ -270,6 +271,11 @@ export default function ObieeAssignUserToApprole() {
     return (
     <Card>
     <Grid container spacing={0}>
+      <Grid item xs={12} md={12}>
+        <Typography variant="h6" noWrap>
+          {title}
+        </Typography>
+      </Grid>
       <Grid item xs={10} md={10}>
       <TextField
       fullWidth
@@ -358,6 +364,7 @@ export default function ObieeAssignUserToApprole() {
                 context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:getText('Fill Inputs')+" . "+getText('Approle Name')}});
                 return;
               }
+              setInfoType(event.target.value);
 
               context.obieeDispatch({type:'show_loading'});
 
@@ -378,8 +385,6 @@ export default function ObieeAssignUserToApprole() {
                   break;
               }
 
-              setInfoType(event.target.value);
-
               context.obieeDispatch({type:'hide_loading'});          
 
             }}
@@ -390,7 +395,7 @@ export default function ObieeAssignUserToApprole() {
           </Select>
         {/* </FormControl>     */}
       </Grid>
-      <Grid item xs={12} md={5}>{customList(left,1000000)}</Grid>
+      <Grid item xs={12} md={5}>{customList(left,1000000,getText('Allocatable'))}</Grid>
       <Grid item xs={12} md={2}>
         <Grid container direction="column" alignItems="center">
           <Button
@@ -435,7 +440,7 @@ export default function ObieeAssignUserToApprole() {
           </Button>
         </Grid>
       </Grid>
-      <Grid item xs={12} md={5}>{customList(right,2000000)}</Grid>
+      <Grid item xs={12} md={5}>{customList(right,2000000,getText('Allocated'))}</Grid>
 
       <Grid
         container

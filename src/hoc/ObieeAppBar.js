@@ -313,6 +313,9 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
             <Typography className={classes.title} variant="h6" noWrap>
             <Text keyStr="IrisaProductions"/>
             </Typography>
+            <Typography className={classes.title} variant="h6" noWrap>
+            {context.obieeState.formTitle ? " - "+context.obieeState.formTitle : ""} 
+            </Typography>            
             {hasSystemFeatures('appbar-search') ?  
             <div className={classes.search}>
               <div className={classes.searchIcon}>

@@ -164,7 +164,7 @@ export default function ObieeDrawer(props) {
           </CardContent>
         </Card>
         <Divider /> */}
-        <ObieeDrawerMenuList />
+        <ObieeDrawerMenuList open={open}/>
 
       </Drawer>
       <main className={classes.content}>

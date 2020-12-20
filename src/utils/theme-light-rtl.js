@@ -81,7 +81,7 @@ export const themeLightRTL = createMuiTheme({
     },
     MuiListItemText:{
       primary:{
-        textAlign:'left',
+        textAlign:'left'
       }
     },
     MuiCardHeader: {
@@ -168,11 +168,17 @@ export const themeLightRTL = createMuiTheme({
     MuiMenuItem:{
       root:{
         fontFamily:'IRANSans',
+        direction:'ltr'
       }
     },
     MuiButton:{
       label:{
         fontFamily:'IRANSans',
+      }
+    },
+    MuiAutocomplete:{
+      option:{
+        direction:'ltr'
       }
     },
     //MuiToolbar:{root:{direction:"ltr"}},

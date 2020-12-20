@@ -15,6 +15,7 @@ import {UserContext} from './Context';
 import App from './App';
 import {isSessionValid} from './webservice/Login';
 import {isSessionValidAndGetData} from './webservice/MultiActions';
+import ObieeShowMessage from './widgets/ObieeShowMessage';
 
 export default function AppRouter(){
 
@@ -103,6 +104,15 @@ export default function AppRouter(){
           </Route>
 
         </Switch>
+
+        {context.obieeState.messageToShow && context.obieeState.messageToShow.message &&
+            <ObieeShowMessage 
+                open={context.obieeState.messageToShow.message!==''} 
+                //onClose={()=>{context.obieeDispatch({type:'show_message',messaeToShow:{type:'',message:''}})}} 
+                message={context.obieeState.messageToShow.message} 
+                type={context.obieeState.messageToShow.type}
+                />
+             }
 
 </div>
         </Router>

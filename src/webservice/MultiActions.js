@@ -48,15 +48,17 @@ export async function loginAndGetData(data){
       localStorage.setItem('user',userName);
 
       result = await getLogedInUserInfo(userName);
+
       if(result.error){
         return {userInfo:null,hasAdminRole:null,isAuthenticated:false,
             error:result.error
         };
       }
-      else
+      else{
         return {userInfo:result.userInfo,hasAdminRole:result.hasAdminRole,isAuthenticated:true,
             error:null
             };
+      }
     }
 
 }

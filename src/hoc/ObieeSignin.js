@@ -138,15 +138,14 @@ export default function SignIn(props) {
       password:password
     };
     let result = await loginAndGetData(data);
-    console.log("ebrahim",result);
     if(result.error){
       context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error}});
     }
     else{
       context.obieeDispatch(
         {type:'login',
-         userInfo:result.userInfoData,
-         hasAdminRole:result.hasAdminRoleData,
+         userInfo:result.userInfo,
+         hasAdminRole:result.hasAdminRole,
          isAuthenticated:result.isAuthenticated
         });
     }

@@ -33,6 +33,17 @@ function Dashboard(props){
     
     const context = React.useContext(UserContext);
 
+    const BILink = (rowData)=>{
+        return (<>{context.obieeState.shown_component!=='show_dashboard_analyser1' ? 
+    <a href={getBIUrl(context.obieeState.shown_component==='show_dashboard_transactional' ? 'REPORT_TRANSACTIONAL' :
+context.obieeState.shown_component==='show_dashboard_analyser' ? 'REPORT_ANALYSER'  :
+context.obieeState.shown_component==='show_dashboard_dashboard' ? 'REPORT_DASHBOARD' : '',
+rowData.linkPath,localStorage.getItem('user')
+)} target={"_blank"}>{rowData.type===1 ? rowData.caption : rowData.description}</a> : <a  onClick={()=>{
+    biLogin('REPORT_ANALYSER',localStorage.getItem('user'),'biviewer','biviewer12c')
+}}>{rowData.type===1 ? rowData.caption : rowData.description}</a>}</>)
+};
+
     return (
             <Grid container spacing={1} className={classes.root} justify={"center"} alignItems={"center"}>
             { 
@@ -71,17 +82,8 @@ function Dashboard(props){
             <ObieeMaterialTable
                 title=""
                 columns={[
-                    { field: 'caption', title: getText('Caption'), headerStyle: {width: 250}
-                    ,render:rowData=>(<>{context.obieeState.shown_component!=='show_dashboard_analyser1' ? 
-                        <a href={getBIUrl(context.obieeState.shown_component==='show_dashboard_transactional' ? 'REPORT_TRANSACTIONAL' :
-                    context.obieeState.shown_component==='show_dashboard_analyser' ? 'REPORT_ANALYSER'  :
-                    context.obieeState.shown_component==='show_dashboard_dashboard' ? 'REPORT_DASHBOARD' : '',
-                    rowData.linkPath,localStorage.getItem('user')
-                    )} target={"_blank"}>{rowData.caption}</a> : <a  onClick={()=>{
-                        biLogin('REPORT_ANALYSER',localStorage.getItem('user'),'biviewer','biviewer12c')
-                    }}>{rowData.caption}</a>}</>)
-                    },
-                    { field: 'description', title: getText('Description'), headerStyle: {width: 500} }
+                    { field: 'description', title: getText('Description'), headerStyle: {width: 500} ,render: (props)=><BILink {...props} type={2}/> },
+                    { field: 'caption', title: getText('Caption'), headerStyle: {width: 250},render: (props)=><BILink {...props} type={1}/> },
                 ]} 
                 url={
                     context.obieeState.shown_component==='show_dashboard_transactional' ? 'REPORT_TRANSACTIONAL' :

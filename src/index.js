@@ -144,7 +144,7 @@ function reducer(state,action){
                 ...state,
                 theme: true,
             }  
-        case 'show_message':
+        case 'show_message':           
             return {
                 ...state,
                 messageToShow: {
@@ -188,12 +188,6 @@ function reducer(state,action){
 function IndexComp(props) {    
 
     const [state,dispatch] = React.useReducer(reducer,initialState);
-
-    //const context = React.useContext(UserContext);
-
-    React.useEffect(()=>{
-
-    },[]);
 
     return (        
     <React.Suspense fallback={<h1>Progress ....</h1>}>

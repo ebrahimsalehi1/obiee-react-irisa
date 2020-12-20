@@ -20,7 +20,7 @@ import Box from '@material-ui/core/Box';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
-import { createFilterOptions } from '@material-ui/lab/Autocomplete';
+//import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -107,8 +107,6 @@ export default function ObieePermissionDialog(props){
 
     const classes = useStyles();
 
-    console.log('ObieePermissionDialog is rendering',actionType);
-
     return (
         <ObieeDialog 
         title={getText("Permission Dialog")}
@@ -169,7 +167,7 @@ export default function ObieePermissionDialog(props){
             //const removeFromAccessPermissions = props.itemAccessPermissions.filter(item=>newDataArr.map(obj=>obj.name).indexOf(item.account.name)===-1);
             //console.log('removeFromAccessPermissions',removeFromAccessPermissions);
           }}
-          renderInput={(params) => <TextField {...params} label="approles" variant="outlined" />}
+          renderInput={(params) => <TextField {...params} label={getText('Approle Name')} variant="outlined" />}
           renderOption={(option, { selected }) =>  (
             <React.Fragment>
               <Checkbox
@@ -195,7 +193,7 @@ export default function ObieePermissionDialog(props){
                   const filteredAceessPermission = props.itemAccessPermissions.filter(item=>item.account.name===option.name);
                   if(filteredAceessPermission.length===1)
                     setPermissionType(filteredAceessPermission[0].permission.accessPermission.accessLabel);
-
+                    
                   if(filteredAceessPermission.length===1){
 
                     // if(filteredAceessPermission[0].permission.accessModeList && 
@@ -217,6 +215,7 @@ export default function ObieePermissionDialog(props){
                     setSelectedApprole(null);
                   else  
                     setSelectedApprole(option);
+
                 }}
                 onDelete={() => console.log("test")}
                 {...getTagProps({ index })}
@@ -394,7 +393,7 @@ export default function ObieePermissionDialog(props){
 
  
           }}
-          renderInput={(params) => <TextField {...params} label="custom" variant="outlined" />}
+          renderInput={(params) => <TextField {...params} label={getText('Custom Permission')} variant="outlined" />}
           renderOption={(option, { selected }) =>  (
             <React.Fragment>
               <Checkbox

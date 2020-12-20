@@ -21,6 +21,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
 import validator from "validator";
+import {UserContext} from '../../Context';
 
 const useStyles = makeStyles(theme=>({
     root: {
@@ -54,6 +55,8 @@ export default function ObieeItemApprole(props){
     const classes = useStyles();
 
     const{mode,onAdd,onEdit,onDelete,onCancel,onExternalEvent} = props;
+
+    const context = React.useContext(UserContext);
 
     const [approleName,setApproleName] = React.useState(props.approle && mode!=='add' ? props.approle.name:'');
     const [approleDesc,setApproleDesc] = React.useState(props.approle && mode!=='add' ? props.approle.description : '');
@@ -104,7 +107,7 @@ export default function ObieeItemApprole(props){
       {(mode==='add' || mode==='edit') && 
       <Grid item xs={12} md={12}>
           <TextField  
-          label={strApproleName}ث
+          label={strApproleName}
           placeholder={strApproleName}
           variant={"outlined"}
           fullWidth
@@ -133,6 +136,8 @@ export default function ObieeItemApprole(props){
             placeholder={strApproleDisplayName}
             variant={"outlined"}
             fullWidth
+            error={!validator.isAlpha(approleDisplayName, 'fa-IR')}
+            helperText={!validator.isAlpha(approleDisplayName, 'fa-IR') ? getText('Input Failed'):null}
             value={approleDisplayName}
             onChange={e=>setApproleDisplayName(e.target.value)}
             />
@@ -258,7 +263,7 @@ export default function ObieeItemApprole(props){
             if(validation())
               onAdd(createRow());
             else 
-              alert('fields must be fill');              
+              context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:getText('Input Failed')}});
           }} title={strSave} />
         }
         {mode==='edit' &&    
@@ -267,7 +272,7 @@ export default function ObieeItemApprole(props){
               if(validation())
                 onEdit(createRow());
               else 
-                alert('fields must be fill');              
+                context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:getText('Input Failed')}});
             }} title={strSave} />        
         }
         </Grid>

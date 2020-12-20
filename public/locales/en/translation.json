@@ -85,7 +85,7 @@
     {"str":"Delete Approle","val":"Delete Approle"},
     {"str":"Allocated","val":"Allocated"},
     {"str":"Allocatable","val":"Allocatable"},
-    {"str":"","val":""},
+    {"str":"Custom Permission","val":"Custom Permission"},
     {"str":"","val":""},
     {"str":"","val":""},
     {"str":"","val":""},

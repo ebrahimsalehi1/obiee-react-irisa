@@ -11,7 +11,6 @@ import ObieeAssignUserToApprole from './hoc/Security/ObieeAssignUserToApprole';
 import ObieeAssignObjectToApprole from './hoc/Security/ObieeAssignObjectToApprole';
 import ObieeSettings from './hoc/setting/ObieeSettings';
 import Grid from '@material-ui/core/Grid';
-import ObieeShowMessage from './widgets/ObieeShowMessage';
 import {MuiThemeProvider,createMuiTheme} from '@material-ui/core/styles';
 
 import data from '../db.json';
@@ -152,14 +151,6 @@ export default function App(props){
             </Grid>
             </ObieeDrawer>
 
-            {context.obieeState.messageToShow && context.obieeState.messageToShow.message &&
-            <ObieeShowMessage 
-                open={context.obieeState.messageToShow.message!==''} 
-                //onClose={()=>{context.obieeDispatch({type:'show_message',messaeToShow:{type:'',message:''}})}} 
-                message={context.obieeState.messageToShow.message} 
-                type={context.obieeState.messageToShow.type}
-                />
-             }
             </MuiThemeProvider>
     );
 }

@@ -400,7 +400,19 @@ export default function ObieeAssignObjectToApprole() {
             setOpenPermissionDialog(
               { open: true,
                 actionType:'add',
-                itemAccessPermissions: selectedApprole ? [{account:{name:selectedApprole}}] : [],
+                itemAccessPermissions: !selectedApprole ? []:
+                [
+                  {
+                    account:{name:selectedApprole},
+                    permission: {
+                        accessModeList: [],
+                        accessPermission: {
+                          accessValue: 0,
+                          accessLabel: ""
+                        }
+                    }
+                  }
+                ] ,
                 approles: approles
               }
             );
@@ -434,7 +446,7 @@ export default function ObieeAssignObjectToApprole() {
                 newPaths.push(rowData);
                 setPaths(newPaths);     
             
-                context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Node Added')+" ["+(rowData.description ? rowData.description : rowData.caption)+" ]"}});
+                //context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Node Added')+" ["+(rowData.description ? rowData.description : rowData.caption)+" ]"}});
               }
 
               setOpenPermissionDialog(
@@ -457,7 +469,7 @@ export default function ObieeAssignObjectToApprole() {
                 newPaths.push(rowData);
                 setPaths(newPaths);     
             
-                context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Node Added')+" ["+(rowData.description ? rowData.description : rowData.caption)+" ]"}});
+                //context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Node Added')+" ["+(rowData.description ? rowData.description : rowData.caption)+" ]"}});
               }
 
               setOpenPermissionDialog(
@@ -537,18 +549,18 @@ export default function ObieeAssignObjectToApprole() {
       />
         {openPermissionDialog.open &&
         <ObieePermissionDialog 
-        onClose={()=>setOpenPermissionDialog({...openPermissionDialog , open:false})}
-        actionType={openPermissionDialog.actionType}
-        itemAccessPermissions={openPermissionDialog.itemAccessPermissions}
-        approles={openPermissionDialog.approles}
-        onAddPermission={async (itemAccessPermissions)=>{
-          console.log('onAddPermission',itemAccessPermissions);
-          await handleAddPermission(itemAccessPermissions);
-        }}
-        onRemovePermission={async (itemAccessPermissions)=>{
-          console.log('onRemovePermission',itemAccessPermissions);
-          await handleDeletePermission(itemAccessPermissions);
-        }}
+          onClose={()=>setOpenPermissionDialog({...openPermissionDialog , open:false})}
+          actionType={openPermissionDialog.actionType}
+          itemAccessPermissions={openPermissionDialog.itemAccessPermissions}
+          approles={openPermissionDialog.approles}
+          onAddPermission={async (itemAccessPermissions)=>{
+            console.log('onAddPermission',itemAccessPermissions);
+            await handleAddPermission(itemAccessPermissions);
+          }}
+          onRemovePermission={async (itemAccessPermissions)=>{
+            console.log('onRemovePermission',itemAccessPermissions);
+            await handleDeletePermission(itemAccessPermissions);
+          }}
         />
         }
       </Grid>

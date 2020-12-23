@@ -28,13 +28,13 @@ import BrightnessLowIcon from '@material-ui/icons/Brightness4';
 import clsx from 'clsx';
 import {UserContext} from '../Context';
 import Text from '../widgets/ObieeText';
-import {getText} from '../utils/Utils';
+import {getText,getConfigData} from '../utils/Utils';
 import Tooltip from '@material-ui/core/Tooltip';
 //import ObieeAppearance from './ObieeApperance';
 //import {showLoading} from '../utils/GeneralContext';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import {hasSystemFeatures} from '../utils/Utils';
-import ObieeAppProgress from '../widgets/ObieeAppProgress';
+//import ObieeAppProgress from '../widgets/ObieeAppProgress';
 
 const drawerWidth = 240;
 //const mtheme = useTheme();
@@ -311,7 +311,8 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
               <MenuIcon />
             </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
-            <Text keyStr="IrisaProductions"/>
+              {getConfigData('title')}
+            {/* <Text keyStr="IrisaProductions"/> */}
             </Typography>
             <Typography className={classes.title} variant="h6" noWrap>
             {context.obieeState.formTitle ? " - "+context.obieeState.formTitle : ""} 
@@ -447,12 +448,6 @@ const mobileMenuId = 'primary-search-account-menu-mobile';
               </IconButton>
             </div>
           </Toolbar>
-
-          {context.obieeState.progress && 
-            // <LinearProgress />
-                            <ObieeAppProgress />
-
-          } 
 
         </AppBar>               
       

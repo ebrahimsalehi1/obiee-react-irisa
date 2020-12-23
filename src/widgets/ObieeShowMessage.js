@@ -4,6 +4,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import {UserContext} from '../Context';
+import {getConfigData} from "../utils/Utils";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -29,11 +30,18 @@ export default function ObieeShowMessage(props) {
 
   React.useEffect(()=>{
 
+    let timeOut;
+    try{
+      timeOut = getConfigData('showMessageTimeout');
+    }
+    catch(e){
+      timeOut = 6000;
+    }
     let myTimer;
 
     myTimer = setTimeout(()=>{
       context.obieeDispatch({type:'hide_message'});
-    },6000);
+    },timeOut);
 
     return ()=>{
       clearTimeout(myTimer);

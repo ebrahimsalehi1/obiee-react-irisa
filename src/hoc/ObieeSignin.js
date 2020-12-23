@@ -130,8 +130,7 @@ export default function SignIn(props) {
 
   async function handleLogin(){ 
 
-    //let userInfoData;
-    //let hasAdminRoleData;
+    context.obieeDispatch({type:'show_loading'});
 
     const data = {
       userName:userName,
@@ -149,6 +148,9 @@ export default function SignIn(props) {
          isAuthenticated:result.isAuthenticated
         });
     }
+
+    context.obieeDispatch({type:'hide_loading'});
+
     /*
     let result = await login(data);
 

@@ -34,7 +34,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import AddAllIcon from '@material-ui/icons/PlaylistAdd';
 import DeleteAllIcon from '@material-ui/icons/DeleteSweep';
 import ObieePermissionDialog from '../../widgets/ObieePermissionDialog';
-import config from "../../../public/config.json";
+import {getConfigData} from "../../utils/Utils";
 import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
 import IconPermDataSetting from '@material-ui/icons/PermDataSetting';
 import { MTableToolbar } from 'material-table';
@@ -131,7 +131,7 @@ export default function ObieeAssignObjectToApprole() {
         {
         user: user,
         sessionId:sessionId,
-        types: config.featuresBI.treeTypes.filter(item=>item.isActive===true).map(item=>item.title),
+        types: getConfigData('featuresBI','treeTypes').filter(item=>item.isActive===true).map(item=>item.title),
         detail:true
         }
       );
@@ -155,83 +155,83 @@ export default function ObieeAssignObjectToApprole() {
   ,[]);
 
 
-  async function handleAddPermission0(permissionType,customPermissionType){
+  // async function handleAddPermission0(permissionType,customPermissionType){
 
-    if(paths.length === 0 || selectedApprole.length===0){
-      context.obieeDispatch({type:'show_message',messageToShow:{type:'warning',message:getText('Fill Inputs')}});
-      return;
-    }
+  //   if(paths.length === 0 || selectedApprole.length===0){
+  //     context.obieeDispatch({type:'show_message',messageToShow:{type:'warning',message:getText('Fill Inputs')}});
+  //     return;
+  //   }
 
-    let result;
-    const user = localStorage.getItem('user');
+  //   let result;
+  //   const user = localStorage.getItem('user');
 
-    let data =
-    {
-      user:user,
-      paths: paths.map(item=>item.path),
-      isRecursive: true,
-      itemAccessPermissions: [
-          {
-              account: {
-                  name: selectedApprole
-              }
-          }
-      ]
-    }
+  //   let data =
+  //   {
+  //     user:user,
+  //     paths: paths.map(item=>item.path),
+  //     isRecursive: true,
+  //     itemAccessPermissions: [
+  //         {
+  //             account: {
+  //                 name: selectedApprole
+  //             }
+  //         }
+  //     ]
+  //   }
 
-    switch(permissionType){
-      case 'Full Control':
+  //   switch(permissionType){
+  //     case 'Full Control':
 
-        result = await permissionFull(data);
-        break;
-      case 'Modify':
-        result = await permissionModify(data);
-        break;
-      case 'Open':
-        result = await permissionOpen(data);
-        break;
-      case 'No Access':
-        result = await permissionNoAccess(data);
-        break;
-      case 'Custom':
-        const customPermissionTypeValues = customPermissionType.map(item=>{
-          return CUSTOM_TYPE.filter(obj=>obj.desc===item)[0].id
-        });
+  //       result = await permissionFull(data);
+  //       break;
+  //     case 'Modify':
+  //       result = await permissionModify(data);
+  //       break;
+  //     case 'Open':
+  //       result = await permissionOpen(data);
+  //       break;
+  //     case 'No Access':
+  //       result = await permissionNoAccess(data);
+  //       break;
+  //     case 'Custom':
+  //       const customPermissionTypeValues = customPermissionType.map(item=>{
+  //         return CUSTOM_TYPE.filter(obj=>obj.desc===item)[0].id
+  //       });
 
-        const sumValues = customPermissionTypeValues.reduce((item,acc)=>acc+item,0)
+  //       const sumValues = customPermissionTypeValues.reduce((item,acc)=>acc+item,0)
 
-        data={
-          user:user,
-          //sessionId":"5454",
-          paths: paths.map(item=>item.path),
-          isRecursive: true,
-          itemAccessPermissions: [
-              {
-                  account: {
-                      name: selectedApprole
-                  },
-                  permission: {
-                      "accessModeList": customPermissionTypeValues,
-                      "accessPermission": sumValues
-                  }
-              }
-          ]
-          }
-          result = await permissionCustom(data);
-        break;              
+  //       data={
+  //         user:user,
+  //         //sessionId":"5454",
+  //         paths: paths.map(item=>item.path),
+  //         isRecursive: true,
+  //         itemAccessPermissions: [
+  //             {
+  //                 account: {
+  //                     name: selectedApprole
+  //                 },
+  //                 permission: {
+  //                     "accessModeList": customPermissionTypeValues,
+  //                     "accessPermission": sumValues
+  //                 }
+  //             }
+  //         ]
+  //         }
+  //         result = await permissionCustom(data);
+  //       break;              
       
-      default:
+  //     default:
 
-    }
+  //   }
 
-    if(result.error){
-      context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
-    }
-    else{
-      context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
-    }
+  //   if(result.error){
+  //     context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+  //   }
+  //   else{
+  //     context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
+  //   }
 
-  }
+  // }
 
   async function handleAddPermission(itemAccessPermissions){
 
@@ -239,6 +239,8 @@ export default function ObieeAssignObjectToApprole() {
     //   context.obieeDispatch({type:'show_message',messageToShow:{type:'warning',message:getText('Fill Inputs')}});
     //   return;
     // }
+
+    context.obieeDispatch({type:'show_loading'});
 
     let result;
     const user = localStorage.getItem('user');
@@ -261,9 +263,13 @@ export default function ObieeAssignObjectToApprole() {
       context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
     }
 
+    context.obieeDispatch({type:'hide_loading'});
+
   }
 
   async function handleDeletePermission(itemAccessPermissions){
+
+    context.obieeDispatch({type:'show_loading'});
 
     let result;
     const user = localStorage.getItem('user');
@@ -286,6 +292,7 @@ export default function ObieeAssignObjectToApprole() {
       context.obieeDispatch({type:'show_message',messageToShow:{type:'info',message:getText('Operation Successful')}});                    
     }
 
+    context.obieeDispatch({type:'hide_loading'});
 
   }
 
@@ -325,10 +332,11 @@ export default function ObieeAssignObjectToApprole() {
               {
                 user: user,
                 account: selectedApprole,
-                types: config.featuresBI.treeTypes.filter(item=>item.isActive===true).map(item=>item.title),
+                types: getConfigData('featuresBI','treeTypes').filter(item=>item.isActive===true).map(item=>item.title),
               }
             );
             if(result.error){
+              setCatalog([]);
               context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
             }
             else{

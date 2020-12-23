@@ -127,7 +127,6 @@ export async function getRolePermission(data){
          result.data = res.data;   
     })
     .catch(err=>{
-        alert('error')
         result.error = inspectErrors(err);
     });
 

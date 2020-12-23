@@ -2,15 +2,23 @@ import axios from 'axios';
 
 import translationEn from '../../public/locales/en/translation.json';
 import translationFa from '../../public/locales/fa/translation.json';
-import config from '../../public/config.json';
 import webservices from '../../public/webservices.json';
 
 import jsonData from '../../db.json';
 
+export function getConfigData(key1,key2){
+    const configVal = localStorage.getItem('config');
+    if(configVal){
+        return key2 ? JSON.parse(configVal)[key1][key2] : JSON.parse(configVal)[key1];
+    }
+
+    return null;    
+}
+
 export function getText(keyStr){
 
     //const lang = localStorage.getItem('language');
-    const lang = config.language;
+    const lang = getConfigData('language');
 
     const result =  lang==='en' ? translationEn.filter(item=>item.str===keyStr).map(item=>item.val): translationFa.filter(item=>item.str===keyStr).map(item=>item.val);
     return String(result[0]);
@@ -26,7 +34,7 @@ export function getText(keyStr){
 
 function getUrlByKey(key){
     //return JSON.parse(localStorage.getItem("webservices")).filter(item=>item.name===key)[0]['bffUrl'].replace(":0",config.host);    
-    return webservices.filter(item=>item.name===key)[0]['bffUrl'].replace(":0",config.host);
+    return webservices.filter(item=>item.name===key)[0]['bffUrl'].replace(":0",getConfigData('host'));
 }
 
 function getUrlParamList(key,urlParams){
@@ -70,7 +78,7 @@ export async function callRestPost2(key,urlParams,data){
 
 export async function callRestPost(key,urlParams,data){        
    
-    if(config && config.serviceType==='file'){
+    if(getConfigData('serviceType')==='file'){
 
         return new Promise((resolve,reject)=>{
             const foundData = jsonData[key];
@@ -106,7 +114,7 @@ export async function callRestPost(key,urlParams,data){
 
 export async function callRestPut(key,urlParams,data){    
 
-    if(config && config.serviceType==='file'){
+    if(getConfigData('serviceType')==='file'){
         return new Promise((resolve,reject)=>{
             setTimeout(()=>{
                 resolve({data:"Ok",status:200});
@@ -137,7 +145,7 @@ export async function callRestPut(key,urlParams,data){
 
 export async function callRestDelete(key,urlParams,data){    
 
-    if(config && config.serviceType==='file'){
+    if(getConfigData('serviceType')==='file'){
         return new Promise((resolve,reject)=>{
             setTimeout(()=>{
                 resolve({data:"Ok",status:200});
@@ -168,7 +176,7 @@ export async function callRestDelete(key,urlParams,data){
 
 export async function callRestGet(key,urlParams){    
 
-    if(config && config.serviceType==='file'){
+    if(getConfigData('serviceType')==='file'){
 
         return new Promise((resolve,reject)=>{
             const foundData = jsonData[key];
@@ -277,7 +285,7 @@ export function deleteFromList(data,oldData){
 }
 
 export function hasSystemFeatures(feature){
-    const res = config.features.filter(item=>{
+    const res = getConfigData('features').filter(item=>{
         return item[feature];        
     });
 
@@ -289,13 +297,13 @@ export function getBIUrl(type,path,user){
 
     switch(type){
         case 'REPORT_TRANSACTIONAL':
-            url += config.urlBIPublisher+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
+            url += getConfigData('urlBIPublisher')+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
             break;
         case 'REPORT_DASHBOARD':
-            url += config.urlBIAnalytics+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
+            url += getConfigData('urlBIAnalytics')+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
             break;
         case 'REPORT_ANALYSER':
-            url += config.urlBIVisualAnalyser+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
+            url += getConfigData('urlBIVisualAnalyser')+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
             break;            
     }
 
@@ -306,7 +314,7 @@ export function getBIUrl(type,path,user){
 
 export function biLogin(key,impersonate,biuser,bipasswd) {
 
-    let url = config.urlBIVisualAnalyser;
+    let url = getConfigData('urlBIVisualAnalyser');
 
        var popup = 
  window.open    
@@ -335,3 +343,30 @@ export function biLogin(key,impersonate,biuser,bipasswd) {
 //     });
  
 }
+
+export async function readFile(url){
+
+    let result = null;
+    await fetch(url,{
+        headers: {
+            'Content-Type': 'application/json'
+          }
+    })
+    .then(response=>
+        {
+            console.log("response",response);
+            return response.json();
+        })
+    .then(data=>
+        {
+            console.log(data);
+            result = data;
+        }
+        )
+    .catch(err=>{
+        console.log("err",err);
+    })
+
+    return result;
+} 
+

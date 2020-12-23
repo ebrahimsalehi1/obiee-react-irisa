@@ -15,7 +15,7 @@ import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import {UserContext} from './Context';
 // import { AlternateEmail } from '@material-ui/icons';
 //import {isSessionValid} from './webservice/Login';
-import {getText} from './utils/Utils';
+import {getText,readFile} from './utils/Utils';
 
 const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 
@@ -188,6 +188,23 @@ function reducer(state,action){
 function IndexComp(props) {    
 
     const [state,dispatch] = React.useReducer(reducer,initialState);
+
+    React.useEffect(()=>{
+
+        async function loadConfigFie(){
+            
+            const result = await readFile('config.json');
+
+            if(result){
+                localStorage.setItem('config',JSON.stringify(result));
+                //alert(0)
+            }
+
+        }
+
+        loadConfigFie();
+
+    },[]);
 
     return (        
     <React.Suspense fallback={<h1>Progress ....</h1>}>

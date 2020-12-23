@@ -147,6 +147,8 @@ export default function ObieeAssignUserToApprole() {
         result = await getListRolesOfRole(approle);
         
         if(result.error){
+          setCurrentData([]);
+          setRight([]);
           context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
         }
         else{
@@ -164,6 +166,8 @@ export default function ObieeAssignUserToApprole() {
       case 'group':
         result = await getListGroupsOfRole(approle);
         if(result.error){
+          setCurrentData([]);
+          setRight([]);
           context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
         }
         else{
@@ -181,6 +185,8 @@ export default function ObieeAssignUserToApprole() {
       case 'user':
         result = await getListUsersOfRole(approle);
         if(result.error){
+          setCurrentData([]);
+          setRight([]);
           context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
         }
         else{

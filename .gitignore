@@ -5,3 +5,6 @@ package-lock.json
 /build
 /dist
 front.war
+/DEV
+/PROD
+/DEV-OFFICE

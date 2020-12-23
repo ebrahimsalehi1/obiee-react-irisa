@@ -7,6 +7,8 @@
     "urlBIVisualAnalyser0":"http://172.25.40.135:9502/va/home.jsp?reportpath=",
     "language":"fa",
     "direction":"rtl",
+    "showMessageTimeout":6000,
+    "title":"سیستم راهکار جامع گزارش گیری هرمزگان",
     "features":[
         {"appbar":{"search":false,"titleFormat":"titleOnly;titleFormPath"}},
         {"user-profile":true},

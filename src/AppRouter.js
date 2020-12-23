@@ -16,6 +16,7 @@ import App from './App';
 import {isSessionValid} from './webservice/Login';
 import {isSessionValidAndGetData} from './webservice/MultiActions';
 import ObieeShowMessage from './widgets/ObieeShowMessage';
+import ObieeAppProgress from './widgets/ObieeAppProgress';
 
 export default function AppRouter(){
 
@@ -30,8 +31,6 @@ export default function AppRouter(){
           if(!localStorage.getItem('sessionId') || localStorage.getItem('sessionId')==="0"){
               return null;
           }
-
-          //let isValid;
 
           const data = {sessionId:localStorage.getItem('sessionId')};
           const result = await isSessionValidAndGetData(data,localStorage.getItem('user'));
@@ -104,6 +103,11 @@ export default function AppRouter(){
           </Route>
 
         </Switch>
+
+        {context.obieeState.progress && 
+          // <LinearProgress />
+          <ObieeAppProgress />
+        } 
 
         {context.obieeState.messageToShow && context.obieeState.messageToShow.message &&
             <ObieeShowMessage 

@@ -6,6 +6,7 @@ import React from 'react';
 // import Typography from '@material-ui/core/Typography';
 // import Checkbox from '@material-ui/core/Checkbox';
 import ObieeTabs from '../../widgets/ObieeTabs';
+import ObieeTabs2 from '../../widgets/ObieeTabs2';
 import Card from '@material-ui/core/Card';
 // import CardContent from '@material-ui/core/CardContent';
 // import CardActions from '@material-ui/core/CardActions';
@@ -16,21 +17,22 @@ import ObieeProfile from './ObieeProfile';
 import {getText} from '../../utils/Utils';
 import {UserContext} from '../../Context';
 
-export default function ObieeSettings(){
+export default function ObieeSettings(props){
 
     const [valTab,setValTab] = React.useState(0);
+    const {showList} = props;
 
     const context = React.useContext(UserContext);
 
     return (
     <>
-        <Card >
-         <ObieeTabs 
-         value={valTab}
-         handleChange={(event,newValue)=>{
-            setValTab(newValue);
-         }}
-         tabData={
+
+    <ObieeTabs2 
+        value={valTab}
+        handleChange={(event,newValue)=>{
+        setValTab(newValue);
+        }}
+        tabData={
             [
             {title:getText('Profile'),id:0},
             //{title:'Systems',id:1},
@@ -39,19 +41,39 @@ export default function ObieeSettings(){
             //{title:getText('Admin'),id:4},
             ]
          }
+    /> 
+
+    {1===0 &&
+        <Card >
+            
+         <ObieeTabs 
+         value={valTab}
+         handleChange={(event,newValue)=>{
+            setValTab(newValue);
+         }}
+         tabData={
+            [
+            {title:getText('Profile'),id:0},
+            {title:'Systems',id:1,component:<div>Hello Ebrahim !!!</div>},
+            //{title:'languages',id:2},
+            //{title:'change password',id:3},
+            //{title:getText('Admin'),id:4},
+            ]
+         }
          />
 
          </Card>
+    }
 
-        {valTab === 0 && 
+        {valTab === 0 && showList.filter(item=>item==='profile').length>0 &&
         <ObieeProfile userInfo={context.obieeState.userInfo} />       
         }
 
-        {valTab === 1 &&
+        {valTab === 1 && showList.filter(item=>item==='host').length>0 &&
         <ObieeHosts />  
         }
 
-        {valTab === 3 && 
+        {valTab === 3 && showList.filter(item=>item==='reset_password').length>0 &&
         <ObieeResetPassword />       
         }
     </>

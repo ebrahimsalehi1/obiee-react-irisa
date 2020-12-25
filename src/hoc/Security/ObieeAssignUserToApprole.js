@@ -32,6 +32,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import Typography from '@material-ui/core/Typography';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -274,6 +275,13 @@ export default function ObieeAssignUserToApprole() {
       setFilteredItems(items);
     },[items]);
 
+    const handleSearch = ()=>{
+      if(textVal.current.value.length>2){
+        const filteredItems = items.filter(item=>item.name.indexOf(textVal.current.value)!==-1);
+        setFilteredItems(filteredItems);
+      }
+    }
+
     return (
     <Card>
     <Grid container spacing={0}>
@@ -282,7 +290,32 @@ export default function ObieeAssignUserToApprole() {
           {title}
         </Typography>
       </Grid>
-      <Grid item xs={10} md={10}>
+
+      <TextField
+        fullWidth
+        variant="outlined"
+        inputRef={textVal}
+        placeholder={getText('Search')}
+        inputProps={{ 'aria-label': 'search' }}    
+        onChange={e=>{
+          if(e.target.value.length === 0)
+            setFilteredItems(items);
+        }} 
+        onKeyDown={e=>{
+          if(e.keyCode===13){
+            handleSearch();
+          }
+        }}
+        InputProps={{
+          startAdornment: ( 
+            <InputAdornment position="start">
+              <SearchIcon onClick={handleSearch}/>
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      {/* <Grid item xs={10} md={10}>
       <TextField
       fullWidth
       variant="outlined"
@@ -306,7 +339,7 @@ export default function ObieeAssignUserToApprole() {
       >
         <SearchIcon />
       </IconButton>
-      </Grid>
+      </Grid> */}
       </Grid>
     <Paper className={classes.paper}>
       <List dense component="div" role="list">
@@ -344,14 +377,14 @@ export default function ObieeAssignUserToApprole() {
           fullWidth
           renderInput={(params) => <TextField {...params} label={getText("Approle Name")} variant="outlined" />}
           onChange={async (e,val)=>{     
-            
-            context.obieeDispatch({type:'show_loading'});
+            if(val){                                                                                                                                               
+              context.obieeDispatch({type:'show_loading'});
 
-            setCurrentApprole(val);
-            await loadDataByApprole(infoType,val.name);
+              setCurrentApprole(val);
+              await loadDataByApprole(infoType,val.name);
 
-            context.obieeDispatch({type:'hide_loading'});          
-            
+              context.obieeDispatch({type:'hide_loading'});          
+            }
           }}
         />        
       </Grid>

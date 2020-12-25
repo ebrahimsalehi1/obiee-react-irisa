@@ -1,7 +1,6 @@
 
 export function inspectErrors(err){
 
-    console.log("ebrahim-inspectErrors",err);
     let result;
     if(err && err.response && err.response.data){
         result = {

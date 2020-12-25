@@ -5,7 +5,7 @@ import {UserContext} from '../Context';
 import { makeStyles } from '@material-ui/core/styles';
 //const DataGridDemo = React.lazy(()=>import('../widgets/ObieeTable'));
 const ObieeMaterialTable = React.lazy(()=>import('../widgets/ObieeMaterialTable'));
-import ObieeChartMonthlyByType from './charts/ObieeChartMonthlyByType';
+import ObieeChartMonthlyByType from './charts/ObieeChartMonthlyByType2';
 import ObieeChartPie from './charts/ObieeChartPie';
 import ObieeProgress from './charts/ObieeProgress2';
 import {ANALYTIC,VISUAL_ANALYSER,BI_PUBLISHER} from '../utils/Constants';

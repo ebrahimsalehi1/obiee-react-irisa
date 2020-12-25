@@ -5,13 +5,14 @@ import clsx from 'clsx'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { TitleOutlined } from '@material-ui/icons'
 
 const useStylePaper = makeStyles(theme=>({
   root:{
       color: '#263238',
       transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
       backgroundColor: '#fff',
-      //padding: '24px'   
+      padding: 0//'24px'   
   },
   elevation1: {
     boxShadow:' 0 0 0 1px rgba(63,63,68,0.05), 0 1px 2px 0 rgba(63,63,68,0.15)'
@@ -70,11 +71,14 @@ const useStyleProgress = makeStyles(theme=>({
   }  
 }));
 
-export default function Progress(){
-const classesPaper = useStylePaper();
-const classesTypography = useStyleTypography();
-const classesBox = useStyleBox();
-const classesProgress = useStyleProgress();
+export default function ObieeDashboardInfo(props){
+
+  const classesPaper = useStylePaper();
+  const classesTypography = useStyleTypography();
+  const classesBox = useStyleBox();
+  //const classesProgress = useStyleProgress();
+
+  const {children,title} = props;
 
   return (
     <Paper className={
@@ -88,21 +92,9 @@ const classesProgress = useStyleProgress();
           classesTypography.gutterBottom,
           classesTypography.overline,
           classesTypography.root
-        )}>وضعیت سیستم</Typography>
+      )}>{title}</Typography>
         <Box className={clsx(classesBox.gen)}>
-        <Typography component={"h3"} className={clsx(
-          classesTypography.colorTextSecondary,
-          classesTypography.gutterBottom,
-          classesTypography.overline,
-          classesTypography.root
-        )}>97%</Typography>
-      <LinearProgress 
-      className={clsx(
-        classesProgress.colorSecondary,
-        classesProgress.root,
-        classesProgress.other)}
-      variant="determinate" value={97} />
-
+          {children}
         </Box>
     </Paper>
   )

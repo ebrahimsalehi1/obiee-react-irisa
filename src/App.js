@@ -77,7 +77,7 @@ export default function App(props){
 
             <ObieeAppBar 
             open={openDrawer} 
-            handleDrawerOpen={()=>{setOpenDrawer(true);}} 
+            handleDrawerOpen={()=>{setOpenDrawer(!openDrawer);}} 
             handleSettings={()=>{
                 setShowSystemSetting(true);
                 setWhichCompShow(-1);
@@ -145,7 +145,7 @@ export default function App(props){
             }
 
             {context.obieeState.shown_component==='show_setting' &&
-                <ObieeSettings />
+                <ObieeSettings showList={['profile']}/>
             }
 
             </Grid>

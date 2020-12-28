@@ -136,8 +136,8 @@ export default function ObieeItemApprole(props){
             placeholder={strApproleDisplayName}
             variant={"outlined"}
             fullWidth
-            error={!validator.isAlpha(approleDisplayName, 'fa-IR')}
-            helperText={!validator.isAlpha(approleDisplayName, 'fa-IR') ? getText('Input Failed'):null}
+            error={!validator.isAlpha(approleDisplayName, 'fa-IR') && !validator.contains(approleDisplayName,' ')}
+            helperText={!validator.isAlpha(approleDisplayName, 'fa-IR') && !validator.contains(approleDisplayName,' ') ? getText('Input Failed'):null}
             value={approleDisplayName}
             onChange={e=>setApproleDisplayName(e.target.value)}
             />

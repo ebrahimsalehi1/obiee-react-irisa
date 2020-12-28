@@ -292,55 +292,76 @@ export function hasSystemFeatures(feature){
     return  res && res.length>0;
 }
 
-export function getBIUrl(type,path,user){
+// export function getBIUrl(type,path,user){
+//     let url = '';
+
+//     switch(type){
+//         case 'REPORT_TRANSACTIONAL':
+//             url += getConfigData('urlBIPublisher')+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
+//             break;
+//         case 'REPORT_DASHBOARD':
+//             url += getConfigData('urlBIAnalytics')+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
+//             break;
+//         case 'REPORT_ANALYSER':
+//             url += getConfigData('urlBIVisualAnalyser')+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
+//             break;            
+//     }
+
+//     return url;
+
+// }
+
+
+export function biLogin(key,path,impersonate,biuser,bipassword){
+
     let url = '';
 
-    switch(type){
+    switch(key){
         case 'REPORT_TRANSACTIONAL':
-            url += getConfigData('urlBIPublisher')+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
+            url += getConfigData('urlBIPublisher')+encodeURIComponent(path)+'&impersonate='+impersonate+'&nqUser='+biuser+'&nqPassword='+bipassword;
             break;
         case 'REPORT_DASHBOARD':
-            url += getConfigData('urlBIAnalytics')+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
+            url += getConfigData('urlBIAnalytics')+encodeURIComponent(path)+`&impersonate=${impersonate}&nqUser=${biuser}&nqPassword=${bipassword}`;
             break;
         case 'REPORT_ANALYSER':
-            url += getConfigData('urlBIVisualAnalyser')+encodeURIComponent(path)+'&impersonate='+user+'&nqUser=biviewer&nqPassword=biviewer12c';
-            break;            
+            url += getConfigData('urlBIVisualAnalyser')+encodeURIComponent(path)+`&impersonate=${impersonate}&nqUser=${biuser}&nqPassword=${bipassword}`;
+            break;   
+        default:
+            break;             
     }
 
-    return url;
+    console.log('ebrahim',key,path,impersonate,biuser,bipassword,url);
 
-}
+    if(key !== 'REPORT_ANALYSER') 
+        return url;
 
+    url = 'https://www.time.ir/';
 
-export function biLogin(key,impersonate,biuser,bipasswd) {
+    //let url = getConfigData('urlBIVisualAnalyser');
 
-    let url = getConfigData('urlBIVisualAnalyser');
+    var popup = window.open(url,"_blank","width=" + screen.width + ", height=" + screen.height,false);
 
-       var popup = 
- window.open    
- (url,"_blank","width=" + screen.width + ", height=" + screen.height,false);
-        
-        popup.onload=function () {
-           console.log('this is a test for visual analyser-step 1');
-        alert(1)
-   loginForm = popup.document.   getElementsByClassName('bitech-login-form')[0];
-        loginForm.action = url + '&impersonate='+ impersonate;
-        popup.document.getElementById('idUser').value = biuser;
-        popup.document.getElementById('idPassword').value = bipasswd;
-        loginForm.submit();
+    // popup.onload= ()=> {
+    //        console.log('this is a test for visual analyser-step 1');
+    //     alert(1)
+    //     loginForm = popup.document.getElementsByClassName('bitech-login-form')[0];
+    //     loginForm.action = url + '&impersonate='+ impersonate;
+    //     popup.document.getElementById('idUser').value = biuser;
+    //     popup.document.getElementById('idPassword').value = bipasswd;
+    //     loginForm.submit();
    
-     }
-
-//  popup.addEventListener('load', function () {
-//           console.log('this is a test for visual analyser-step 1');
-//           alert(1)
-//  loginForm = popup.document.getElementsByClassName('bitech-login-form')[0];
-//        loginForm.action = url + '&impersonate='+ impersonate;
-//        popup.document.getElementById('idUser').value = biuser;
-//        popup.document.getElementById('idPassword').value = bipasswd;
-//        loginForm.submit();
- 
-//     });
+    // }
+alert(0)
+     popup.addEventListener('load', function () {
+              console.log('this is a test for visual analyser-step 1');
+              alert(1)
+     loginForm = popup.document.getElementsByClassName('bitech-login-form')[0];
+           loginForm.action = url + '&impersonate='+ impersonate;
+           popup.document.getElementById('idUser').value = biuser;
+           popup.document.getElementById('idPassword').value = bipasswd;
+           loginForm.submit();
+    
+        });
  
 }
 

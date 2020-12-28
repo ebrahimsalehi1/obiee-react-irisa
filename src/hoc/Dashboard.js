@@ -9,7 +9,7 @@ import ObieeChartMonthlyByType from './charts/ObieeChartMonthlyByType2';
 import ObieeChartPie from './charts/ObieeChartPie';
 import ObieeProgress from './charts/ObieeProgress2';
 import {ANALYTIC,VISUAL_ANALYSER,BI_PUBLISHER} from '../utils/Constants';
-import {getText,getBIUrl,biLogin} from '../utils/Utils';
+import {getText,biLogin} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,15 +34,26 @@ function Dashboard(props){
     const context = React.useContext(UserContext);
 
     const BILink = (rowData)=>{
-        return (<>{context.obieeState.shown_component!=='show_dashboard_analyser1' ? 
-    <a href={getBIUrl(context.obieeState.shown_component==='show_dashboard_transactional' ? 'REPORT_TRANSACTIONAL' :
+        return (<>{context.obieeState.shown_component!=='show_dashboard_analyser' ? 
+    <a href={biLogin(context.obieeState.shown_component==='show_dashboard_transactional' ? 'REPORT_TRANSACTIONAL' :
 context.obieeState.shown_component==='show_dashboard_analyser' ? 'REPORT_ANALYSER'  :
 context.obieeState.shown_component==='show_dashboard_dashboard' ? 'REPORT_DASHBOARD' : '',
-rowData.linkPath,localStorage.getItem('user')
+rowData.linkPath,localStorage.getItem('user'),'biviewer','biviewer12c'
 )} target={"_blank"}>{rowData.type===1 ? rowData.caption : rowData.description}</a> : <a  onClick={()=>{
-    biLogin('REPORT_ANALYSER',localStorage.getItem('user'),'biviewer','biviewer12c')
+    biLogin('REPORT_ANALYSER',rowData.linkPath,localStorage.getItem('user'),'biviewer','biviewer12c')
 }}>{rowData.type===1 ? rowData.caption : rowData.description}</a>}</>)
 };
+
+// const BILink2 = (rowData)=>{
+//     return (
+// <a  onClick={()=>{
+// biLogin(
+//     context.obieeState.shown_component==='show_dashboard_transactional' ? 'REPORT_TRANSACTIONAL' :
+//     context.obieeState.shown_component==='show_dashboard_analyser' ? 'REPORT_ANALYSER'  :
+//     context.obieeState.shown_component==='show_dashboard_dashboard' ? 'REPORT_DASHBOARD' : ''
+//     ,rowData.linkPath,localStorage.getItem('user'),'biviewer','biviewer12c')
+// }}>{rowData.type===1 ? rowData.caption : rowData.description}</a>)
+// };
 
     return (
             <Grid container spacing={1} className={classes.root} justify={"center"} alignItems={"center"}>

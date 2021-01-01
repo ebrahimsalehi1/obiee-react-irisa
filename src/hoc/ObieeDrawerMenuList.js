@@ -83,7 +83,7 @@ function ObieeDrawerMenuList(props){
       className={classes.root}
     >
 
-<ListItem button key={strUserInfo} onClick={()=>context.obieeDispatch({type:'show_setting_userinfo'})}>
+<ListItem button key={strUserInfo} onClick={()=>context.obieeDispatch({type:'show_setting'})}>
     <Tooltip title={strUserInfo} >
       <ListItemIcon><AccountCircleIcon /></ListItemIcon>
     </Tooltip>  

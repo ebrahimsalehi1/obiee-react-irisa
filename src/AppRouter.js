@@ -4,7 +4,7 @@ import ObieeSignin from './hoc/ObieeSignin';
 //import ObieeCrudApprole from './hoc/ObieeCrudApprole';
 //import { TramRounded } from '@material-ui/icons';
 import {
-    BrowserRouter as Router,
+  HashRouter as Router,
     Switch,
     Route,
     Link,
@@ -22,7 +22,7 @@ export default function AppRouter(){
 
     const context = React.useContext(UserContext);
 
-    const [isSessionValidate,setIsSessionValidate] = React.useState(context.obieeState.isAuthenticated);
+    //const [isSessionValidate,setIsSessionValidate] = React.useState(context.obieeState.isAuthenticated);
 
     React.useEffect(async ()=>{
 
@@ -51,7 +51,7 @@ export default function AppRouter(){
       const result = await checkSessionIsValid();
       if(result)
         if(!result.error){
-          setIsSessionValidate(result.isAuthenticated);
+          //setIsSessionValidate(result.isAuthenticated);
 
           context.obieeDispatch({type:'is_session_valid',
             userInfo:result.userInfo,
@@ -63,9 +63,9 @@ export default function AppRouter(){
 
   },[]);
 
-    return (
-        <Router>
-<div>
+  return (
+    <Router>
+        <div>
         {/* <nav>
           <ul>
             <li>
@@ -81,18 +81,18 @@ export default function AppRouter(){
         </nav> */}
 
         <Switch>
-          <Route path="/about">
+          <Route path="/about" exact>
             <About />
           </Route>
-          <Route path="/users">
+          <Route path="/users" exact>
             <Users />
           </Route>
 
-          <Route path="/login"          
-          render={()=>!isSessionValidate ? <ObieeSignin /> : <App/>
+          <Route path="/login" exact         
+          render={()=>!context.obieeState.isAuthenticated ? <ObieeSignin /> : <App/>
           } />
        
-          <Route path="/" 
+          <Route path="/" exact
                 render={()=>!context.obieeState.isAuthenticated ? <ObieeSignin /> : <App/>
                 } />
 
@@ -118,8 +118,8 @@ export default function AppRouter(){
                 />
              }
 
-</div>
-        </Router>
+        </div>
+      </Router>
     );
 }
 

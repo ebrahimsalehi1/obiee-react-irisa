@@ -38,6 +38,7 @@ import {getConfigData} from "../../utils/Utils";
 import ObieeButtonOperation from '../../widgets/ObieeButtonOperation';
 import IconPermDataSetting from '@material-ui/icons/PermDataSetting';
 import { MTableToolbar } from 'material-table';
+import blue from '@material-ui/core/colors/blue';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -506,7 +507,7 @@ export default function ObieeAssignObjectToApprole() {
             rowStyle:(event,rowData)=>{                
                 if(rowExpanded && rowExpanded.path===event.parentPath)
                     return {
-                        backgroundColor:'#70b1f2',
+                        backgroundColor: blue[200],
                     }                  
             },
         }}

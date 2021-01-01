@@ -16,7 +16,7 @@ import Avatar from '@material-ui/core/Avatar';
 //import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 //import ExpandMoreLess from '@material-ui/icons/ExpandLess';
 import blue from '@material-ui/core/colors/blue';
-import red from '@material-ui/core/colors/red'; 
+//import red from '@material-ui/core/colors/red'; 
 //import {getText} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
@@ -36,10 +36,10 @@ const useStyles = makeStyles((theme) => ({
         transform: 'rotate(180deg)',
       },
     avatarSelected: {
-        backgroundColor: red[500],
+        backgroundColor: blue[800],
     },
     avatar: {
-        backgroundColor: red[0],
+        backgroundColor: blue[0],
     },
     cardBackgroundDark:{
         backgroundColor:blue[100]

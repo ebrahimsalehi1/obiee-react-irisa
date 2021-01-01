@@ -335,11 +335,12 @@ export function biLogin(key,path,impersonate,biuser,bipassword){
     if(key !== 'REPORT_ANALYSER') 
         return url;
 
-    url = 'https://www.time.ir/';
-
     //let url = getConfigData('urlBIVisualAnalyser');
 
-    var popup = window.open(url,"_blank","width=" + screen.width + ", height=" + screen.height,false);
+    var popup = window.open(url,"_blank","width=" + screen.width + ", height=" + screen.height,true);
+
+    popup.postMessage({user:biuser,password:bipassword},'*')// childwin is the targetWindow
+    popup.focus();
 
     // popup.onload= ()=> {
     //        console.log('this is a test for visual analyser-step 1');
@@ -351,17 +352,17 @@ export function biLogin(key,path,impersonate,biuser,bipassword){
     //     loginForm.submit();
    
     // }
-alert(0)
-     popup.addEventListener('load', function () {
-              console.log('this is a test for visual analyser-step 1');
-              alert(1)
-     loginForm = popup.document.getElementsByClassName('bitech-login-form')[0];
-           loginForm.action = url + '&impersonate='+ impersonate;
-           popup.document.getElementById('idUser').value = biuser;
-           popup.document.getElementById('idPassword').value = bipasswd;
-           loginForm.submit();
+
+    //  popup.addEventListener('load', function () {
+    //           console.log('this is a test for visual analyser-step 1');
+    //           alert(1)
+    //  loginForm = popup.document.getElementsByClassName('bitech-login-form')[0];
+    //        loginForm.action = url + '&impersonate='+ impersonate;
+    //        popup.document.getElementById('idUser').value = biuser;
+    //        popup.document.getElementById('idPassword').value = bipasswd;
+    //        loginForm.submit();
     
-        });
+    //     });
  
 }
 

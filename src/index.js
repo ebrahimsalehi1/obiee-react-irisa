@@ -15,7 +15,7 @@ import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import {UserContext} from './Context';
 // import { AlternateEmail } from '@material-ui/icons';
 //import {isSessionValid} from './webservice/Login';
-import {getText,readFile} from './utils/Utils';
+import {getText,readFile,biLogin} from './utils/Utils';
 
 const jssRtl = create({ plugins: [...jssPreset().plugins, rtl()] });
 
@@ -66,6 +66,11 @@ function reducer(state,action){
                 ...state,
                 shown_component:'show_dashboard_dashboard',
                 formTitle: getText('Analytics')
+            }
+        case 'create_dashboard_analyser':   
+            biLogin('urlBIVisualAnalyserCreate',null,localStorage.getItem('user'),'biviewer','biviewer12c')
+            return  {
+                ...state,
             }
         case 'show_users':
             return {

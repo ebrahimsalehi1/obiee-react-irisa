@@ -30,6 +30,20 @@ export async function getUserAll(user){
     return result;
 }
 
+export async function getUserSearch(searchCondition){
+
+    const result = {data:null,error:null};
+    await callRestGet('USER_SEARCH',[searchCondition],null)
+    .then(res=>{
+         result.data = res.data;   
+    })
+    .catch(err=>{
+        result.error = inspectErrors(err);
+    });
+
+    return result;
+}
+
 export async function hasAdminRole(user){
 
     const result = {data:null,error:null};
@@ -43,3 +57,5 @@ export async function hasAdminRole(user){
 
     return result;
 }
+
+

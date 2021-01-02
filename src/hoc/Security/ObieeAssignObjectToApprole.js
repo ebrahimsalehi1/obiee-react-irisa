@@ -309,7 +309,7 @@ export default function ObieeAssignObjectToApprole() {
 
   return (
     <Grid container spacing={1} justify="center" alignItems="center" className={classes.root}>
-      <Grid item xs={12} md={11}>
+      <Grid item xs={10} md={10}>
         <Autocomplete
           id="combo-box-demo"
           options={approles}
@@ -322,7 +322,7 @@ export default function ObieeAssignObjectToApprole() {
         />        
         </Grid>
 
-      <Grid item xs={12} md={1}>
+      <Grid item xs={2} md={2}>
         <ObieeButtonOperation type='button' title={getText('Search')} onExecute={async ()=>{
             context.obieeDispatch({type:'show_loading'});
 

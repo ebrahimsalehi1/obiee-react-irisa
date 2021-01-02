@@ -326,17 +326,20 @@ export function biLogin(key,path,impersonate,biuser,bipassword){
         case 'REPORT_ANALYSER':
             url += getConfigData('urlBIVisualAnalyser')+encodeURIComponent(path)+`&impersonate=${impersonate}&nqUser=${biuser}&nqPassword=${bipassword}`;
             break;   
+        case 'urlBIVisualAnalyserCreate':
+            url += getConfigData('urlBIVisualAnalyserCreate');
+            break;    
         default:
             break;             
     }
 
     console.log('ebrahim',key,path,impersonate,biuser,bipassword,url);
 
-    if(key !== 'REPORT_ANALYSER') 
+    if(key !== 'REPORT_ANALYSER' && key !== 'urlBIVisualAnalyserCreate') 
         return url;
 
     //let url = getConfigData('urlBIVisualAnalyser');
-
+//alert(0)
     var popup = window.open(url,"_blank","width=" + screen.width + ", height=" + screen.height,true);
 
     popup.postMessage({user:biuser,password:bipassword},'*')// childwin is the targetWindow

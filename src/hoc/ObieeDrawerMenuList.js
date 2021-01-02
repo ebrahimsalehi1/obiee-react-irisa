@@ -31,6 +31,10 @@ import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Tooltip from '@material-ui/core/Tooltip';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import Link from '@material-ui/core/Link';
+//import { Link } from "react-router-dom";
+import {getConfigData} from '../utils/Utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,6 +71,7 @@ function ObieeDrawerMenuList(props){
   //const strDashboard = getText('Dashboard');
   const strUserInfo = context.obieeState.userInfo && context.obieeState.userInfo.name ? context.obieeState.userInfo.name : ""; //getText('User');
   const strSetting = getText('Setting');
+  const strCreateReport = getText('Create Report');
 
   //console.log('ObieeDrawerMenuList is rendering',props);
 
@@ -118,6 +123,13 @@ function ObieeDrawerMenuList(props){
       <ListItemIcon><DescriptionRoundedIcon /></ListItemIcon>
     </Tooltip>  
       <ListItemText >{strBIPublisher}</ListItemText>
+</ListItem>
+
+<ListItem button key={strCreateReport} onClick={()=>context.obieeDispatch({type:'create_dashboard_analyser'})} >
+    <Tooltip title={strCreateReport} >
+      <ListItemIcon><OpenInNewIcon /></ListItemIcon>
+    </Tooltip>  
+    <ListItemText >{strCreateReport}</ListItemText>
 </ListItem>
 
 

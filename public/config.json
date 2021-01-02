@@ -1,10 +1,11 @@
 {
     "serviceType":"webservice",
+    "backendRoutes":"/obieebff/api/v1.0",
     "host":"http://localhost:8081",
     "urlBIAnalytics":"http://172.25.40.135:9502/analytics/saw.dll?Portal&PortalPath=",
     "urlBIPublisher":"http://172.25.40.135:9502/analytics/saw.dll?bipublisherEntry&Action=open&itemType=.xdo&bipPath=",
     "urlBIVisualAnalyser":"http://172.25.40.135:9502/va/project.jsp?pageid=visualAnalyzer&reportpath=",
-    "urlBIVisualAnalyser0":"http://172.25.40.135:9502/va/home.jsp?reportpath=",
+    "urlBIVisualAnalyserCreate":"http://172.25.40.135:9502/dv/ui/project.jsp?pageid=visualAnalyzer&reportmode=full",
     "language":"fa",
     "direction":"rtl",
     "showMessageTimeout":6000,

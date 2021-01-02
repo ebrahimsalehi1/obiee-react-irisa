@@ -15,7 +15,7 @@ import {
   getListGroupsOfRole,approleAssignGroupToRole,approleRemoveGroupFromRole,
   getListUsersOfRole,approleAssignUserToRole,approleDeleteUserFromRole
 } from '../../webservice/Approle';
-import {getUserAll} from '../../webservice/User';
+import {getUserAll,getUserSearch} from '../../webservice/User';
 import {getGroupAll} from '../../webservice/Group';
 
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -118,6 +118,8 @@ export default function ObieeAssignUserToApprole() {
         }        
         break;
       case 'user':
+        setLeft([]);
+        break;
         if(users.length>0){
           setLeft(users);
           break;
@@ -188,22 +190,25 @@ export default function ObieeAssignUserToApprole() {
         if(result.error){
           setCurrentData([]);
           setRight([]);
+          setLeft([]);
           context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
         }
         else{
           if(result.data){
             setCurrentData(result.data);
             setRight(result.data);
+            setLeft(result.data);
           }
           else{
             setCurrentData([]);
             setRight([]);
+            setLeft([]);
             context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:getText('ERROR-204')}});
           }
         }
         break;
       default:
-
+        break;
     }
   }
 
@@ -275,11 +280,46 @@ export default function ObieeAssignUserToApprole() {
       setFilteredItems(items);
     },[items]);
 
-    const handleSearch = ()=>{
-      if(textVal.current.value.length>2){
-        const filteredItems = items.filter(item=>item.name.indexOf(textVal.current.value)!==-1);
-        setFilteredItems(filteredItems);
+    const handleSearch = async ()=>{
+      
+      switch(infoType){
+        case 'approle':
+          if(textVal.current.value.length>2){
+            const filteredItems = items.filter(item=>item.name.indexOf(textVal.current.value)!==-1);
+            setFilteredItems(filteredItems);
+          }
+          break;
+        case 'group':
+          if(textVal.current.value.length>2){
+            const filteredItems = items.filter(item=>item.name.indexOf(textVal.current.value)!==-1);
+            setFilteredItems(filteredItems);
+          }
+          break;
+        case 'user':
+          let result = await getUserSearch(textVal.current.value);
+          console.log(result);
+          if(result.error){
+            setCurrentData([]);
+            setLeft([]);
+            context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:result.error.errorPersian+". "+result.error.errorLatin}});
+          }
+          else{
+            if(result.data){
+              setCurrentData(result.data);
+              //setRight(result.data);
+              setLeft(result.data);
+            }
+            else{
+              setCurrentData([]);
+              setLeft([]);
+              context.obieeDispatch({type:'show_message',messageToShow:{type:'error',message:getText('ERROR-204')}});
+            }
+          }
+          break;
+        default:
+          break;
       }
+
     }
 
     return (

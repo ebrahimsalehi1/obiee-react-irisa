@@ -87,6 +87,8 @@
     {"str":"Allocatable","val":"قابل تخصیص"},
     {"str":"Custom Permission","val":"مقادیر سطح دسترسی"},
     {"str":"Create Report","val":"ایجاد گزارش جدید"},
+    {"str":"Features","val":"امکانات"},
+    {"str":"FeaturesBI","val":"امکانات درخت کاتالوگ"},
     {"str":"","val":""},
     {"str":"","val":""},
     {"str":"","val":""},

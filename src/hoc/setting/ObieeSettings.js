@@ -11,11 +11,13 @@ import Card from '@material-ui/core/Card';
 // import CardContent from '@material-ui/core/CardContent';
 // import CardActions from '@material-ui/core/CardActions';
 // import {makeStyles} from '@material-ui/core/styles';
-import ObieeHosts from './ObieeAdministrator';
+//import ObieeHosts from './ObieeAdministrator';
 import ObieeResetPassword from './ObieeResetPassword';
 import ObieeProfile from './ObieeProfile';
 import {getText} from '../../utils/Utils';
 import {UserContext} from '../../Context';
+import {getConfigData} from '../../utils/Utils';
+import ObieeSettingAccordion from './ObieeSettingAccordion';
 
 export default function ObieeSettings(props){
 
@@ -35,8 +37,8 @@ export default function ObieeSettings(props){
         tabData={
             [
             {title:getText('Profile'),id:0},
-            //{title:'Systems',id:1},
-            //{title:'languages',id:2},
+            {title:getText('Features'),id:1},
+            {title:getText('FeaturesBI'),id:1},
             //{title:'change password',id:3},
             //{title:getText('Admin'),id:4},
             ]
@@ -69,13 +71,37 @@ export default function ObieeSettings(props){
         <ObieeProfile userInfo={context.obieeState.userInfo} />       
         }
 
-        {valTab === 1 && showList.filter(item=>item==='host').length>0 &&
-        <ObieeHosts />  
+        {valTab === 1 && showList.filter(item=>item==='features').length>0 &&
+
+        <ObieeSettingAccordion 
+            title={getText('Features')}
+            items={getConfigData('features')}
+            onCheckChange={items=>{
+            console.log('config.features-onCheckChange',items);
+            }} 
+            onSaveClick={()=>{alert('save')}}
+            onCancelClick={()=>{alert('cancel')}}
+        />  
+        }
+
+        {valTab === 2 && showList.filter(item=>item==='features').length>0 &&
+        
+        <ObieeSettingAccordion 
+            title={getText('FeaturesBI')}
+            items={getConfigData('featuresBI','treeTypes')}
+            onCheckChange={items=>{
+            console.log('config.featuresBI-onCheckChange',items);
+            }} 
+            onSaveClick={()=>{alert('save')}}
+            onCancelClick={()=>{alert('cancel')}}
+        />  
         }
 
         {valTab === 3 && showList.filter(item=>item==='reset_password').length>0 &&
         <ObieeResetPassword />       
         }
+
+
     </>
     )
 }

@@ -132,7 +132,7 @@ export default function ObieeAssignObjectToApprole() {
         {
         user: user,
         sessionId:sessionId,
-        types: getConfigData('featuresBI','treeTypes').filter(item=>item.isActive===true).map(item=>item.title),
+        types: getConfigData('featuresBI','treeTypes').filter(item=>item.value===true).map(item=>item.title),
         detail:true
         }
       );
@@ -333,7 +333,7 @@ export default function ObieeAssignObjectToApprole() {
               {
                 user: user,
                 account: selectedApprole,
-                types: getConfigData('featuresBI','treeTypes').filter(item=>item.isActive===true).map(item=>item.title),
+                types: getConfigData('featuresBI','treeTypes').filter(item=>item.value===true).map(item=>item.title),
               }
             );
             if(result.error){

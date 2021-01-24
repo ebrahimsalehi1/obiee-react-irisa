@@ -286,10 +286,10 @@ export function deleteFromList(data,oldData){
 
 export function hasSystemFeatures(feature){
     const res = getConfigData('features').filter(item=>{
-        return item[feature];        
+        return item.title === feature;        
     });
 
-    return  res && res.length>0;
+    return res.length>0 && res[0].value;
 }
 
 // export function getBIUrl(type,path,user){

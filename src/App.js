@@ -145,7 +145,7 @@ export default function App(props){
             }
 
             {context.obieeState.shown_component==='show_setting' &&
-                <ObieeSettings showList={['profile']}/>
+                <ObieeSettings showList={['profile','features']}/>
             }
 
             </Grid>

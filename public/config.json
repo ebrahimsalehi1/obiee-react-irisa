@@ -11,31 +11,31 @@
     "showMessageTimeout":6000,
     "title":"سیستم راهکار جامع گزارش گیری هرمزگان",
     "features":[
-        {"appbar":{"search":false,"titleFormat":"titleOnly;titleFormPath"}},
-        {"user-profile":true},
-        {"language":false},
-        {"theme":false},
-        {"caching":false},
-        {"logging":false},
-        {"datastore":false},
+        {"title":"appbar-search","value":false},
+        {"title":"user-profile","value":true},
+        {"title":"language","value":false},
+        {"title":"theme","value":false},
+        {"title":"caching","value":false},
+        {"title":"logging","value":false},
+        {"title":"datastore","value":false},
 
-        {"dashboard":true},
-        {"report-transactional":true},
-        {"report-analytic":true},
-        {"report-analyser":true},
-        {"approle":true},
-        {"user-approle":true},
-        {"object-approle":true}
+        {"title":"dashboard","value":true},
+        {"title":"report-transactional","value":true},
+        {"title":"report-analytic","value":true},
+        {"title":"report-analyser","value":true},
+        {"title":"approle","value":true},
+        {"title":"user-approle","value":true},
+        {"title":"object-approle","value":true}
     ],
     "featuresBI":{
         "treeTypes": [
-            {"isActive":true,"title":"Folder"},
-            {"isActive":true,"title":"Dashboard"},
-            {"isActive":true,"title":"DashboardGroup"},
-            {"isActive":true,"title":"Page"},
-            {"isActive":true,"title":"Report"},
-            {"isActive":false,"title":"DataModel"},
-            {"isActive":true,"title":"Project"}
+            {"value":true,"title":"Folder"},
+            {"value":true,"title":"Dashboard"},
+            {"value":true,"title":"DashboardGroup"},
+            {"value":true,"title":"Page"},
+            {"value":true,"title":"Report"},
+            {"value":false,"title":"DataModel"},
+            {"value":true,"title":"Project"}
         ]
     }
 }

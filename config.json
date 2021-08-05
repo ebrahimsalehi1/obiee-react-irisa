@@ -1,0 +1,40 @@
+{
+    "serviceType":"file",
+    "host":"http://localhost:8081",
+    "urlBIAnalytics":"http://172.25.40.135:9502/analytics/saw.dll?Portal&PortalPath=",
+    "urlBIPublisher":"http://172.25.40.135:9502/analytics/saw.dll?bipublisherEntry&Action=open&itemType=.xdo&bipPath=",
+    "urlBIVisualAnalyser":"http://172.25.40.135:9502/va/project.jsp?pageid=visualAnalyzer&reportpath=",
+    "urlBIVisualAnalyser0":"http://172.25.40.135:9502/va/home.jsp?reportpath=",
+    "language":"fa",
+    "direction":"rtl",
+    "showMessageTimeout":6000,
+    "title":"سیستم راهکار جامع گزارش گیری هرمزگان",
+    "features":[
+        {"appbar":{"search":false,"titleFormat":"titleOnly;titleFormPath"}},
+        {"user-profile":true},
+        {"language":false},
+        {"theme":false},
+        {"caching":false},
+        {"logging":false},
+        {"datastore":false},
+
+        {"dashboard":true},
+        {"report-transactional":true},
+        {"report-analytic":true},
+        {"report-analyser":true},
+        {"approle":true},
+        {"user-approle":true},
+        {"object-approle":true}
+    ],
+    "featuresBI":{
+        "treeTypes": [
+            {"isActive":true,"title":"Folder"},
+            {"isActive":true,"title":"Dashboard"},
+            {"isActive":true,"title":"DashboardGroup"},
+            {"isActive":true,"title":"Page"},
+            {"isActive":true,"title":"Report"},
+            {"isActive":false,"title":"DataModel"},
+            {"isActive":true,"title":"Project"}
+        ]
+    }
+}
